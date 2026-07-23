@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Crédito UVA BNA · Informe Estático · Julio 2026</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6;max-width:960px;margin:0 auto}
+
+.portada{background:#0d1b2e;color:#fff;padding:0;position:relative;overflow:hidden}
+.portada-header{padding:40px 56px 0}
+.portada-logo-row{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.portada-logo-box{background:#1a7aff22;border:1px solid #1a7aff44;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:8px}
+.portada-logo-text{font-size:18px;font-weight:900;color:#1a7aff}
+.portada-logo-sub{font-size:8px;letter-spacing:2px;color:#6b9fff;text-transform:uppercase}
+.portada-logo-sub2{font-size:10px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase}
+.portada-eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:14px;font-weight:500}
+.portada-titulo{font-size:38px;font-weight:300;color:#f0f1f3;line-height:1.1;margin-bottom:8px}
+.portada-titulo strong{font-weight:700;color:#fff}
+.portada-subtitulo{font-size:14px;color:#9ca3af;margin-bottom:36px;max-width:580px;line-height:1.5}
+.portada-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid #2a3a50;border-radius:10px;overflow:hidden;margin-bottom:0}
+.portada-meta-item{padding:18px 20px;border-right:1px solid #2a3a50}
+.portada-meta-item:last-child{border-right:none}
+.portada-meta-label{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.portada-meta-val{font-size:22px;font-weight:700;color:#fff}
+.portada-meta-sub{font-size:10px;color:#6b7280;margin-top:2px}
+.portada-footer{padding:28px 56px;border-top:1px solid #2a3a50;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.portada-autor{display:flex;align-items:center;gap:14px}
+.portada-avatar{width:44px;height:44px;border-radius:50%;border:2px solid #1a7aff55;object-fit:cover;flex-shrink:0}
+.portada-autor-info strong{color:#f0f1f3;font-size:14px;display:block}
+.portada-autor-info span{color:#9ca3af;font-size:11px}
+.portada-tags{display:flex;gap:8px;flex-wrap:wrap}
+.portada-tag{font-size:10px;color:#6b9fff;background:#1a7aff11;padding:4px 12px;border-radius:20px;border:1px solid #1a7aff33}
+
+.seccion{padding:40px 56px;border-bottom:1px solid #e1e0d9}
+.seccion:last-child{border-bottom:none}
+.seccion-blanca{background:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:24px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:3px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:22px;font-weight:300;color:#0b0b0b;line-height:1.2}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:#52514e;margin-top:5px;line-height:1.6}
+
+.corte-box{background:#0d1b2e;border-radius:10px;padding:20px 24px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;margin-bottom:20px}
+.corte-item .c-label{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#4b5a6e;margin-bottom:4px}
+.corte-item .c-val{font-size:22px;font-weight:700;color:#fff;line-height:1}
+.corte-item .c-sub{font-size:9px;color:#6b7280;margin-top:2px}
+.corte-item.dest .c-val{color:#1a7aff}
+
+.alert{border-radius:8px;padding:14px 18px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
+.a-amarillo{background:#fff8e1;border:0.5px solid #f0c040}
+.a-verde{background:#edf7f1;border:0.5px solid #9fd4b6}
+.a-azul{background:#e6f1fb;border:0.5px solid #b5d4f4}
+.a-gris{background:#f5f4f0;border:0.5px solid #d3d1c7}
+.alert-ico{font-size:17px;flex-shrink:0;margin-top:1px}
+.alert-titulo{font-size:12px;font-weight:600;margin-bottom:3px}
+.a-amarillo .alert-titulo{color:#7d5a00}
+.a-verde .alert-titulo{color:#1a7a4a}
+.a-azul .alert-titulo{color:#1F4E79}
+.a-gris .alert-titulo{color:#52514e}
+.alert-body{font-size:12px;color:#52514e;line-height:1.65}
+
+.kpi-grid{display:grid;gap:8px;margin-bottom:16px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.kpi{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:14px 18px}
+.kpi-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:4px}
+.kpi-val{font-size:22px;font-weight:700;color:#0b0b0b;line-height:1}
+.kpi-val.azul{color:#1F4E79}
+.kpi-note{font-size:10px;color:#b4b2a9;margin-top:4px}
+
+/* TABLA PRINCIPAL */
+.tabla-wrap{overflow-x:auto}
+.tabla{width:100%;border-collapse:collapse;font-size:11px}
+.tabla thead tr:first-child th{background:#0d1b2e;color:#9ca3af;font-weight:500;padding:10px 12px;text-align:center;font-size:10px;letter-spacing:.5px}
+.tabla thead tr:first-child th:first-child{text-align:left}
+.tabla thead tr:first-child th.th-6{background:#0f4a2e;color:#9fd4b6}
+.tabla thead tr:first-child th.th-12{background:#4a0f0f;color:#f4a5a5}
+.tabla thead tr.subhdr th{background:#1a1a1a;color:#6b7280;font-weight:400;padding:7px 12px;font-size:9px;text-align:center;letter-spacing:.5px;text-transform:uppercase}
+.tabla thead tr.subhdr th:first-child{text-align:left;color:#898781}
+.tabla tbody tr td{padding:8px 12px;border-bottom:0.5px solid #f0efea;vertical-align:middle;text-align:center}
+.tabla tbody tr td:first-child{text-align:left}
+.tabla tbody tr.row-20 td{background:#fff}
+.tabla tbody tr.row-30 td{background:#f9f9f7}
+.tabla tbody tr.row-20 td:first-child{font-weight:600;color:#0b0b0b}
+.tabla tbody tr.row-30 td:first-child{font-weight:400;color:#52514e;font-size:10px}
+.tabla tbody tr.monto-sep td{border-top:0.5px solid #e1e0d9}
+.tabla tbody tr:hover td{background:#f5f4f3}
+.badge{display:inline-block;padding:2px 7px;border-radius:10px;font-size:9px;font-weight:500}
+.b-verde{background:#edf7f1;color:#1a7a4a}
+.b-rojo{background:#fdf0f0;color:#c0392b}
+.td-naranja{color:#b45309;font-weight:600}
+.td-azul{color:#1F4E79;font-weight:600}
+.td-rojo{color:#c0392b;font-weight:600}
+
+.nota-uva{background:#fff8e1;border:0.5px solid #f0c040;border-radius:8px;padding:12px 16px;font-size:10px;color:#7d5a00;line-height:1.65;margin-top:16px}
+
+.sep{height:0.5px;background:#e1e0d9;margin:20px 0}
+
+.contacto-page{background:#0d1b2e;color:#fff;padding:40px 56px}
+.contacto-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:40px;padding-bottom:36px;border-bottom:1px solid #2a3a50}
+.contacto-foto{width:80px;height:80px;border-radius:50%;border:2px solid #1a7aff55;object-fit:cover;flex-shrink:0}
+.contacto-nombre{font-size:24px;font-weight:700;color:#fff;margin-bottom:4px}
+.contacto-titulo{font-size:12px;color:#6b9fff;margin-bottom:10px}
+.contacto-bio{font-size:11px;color:#9ca3af;line-height:1.7;max-width:520px}
+.contacto-redes{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.red-btn{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:500;padding:6px 12px;border-radius:20px;border:1px solid #2a3a50;color:#9ca3af;text-decoration:none}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:28px;grid-auto-rows:auto}
+.contacto-card{background:#0f2440;border:1px solid #2a3a50;border-radius:10px;padding:18px 20px}
+.contacto-card-ico{font-size:18px;margin-bottom:8px}
+.contacto-card-titulo{font-size:12px;font-weight:600;color:#f0f1f3;margin-bottom:5px}
+.contacto-card-desc{font-size:10px;color:#6b7280;line-height:1.6;margin-bottom:10px}
+.contacto-link{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:500;color:#6b9fff;text-decoration:none;padding:5px 10px;background:#1a7aff11;border:1px solid #1a7aff22;border-radius:6px;margin-bottom:5px;display:block}
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+  <div class="portada-header">
+    <div class="portada-logo-row">
+      <div class="portada-logo-box">
+        <span class="portada-logo-text">IN²</span>
+        <div>
+          <div class="portada-logo-sub">Ingenieros</div>
+          <div class="portada-logo-sub2">Inmobiliarios</div>
+        </div>
+      </div>
+    </div>
+    <div class="portada-eyebrow">Guía para compradores · Julio 2026</div>
+    <div class="portada-titulo">Crédito Hipotecario UVA<br><strong>Banco Nación +Hogares</strong></div>
+    <div class="portada-subtitulo">Cuotas, ahorros e ingresos necesarios para acceder al crédito hipotecario del BNA · Calculado con datos reales al 23 de julio de 2026</div>
+    <div class="portada-meta">
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Valor UVA hoy</div>
+        <div class="portada-meta-val">$2.048</div>
+        <div class="portada-meta-sub">al 23/07/2026</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">TC Oficial BNA</div>
+        <div class="portada-meta-val">$1.505</div>
+        <div class="portada-meta-sub">por dólar</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Financiación máxima</div>
+        <div class="portada-meta-val">75%</div>
+        <div class="portada-meta-sub">del valor de la propiedad</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Cuota máxima / ingreso</div>
+        <div class="portada-meta-val">25%</div>
+        <div class="portada-meta-sub">del ingreso familiar neto</div>
+      </div>
+    </div>
+  </div>
+  <div class="portada-footer">
+    <div class="portada-autor">
+      <img class="portada-avatar" src="../IMG/Fotoportada.jpg" alt="Matías Leiblich">
+      <div class="portada-autor-info">
+        <strong>Matías Leiblich</strong>
+        <span>Ingeniero Civil · Asesor Inmobiliario · deinmobiliarios.com</span>
+      </div>
+    </div>
+    <div class="portada-tags">
+      <span class="portada-tag">#CréditoUVA</span>
+      <span class="portada-tag">#BancoNación</span>
+      <span class="portada-tag">#Argentina</span>
+    </div>
+  </div>
+</div>
+
+<!-- SEC 01: CORTE -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <div>
+      <div class="sec-titulo">El límite de la <strong>tasa preferencial</strong></div>
+      <div class="sec-desc">El BNA ofrece tasa 6% TNA para propiedades de hasta 210.000 UVAs — siempre que se cumplan todas las condiciones. Así queda ese límite en valores de hoy.</div>
+    </div>
+  </div>
+  <div class="corte-box">
+    <div class="corte-item">
+      <div class="c-label">Límite en UVAs</div>
+      <div class="c-val">210.000</div>
+      <div class="c-sub">condición BNA</div>
+    </div>
+    <div class="corte-item">
+      <div class="c-label">Equivalente en pesos</div>
+      <div class="c-val">$430 M</div>
+      <div class="c-sub">210.000 × $2.048,02</div>
+    </div>
+    <div class="corte-item dest">
+      <div class="c-label">Equivalente en USD</div>
+      <div class="c-val">USD 285.800</div>
+      <div class="c-sub">al TC oficial $1.505</div>
+    </div>
+  </div>
+  <div class="alert a-amarillo">
+    <span class="alert-ico">⚠️</span>
+    <div>
+      <div class="alert-titulo">Condiciones para la tasa 6% TNA — deben cumplirse todas</div>
+      <div class="alert-body">① Vivienda única y de ocupación permanente &nbsp;·&nbsp; ② Sueldo acreditado en BNA &nbsp;·&nbsp; ③ Valor total de la propiedad ≤ 210.000 UVAs (≈ USD 285.800 hoy). Si alguna condición no se cumple, la tasa es 12% TNA.</div>
+    </div>
+  </div>
+</div>
+
+<!-- SEC 02: TABLA -->
+<div class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <div>
+      <div class="sec-titulo">Tabla de referencia: <strong>cuotas e ingresos</strong></div>
+      <div class="sec-desc">Para cada valor de propiedad se muestran dos filas: plazo a 20 años y plazo a 30 años. Los valores corresponden al momento del otorgamiento del crédito.</div>
+    </div>
+  </div>
+
+  <div class="tabla-wrap">
+  <table class="tabla">
+    <thead>
+      <tr>
+        <th rowspan="2" style="text-align:left;vertical-align:bottom;padding-bottom:10px">Valor<br>propiedad</th>
+        <th rowspan="2" style="vertical-align:bottom;padding-bottom:10px">Plazo</th>
+        <th rowspan="2" style="vertical-align:bottom;padding-bottom:10px">Ahorro<br>previo (25%)</th>
+        <th rowspan="2" style="vertical-align:bottom;padding-bottom:10px">Crédito<br>(75%)</th>
+        <th colspan="2" class="th-6">TASA 6% TNA &nbsp;·&nbsp; sueldo en BNA · vivienda única · prop ≤ USD 285.800</th>
+        <th colspan="2" class="th-12">TASA 12% TNA &nbsp;·&nbsp; resto de los casos</th>
+      </tr>
+      <tr class="subhdr">
+        <th style="background:#0a3a22;color:#9fd4b6">Cuota inicial*</th>
+        <th style="background:#0a3a22;color:#9fd4b6">Ingreso familiar</th>
+        <th style="background:#3a0a0a;color:#f4a5a5">Cuota inicial*</th>
+        <th style="background:#3a0a0a;color:#f4a5a5">Ingreso familiar</th>
+      </tr>
+    </thead>
+    <tbody id="tabla-body">
+    </tbody>
+  </table>
+  </div>
+
+  <div class="nota-uva">
+    ⚠️ <strong>Las cuotas son en UVAs — no en pesos fijos.</strong> El monto en pesos se ajusta mensualmente por el índice CER (inflación). Lo que no cambia es la cantidad de UVAs a pagar por mes. El ingreso del titular debe representar como mínimo el 50% del ingreso familiar requerido. Se permiten hasta 2 codeudores familiares directos. &nbsp;·&nbsp; Valores calculados con UVA $2.048,02 y TC oficial $1.505 (23/07/2026).
+  </div>
+</div>
+
+<!-- SEC 03: CÓMO FUNCIONA -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <div>
+      <div class="sec-titulo">¿Cómo funciona el <strong>crédito UVA</strong>?</div>
+      <div class="sec-desc">Lo fundamental antes de tomar la decisión.</div>
+    </div>
+  </div>
+  <div class="kpi-grid g3">
+    <div class="kpi">
+      <div class="kpi-label">Sistema</div>
+      <div class="kpi-val azul" style="font-size:16px">Francés en UVAs</div>
+      <div class="kpi-note">Cuotas fijas en UVAs. Alta carga de intereses al inicio. El capital adeudado se reduce lentamente en los primeros años.</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Ajuste mensual</div>
+      <div class="kpi-val azul" style="font-size:16px">CER (inflación)</div>
+      <div class="kpi-note">La cuota en pesos sube con la inflación. La cuota en UVAs no cambia. El riesgo es que los ingresos no acompañen la suba de precios.</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Codeudores</div>
+      <div class="kpi-val azul" style="font-size:16px">Hasta 2</div>
+      <div class="kpi-note">Familiares directos. Suman sus ingresos para calificar. El titular debe aportar al menos el 50% del ingreso familiar requerido.</div>
+    </div>
+  </div>
+  <div class="sep"></div>
+  <div class="alert a-verde">
+    <span class="alert-ico">💡</span>
+    <div>
+      <div class="alert-titulo">¿Por qué el crédito UVA del BNA es la mejor opción del mercado hoy?</div>
+      <div class="alert-body">La tasa real del 6% TNA está por debajo de la mayoría de las alternativas financieras. Los plazos de hasta 30 años permiten acceder a propiedades que de otra forma requerirían un ahorro inicial mucho mayor. El riesgo inflacionario existe — pero también existe la alternativa de seguir alquilando mientras el precio de las propiedades y el costo de oportunidad siguen aumentando. Para quien tiene empleo en blanco y estabilidad laboral, este crédito puede ser la herramienta más eficiente de acceso a la vivienda propia disponible hoy en Argentina.</div>
+    </div>
+  </div>
+  <div class="alert a-azul">
+    <span class="alert-ico">📊</span>
+    <div>
+      <div class="alert-titulo">Plazos disponibles</div>
+      <div class="alert-body">El BNA ofrece 5 / 10 / 15 / 20 / 25 / 30 años. A mayor plazo, menor cuota mensual pero mayor costo total del crédito. A menor plazo, mayor cuota pero menos interés acumulado. Los plazos de 20 y 30 años son los más elegidos para mantener la cuota dentro del 25% del ingreso.</div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="contacto-page">
+  <div class="contacto-hero">
+    <img class="contacto-foto" src="../IMG/Fotoportada.jpg" alt="Matías Leiblich">
+    <div>
+      <div class="contacto-nombre">Matías Leiblich</div>
+      <div class="contacto-titulo">Ingeniero Civil · Asesor Inmobiliario · CABA y GBA</div>
+      <div class="contacto-bio">Soy Ingeniero Civil (UBA) y asesor comercial en Ingenieros Inmobiliarios. Mi enfoque combina el análisis técnico con el estudio del mercado, lo que permite elaborar valuaciones objetivas y fundamentadas. Si estás pensando en comprar con crédito, puedo ayudarte a entender exactamente a qué podés acceder con tus ingresos y tu ahorro actual.</div>
+      <div class="contacto-redes">
+        <a class="red-btn" href="https://wa.me/5491161737552" target="_blank">📱 WhatsApp</a>
+        <a class="red-btn" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank">✉️ Mail</a>
+        <a class="red-btn" href="https://linkedin.com/in/matias-leiblich" target="_blank">💼 LinkedIn</a>
+        <a class="red-btn" href="https://www.instagram.com/tutemudas" target="_blank">📷 @tutemudas</a>
+        <a class="red-btn" href="https://whatsapp.com/channel/0029VbBiYGGLCoWvqOOv4y1O" target="_blank">📢 Canal WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="contacto-grid">
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🏠</div>
+      <div class="contacto-card-titulo">¿Querés comprar con crédito UVA?</div>
+      <div class="contacto-card-desc">Te ayudo a analizar a qué propiedad podés acceder con tu ahorro e ingresos, y a preparar el legajo para el banco.</div>
+      <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20consultar%20sobre%20credito%20UVA%20para%20comprar%20una%20propiedad." target="_blank">📱 Consultar por WhatsApp →</a>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">💰</div>
+      <div class="contacto-card-titulo">¿Tenés una propiedad para vender?</div>
+      <div class="contacto-card-desc">Con crédito activo hay más compradores calificados en el mercado. Buen momento para vender con una tasación sólida.</div>
+      <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20recibir%20asesoramiento%20para%20vender%20mi%20propiedad." target="_blank">💰 Quiero vender →</a>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🧮</div>
+      <div class="contacto-card-titulo">Calculadora de gastos de compra</div>
+      <div class="contacto-card-desc">Calculá cuánto saldrán los gastos de escritura, sellado, honorarios e impuestos antes de cerrar la operación.</div>
+      <a class="contacto-link" href="https://matiasleiblich.com/calculadora-inmobiliaria" target="_blank">🧮 Ir a la calculadora →</a>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🏘</div>
+      <div class="contacto-card-titulo">Cartera de propiedades</div>
+      <div class="contacto-card-desc">Explorá las propiedades disponibles en CABA y GBA. Filtros por zona, tipo y precio.</div>
+      <a class="contacto-link" href="https://matiasleiblich.com/cartera" target="_blank">🏘 Ver propiedades →</a>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid #2a3a50;padding-top:22px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#f0f1f3">Matías Leiblich</div>
+      <div style="font-size:10px;color:#4b5a6e;margin-top:2px">Ingenieros Inmobiliarios · IN² Platform · Julio 2026</div>
+    </div>
+    <div style="font-size:10px;color:#4b5a6e;text-align:right">
+      Cálculos propios · UVA $2.048,02 · TC $1.505 · 23/07/2026<br>
+      No constituye asesoramiento financiero formal
+    </div>
+  </div>
+</div>
+
+<script>
+const UVA = 2048.02;
+const TC = 1505;
+const LIMITE_USD = (210000 * UVA) / TC;
+
+function fmt(n){return Math.round(n).toLocaleString('es-AR')}
+function fmtUSD(n){return 'USD '+fmt(n)}
+function fmtP(n){return '$'+fmt(n)}
+
+function calcular(monto_usd, anios, tasa){
+  const n = anios * 12;
+  const r = tasa / 12;
+  const prestamo_usd = monto_usd * 0.75;
+  const prestamo_pesos = prestamo_usd * TC;
+  const prestamo_uvas = prestamo_pesos / UVA;
+  const cuota_uvas = prestamo_uvas * (r * Math.pow(1+r,n)) / (Math.pow(1+r,n) - 1);
+  const cuota_pesos = cuota_uvas * UVA;
+  const ingreso_familiar = cuota_pesos / 0.25;
+  return { cuota_pesos: Math.round(cuota_pesos), ingreso_familiar: Math.round(ingreso_familiar) };
+}
+
+const montos = [50000,60000,70000,80000,90000,100000,110000,120000,140000,160000,180000,200000];
+const plazos = [20, 30];
+const plazosLabel = {20:'20 años', 30:'30 años'};
+
+const tbody = document.getElementById('tabla-body');
+let html = '';
+
+montos.forEach(m => {
+  const dentro = m <= LIMITE_USD;
+  const rowspan = 2;
+
+  plazos.forEach((p, pi) => {
+    const c6 = calcular(m, p, 0.06);
+    const c12 = calcular(m, p, 0.12);
+    const rowClass = pi === 0 ? 'row-20 monto-sep' : 'row-30';
+
+    html += `<tr class="${rowClass}">`;
+    if(pi === 0){
+      html += `<td rowspan="2" style="font-weight:700;color:#0b0b0b;font-size:12px">${fmtUSD(m)}<br><span style="font-size:9px;font-weight:400;color:#898781">${dentro?'<span style="color:#1a7a4a">tasa 6% disponible</span>':'<span style="color:#c0392b">sólo tasa 12%</span>'}</span></td>`;
+      html += `<td rowspan="2" style="text-align:center;font-size:10px;color:#898781">${fmtUSD(m*0.25)}</td>`;
+      html += `<td rowspan="2" style="text-align:center;font-size:10px;color:#1F4E79;font-weight:600">${fmtUSD(m*0.75)}</td>`;
+    }
+    html += `<td style="font-size:10px;color:#52514e;text-align:center">${plazosLabel[p]}</td>`;
+    if(dentro){
+      html += `<td class="td-azul" style="text-align:center">${fmtP(c6.cuota_pesos)}</td>`;
+      html += `<td class="td-rojo" style="text-align:center">${fmtP(c6.ingreso_familiar)}</td>`;
+    } else {
+      html += `<td style="text-align:center;color:#b4b2a9;font-size:10px">—</td>`;
+      html += `<td style="text-align:center;color:#b4b2a9;font-size:10px">—</td>`;
+    }
+    html += `<td class="td-azul" style="text-align:center;opacity:.8">${fmtP(c12.cuota_pesos)}</td>`;
+    html += `<td class="td-rojo" style="text-align:center;opacity:.8">${fmtP(c12.ingreso_familiar)}</td>`;
+    html += '</tr>';
+  });
+});
+
+tbody.innerHTML = html;
+</script>
+</body>
+</html>
