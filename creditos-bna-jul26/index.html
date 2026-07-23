@@ -4,16 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Crédito UVA BNA · Informe Estático · Julio 2026</title>
-
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-MC47CJF0VL"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-MC47CJF0VL');
-</script>
-
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6;max-width:960px;margin:0 auto}
@@ -229,9 +219,9 @@ body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;backgrou
     <thead>
       <tr>
         <th rowspan="2" style="text-align:left;vertical-align:bottom;padding-bottom:10px">Valor<br>propiedad</th>
-        <th rowspan="2" style="vertical-align:bottom;padding-bottom:10px">Plazo</th>
         <th rowspan="2" style="vertical-align:bottom;padding-bottom:10px">Ahorro<br>previo (25%)</th>
         <th rowspan="2" style="vertical-align:bottom;padding-bottom:10px">Crédito<br>(75%)</th>
+        <th rowspan="2" style="vertical-align:bottom;padding-bottom:10px">Plazo</th>
         <th colspan="2" class="th-6">TASA 6% TNA &nbsp;·&nbsp; sueldo en BNA · vivienda única · prop ≤ USD 285.800</th>
         <th colspan="2" class="th-12">TASA 12% TNA &nbsp;·&nbsp; resto de los casos</th>
       </tr>
@@ -395,7 +385,7 @@ montos.forEach(m => {
       html += `<td rowspan="2" style="text-align:center;font-size:10px;color:#898781">${fmtUSD(m*0.25)}</td>`;
       html += `<td rowspan="2" style="text-align:center;font-size:10px;color:#1F4E79;font-weight:600">${fmtUSD(m*0.75)}</td>`;
     }
-    html += `<td style="font-size:10px;color:#52514e;text-align:center">${plazosLabel[p]}</td>`;
+    html += `<td style="font-size:10px;color:#52514e;text-align:center;white-space:nowrap">${plazosLabel[p]}</td>`;
     if(dentro){
       html += `<td class="td-azul" style="text-align:center">${fmtP(c6.cuota_pesos)}</td>`;
       html += `<td class="td-rojo" style="text-align:center">${fmtP(c6.ingreso_familiar)}</td>`;
