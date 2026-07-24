@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Informe de Mercado · Palermo Green · Av. Córdoba y Godoy Cruz</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+     background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6}
+
+/* HEADER */
+.header{background:#0d1b2e;color:#fff;padding:40px 56px 36px;
+        display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;
+         color:#6b9fff;margin-bottom:12px;font-weight:500}
+.header h1{font-size:32px;font-weight:300;color:#f0f1f3;line-height:1.15;margin-bottom:6px}
+.header h1 strong{font-weight:700;color:#fff}
+.header-sub{font-size:12px;color:#6b7280}
+.header-right{text-align:right;font-size:12px;color:#6b7280;line-height:1.9;flex-shrink:0}
+.header-right strong{display:block;color:#f0f1f3;font-size:13px;font-weight:600}
+.header-right .handle{font-size:10px;color:#6b9fff;letter-spacing:.5px}
+
+/* SECTIONS */
+.section{padding:36px 56px;border-bottom:1px solid #e1e0d9}
+.section-blanca{background:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;
+         background:#1a7aff11;padding:4px 10px;border-radius:20px;
+         white-space:nowrap;margin-top:2px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:20px;font-weight:300;color:#0b0b0b;line-height:1.25}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:#52514e;margin-top:4px;line-height:1.6}
+
+/* CIERRES */
+.cierres-grid{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:18px}
+.cierre-card{background:#fff;border:0.5px solid #e1e0d9;border-radius:10px;
+             padding:20px 24px;flex:1;min-width:180px}
+.cierre-pu{font-size:30px;font-weight:700;color:#0b0b0b;margin-bottom:2px}
+.cierre-tipo{font-size:10px;color:#898781;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px}
+.cierre-precio{font-size:22px;font-weight:700;color:#1F4E79;margin-bottom:4px}
+.cierre-detail{font-size:11px;color:#898781;margin-bottom:8px}
+.fuente-conf{font-size:11px;color:#1a7a4a;font-weight:600}
+.fuente-verb{font-size:11px;color:#b8860b;font-weight:600}
+
+.note-box{background:#fff8e1;border:0.5px solid #f0c040;border-radius:8px;
+          padding:13px 16px;font-size:12px;color:#52514e;line-height:1.65}
+.note-box strong{color:#7d5a00}
+
+/* TABLA */
+.tipo-legend{display:flex;gap:18px;flex-wrap:wrap;margin-bottom:16px;font-size:11px;color:#52514e}
+.tipo-item{display:flex;align-items:center;gap:7px}
+.tipo-dot{width:9px;height:9px;border-radius:50%;flex-shrink:0}
+.table-wrap{border-radius:8px;border:0.5px solid #e1e0d9;overflow:hidden}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{background:#f5f4f0;color:#52514e;font-size:10px;font-weight:500;
+         text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;
+         border-bottom:0.5px solid #e1e0d9;text-align:left;white-space:nowrap}
+tbody tr{border-bottom:0.5px solid #f0efea;transition:background .1s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover td{background:#fafaf8}
+tbody tr.row-b td{background:#fffbf0}
+tbody tr.row-b:hover td{background:#fff8e6}
+tbody td{padding:11px 12px;vertical-align:middle}
+.td-pu{white-space:nowrap}
+.pu-badge{display:inline-block;padding:3px 10px;border-radius:16px;font-weight:600;font-size:12px}
+.td-price{font-weight:700;white-space:nowrap;color:#0b0b0b}
+.td-num{color:#52514e;font-variant-numeric:tabular-nums;text-align:right;white-space:nowrap}
+.td-anuncio{letter-spacing:3px;white-space:nowrap}
+.dot-on{opacity:1}
+.dot-off{opacity:.15;filter:grayscale(1)}
+.td-publi{white-space:nowrap}
+.badge{display:inline-block;font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px}
+.b-super{background:#e8f5e9;color:#1b5e20}
+.b-dest{background:#e3f2fd;color:#0d47a1}
+.b-free{background:#fdecea;color:#b71c1c}
+.b-free-p{background:#fff3e0;color:#7d5a00}
+.renta-tag{display:inline-block;font-size:9px;background:#f5f4f0;
+           color:#898781;border:0.5px solid #d3d1c7;
+           padding:1px 5px;border-radius:3px;margin-left:4px;vertical-align:middle}
+.table-note{font-size:10px;color:#898781;margin-top:8px;font-style:italic}
+
+/* NOS ROW */
+.nos-row{background:#edf7f1;border:0.5px solid #9fd4b6;border-radius:8px;
+         padding:13px 16px;display:flex;align-items:center;gap:20px;
+         flex-wrap:wrap;margin-top:14px;font-size:12px}
+.nos-label{color:#1a7a4a;font-weight:700;font-size:13px;white-space:nowrap}
+.nos-block{display:flex;flex-direction:column;gap:1px}
+.nos-sub{font-size:9px;color:#52946a;text-transform:uppercase;letter-spacing:.5px}
+.nos-val{color:#0b4a2a;font-weight:600;font-size:12px}
+
+/* INSIGHTS */
+.insights{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}
+.insight{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px}
+.ins-num{font-size:26px;font-weight:700;color:#0b0b0b;line-height:1;margin-bottom:4px}
+.ins-num.rojo{color:#c0392b}
+.ins-num.azul{color:#1F4E79}
+.ins-label{font-size:11px;color:#52514e;line-height:1.5}
+.ins-label strong{color:#0b0b0b}
+
+/* CHARTS — light bg matching reference */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:4px}
+.chart-card{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px 18px}
+.chart-eyebrow{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;
+               color:#898781;margin-bottom:8px}
+.chart-title{font-size:12px;font-weight:600;color:#0b0b0b;margin-bottom:14px}
+.chart-wrap{position:relative;height:200px}
+
+/* TRIÁNGULO */
+.tri-wrap{display:flex;gap:36px;align-items:flex-start;flex-wrap:wrap}
+.tri-svg-col{flex:0 0 300px}
+.tri-text-col{flex:1;min-width:220px}
+.tri-item{margin-bottom:16px;padding-bottom:16px;border-bottom:0.5px solid #e1e0d9}
+.tri-item:last-child{border-bottom:none;margin-bottom:0;padding-bottom:0}
+.tri-pct{font-size:14px;font-weight:700;margin-bottom:4px}
+.tri-desc{font-size:12px;color:#52514e;line-height:1.65}
+.tri-desc strong{color:#0b0b0b}
+
+/* FOOTER */
+.footer{background:#0d1b2e;color:#6b7280;padding:24px 56px;
+        font-size:11px;display:flex;justify-content:space-between;
+        align-items:center;flex-wrap:wrap;gap:12px}
+.footer strong{color:#f0f1f3}
+
+@media(max-width:720px){
+  .header,.section,.footer{padding-left:20px;padding-right:20px}
+  .header{flex-direction:column;gap:16px}
+  .header-right{text-align:left}
+  .charts-grid,.insights{grid-template-columns:1fr}
+  .tri-wrap{flex-direction:column}
+  .tri-svg-col{flex:0 0 auto;width:100%}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Análisis de mercado · Monoambientes · CABA</div>
+    <h1><strong>Av. Córdoba y Godoy Cruz</strong><br>Palermo Green · Palermo Soho</h1>
+    <div class="header-sub">Edificio nuevo · Full amenities · Julio 2026</div>
+  </div>
+  <div class="header-right">
+    <strong>Matías Leiblich</strong>
+    Ingenieros Inmobiliarios<br>
+    deinmobiliarios.com<br>
+    <span class="handle">@tutemudas</span>
+  </div>
+</header>
+
+<section class="section section-blanca">
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <div>
+      <div class="sec-titulo"><strong>Qué se vendió</strong> en el edificio</div>
+      <div class="sec-desc">Operaciones recientes — precios de cierre confirmados</div>
+    </div>
+  </div>
+  <div class="cierres-grid"><div class="cierre-card">
+      <div class="cierre-pu">4°C</div>
+      <div class="cierre-tipo">Contrafrente</div>
+      <div class="cierre-precio">USD 95.000</div>
+      <div class="cierre-detail">37,6 m² pond · USD 2.527/m²</div>
+      <div class="fuente-conf">✓ Confirmado</div>
+    </div><div class="cierre-card">
+      <div class="cierre-pu">3°B</div>
+      <div class="cierre-tipo">Frente</div>
+      <div class="cierre-precio">USD 105.000</div>
+      <div class="cierre-detail">33,7 m² pond · USD 3.116/m²</div>
+      <div class="fuente-verb">~ Referencia verbal</div>
+    </div></div>
+  <div class="note-box">
+    <strong>¿Por qué importan los cierres?</strong> Los precios de publicación reflejan las expectativas del vendedor.
+    Los de cierre muestran lo que un comprador real pagó. Son el ancla de realidad del mercado
+    y el punto de referencia para entender si la oferta activa está bien o mal posicionada.
+    Nótese que las unidades vendidas eran de pisos intermedios-altos: un 4°C y un 3°B.
+    Las unidades de pisos más bajos, según las ponderaciones estándar de tasación, 
+    deberían valer <em>menos</em> — lo cual refuerza que el precio de la unidad a tasar
+    debe leerse con ese ajuste aplicado.
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <div>
+      <div class="sec-titulo"><strong>Qué hay en venta</strong> hoy</div>
+      <div class="sec-desc">12 avisos activos en Zonaprop · Mismo edificio · Ordenados por tipología y piso</div>
+    </div>
+  </div>
+  <div class="tipo-legend">
+    <div class="tipo-item"><div class="tipo-dot" style="background:#1a7a9a"></div>Tipo A · 27 m² cub.</div>
+    <div class="tipo-item"><div class="tipo-dot" style="background:#b8860b"></div>Tipo B · 32 m² cub. <strong style="font-size:10px;margin-left:2px">← nuestra unidad</strong></div>
+    <div class="tipo-item"><div class="tipo-dot" style="background:#6a3a9a"></div>Tipo C · 36–41 m² cub.</div>
+    <div class="tipo-item"><div class="tipo-dot" style="background:#9a3a3a"></div>Tipo D · 36 m² cub.</div>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead>
+        <tr>
+          <th>Piso · Ud.</th>
+          <th>Precio</th>
+          <th style="text-align:right">Sup. pond.</th>
+          <th style="text-align:right">USD/m²</th>
+          <th style="text-align:right">Días</th>
+          <th style="text-align:right">Vis/día</th>
+          <th>Anuncio</th>
+          <th>Publicidad</th>
+        </tr>
+      </thead>
+      <tbody><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#1a7a9a18;color:#1a7a9a;border:1px solid #1a7a9a44">3°A</span></td>
+      <td class="td-price">USD 129.000</td>
+      <td class="td-num">29,5 m²</td>
+      <td class="td-num">4.373</td>
+      <td style="text-align:right;color:#c0392b;font-weight:600;white-space:nowrap">231d</td>
+      <td class="td-num">0.70</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-off" title="Video">🎬</span><span class="dot-off" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-free">Free</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#1a7a9a18;color:#1a7a9a;border:1px solid #1a7a9a44">7°A</span></td>
+      <td class="td-price">USD 108.329 <span class="renta-tag">renta</span></td>
+      <td class="td-num">29,1 m²</td>
+      <td class="td-num">3.723</td>
+      <td style="text-align:right;color:#c0392b;font-weight:600;white-space:nowrap">307d</td>
+      <td class="td-num">1.63</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-on" title="Video">🎬</span><span class="dot-on" title="Plano">📐</span><span class="dot-on" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#1a7a9a18;color:#1a7a9a;border:1px solid #1a7a9a44">7°A</span></td>
+      <td class="td-price">USD 108.329</td>
+      <td class="td-num">29,1 m²</td>
+      <td class="td-num">3.723</td>
+      <td style="text-align:right;color:#b8860b;font-weight:600;white-space:nowrap">146d</td>
+      <td class="td-num">1.20</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-off" title="Video">🎬</span><span class="dot-on" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#1a7a9a18;color:#1a7a9a;border:1px solid #1a7a9a44">9°A*</span></td>
+      <td class="td-price">USD 108.330</td>
+      <td class="td-num">29,1 m²</td>
+      <td class="td-num">3.723</td>
+      <td style="text-align:right;color:#1a7a4a;font-weight:600;white-space:nowrap">28d</td>
+      <td class="td-num">7.43</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-off" title="Video">🎬</span><span class="dot-off" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr><tr class="row-b">
+      <td class="td-pu"><span class="pu-badge" style="background:#b8860b18;color:#b8860b;border:1px solid #b8860b44">7°B</span></td>
+      <td class="td-price">USD 116.537</td>
+      <td class="td-num">32,5 m²</td>
+      <td class="td-num">3.586</td>
+      <td style="text-align:right;color:#b8860b;font-weight:600;white-space:nowrap">146d</td>
+      <td class="td-num">0.83</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-off" title="Video">🎬</span><span class="dot-on" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-free-p">Free + Premier</span></td>
+    </tr><tr class="row-b">
+      <td class="td-pu"><span class="pu-badge" style="background:#b8860b18;color:#b8860b;border:1px solid #b8860b44">7°B</span></td>
+      <td class="td-price">USD 116.537</td>
+      <td class="td-num">31,0 m²</td>
+      <td class="td-num">3.759</td>
+      <td style="text-align:right;color:#c0392b;font-weight:600;white-space:nowrap">307d</td>
+      <td class="td-num">1.83</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-on" title="Video">🎬</span><span class="dot-on" title="Plano">📐</span><span class="dot-on" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#6a3a9a18;color:#6a3a9a;border:1px solid #6a3a9a44">3°C</span></td>
+      <td class="td-price">USD 139.148 <span class="renta-tag">renta</span></td>
+      <td class="td-num">36,0 m²</td>
+      <td class="td-num">3.865</td>
+      <td style="text-align:right;color:#1a7a4a;font-weight:600;white-space:nowrap">29d</td>
+      <td class="td-num">1.24</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-on" title="Video">🎬</span><span class="dot-off" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-free-p">Free + Premier</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#6a3a9a18;color:#6a3a9a;border:1px solid #6a3a9a44">3°C</span></td>
+      <td class="td-price">USD 139.148</td>
+      <td class="td-num">36,9 m²</td>
+      <td class="td-num">3.771</td>
+      <td style="text-align:right;color:#b8860b;font-weight:600;white-space:nowrap">101d</td>
+      <td class="td-num">0.87</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-off" title="Video">🎬</span><span class="dot-on" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#6a3a9a18;color:#6a3a9a;border:1px solid #6a3a9a44">3°C</span></td>
+      <td class="td-price">USD 143.500</td>
+      <td class="td-num">37,2 m²</td>
+      <td class="td-num">3.858</td>
+      <td style="text-align:right;color:#1a7a4a;font-weight:600;white-space:nowrap">43d</td>
+      <td class="td-num">1.47</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-off" title="Video">🎬</span><span class="dot-off" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#6a3a9a18;color:#6a3a9a;border:1px solid #6a3a9a44">8°C</span></td>
+      <td class="td-price">USD 145.000</td>
+      <td class="td-num">41,0 m²</td>
+      <td class="td-num">3.537</td>
+      <td style="text-align:right;color:#b8860b;font-weight:600;white-space:nowrap">136d</td>
+      <td class="td-num">1.33</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-off" title="Video">🎬</span><span class="dot-off" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#6a3a9a18;color:#6a3a9a;border:1px solid #6a3a9a44">9°C</span></td>
+      <td class="td-price">USD 145.000</td>
+      <td class="td-num">41,6 m²</td>
+      <td class="td-num">3.486</td>
+      <td style="text-align:right;color:#c0392b;font-weight:600;white-space:nowrap">183d</td>
+      <td class="td-num">1.23</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-off" title="Video">🎬</span><span class="dot-off" title="Plano">📐</span><span class="dot-off" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr><tr>
+      <td class="td-pu"><span class="pu-badge" style="background:#9a3a3a18;color:#9a3a3a;border:1px solid #9a3a3a44">7°D</span></td>
+      <td class="td-price">USD 129.000 <span class="renta-tag">renta</span></td>
+      <td class="td-num">37,2 m²</td>
+      <td class="td-num">3.468</td>
+      <td style="text-align:right;color:#c0392b;font-weight:600;white-space:nowrap">307d</td>
+      <td class="td-num">1.17</td>
+      <td class="td-anuncio"><span class="dot-on" title="Foto">📷</span><span class="dot-on" title="Video">🎬</span><span class="dot-on" title="Plano">📐</span><span class="dot-on" title="Tour">🔮</span></td>
+      <td class="td-publi"><span class="badge b-super">Super Dest.</span></td>
+    </tr></tbody>
+    </table>
+  </div>
+  <div class="table-note">* Unidad posiblemente 7°A — piso exacto a confirmar</div>
+  <div class="nos-row">
+    <span class="nos-label">📍 Unidad a tasar — 1°B</span>
+    <div class="nos-block"><span class="nos-sub">Sup. pond.</span><span class="nos-val">33,7 m²</span></div>
+    <div class="nos-block"><span class="nos-sub">Cubierta</span><span class="nos-val">31,99 m²</span></div>
+    <div class="nos-block"><span class="nos-sub">Balcón</span><span class="nos-val">5,58 m²</span></div>
+    <div class="nos-block"><span class="nos-sub">Piso · Orient.</span><span class="nos-val">1° · Frente</span></div>
+    <div class="nos-block"><span class="nos-sub">Anuncio previsto</span><span class="nos-val">Foto · Video · Plano · Tour</span></div>
+    <div class="nos-block"><span class="nos-sub">Publicidad prevista</span><span class="nos-val">Super Dest. Premier</span></div>
+  </div>
+  <div class="insights">
+    <div class="insight">
+      <div class="ins-num rojo">5 de 12</div>
+      <div class="ins-label">avisos llevan <strong>más de 146 días</strong> en cartel sin cerrarse — incluso con Super Destacado activo</div>
+    </div>
+    <div class="insight">
+      <div class="ins-num rojo">307 días</div>
+      <div class="ins-label">lleva el aviso más antiguo del edificio. <strong>Tres propiedades superan los 6 meses</strong> en publicación activa sin resultado</div>
+    </div>
+    <div class="insight">
+      <div class="ins-num azul">0,83</div>
+      <div class="ins-label">vis/día tiene el B más barato (USD 116.537 · 7°B · 146 días). <strong>El precio más bajo del mercado no alcanza para generar interés.</strong></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-blanca">
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <div>
+      <div class="sec-titulo"><strong>Lo que los números muestran</strong></div>
+      <div class="sec-desc">Visualizaciones del mercado activo</div>
+    </div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-eyebrow">Precio de publicación</div>
+      <div class="chart-title">Precios por piso y tipología</div>
+      <div class="chart-wrap"><canvas id="cPrecios"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-eyebrow">Tiempo vs interés</div>
+      <div class="chart-title">Días en venta vs visitas/día — más tiempo no genera más interés</div>
+      <div class="chart-wrap"><canvas id="cScatter"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-eyebrow">Precio relativo</div>
+      <div class="chart-title">USD/m² ponderado por unidad</div>
+      <div class="chart-wrap"><canvas id="cUsd"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-eyebrow">Publicidad vs visibilidad</div>
+      <div class="chart-title">Nivel de publicación vs visitas/día promedio</div>
+      <div class="chart-wrap"><canvas id="cPub"></canvas></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="sec-header">
+    <span class="sec-num">04</span>
+    <div>
+      <div class="sec-titulo"><strong>Tu precio decide</strong> quién te llama</div>
+      <div class="sec-desc">Posicionamiento de precio y comportamiento del comprador</div>
+    </div>
+  </div>
+  <div class="tri-wrap">
+    <div class="tri-svg-col">
+      <svg viewBox="0 0 300 290" xmlns="http://www.w3.org/2000/svg" style="width:100%">
+        <polygon points="150,14 286,226 14,226" fill="#c0392b" opacity=".75"/>
+        <polygon points="150,58 270,226 30,226" fill="#6a3a8a" opacity=".82"/>
+        <polygon points="150,104 254,226 46,226" fill="#1F4E79" opacity=".85"/>
+        <polygon points="150,150 238,226 62,226" fill="#1a7a4a" opacity=".88"/>
+        <line x1="14" y1="226" x2="286" y2="226" stroke="#e1e0d9" stroke-width="1"/>
+        <text x="150" y="43"  text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700" font-size="13">+20%</text>
+        <text x="150" y="56"  text-anchor="middle" fill="#fcc" font-family="Inter" font-size="9">No consultan</text>
+        <text x="150" y="86"  text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700" font-size="12">~15%</text>
+        <text x="150" y="99"  text-anchor="middle" fill="#dcc" font-family="Inter" font-size="9">Consultan, no visitan</text>
+        <text x="150" y="130" text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700" font-size="12">~10%</text>
+        <text x="150" y="143" text-anchor="middle" fill="#cdf" font-family="Inter" font-size="9">Visitan, no ofertan</text>
+        <text x="150" y="183" text-anchor="middle" fill="#fff" font-family="Inter" font-weight="700" font-size="12">~5%</text>
+        <text x="150" y="196" text-anchor="middle" fill="#cfc" font-family="Inter" font-size="9">Consultan, visitan y ofertan</text>
+        <text x="12" y="130" text-anchor="middle" fill="#898781" font-family="Inter" font-size="7.5"
+              transform="rotate(-90,12,130)">PRECIO SOBRE EL MERCADO</text>
+        <text x="150" y="246" text-anchor="middle" fill="#898781" font-family="Inter" font-size="7.5" letter-spacing="1.5">COMPRADORES INTERESADOS</text>
+        <text x="150" y="262" text-anchor="middle" fill="#b4b2a9" font-family="Inter" font-size="7" letter-spacing="1">@tutemudas</text>
+      </svg>
+    </div>
+    <div class="tri-text-col">
+      <div class="tri-item">
+        <div class="tri-pct" style="color:#c0392b">3°A — USD 129.000 · Free · 231 días · 0,70 vis/día</div>
+        <div class="tri-desc">El caso más extremo: precio alto para su tipología, sin publicidad paga, anuncio con solo una foto. Prácticamente invisible. <strong>Doble problema: precio y exposición.</strong></div>
+      </div>
+      <div class="tri-item">
+        <div class="tri-pct" style="color:#6a3a8a">7°B — USD 116.537 · 146 días · 0,83 vis/día</div>
+        <div class="tri-desc">El comparable más directo: misma tipología, pero <strong>piso más alto</strong> — que según las ponderaciones de tasación debería valer más que el 1°B. Sin embargo, lleva 146 días sin cerrarse al precio más bajo del mercado B.</div>
+      </div>
+      <div class="tri-item">
+        <div class="tri-pct" style="color:#1a7a4a">Zona objetivo para 1°B</div>
+        <div class="tri-desc">Para generar consultas reales, el precio del 1°B debe ubicarse <strong>por debajo de los B activos</strong>, considerando que es un piso más bajo (castigo por altura) y da a la avenida. Vale notar además que los C del contrafrente —al no estar sobre la avenida— pueden resultar más deseados, lo que matiza la comparación. En cuanto a los cierres, las unidades que sí se vendieron estaban en pisos intermedios y fueron operaciones reales: ese es el mercado real, y sugiere que <strong>el precio de lista debe ser consistente con lo que el mercado efectivamente pagó.</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span><strong>Matías Leiblich</strong> · Ingenieros Inmobiliarios · deinmobiliarios.com · @tutemudas</span>
+  <span>Fuente: Zonaprop · Julio 2026 · Precios de publicación salvo indicación de cierre · Uso interno</span>
+</footer>
+
+<script>
+const gc='#e1e0d9', tc='#52514e', tip={
+  backgroundColor:'#fff',borderColor:'#e1e0d9',borderWidth:1,
+  titleColor:'#0b0b0b',bodyColor:'#52514e',padding:10,
+  boxShadow:'0 2px 8px rgba(0,0,0,.08)'
+};
+const base={
+  responsive:true,maintainAspectRatio:false,
+  plugins:{legend:{display:false},tooltip:tip},
+  scales:{
+    x:{ticks:{color:tc,font:{size:9,family:'Inter'}},grid:{color:gc}},
+    y:{ticks:{color:tc,font:{size:9,family:'Inter'}},grid:{color:gc}}
+  }
+};
+
+const labels=["3\u00b0A", "7\u00b0A", "7\u00b0A", "9\u00b0A", "7\u00b0B", "7\u00b0B", "3\u00b0C", "3\u00b0C", "3\u00b0C", "8\u00b0C", "9\u00b0C", "7\u00b0D"];
+const precios=[129000, 108329, 108329, 108330, 116537, 116537, 139148, 139148, 143500, 145000, 145000, 129000];
+const dias=[231, 307, 146, 28, 146, 307, 29, 101, 43, 136, 183, 307];
+const vds=[0.7, 1.63, 1.2, 7.43, 0.83, 1.83, 1.24, 0.87, 1.47, 1.33, 1.23, 1.17];
+const usds=[4373, 3723, 3723, 3723, 3586, 3759, 3865, 3771, 3858, 3537, 3486, 3468];
+const colors=["#1a7a9a", "#1a7a9a", "#1a7a9a", "#1a7a9a", "#b8860b", "#b8860b", "#6a3a9a", "#6a3a9a", "#6a3a9a", "#6a3a9a", "#6a3a9a", "#9a3a3a"];
+const pubdata=[{"publi": "Free", "vd": 0.7}, {"publi": "Super Dest. Premier", "vd": 1.63}, {"publi": "Super Dest. Premier", "vd": 1.2}, {"publi": "Super Dest. Premier", "vd": 7.43}, {"publi": "Free (Premier)", "vd": 0.83}, {"publi": "Super Dest. Premier", "vd": 1.83}, {"publi": "Free (Premier)", "vd": 1.24}, {"publi": "Super Dest. Premier", "vd": 0.87}, {"publi": "Super Destacado", "vd": 1.47}, {"publi": "Super Dest. Premier", "vd": 1.33}, {"publi": "Super Dest. Premier", "vd": 1.23}, {"publi": "Super Dest. Premier", "vd": 1.17}];
+const medPrecio=129000;
+
+// 1. Precios
+new Chart(document.getElementById('cPrecios'),{type:'bar',
+  data:{labels,datasets:[{data:precios,borderRadius:4,borderSkipped:false,
+    backgroundColor:colors,borderWidth:0}]},
+  options:{...base,scales:{
+    x:{ticks:{color:tc,font:{size:9}},grid:{color:gc}},
+    y:{ticks:{color:tc,font:{size:9},callback:v=>'USD '+v.toLocaleString('es-AR')},grid:{color:gc}}
+  }}
+});
+
+// 2. Scatter
+const scData=labels.map((l,i)=>({x:dias[i],y:vds[i],label:l,col:colors[i]}));
+new Chart(document.getElementById('cScatter'),{type:'scatter',
+  data:{datasets:[{data:scData.map(d=>({x:d.x,y:d.y})),
+    backgroundColor:scData.map(d=>d.col+'cc'),
+    borderColor:scData.map(d=>d.col),
+    borderWidth:1.5,pointRadius:7,pointHoverRadius:10}]},
+  options:{...base,
+    plugins:{...base.plugins,tooltip:{...tip,callbacks:{
+      label:ctx=>{const d=scData[ctx.dataIndex];return[d.label,`${d.x} días · ${d.y} vis/día`];}
+    }}},
+    scales:{
+      x:{title:{display:true,text:'Días en venta',color:tc,font:{size:10}},ticks:{color:tc,font:{size:9}},grid:{color:gc}},
+      y:{title:{display:true,text:'Visitas / día',color:tc,font:{size:10}},ticks:{color:tc,font:{size:9}},grid:{color:gc}}
+    }
+  }
+});
+
+// 3. USD/m²
+new Chart(document.getElementById('cUsd'),{type:'bar',
+  data:{labels,datasets:[{data:usds,borderRadius:4,borderSkipped:false,
+    backgroundColor:colors,borderWidth:0}]},
+  options:{...base,scales:{
+    x:{ticks:{color:tc,font:{size:9}},grid:{color:gc}},
+    y:{ticks:{color:tc,font:{size:9},callback:v=>v.toLocaleString('es-AR')},grid:{color:gc}}
+  }}
+});
+
+// 4. Publicidad vs viz
+const pg={};
+pubdata.forEach(d=>{
+  const k=d.publi.includes('Free')&&!d.publi.includes('Premier')?'Free':
+          d.publi.includes('Free')?'Free + Premier':'Super Dest.';
+  if(!pg[k])pg[k]=[];pg[k].push(d.vd);
+});
+const pk=Object.keys(pg);
+const pa=pk.map(k=>+(pg[k].reduce((a,b)=>a+b,0)/pg[k].length).toFixed(2));
+const pubColors={'Free':'#c0392b','Free + Premier':'#b8860b','Super Dest.':'#1a7a4a'};
+new Chart(document.getElementById('cPub'),{type:'bar',
+  data:{labels:pk.map((k,i)=>`${k} (n=${pg[k].length})`),
+        datasets:[{data:pa,borderRadius:6,borderSkipped:false,borderWidth:0,
+          backgroundColor:pk.map(k=>pubColors[k]||'#898781')}]},
+  options:{...base,scales:{
+    x:{ticks:{color:tc,font:{size:10}},grid:{color:gc}},
+    y:{title:{display:true,text:'Vis/día promedio',color:tc,font:{size:10}},
+       ticks:{color:tc,font:{size:9}},grid:{color:gc}}
+  }}
+});
+</script>
+</body>
+</html>
