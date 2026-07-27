@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cómo uso IA en la inmobiliaria — Matías Leiblich · IN²</title>
+<!-- GA4 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6}
+
+/* PORTADA */
+.portada{background:#0d1b2e;color:#fff;padding:0;position:relative;overflow:hidden}
+.portada-foto{width:100%;height:280px;object-fit:cover;object-position:center 30%;display:block;opacity:.35;filter:sepia(.2) brightness(.8)}
+.portada-overlay{position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,#0d1b2e 0%,transparent 40%,#0d1b2e 100%)}
+.portada-content{padding:40px 64px 0;position:relative;z-index:2;margin-top:-80px}
+.portada-logo-box{display:inline-flex;align-items:center;gap:10px;background:#1a7aff22;border:1px solid #1a7aff44;border-radius:8px;padding:8px 16px;margin-bottom:32px}
+.portada-eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:14px;font-weight:500}
+.portada-titulo{font-size:42px;font-weight:300;color:#f0f1f3;line-height:1.1;margin-bottom:12px}
+.portada-titulo strong{font-weight:700;color:#fff}
+.portada-subtitulo{font-size:15px;color:#9ca3af;margin-bottom:40px;max-width:600px;line-height:1.6}
+.portada-footer{padding:28px 64px;border-top:1px solid #2a3a50;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;position:relative;z-index:2}
+.portada-autor{display:flex;align-items:center;gap:14px}
+.portada-avatar{width:46px;height:46px;border-radius:50%;background:#1a7aff33;border:2px solid #1a7aff55;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px;color:#6b9fff;flex-shrink:0}
+.portada-autor-info strong{color:#f0f1f3;font-size:14px;display:block}
+.portada-autor-info span{color:#9ca3af;font-size:11px}
+.portada-tags{display:flex;gap:8px;flex-wrap:wrap}
+.portada-tag{font-size:10px;color:#6b9fff;background:#1a7aff11;padding:4px 12px;border-radius:20px;border:1px solid #1a7aff33}
+
+/* SECCIONES */
+.seccion{padding:48px 64px;border-bottom:1px solid #e1e0d9}
+.seccion:last-child{border-bottom:none}
+.seccion-blanca{background:#fff}
+.seccion-dark{background:#0d1b2e;color:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:32px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:3px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:26px;font-weight:300;color:#0b0b0b;line-height:1.2}
+.sec-titulo strong{font-weight:700}
+.sec-titulo-dark{font-size:26px;font-weight:300;color:#f0f1f3;line-height:1.2}
+.sec-titulo-dark strong{font-weight:700;color:#fff}
+.sec-desc{font-size:13px;color:#52514e;margin-top:6px;line-height:1.65;max-width:680px}
+.sec-desc-dark{font-size:13px;color:#9ca3af;margin-top:6px;line-height:1.65;max-width:680px}
+
+/* PROMPT BOX */
+.prompt-box{background:#0f2440;border:1px solid #2a3a50;border-radius:12px;padding:28px 32px;font-family:'SF Mono','Fira Code','Consolas',monospace;font-size:12.5px;line-height:1.9;color:#c9d6e8;white-space:pre-wrap;word-break:break-word;margin-bottom:16px}
+.prompt-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a7aff;font-weight:600;margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.prompt-label::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#1a7aff}
+.prompt-note{font-size:11px;color:#6b7280;font-style:italic;margin-top:12px}
+
+/* RESPUESTA */
+.respuesta-box{background:#fff;border:0.5px solid #e1e0d9;border-radius:12px;padding:28px 32px;margin-bottom:12px}
+.respuesta-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#1a7a4a;font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:8px}
+.respuesta-label::before{content:'';display:inline-block;width:8px;height:8px;border-radius:50%;background:#1a7a4a}
+.respuesta-texto{font-size:13px;color:#0b0b0b;line-height:1.75}
+.respuesta-texto p{margin-bottom:14px}
+.respuesta-texto p:last-child{margin-bottom:0}
+.respuesta-texto strong{font-weight:700;color:#0b0b0b}
+
+/* CLAVES */
+.claves-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:8px}
+.clave-card{background:#fff;border:0.5px solid #e1e0d9;border-radius:10px;padding:22px 24px;position:relative;overflow:hidden}
+.clave-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:#1a7aff}
+.clave-card.gold::before{background:#c9a84c}
+.clave-card.verde::before{background:#1a7a4a}
+.clave-num{font-size:32px;font-weight:700;color:#f0f0ee;line-height:1;margin-bottom:8px;font-variant-numeric:tabular-nums}
+.clave-titulo{font-size:14px;font-weight:700;color:#0b0b0b;margin-bottom:8px;line-height:1.3}
+.clave-desc{font-size:12px;color:#52514e;line-height:1.65}
+.clave-link{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:500;color:#1a7aff;text-decoration:none;margin-top:12px;padding:5px 12px;background:#1a7aff11;border:1px solid #1a7aff22;border-radius:6px}
+.clave-link:hover{background:#1a7aff22}
+.clave-tag{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#1a7aff;margin-bottom:10px;display:block}
+.clave-tag.gold{color:#c9a84c}
+.clave-tag.verde{color:#1a7a4a}
+
+/* ALERT */
+.alert{border-radius:8px;padding:16px 20px;margin-top:16px;display:flex;gap:14px;align-items:flex-start}
+.a-azul{background:#e6f1fb;border:0.5px solid #b5d4f4}
+.a-verde{background:#edf7f1;border:0.5px solid #9fd4b6}
+.a-amarillo{background:#fff8e1;border:0.5px solid #f0c040}
+.alert-ico{font-size:18px;flex-shrink:0;margin-top:1px}
+.alert-titulo{font-size:12px;font-weight:600;margin-bottom:4px}
+.a-azul .alert-titulo{color:#1F4E79}
+.a-verde .alert-titulo{color:#1a7a4a}
+.a-amarillo .alert-titulo{color:#7d5a00}
+.alert-body{font-size:12px;color:#52514e;line-height:1.65}
+
+/* DIVISOR */
+.divisor{display:flex;align-items:center;gap:16px;margin:32px 0}
+.divisor-line{flex:1;height:1px;background:#e1e0d9}
+.divisor-text{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#b4b2a9;font-weight:500;white-space:nowrap}
+
+/* CONTACTO */
+.contacto-page{background:#0d1b2e;color:#fff;padding:56px 64px}
+.contacto-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid #2a3a50}
+.contacto-foto{width:100px;height:100px;border-radius:50%;background:#1a7aff22;border:2px solid #1a7aff55;display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:#6b9fff;flex-shrink:0}
+.contacto-nombre{font-size:28px;font-weight:700;color:#fff;margin-bottom:4px}
+.contacto-titulo{font-size:13px;color:#6b9fff;margin-bottom:12px;letter-spacing:.5px}
+.contacto-bio{font-size:12px;color:#9ca3af;line-height:1.7;max-width:560px}
+.contacto-redes{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.red-btn{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:500;padding:7px 14px;border-radius:20px;border:1px solid #2a3a50;color:#9ca3af;text-decoration:none}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.contacto-card{background:#0f2440;border:1px solid #2a3a50;border-radius:10px;padding:20px 22px}
+.contacto-card-ico{font-size:20px;margin-bottom:10px}
+.contacto-card-titulo{font-size:13px;font-weight:600;color:#f0f1f3;margin-bottom:6px}
+.contacto-card-desc{font-size:11px;color:#6b7280;line-height:1.6;margin-bottom:12px}
+.contacto-links{display:flex;flex-direction:column;gap:6px}
+.contacto-link{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;color:#6b9fff;text-decoration:none;padding:6px 12px;background:#1a7aff11;border:1px solid #1a7aff22;border-radius:6px}
+.contacto-link-arrow{font-size:10px;margin-left:auto}
+.contacto-contacto{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:32px}
+.contacto-dato{background:#0f2440;border:1px solid #2a3a50;border-radius:8px;padding:14px 16px}
+.contacto-dato-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4b5a6e;margin-bottom:5px}
+.contacto-dato-val{font-size:12px;font-weight:500;color:#6b9fff}
+
+/* KPI GRID */
+.kpi-grid{display:grid;gap:8px;margin-bottom:20px}
+.g3{grid-template-columns:repeat(3,1fr)}
+.kpi{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px 20px}
+.kpi-dark{background:#0f2440;border:0.5px solid #2a3a50;border-radius:8px;padding:16px 20px}
+.kpi-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:4px}
+.kpi-label-dark{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:#4b5a6e;margin-bottom:4px}
+.kpi-val{font-size:24px;font-weight:700;color:#0b0b0b;line-height:1}
+.kpi-val-dark{font-size:22px;font-weight:700;color:#f0f1f3;line-height:1}
+.kpi-note{font-size:10px;color:#b4b2a9;margin-top:4px}
+.kpi-note-dark{font-size:10px;color:#4b5a6e;margin-top:4px}
+
+.sep{height:1px;background:#e1e0d9;margin:28px 0}
+.sep-dark{height:1px;background:#2a3a50;margin:28px 0}
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     PORTADA
+════════════════════════════════════════ -->
+<div class="portada">
+  <div style="position:relative">
+    <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/Fotoportada.jpg"
+         onerror="this.style.display='none'"
+         style="width:100%;height:280px;object-fit:cover;object-position:center 20%;display:block;opacity:.3;filter:sepia(.2) brightness(.7)" alt="Fondo">
+    <div style="position:absolute;top:0;left:0;right:0;height:280px;background:linear-gradient(to bottom,#0d1b2e 0%,transparent 40%,#0d1b2e 100%)"></div>
+  </div>
+
+  <div class="portada-content">
+    <div class="portada-logo-box">
+      <span style="font-size:20px;font-weight:900;color:#1a7aff">IN²</span>
+      <div>
+        <div style="font-size:8px;letter-spacing:2px;color:#6b9fff;text-transform:uppercase">Ingenieros</div>
+        <div style="font-size:10px;font-weight:700;color:#fff;letter-spacing:1px;text-transform:uppercase">Inmobiliarios</div>
+      </div>
+    </div>
+
+    <div class="portada-eyebrow">Charla interna · IN² Ingenieros Inmobiliarios · Julio 2026</div>
+    <div class="portada-titulo">Cómo uso IA<br><strong>en la inmobiliaria</strong></div>
+    <div class="portada-subtitulo">Claves, aprendizajes y ejemplos concretos de un flujo de trabajo real. No teoría — lo que hacemos todos los días.</div>
+  </div>
+
+  <div class="portada-footer" style="margin-top:40px">
+    <div class="portada-autor">
+      <div class="portada-avatar" style="background:none;border:2px solid #1a7aff55;overflow:hidden;padding:0"><img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/Fotoportada.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 15%" alt="Matías Leiblich"></div>
+      <div class="portada-autor-info">
+        <strong>Matías Leiblich</strong>
+        <span>Ingeniero Civil · Asesor Inmobiliario · @tutemudas</span>
+      </div>
+    </div>
+    <div class="portada-tags">
+      <span class="portada-tag">#IA</span>
+      <span class="portada-tag">#Inmobiliaria</span>
+      <span class="portada-tag">#IN²</span>
+      <span class="portada-tag">#InformasDeValor</span>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     01 — EL PROMPT
+════════════════════════════════════════ -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <div>
+      <div class="sec-titulo">Por dónde <strong>empezó todo esto</strong></div>
+      <div class="sec-desc">Este es el prompt que le mandé a Claude para arrancar esta presentación. Sirve para mostrar cómo pienso antes de escribir — y también como ejemplo de lo que significa darle contexto a la IA.</div>
+    </div>
+  </div>
+
+  <div class="prompt-label">Prompt · Matías → Claude</div>
+  <div class="prompt-box">Mi nombre es Matias Leiblich, soy ingeniero civil. Actualmente trabajo en la inmobiliaria llamada Ingenieros Inmobiliarios, que forma parte de la red deinmobiliarios. Mi zona de trabajo es CABA, ya que los tickets son más altos y la demanda es mayor; pero vivo en Quilmes, así que conozco muy bien todo lo que es Don Bosco, Bernal y Quilmes; y por cuestiones de cercanía trabajo en esa zona así como Avellaneda y hasta Berazategui (en algunos casos Florencio Varela también).
+Por ser parte de esta red tengo acceso a cierta información de precios de cierre dentro de la red (principalmente CABA), pero también tengo acceso a la RedRemax donde hay información de propiedades vendidas por dicha inmobiliaria.
+Mi intención es poder destacarme de los demás inmobiliarios. Y para elo creé este proyecto que nos va a servir para generar INFORMES DE VALOR. Los mismos serán compartidos en las redes, o enviados directamente a gente a la que le pueda servir: tanto compradores como vendedores (reales o potenciales).
+La intención principal de todo lo que hagamos en los proyectos será captar clientes vendedores. Habrá que llegar directamente a ellos o a través de recomendados o a través de referidores (los referidores son personas a las que se les comparte parte de la comisisón de la venta de la propiedad cuyo lead nos presentaron).
+
+Siempre utilizar para los informes la estética planteada en el HTML "barrio-parque-bernal-jul2026index"
+Siempre a cada informe agregarle GA4 para trackear estadísticas
+
+Hola Claudio.
+En esta ocasión voy a necesitar que me ayudes a armar una presentación. La misma consiste justamente en mostrar un poco cómo uso la IA para trabajar en la inmobiliaria, y principalmente las claves que fui aprendiendo para poder hacerlo.
+Como soy muy capo y todos quieren ser como yo, voy a hacer la presentación a mis compañeros de la inmobiliaria. Posiblemente muestre este mismo prompt que estoy escribiendo como ejemplo, así que en las respuestas por favor no te dirijas a los chicos como "los boluditos que trabajan en IN2" porque son mis amigos y no me gusta que los trates así.
+MI idea es que la presentación tenga en la primera página este mismo prompt y a continuación el resultado al que llegamos.
+Tiene que estar enfocado en las claves, que para mi son:
+
+* armar proyectos
+* PENSAR qué queres hacer
+* esas dos están relacionadas. Idealmente primero pensar, luego armar proyectos y luego volver a pensar
+* preguntarle a Claude que es más inteligente que yo qué opina, qué haría distinto o cómo ejecutaría mis ideas
+* tener la capacidad de entender/poder explicar lo que armes (ejemplo: una calculadora o un informe) para poder dar instrucciones y principalmente REVISAR. Obvio también para poder explicar un informe si alguien pregunta algo y que no parezca (auque en gran parte así lo sea) que todo el trabajo lo hizo la IA.
+
+Dicho todo esto, qué más crees que puede ser de utilidad para mostrar en una primera aproximación de uso de IA para inmobiliaria? No quiero que me tires ideas de para qué te podemos usar, sino de qué tener en cuenta además de lo que te escribí más arriba. Si podes, me gustaría que me agregues algo que pienses que yo esté haciendo mucho y que haya aprendido con el uso.
+Cómo encararías la presentación?
+Antes de armarla respondeme a las preguntas y veamos cómo encararlo</div>
+
+  <div class="alert a-azul">
+    <span class="alert-ico">💡</span>
+    <div>
+      <div class="alert-titulo">Por qué esto ya es una clave en sí mismo</div>
+      <div class="alert-body">Este prompt contiene contexto sobre quién soy, dónde trabajo, qué quiero lograr y cómo quiero que responda. Sin eso, la IA da respuestas genéricas. Con eso, da respuestas útiles. La diferencia entre una herramienta mediocre y una potente casi siempre está en cómo se la instruye, no en la herramienta en sí.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     02 — LA RESPUESTA
+════════════════════════════════════════ -->
+<div class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <div>
+      <div class="sec-titulo">Qué me <strong>respondió Claude</strong></div>
+      <div class="sec-desc">Antes de armar la presentación, le pedí que me diera su opinión. Acá está lo que agregó — y por qué lo incorporé.</div>
+    </div>
+  </div>
+
+  <div class="respuesta-label">Respuesta · Claude → Matías</div>
+  <div class="respuesta-box">
+    <div class="respuesta-texto">
+      <p><strong>Consistencia de contexto.</strong> La IA no tiene memoria entre conversaciones si no se la das. Aprender a "alimentarla" — con el proyecto, con el estilo, con las reglas del negocio — es lo que hace que el output sea usable desde el primer mensaje. Un compañero que empieza de cero cada vez y le pide "haceme un informe de un barrio" va a obtener algo genérico. Vos obtenés algo con tu estética, tu tono, tu metodología. Esa diferencia la construiste explicitando contexto.</p>
+      <p><strong>Iterar en vez de pedir todo de una.</strong> Los mejores resultados no salen del primer prompt. Salen de ir refinando: "esto sí, esto no, cambiá este dato, el tono era más así". Eso requiere paciencia y criterio — y es exactamente lo que frustra a la gente que lo prueba una vez y lo abandona.</p>
+      <p><strong>Saber cuándo NO usar IA.</strong> La conversación con el cliente, la lectura del ambiente en una negociación, el olfato para saber si alguien está listo para cerrar — eso no lo delegás. La IA te libera tiempo para que estés más presente en eso.</p>
+      <p><strong>Y algo que veo que hacés mucho y aprendiste con el uso:</strong> separar proyectos por tema. Bernal en su conversación, créditos en la suya, Abril en la suya. Eso no es obvio para alguien que recién empieza — la tendencia natural es mezclar todo. Vos entendiste que el contexto acotado produce mejores resultados.</p>
+    </div>
+  </div>
+
+  <div class="alert a-verde">
+    <span class="alert-ico">✅</span>
+    <div>
+      <div class="alert-titulo">El ida y vuelta también es parte del método</div>
+      <div class="alert-body">Antes de arrancar a armar, pregunté. Primero hablamos de estructura, de qué incluir, de cómo encararlo. Recién después ejecuté. Eso solo — preguntarle antes de hacer — cambia completamente la calidad del resultado.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     03 — LAS CLAVES
+════════════════════════════════════════ -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <div>
+      <div class="sec-titulo">Las <strong>claves</strong> del método</div>
+      <div class="sec-desc">Lo que aprendí usando IA en el día a día. Algunas las fui descubriendo solo, otras me las señaló Claude cuando le pregunté. Las primeras cinco son mías; las últimas tres, las sumó él.</div>
+    </div>
+  </div>
+
+  <div class="claves-grid">
+
+    <!-- CLAVE 1 -->
+    <div class="clave-card">
+      <span class="clave-tag">Clave 01 · Tuya</span>
+      <div class="clave-num">01</div>
+      <div class="clave-titulo">Primero pensá. Después abrís Claude.</div>
+      <div class="clave-desc">La IA ejecuta bien lo que vos definís bien. Si llegás sin idea clara, vas a obtener algo genérico que vas a tener que rehacer igual. El tiempo de pensar antes es el que más ahorra después.<br><br>El loop ideal: <strong>pensar → armar el proyecto → volver a pensar → ejecutar</strong>.</div>
+    </div>
+
+    <!-- CLAVE 2 -->
+    <div class="clave-card">
+      <span class="clave-tag">Clave 02 · Tuya</span>
+      <div class="clave-num">02</div>
+      <div class="clave-titulo">Armá proyectos, no conversaciones sueltas</div>
+      <div class="clave-desc">Cada proyecto tiene su contexto, su estética, sus reglas. Bernal en un proyecto, créditos en otro, Abril en otro. Claude mantiene todo el historial y las instrucciones dentro de cada uno.<br><br>Una conversación suelta sin contexto es como empezar de cero cada vez.</div>
+    </div>
+
+    <!-- CLAVE 3 -->
+    <div class="clave-card">
+      <span class="clave-tag">Clave 03 · Tuya</span>
+      <div class="clave-num">03</div>
+      <div class="clave-titulo">Preguntale qué haría él. Después decidís vos.</div>
+      <div class="clave-desc">Antes de ejecutar, consultá. <em>"¿Cómo encararías esto?", "¿qué cambiarías?", "¿qué me estoy perdiendo?"</em> Son preguntas que en otro contexto requieren un consultor. Acá las respondés en 30 segundos.<br><br>La decisión final siempre es tuya. Pero tomala con más información.</div>
+    </div>
+
+    <!-- CLAVE 4 -->
+    <div class="clave-card">
+      <span class="clave-tag">Clave 04 · Tuya</span>
+      <div class="clave-num">04</div>
+      <div class="clave-titulo">Tenés que poder revisar lo que armaste</div>
+      <div class="clave-desc">Si publicás un informe sin entenderlo, cualquier pregunta del cliente te deja en evidencia. Si armás una calculadora sin saber qué hace, no podés corregir cuando algo está mal.<br><br>No necesitás saber programar. Necesitás entender la lógica de lo que pediste.</div>
+    </div>
+
+    <!-- CLAVE 5 -->
+    <div class="clave-card">
+      <span class="clave-tag">Clave 05 · Tuya</span>
+      <div class="clave-num">05</div>
+      <div class="clave-titulo">Lo que pensaste al principio se amortiza para siempre</div>
+      <div class="clave-desc">La estética de los informes, la sección de contacto, los botones, el tono, el footer — todo eso se pensó una vez y ahora se replica en cada nuevo informe con una sola instrucción.<br><br><em>"Che, agregá esto tal cual"</em> — eso solo es posible porque antes hubo una decisión deliberada.</div>
+      <a class="clave-link" href="https://matiasleiblich.github.io/informes/barrio-parque-bernal-jul2026/" target="_blank">Ver informe Bernal →</a>
+    </div>
+
+    <!-- CLAVE 6 -->
+    <div class="clave-card gold">
+      <span class="clave-tag gold">Clave 06 · Claude</span>
+      <div class="clave-num" style="color:#f0e8d0">06</div>
+      <div class="clave-titulo">El contexto es la diferencia entre genérico y útil</div>
+      <div class="clave-desc">La IA no tiene memoria entre sesiones si no se la das. El resultado que obtenés depende directamente de cuánto contexto incluís: quién sos, qué hacés, para qué sirve esto, cómo tiene que verse.<br><br>Eso se construye con el tiempo — y separa a quien la usa bien de quien la prueba una vez y la descarta.</div>
+    </div>
+
+    <!-- CLAVE 7 -->
+    <div class="clave-card gold">
+      <span class="clave-tag gold">Clave 07 · Claude</span>
+      <div class="clave-num" style="color:#f0e8d0">07</div>
+      <div class="clave-titulo">Iterá. No esperes el resultado perfecto en el primer intento.</div>
+      <div class="clave-desc">El primer output casi nunca es el final. La clave está en ir refinando: <em>"esto está bien, esto no, acá el tono era distinto, el número estaba mal"</em>. Ese ida y vuelta requiere criterio — y es el criterio que la IA no tiene.<br><br>La paciencia para iterar es una habilidad concreta. La mayoría la abandona antes.</div>
+    </div>
+
+    <!-- CLAVE 8 -->
+    <div class="clave-card verde">
+      <span class="clave-tag verde">Clave 08 · Claude (sobre vos)</span>
+      <div class="clave-num" style="color:#d0f0e0">08</div>
+      <div class="clave-titulo">Sabé cuándo la IA no entra</div>
+      <div class="clave-desc">La IA no percibe si el cliente está listo para cerrar. No lee el silencio en una negociación. No genera confianza con un vendedor nervioso.<br><br>La IA te libera tiempo para hacer eso mejor. Pero no lo reemplaza. Usar IA no significa delegar el trabajo — significa tener más tiempo para el trabajo que importa.</div>
+    </div>
+
+  </div>
+
+  <div class="alert a-amarillo" style="margin-top:24px">
+    <span class="alert-ico">⚠️</span>
+    <div>
+      <div class="alert-titulo">Lo que separa a quien la usa bien de quien la descarta</div>
+      <div class="alert-body">La mayoría de la gente prueba la IA una o dos veces, obtiene algo mediocre y concluye que no sirve. Lo que no ven es que el resultado mediocre no fue culpa de la herramienta — fue culpa de no saber usarla. Estas claves son exactamente eso: lo que hay que construir para que funcione.</div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════
+     04 — CIERRE / CONTACTO
+════════════════════════════════════════ -->
+<div class="contacto-page">
+
+  <div class="contacto-hero">
+    <div class="contacto-foto" style="background:none;border:2px solid #1a7aff55;overflow:hidden;padding:0"><img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/Fotoportada.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center 15%" alt="Matías Leiblich"></div>
+    <div>
+      <div class="contacto-nombre">Matías Leiblich</div>
+      <div class="contacto-titulo">Ingeniero Civil · Asesor Inmobiliario · IN² Ingenieros Inmobiliarios</div>
+      <div class="contacto-bio">Trabajo en CABA y GBA Sur (Quilmes, Bernal, Don Bosco, Avellaneda, Berazategui). Genero informes de valor con datos reales de mercado para captar vendedores y asesorar compradores con criterio técnico.</div>
+      <div class="contacto-redes">
+        <a class="red-btn" href="https://wa.me/5491161737552" target="_blank">📱 WhatsApp</a>
+        <a class="red-btn" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank">✉️ Mail</a>
+        <a class="red-btn" href="https://linkedin.com/in/matias-leiblich" target="_blank">💼 LinkedIn</a>
+        <a class="red-btn" href="https://www.instagram.com/tutemudas" target="_blank">📷 @tutemudas</a>
+        <a class="red-btn" href="https://whatsapp.com/channel/0029VbBiYGGLCoWvqOOv4y1O" target="_blank">📢 Canal WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">Datos de contacto</div>
+  <div class="contacto-contacto">
+    <div class="contacto-dato">
+      <div class="contacto-dato-label">Teléfono / WhatsApp</div>
+      <a class="contacto-dato-val" href="https://wa.me/5491161737552" target="_blank" style="text-decoration:none">11-6173-7552</a>
+    </div>
+    <div class="contacto-dato">
+      <div class="contacto-dato-label">Email</div>
+      <a class="contacto-dato-val" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank" style="text-decoration:none;font-size:11px">matiasleiblich@deinmobiliarios.com</a>
+    </div>
+    <div class="contacto-dato">
+      <div class="contacto-dato-label">Web</div>
+      <a class="contacto-dato-val" href="https://matiasleiblich.com" target="_blank" style="text-decoration:none">matiasleiblich.com</a>
+    </div>
+  </div>
+
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">Herramientas e informes</div>
+  <div class="contacto-grid">
+
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📊</div>
+      <div class="contacto-card-titulo">Informes de Valor</div>
+      <div class="contacto-card-desc">Análisis de mercado por barrio con datos reales: precios, tiempo en mercado, visualizaciones y patrones de oferta.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://matiasleiblich.github.io/informes/barrio-parque-bernal-jul2026/" target="_blank">
+          📊 Informe Barrio Parque Bernal <span class="contacto-link-arrow">→</span>
+        </a>
+        <a class="contacto-link" href="https://matiasleiblich.github.io/informes/creditos-bna-jul26/" target="_blank">
+          🏦 Créditos hipotecarios BNA <span class="contacto-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🧮</div>
+      <div class="contacto-card-titulo">Calculadoras y herramientas</div>
+      <div class="contacto-card-desc">Calculadora de gastos de compra, simulador de créditos UVA y análisis de prefactibilidad de lotes.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://matiasleiblich.com/calculadora-inmobiliaria" target="_blank">
+          🧮 Calculadora inmobiliaria <span class="contacto-link-arrow">→</span>
+        </a>
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20consultar%20por%20un%20analisis%20de%20prefactibilidad%20para%20un%20lote." target="_blank">
+          📐 Análisis de lote <span class="contacto-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🏠</div>
+      <div class="contacto-card-titulo">¿Necesitás ayuda con tu operación?</div>
+      <div class="contacto-card-desc">Asesoramiento para compradores y vendedores en CABA y GBA con visión técnica de ingeniero.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20recibir%20asesoramiento%20para%20analizar%20la%20venta%20de%20una%20propiedad." target="_blank">
+          💰 Quiero vender <span class="contacto-link-arrow">→</span>
+        </a>
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20recibir%20asesoramiento%20para%20analizar%20una%20operacion%20de%20compra." target="_blank">
+          🏠 Quiero comprar <span class="contacto-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📚</div>
+      <div class="contacto-card-titulo">Biblioteca de guías</div>
+      <div class="contacto-card-desc">Guías para compradores, vendedores e inversores. Recursos gratuitos para tomar mejores decisiones inmobiliarias.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://drive.google.com/drive/folders/1el9JGp-ROZrFCmeo2ruf0rJneN-WWf4z?usp=sharing" target="_blank">
+          📖 Ver biblioteca <span class="contacto-link-arrow">→</span>
+        </a>
+        <a class="contacto-link" href="https://matiasleiblich.com/cartera" target="_blank">
+          🏘 Cartera de propiedades <span class="contacto-link-arrow">→</span>
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="border-top:1px solid #2a3a50;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#f0f1f3">Matías Leiblich</div>
+      <div style="font-size:10px;color:#4b5a6e;margin-top:2px">IN² Ingenieros Inmobiliarios · Charla interna · Julio 2026</div>
+    </div>
+    <div style="font-size:10px;color:#4b5a6e;text-align:right">
+      Armado con IA · Claude (Anthropic) · Revisado y aprobado por ML
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
