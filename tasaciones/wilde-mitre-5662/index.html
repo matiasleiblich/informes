@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Tasación · Av. Mitre 5662 2°B · Matías Leiblich</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6}
+
+/* HEADER */
+.header{background:#0d1b2e;color:#fff;padding:40px 56px 36px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:12px;font-weight:500}
+.header h1{font-size:32px;font-weight:300;color:#f0f1f3;line-height:1.15;margin-bottom:6px}
+.header h1 strong{font-weight:700;color:#fff}
+.header-sub{font-size:12px;color:#6b7280}
+.header-right{text-align:right;font-size:12px;color:#6b7280;line-height:1.9;flex-shrink:0}
+.header-right strong{display:block;color:#f0f1f3;font-size:13px;font-weight:600}
+.handle-wpp{font-size:11px;color:#c9a84c;letter-spacing:.5px;font-weight:600;text-decoration:none}
+.handle-wpp:hover{text-decoration:underline}
+
+/* SECTIONS */
+.section{padding:36px 56px;border-bottom:1px solid #e1e0d9}
+.section-blanca{background:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:2px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:20px;font-weight:300;color:#0b0b0b;line-height:1.25}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:#52514e;margin-top:4px;line-height:1.6}
+
+/* STATS */
+.mercado-stats{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+.mstat{background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:18px 22px;flex:1;min-width:130px}
+.mstat-num{font-size:26px;font-weight:700;color:#0b0b0b;margin-bottom:2px}
+.mstat-label{font-size:10px;color:#898781;text-transform:uppercase;letter-spacing:.8px}
+.mstat-hl .mstat-num{color:#1a7aff}
+
+/* CHARTS */
+.chart-card{background:#fff;border:.5px solid #e1e0d9;border-radius:8px;padding:16px 18px}
+.chart-eyebrow{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin-bottom:8px}
+.chart-title{font-size:12px;font-weight:600;color:#0b0b0b;margin-bottom:14px}
+.chart-wrap{position:relative;height:200px}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+
+/* ZONA */
+.zona-stats{display:flex;gap:16px;flex-wrap:wrap;margin-top:0}
+.zona-stat{background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:18px 24px;flex:1;min-width:200px}
+.zona-num{font-size:34px;font-weight:700;color:#1a7aff;margin-bottom:4px}
+.zona-desc{font-size:12px;color:#52514e;line-height:1.5}
+.zona-imgs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.zona-img-wrap img{width:100%;border-radius:8px;display:block}
+.zona-img-caption{font-size:11px;color:#52514e;margin-top:6px;text-align:center}
+
+/* PROPIEDAD + FODA */
+.prop-layout{display:flex;gap:28px;flex-wrap:wrap;align-items:flex-start}
+.prop-datos{flex:0 0 240px}
+.prop-foda{flex:1;min-width:260px}
+.prop-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:.5px solid #e1e0d9;font-size:12px}
+.prop-row:last-child{border-bottom:none}
+.prop-key{color:#52514e}
+.prop-val{font-weight:600;color:#0b0b0b;text-align:right}
+.foda-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.foda-cell{border:.5px solid #e1e0d9;border-radius:8px;padding:13px 15px}
+.foda-cell-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:9px;padding-bottom:7px;border-bottom:.5px solid #e1e0d9}
+.foda-cell-f{background:#f0faf4}.foda-cell-f .foda-cell-label{color:#1a7a4a}
+.foda-cell-o{background:#f0f4ff}.foda-cell-o .foda-cell-label{color:#1a7aff}
+.foda-cell-d{background:#fffbf0}.foda-cell-d .foda-cell-label{color:#b8860b}
+.foda-cell-a{background:#fff0f0}.foda-cell-a .foda-cell-label{color:#c0392b}
+.foda-line{display:flex;gap:8px;align-items:baseline;margin-bottom:5px;font-size:12px;color:#52514e}
+
+/* EVOLUCIÓN AVELLANEDA */
+.evol-img-wrap{border-radius:8px;overflow:hidden;border:.5px solid #e1e0d9}
+.evol-img-wrap img{width:100%;display:block}
+
+/* PROP CARDS */
+.prop-cards-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.prop-card{background:#fff;border:.5px solid #e1e0d9;border-radius:12px;overflow:hidden}
+.prop-card-fotos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:160px 100px;gap:3px;background:#e1e0d9}
+.prop-card-foto-main{grid-row:1/3;overflow:hidden}
+.prop-card-foto-main img{width:100%;height:100%;object-fit:cover;display:block}
+.prop-card-foto-side{overflow:hidden;position:relative}
+.prop-card-foto-side img{width:100%;height:100%;object-fit:cover;display:block}
+.prop-card-foto-side.mas-fotos{position:relative}
+.prop-card-foto-side.mas-fotos::after{content:attr(data-count);position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600}
+.prop-card-body{padding:16px 18px}
+.prop-card-tag{display:inline-block;font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 9px;border-radius:20px;margin-bottom:8px}
+.tag-vendida{background:#edf7f1;color:#1a7a4a;border:.5px solid #9fd4b6}
+.tag-venta{background:#eff4ff;color:#1a4aaf;border:.5px solid #9ab4f0}
+.prop-card-precio{font-size:22px;font-weight:700;color:#0b0b0b;margin-bottom:2px}
+.prop-card-m2{font-size:12px;color:#52514e;margin-bottom:10px}
+.prop-card-specs{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.spec{font-size:11px;color:#52514e;display:flex;align-items:center;gap:4px}
+.spec::before{content:'';width:4px;height:4px;border-radius:50%;background:#1a7aff;flex-shrink:0}
+.prop-card-desc{font-size:11.5px;color:#52514e;line-height:1.6;border-top:.5px solid #e1e0d9;padding-top:10px;margin-top:4px}
+.prop-card-meta{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:.5px solid #e1e0d9;align-items:center}
+.meta-pill{font-size:10px;font-weight:500;padding:3px 9px;border-radius:10px;border:.5px solid #e1e0d9;color:#52514e}
+.meta-pill.dias-alto{background:#fdecea;border-color:#f0b0a0;color:#b71c1c}
+.meta-pill.dias-med{background:#fff8e1;border-color:#e8d080;color:#7d5a00}
+.meta-pill.dias-ok{background:#edf7f1;border-color:#9fd4b6;color:#1a5a2a}
+.meta-pill.b-dest{background:#e3f2fd;color:#0d47a1;border-color:#90c8f0}
+.meta-link{margin-left:auto;font-size:10px;font-weight:700;color:#1a7aff;text-decoration:none;white-space:nowrap}
+.meta-link:hover{text-decoration:underline}
+
+/* NOTE */
+.note-box{background:#fff8e1;border:.5px solid #f0c040;border-radius:8px;padding:13px 16px;font-size:12px;color:#52514e;line-height:1.65;margin-top:14px}
+.note-box strong{color:#7d5a00}
+
+/* SUMMARY BAR vendidos */
+.summary-bar{background:#0d1b2e;border-radius:10px;padding:18px 24px;display:flex;gap:40px;align-items:center;flex-wrap:wrap;margin-top:20px}
+.sbar-label{color:#fff;opacity:.4;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase}
+.sbar-stats{display:flex;gap:36px;flex-wrap:wrap}
+.sbar-item{text-align:center}
+.sbar-val{color:#1a7aff;font-size:17px;font-weight:800}
+.sbar-desc{color:#fff;opacity:.45;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;margin-top:2px}
+
+/* CONCLUSIONES */
+.concl-line{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:.5px solid #e1e0d9;font-size:13px;color:#0b0b0b;line-height:1.55}
+.concl-line:last-child{border-bottom:none}
+
+/* PRECIOS */
+.precios-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px}
+.precio-block{background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:20px 24px}
+.precio-block-label{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#898781;margin-bottom:10px}
+.precio-block-valor{font-size:26px;font-weight:700;color:#0b0b0b;margin-bottom:4px}
+.precio-block-m2{font-size:12px;color:#52514e}
+.neg-nota{text-align:center;font-size:11px;color:#b0afa8;margin-top:12px;font-style:italic}
+
+/* FOOTER */
+.footer{background:#0d1b2e;color:#6b7280;padding:24px 56px;font-size:11px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer strong{color:#f0f1f3}
+
+@media(max-width:720px){
+  .header,.section,.footer{padding-left:20px;padding-right:20px}
+  .header{flex-direction:column;gap:14px}.header-right{text-align:left}
+  .charts-grid,.foda-grid,.precios-grid,.prop-cards-grid,.zona-imgs{grid-template-columns:1fr}
+  .precios-grid{grid-template-columns:1fr}
+  .prop-layout{flex-direction:column}
+  .prop-datos{flex:0 0 auto;width:100%}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="header">
+  <div>
+    <div class="eyebrow">Informe de Tasación · 2 ambientes · GBA Sur</div>
+    <h1><strong>Av. Mitre 5662 2°B</strong><br>Wilde, Avellaneda</h1>
+    <div class="header-sub">2 ambientes · ~1965 · A modernizar · Julio 2026</div>
+  </div>
+  <div class="header-right">
+    <strong>Matías Leiblich</strong>
+    Ingenieros Inmobiliarios<br>
+    deinmobiliarios.com<br>
+    <a href="https://wa.me/5491161737552" target="_blank" class="handle-wpp">11-6173-7552</a>
+  </div>
+</header>
+
+<!-- 01: MERCADO -->
+<section class="section section-blanca">
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <div>
+      <div class="sec-titulo"><strong>El mercado</strong> hoy</div>
+      <div class="sec-desc">CABA · Colegio de Escribanos · Julio 2026</div>
+    </div>
+  </div>
+  <div class="mercado-stats">
+    <div class="mstat"><div class="mstat-num">112.187</div><div class="mstat-label">Avisos publicados hoy</div></div>
+    <div class="mstat"><div class="mstat-num">69.410</div><div class="mstat-label">Escrituras últ. 12 meses</div></div>
+    <div class="mstat mstat-hl"><div class="mstat-num">5,0%</div><div class="mstat-label">Se vende de lo publicado</div></div>
+    <div class="mstat"><div class="mstat-num">1 cada 20</div><div class="mstat-label">Avisos por operación</div></div>
+  </div>
+  <div class="chart-card">
+    <div class="chart-eyebrow">Escrituras realizadas · CABA</div>
+    <div class="chart-title">Operaciones escrituradas y con hipoteca por mes</div>
+    <div class="chart-wrap"><canvas id="cEscr"></canvas></div>
+  </div>
+  <div style="font-size:11px;color:#898781;margin-top:8px;font-style:italic">Fuente: Colegio de Escribanos CABA · Los valores de publicación no reflejan la realidad — <strong style="color:#0b0b0b">lo que importa son los precios de cierre</strong>.</div>
+</section>
+
+<!-- 02: EVOLUCIÓN VALOR AVELLANEDA -->
+<section class="section">
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <div>
+      <div class="sec-titulo"><strong>Evolución del valor</strong> en Avellaneda</div>
+      <div class="sec-desc">USD/m² promedio publicado · Usado · GBA Sur · Enero 2019 – Enero 2026</div>
+    </div>
+  </div>
+  <div class="evol-img-wrap">
+    <img src="informes/tasaciones/wilde-mitre-5662/IMG/evolucion-avellaneda.png"
+         onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+         alt="Evolución valor Avellaneda">
+    <div style="display:none;background:#e8edf2;border-radius:8px;height:220px;align-items:center;justify-content:center;border:.5px solid #d1dae3">
+      <div style="text-align:center;color:#9ca3af">
+        <div style="font-size:11px;font-weight:500">Imagen: Evolución valor Avellaneda</div>
+        <div style="font-size:10px;margin-top:4px">Zonaprop · USD/m² promedio publicado</div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:11px;color:#898781;margin-top:8px;font-style:italic">Fuente: Zonaprop · Precio de publicación promedio por m² · Departamentos usados · Avellaneda</div>
+</section>
+
+<!-- 03: ZONA DE INFLUENCIA -->
+<section class="section section-blanca">
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <div>
+      <div class="sec-titulo"><strong>Competencia</strong> en la zona</div>
+      <div class="sec-desc">Zona de influencia · Julio 2026</div>
+    </div>
+  </div>
+  <div class="zona-imgs">
+    <div>
+      <div class="evol-img-wrap">
+        <img src="informes/tasaciones/wilde-mitre-5662/IMG/wilde-zona.png"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+             alt="Wilde zona completa">
+        <div style="display:none;background:#e8edf2;border-radius:8px;height:200px;align-items:center;justify-content:center">
+          <div style="text-align:center;color:#9ca3af;font-size:11px">Captura zona Wilde</div>
+        </div>
+      </div>
+      <div class="zona-img-caption"><strong>354</strong> departamentos de 2 ambientes en venta en Wilde</div>
+    </div>
+    <div>
+      <div class="evol-img-wrap">
+        <img src="informes/tasaciones/wilde-mitre-5662/IMG/wilde-radio.png"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"
+             alt="Wilde radio cercano">
+        <div style="display:none;background:#e8edf2;border-radius:8px;height:200px;align-items:center;justify-content:center">
+          <div style="text-align:center;color:#9ca3af;font-size:11px">Captura radio 5 cuadras</div>
+        </div>
+      </div>
+      <div class="zona-img-caption"><strong>186</strong> en radio de 5 cuadras a la redonda</div>
+    </div>
+  </div>
+  <div class="zona-stats">
+    <div class="zona-stat">
+      <div class="zona-num">354</div>
+      <div class="zona-desc">departamentos de 2 ambientes en venta en <strong>Wilde</strong></div>
+    </div>
+    <div class="zona-stat">
+      <div class="zona-num">186</div>
+      <div class="zona-desc">en <strong>5 cuadras a la redonda</strong> de la propiedad</div>
+    </div>
+  </div>
+</section>
+
+<!-- 04: PROPIEDAD + FODA -->
+<section class="section">
+  <div class="sec-header">
+    <span class="sec-num">04</span>
+    <div>
+      <div class="sec-titulo"><strong>La propiedad</strong> a tasar</div>
+      <div class="sec-desc">Datos de la unidad y análisis FODA</div>
+    </div>
+  </div>
+  <div class="prop-layout">
+    <div class="prop-datos">
+      <div class="prop-row"><span class="prop-key">Tipología</span><span class="prop-val">2 ambientes</span></div>
+      <div class="prop-row"><span class="prop-key">Cubierta</span><span class="prop-val">49 m²</span></div>
+      <div class="prop-row"><span class="prop-key">Sup. ponderada</span><span class="prop-val" style="color:#1F4E79;font-size:14px;font-weight:700">49 m²</span></div>
+      <div class="prop-row"><span class="prop-key">Dormitorios</span><span class="prop-val">1</span></div>
+      <div class="prop-row"><span class="prop-key">Baños</span><span class="prop-val">1</span></div>
+      <div class="prop-row"><span class="prop-key">Piso</span><span class="prop-val">2° · Interno</span></div>
+      <div class="prop-row"><span class="prop-key">Edificio</span><span class="prop-val">10 pisos · Ascensor</span></div>
+      <div class="prop-row"><span class="prop-key">Antigüedad</span><span class="prop-val">~60 años</span></div>
+      <div class="prop-row"><span class="prop-key">Estado</span><span class="prop-val">A modernizar</span></div>
+      <div class="prop-row"><span class="prop-key">Cochera / Baulera</span><span class="prop-val">No</span></div>
+      <div class="prop-row"><span class="prop-key">Expensas</span><span class="prop-val">$100.000/mes</span></div>
+      <div class="prop-row"><span class="prop-key">Apto crédito</span><span class="prop-val">A confirmar</span></div>
+    </div>
+    <div class="prop-foda">
+      <div class="foda-grid">
+        <div class="foda-cell foda-cell-f">
+          <div class="foda-cell-label">✓ Fortalezas</div>
+          <div class="foda-line"><span style="color:#1a7a4a">✓</span> Superficie generosa: 49 m²</div>
+          <div class="foda-line"><span style="color:#1a7a4a">✓</span> Ubicación sobre Av. Mitre</div>
+          <div class="foda-line"><span style="color:#1a7a4a">✓</span> Edificio con ascensor</div>
+          <div class="foda-line"><span style="color:#1a7a4a">✓</span> Buena conectividad y transporte</div>
+        </div>
+        <div class="foda-cell foda-cell-o">
+          <div class="foda-cell-label">◈ Oportunidades</div>
+          <div class="foda-line"><span style="color:#1a7aff">◈</span> Perfil primera vivienda activo</div>
+          <div class="foda-line"><span style="color:#1a7aff">◈</span> Potencial apto crédito (a confirmar)</div>
+          <div class="foda-line"><span style="color:#1a7aff">◈</span> Comprador que busca para remodelar</div>
+        </div>
+        <div class="foda-cell foda-cell-d">
+          <div class="foda-cell-label">⚠ Debilidades</div>
+          <div class="foda-line"><span style="color:#b8860b">⚠</span> Estado: requiere modernización</div>
+          <div class="foda-line"><span style="color:#b8860b">⚠</span> Interno: sin luz directa</div>
+          <div class="foda-line"><span style="color:#b8860b">⚠</span> Sin cochera ni balcón</div>
+        </div>
+        <div class="foda-cell foda-cell-a">
+          <div class="foda-cell-label">✗ Amenazas</div>
+          <div class="foda-line"><span style="color:#c0392b">✗</span> Alta competencia en la zona</div>
+          <div class="foda-line"><span style="color:#c0392b">✗</span> Incertidumbre sobre créditos hipotecarios</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 05: QUÉ SE VENDIÓ -->
+<section class="section section-blanca">
+  <div class="sec-header">
+    <span class="sec-num">05</span>
+    <div>
+      <div class="sec-titulo"><strong>Qué se vendió</strong> en la zona</div>
+      <div class="sec-desc">Operaciones de cierre recientes · Wilde / Villa Domínico · Red Ingenieros Inmobiliarios</div>
+    </div>
+  </div>
+  <div class="prop-cards-grid">
+
+    <!-- KP434951 · Villa Domínico -->
+    <div class="prop-card">
+      <div class="prop-card-fotos">
+        <div class="prop-card-foto-main">
+          <img src="https://static.kiteprop.com/kp/properties/434951/c61111/md/c611113aefaeef54e070afa89842f00b.jpg" alt="KP434951" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side">
+          <img src="https://static.kiteprop.com/kp/properties/434951/5e3901/md/5e3901656252871a9ee0b0735b4c586a.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side mas-fotos" data-count="+27 fotos" style="position:relative">
+          <img src="https://static.kiteprop.com/kp/properties/434951/4ff781/md/4ff78188f6cce82c94b4cc967d1ba312.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600">+27 fotos</div>
+        </div>
+      </div>
+      <div class="prop-card-body">
+        <span class="prop-card-tag tag-vendida">✓ Vendida</span>
+        <div class="prop-card-precio">USD 49.000</div>
+        <div class="prop-card-m2">37 m² cub · 3 m² semi · <strong>38,5 m² pond.</strong> · <strong>USD 1.273/m²</strong></div>
+        <div class="prop-card-specs">
+          <span class="spec">2 ambientes</span>
+          <span class="spec">1 dormitorio</span>
+          <span class="spec">1 baño</span>
+          <span class="spec">1 cochera</span>
+          <span class="spec">Piso 2° · Frente</span>
+          <span class="spec">Año 2013 · Excelente</span>
+        </div>
+        <div class="prop-card-desc">Magdalena 100, Villa Domínico. Balcón al frente, orientación oeste. Cochera propia. Cocina independiente con isla desayunador. AA. Expensas $65.000.</div>
+        <div class="prop-card-meta">
+          <span class="meta-pill">Villa Domínico</span>
+          <span class="meta-pill">Con cochera</span>
+          <a class="meta-link" href="https://www.kiteprop.com/landing/properties/t5132p434951t41a846m/departamento-en-venta-2-ambientes-balcon-cochera-villa-dominico" target="_blank">Ver ficha ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- KP439920 · Wilde -->
+    <div class="prop-card">
+      <div class="prop-card-fotos">
+        <div class="prop-card-foto-main">
+          <img src="https://static.kiteprop.com/kp/properties/439920/ba1658/md/ba165813ef7e55a66046febc715aa959.jpg" alt="KP439920" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side">
+          <img src="https://static.kiteprop.com/kp/properties/439920/66c1f2/md/66c1f2c0a54a25cff08d63a351e98acc.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side" style="position:relative">
+          <img src="https://static.kiteprop.com/kp/properties/439920/447eaa/md/447eaaacb4c4577a553985a4ab2e7e67.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600">+25 fotos</div>
+        </div>
+      </div>
+      <div class="prop-card-body">
+        <span class="prop-card-tag tag-vendida">✓ Vendida</span>
+        <div class="prop-card-precio">USD 42.000</div>
+        <div class="prop-card-m2">37 m² cub · <strong>37 m² pond.</strong> · <strong>USD 1.135/m²</strong></div>
+        <div class="prop-card-specs">
+          <span class="spec">2 ambientes</span>
+          <span class="spec">1 dormitorio</span>
+          <span class="spec">1 baño</span>
+          <span class="spec">Piso 7° · Norte</span>
+          <span class="spec">Año 1973 · Muy bueno</span>
+        </div>
+        <div class="prop-card-desc">Av. Mitre 5840, Wilde. Vista abierta orientación norte. Living con AA, dormitorio con placard. Acceso directo Autopista Bs.As.–La Plata. Expensas $70.000.</div>
+        <div class="prop-card-meta">
+          <span class="meta-pill">Av. Mitre · Wilde</span>
+          <span class="meta-pill">Vista abierta</span>
+          <a class="meta-link" href="https://www.kiteprop.com/landing/properties/t5132p439920t41a846m/departamento-en-venta-2-ambientes-vista-abierta-avellaneda" target="_blank">Ver ficha ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="summary-bar">
+    <div class="sbar-label">Resumen<br>vendidos</div>
+    <div class="sbar-stats">
+      <div class="sbar-item"><div class="sbar-val">USD 1.204/m²</div><div class="sbar-desc">USD/m² pond. promedio</div></div>
+      <div class="sbar-item"><div class="sbar-val">USD 45.500</div><div class="sbar-desc">Precio promedio</div></div>
+      <div class="sbar-item"><div class="sbar-val">37,75 m²</div><div class="sbar-desc">Superficie pond. prom.</div></div>
+      <div class="sbar-item"><div class="sbar-val">2</div><div class="sbar-desc">Operaciones relevadas</div></div>
+    </div>
+  </div>
+
+  <div class="note-box" style="margin-top:14px">
+    <strong>Interpretación:</strong> Las dos operaciones de cierre muestran un rango de USD 1.135–1.273/m² ponderado para unidades sin amenities en Wilde y Villa Domínico. La unidad a tasar tiene mayor superficie (49 m²) pero su condición "a modernizar" y disposición interna justifican un posicionamiento en el extremo inferior del rango.
+  </div>
+</section>
+
+<!-- 06: QUÉ HAY EN VENTA -->
+<section class="section">
+  <div class="sec-header">
+    <span class="sec-num">06</span>
+    <div>
+      <div class="sec-titulo"><strong>Qué hay en venta</strong> hoy</div>
+      <div class="sec-desc">Comparables activos en Zonaprop · Wilde · Julio 2026</div>
+    </div>
+  </div>
+
+  <div class="prop-cards-grid">
+
+    <!-- Bolívar 6306 · 31d · verde -->
+    <div class="prop-card">
+      <div class="prop-card-fotos">
+        <div class="prop-card-foto-main">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/49/54/16/720x532/2062607276.jpg" alt="Bolívar 6306" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/49/54/16/720x532/2062607282.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side" style="position:relative">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/49/54/16/720x532/2062607277.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600">+20 fotos</div>
+        </div>
+      </div>
+      <div class="prop-card-body">
+        <span class="prop-card-tag tag-venta">En venta</span>
+        <div class="prop-card-precio">USD 43.000</div>
+        <div class="prop-card-m2">47 m² tot · 45 m² cub · <strong>45 m² pond.</strong> · USD 956/m²</div>
+        <div class="prop-card-specs">
+          <span class="spec">2 ambientes</span>
+          <span class="spec">1 dormitorio</span>
+          <span class="spec">1 baño</span>
+          <span class="spec">~30 años</span>
+        </div>
+        <div class="prop-card-desc">Bolívar 6306, esquina Lartigau. Luminoso, zona estratégica de Wilde a una cuadra de Av. Mitre.</div>
+        <div class="prop-card-meta">
+          <span class="meta-pill dias-ok">31 días</span>
+          <span class="meta-pill">3,4 viz/día</span>
+          <span class="meta-pill">Free</span>
+          <a class="meta-link" href="https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-59495416.html" target="_blank">Ver aviso ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bismark 801 · 42d · verde -->
+    <div class="prop-card">
+      <div class="prop-card-fotos">
+        <div class="prop-card-foto-main">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/40/83/15/720x532/2067856183.jpg" alt="Bismark 801" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/40/83/15/720x532/2067856181.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side" style="position:relative">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/40/83/15/720x532/2067856175.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600">+7 fotos</div>
+        </div>
+      </div>
+      <div class="prop-card-body">
+        <span class="prop-card-tag tag-venta">En venta</span>
+        <div class="prop-card-precio">USD 35.000</div>
+        <div class="prop-card-m2">45 m² cub · <strong>45 m² pond.</strong> · USD 778/m²</div>
+        <div class="prop-card-specs">
+          <span class="spec">2 ambientes</span>
+          <span class="spec">1 dormitorio</span>
+          <span class="spec">1 baño</span>
+          <span class="spec">~15 años</span>
+        </div>
+        <div class="prop-card-desc">Bismark 801, Wilde. 2° piso por escalera, frente. Actualmente alquilado. Precio más bajo del segmento.</div>
+        <div class="prop-card-meta">
+          <span class="meta-pill dias-ok">42 días</span>
+          <span class="meta-pill">5,6 viz/día</span>
+          <span class="meta-pill">Free</span>
+          <a class="meta-link" href="https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-en-wilde-59408315.html" target="_blank">Ver aviso ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Av. Mitre 6505 (a reciclar) · 14d · verde -->
+    <div class="prop-card">
+      <div class="prop-card-fotos">
+        <div class="prop-card-foto-main">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/63/07/46/720x532/2065877640.jpg" alt="Av. Mitre 6505 reciclar" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/63/07/46/720x532/2065877653.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side" style="position:relative">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/59/63/07/46/720x532/2065877639.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600">+15 fotos</div>
+        </div>
+      </div>
+      <div class="prop-card-body">
+        <span class="prop-card-tag tag-venta">En venta</span>
+        <div class="prop-card-precio">USD 35.000</div>
+        <div class="prop-card-m2">32 m² cub · <strong>32 m² pond.</strong> · USD 1.094/m²</div>
+        <div class="prop-card-specs">
+          <span class="spec">2 ambientes</span>
+          <span class="spec">1 dormitorio</span>
+          <span class="spec">1 baño</span>
+          <span class="spec">~40 años · A reciclar</span>
+        </div>
+        <div class="prop-card-desc">Av. Mitre 6505, Wilde. Unidad a reciclar. Alta demanda de consultas (9,3 viz/día) — refleja interés de compradores en condición similar a la tasada.</div>
+        <div class="prop-card-meta">
+          <span class="meta-pill dias-ok">14 días</span>
+          <span class="meta-pill">9,3 viz/día ↑</span>
+          <span class="meta-pill">Free</span>
+          <a class="meta-link" href="https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-59630746.html" target="_blank">Ver aviso ↗</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Av. Mitre 6505 (Edificio) · 255d · rojo -->
+    <div class="prop-card">
+      <div class="prop-card-fotos">
+        <div class="prop-card-foto-main">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/57/67/87/28/720x532/2014302468.jpg" alt="Av. Mitre 6505 edificio" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/57/67/87/28/720x532/2014302472.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+        </div>
+        <div class="prop-card-foto-side" style="position:relative">
+          <img src="https://imgar.zonapropcdn.com/avisos/1/00/57/67/87/28/720x532/2014302471.jpg" alt="" onerror="this.parentElement.style.background='#e8edf2'">
+          <div style="position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600">+10 fotos</div>
+        </div>
+      </div>
+      <div class="prop-card-body">
+        <span class="prop-card-tag tag-venta">En venta</span>
+        <div class="prop-card-precio">USD 42.000</div>
+        <div class="prop-card-m2">43 m² cub · <strong>43 m² pond.</strong> · USD 977/m²</div>
+        <div class="prop-card-specs">
+          <span class="spec">2 ambientes</span>
+          <span class="spec">1 dormitorio</span>
+          <span class="spec">1 baño</span>
+          <span class="spec">~45 años</span>
+        </div>
+        <div class="prop-card-desc">Av. Mitre 6505, Wilde. Amplio living-comedor, cocina separada con muebles, dormitorio con placard. Lleva más de 8 meses publicado sin operarse, con Destacado activo.</div>
+        <div class="prop-card-meta">
+          <span class="meta-pill dias-alto">255 días</span>
+          <span class="meta-pill">3,3 viz/día</span>
+          <span class="meta-pill b-dest">Destacado</span>
+          <a class="meta-link" href="https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-57678728.html" target="_blank">Ver aviso ↗</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="note-box">
+    <strong>Lectura del mercado activo:</strong> Los comparables frescos (Bolívar 6306 y Bismark 801) marcan el rango real de operación: USD 35.000–43.000. El de Av. Mitre con 255 días y publicación Destacada es la referencia de qué pasa cuando el precio no está alineado. El "a reciclar" de USD 35.000 genera el mayor interés (9,3 viz/día) — señal de que hay demanda activa para condiciones similares a la tasada, pero con expectativa de precio ajustado.
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-eyebrow">Precio de publicación</div>
+      <div class="chart-title">USD total por comparable activo</div>
+      <div class="chart-wrap"><canvas id="cPrecios"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-eyebrow">Precio relativo</div>
+      <div class="chart-title">USD/m² ponderado por comparable</div>
+      <div class="chart-wrap"><canvas id="cUsd"></canvas></div>
+    </div>
+  </div>
+
+  <!-- Demanda revelada y antigüedad -->
+  <div class="charts-grid" style="margin-top:12px">
+    <div class="chart-card">
+      <div class="chart-eyebrow">Demanda revelada</div>
+      <div class="chart-title">Visualizaciones/día</div>
+      <div style="font-size:11px;color:#898781;margin-bottom:12px">Escala GBA: &gt;8 → ~1 visita presencial/sem · 5–8 → escasa · &lt;5 → prácticamente nula</div>
+      <div class="chart-wrap"><canvas id="cViz"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-eyebrow">Antigüedad en cartel</div>
+      <div class="chart-title">Días en mercado</div>
+      <div style="font-size:11px;color:#898781;margin-bottom:12px">Rojo &gt;180d · Amarillo 90–180d · Verde &lt;90d. Los que más tiempo llevan son los que no bajaron el precio.</div>
+      <div class="chart-wrap"><canvas id="cDias"></canvas></div>
+    </div>
+  </div>
+
+  <!-- KPIs resumen -->
+  <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:12px">
+    <div style="background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:16px 18px">
+      <div style="font-size:21px;font-weight:700;color:#0b0b0b">USD 38.750</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#898781;margin-top:3px">Precio prom. comparables</div>
+      <div style="font-size:11px;color:#52514e;margin-top:6px;line-height:1.4">Los 4 seleccionados (Bismark, Mitre ×2, Bolívar). Excluyendo outliers.</div>
+    </div>
+    <div style="background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:16px 18px">
+      <div style="font-size:21px;font-weight:700;color:#1a7aff">USD 951/m²</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#898781;margin-top:3px">USD/m² pond. prom. activos</div>
+      <div style="font-size:11px;color:#52514e;margin-top:6px;line-height:1.4">Sin considerar cochera, vendidos aprox. USD 1.000/m².</div>
+    </div>
+    <div style="background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:16px 18px">
+      <div style="font-size:21px;font-weight:700;color:#0b0b0b">41 m²</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#898781;margin-top:3px">Sup. pond. promedio</div>
+      <div style="font-size:11px;color:#52514e;margin-top:6px;line-height:1.4">Las unidades más grandes (45 m²) son las de menor precio/m². Bismark y Bolívar.</div>
+    </div>
+    <div style="background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:16px 18px">
+      <div style="font-size:21px;font-weight:700;color:#c0392b">2 de 4</div>
+      <div style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:#898781;margin-top:3px">En cartel &gt;180 días</div>
+      <div style="font-size:11px;color:#52514e;margin-top:6px;line-height:1.4">Av. Mitre edificio (255d). Señal clara de precios que el mercado rechazó.</div>
+    </div>
+  </div>
+
+  <!-- Tabla de comparables -->
+  <div style="margin-top:12px">
+    <div class="chart-card">
+      <div class="chart-eyebrow" style="margin-bottom:12px">Tabla de comparables</div>
+      <div style="border-radius:8px;border:.5px solid #e1e0d9;overflow:hidden">
+        <table style="width:100%;border-collapse:collapse;font-size:12px">
+          <thead>
+            <tr style="background:#f5f4f0">
+              <th style="color:#898781;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;border-bottom:.5px solid #e1e0d9;text-align:left">Dirección</th>
+              <th style="color:#898781;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;border-bottom:.5px solid #e1e0d9;text-align:left">USD total</th>
+              <th style="color:#898781;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;border-bottom:.5px solid #e1e0d9;text-align:left">m² pond.</th>
+              <th style="color:#898781;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;border-bottom:.5px solid #e1e0d9;text-align:left">USD/m²</th>
+              <th style="color:#898781;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;border-bottom:.5px solid #e1e0d9;text-align:left">Días</th>
+              <th style="color:#898781;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;border-bottom:.5px solid #e1e0d9;text-align:left">Viz/día</th>
+              <th style="color:#898781;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;border-bottom:.5px solid #e1e0d9;text-align:left">Pub.</th>
+              <th style="color:#898781;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:10px 12px;border-bottom:.5px solid #e1e0d9;text-align:left">Condición / Nota</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr style="border-bottom:.5px solid #f0efea">
+              <td style="padding:10px 12px;font-weight:600">Bolívar 6306</td>
+              <td style="padding:10px 12px">USD 43.000</td>
+              <td style="padding:10px 12px">45 m²</td>
+              <td style="padding:10px 12px">956</td>
+              <td style="padding:10px 12px"><span style="background:#edf7f1;color:#1a5a2a;border:.5px solid #9fd4b6;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px">31 d</span></td>
+              <td style="padding:10px 12px">3,4/d</td>
+              <td style="padding:10px 12px"><span style="background:#f0f0ed;color:#0b0b0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px">Free</span></td>
+              <td style="padding:10px 12px;color:#52514e">47 m² tot · 45 cub. Fresco. Bien ubicado.</td>
+            </tr>
+            <tr style="border-bottom:.5px solid #f0efea">
+              <td style="padding:10px 12px;font-weight:600">Bismark 801</td>
+              <td style="padding:10px 12px">USD 35.000</td>
+              <td style="padding:10px 12px">45 m²</td>
+              <td style="padding:10px 12px">778</td>
+              <td style="padding:10px 12px"><span style="background:#edf7f1;color:#1a5a2a;border:.5px solid #9fd4b6;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px">42 d</span></td>
+              <td style="padding:10px 12px">5,6/d</td>
+              <td style="padding:10px 12px"><span style="background:#f0f0ed;color:#0b0b0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px">Free</span></td>
+              <td style="padding:10px 12px;color:#52514e">45 m² cub. Precio más bajo. ¿Condición?</td>
+            </tr>
+            <tr style="border-bottom:.5px solid #f0efea">
+              <td style="padding:10px 12px;font-weight:600">Av. Mitre 6505 <em style="font-weight:400">(a reciclar)</em></td>
+              <td style="padding:10px 12px">USD 35.000</td>
+              <td style="padding:10px 12px">32 m²</td>
+              <td style="padding:10px 12px">1.094</td>
+              <td style="padding:10px 12px"><span style="background:#edf7f1;color:#1a5a2a;border:.5px solid #9fd4b6;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px">14 d</span></td>
+              <td style="padding:10px 12px">9,3/d ↑</td>
+              <td style="padding:10px 12px"><span style="background:#f0f0ed;color:#0b0b0b;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px">Free</span></td>
+              <td style="padding:10px 12px;color:#52514e">⚠ A reciclar. Referencia de condición deteriorada.</td>
+            </tr>
+            <tr>
+              <td style="padding:10px 12px;font-weight:600">Av. Mitre 6505 <em style="font-weight:400">(Edificio grande)</em></td>
+              <td style="padding:10px 12px">USD 42.000</td>
+              <td style="padding:10px 12px">43 m²</td>
+              <td style="padding:10px 12px">977</td>
+              <td style="padding:10px 12px"><span style="background:#fdecea;color:#b71c1c;border:.5px solid #f0b0a0;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px">255 d</span></td>
+              <td style="padding:10px 12px">3,3/d</td>
+              <td style="padding:10px 12px"><span style="background:#e3f2fd;color:#0d47a1;border:.5px solid #90c8f0;font-size:10px;font-weight:600;padding:2px 8px;border-radius:10px">Destacado</span></td>
+              <td style="padding:10px 12px;color:#52514e">8+ meses. Ni Destacado lo movió.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07: CONCLUSIONES -->
+<section class="section section-blanca">
+  <div class="sec-header">
+    <span class="sec-num">07</span>
+    <div>
+      <div class="sec-titulo"><strong>Conclusiones</strong></div>
+      <div class="sec-desc">Lo que el mercado indica</div>
+    </div>
+  </div>
+  <div style="max-width:640px">
+    <div class="concl-line"><span style="color:#c0392b;font-size:15px;flex-shrink:0">◉</span>Hay 354 unidades similares en venta en Wilde — la competencia es alta y los compradores tienen opciones</div>
+    <div class="concl-line"><span style="color:#c0392b;font-size:15px;flex-shrink:0">◉</span>El comparable con 255 días en cartel y publicación Destacada muestra que el precio manda: sin ajuste, no se vende</div>
+    <div class="concl-line"><span style="color:#c0392b;font-size:15px;flex-shrink:0">◉</span>Los precios de publicación no reflejan la realidad — los cierres ocurren por debajo del valor publicado</div>
+    <div class="concl-line"><span style="color:#b8860b;font-size:15px;flex-shrink:0">◉</span>La demanda para unidades "a modernizar" existe: el comparable de Av. Mitre a reciclar recibe 9,3 viz/día con solo 14 días publicado</div>
+    <div class="concl-line"><span style="color:#b8860b;font-size:15px;flex-shrink:0">◉</span>La superficie de 49 m² es una fortaleza real frente a los comparables activos, que promedian 41 m² ponderados</div>
+    <div class="concl-line"><span style="color:#1a7aff;font-size:15px;flex-shrink:0">◉</span>El precio de salida y la calidad del aviso son los dos únicos factores que el propietario controla desde el día 1</div>
+  </div>
+</section>
+
+<!-- 08: PROPUESTA -->
+<section class="section">
+  <div class="sec-header">
+    <span class="sec-num">08</span>
+    <div>
+      <div class="sec-titulo"><strong>Propuesta</strong> de precio</div>
+      <div class="sec-desc">Estrategia de publicación · Wilde · Julio 2026</div>
+    </div>
+  </div>
+  <div class="precios-grid">
+    <div class="precio-block">
+      <div class="precio-block-label">Publicación prueba · 30 días</div>
+      <div class="precio-block-valor">USD 45.000</div>
+      <div class="precio-block-m2">USD 918/m² ponderado</div>
+    </div>
+    <div class="precio-block" style="opacity:.75">
+      <div class="precio-block-label">Valor de publicación sugerido</div>
+      <div class="precio-block-valor">USD 42.000</div>
+      <div class="precio-block-m2">USD 857/m² ponderado</div>
+    </div>
+    <div class="precio-block" style="opacity:.55">
+      <div class="precio-block-label">Precio de cierre esperado</div>
+      <div class="precio-block-valor">USD 38.000</div>
+      <div class="precio-block-m2">USD 776/m² ponderado</div>
+    </div>
+  </div>
+  <div class="neg-nota">Negociación estimada: 5–7%</div>
+</section>
+
+<footer class="footer">
+  <span><strong>Matías Leiblich</strong> · Ingenieros Inmobiliarios · deinmobiliarios.com · <a href="https://wa.me/5491161737552" target="_blank" style="color:#c9a84c;text-decoration:none;font-weight:600">11-6173-7552</a></span>
+  <span>Fuente: Zonaprop · KiteProp · Colegio de Escribanos · Julio 2026 · Precios de publicación salvo indicación de cierre</span>
+</footer>
+
+<script>
+const gc='#e1e0d9',tc='#52514e',tip={backgroundColor:'#fff',borderColor:'#e1e0d9',borderWidth:1,titleColor:'#0b0b0b',bodyColor:'#52514e',padding:10};
+const base={responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:tip},scales:{x:{ticks:{color:tc,font:{size:9,family:'Inter'}},grid:{color:gc}},y:{ticks:{color:tc,font:{size:9,family:'Inter'}},grid:{color:gc}}}};
+
+// Escrituras
+const escrLabels=["Ene '24","Feb '24","Mar '24","Abr '24","May '24","Jun '24","Jul '24","Ago '24","Sep '24","Oct '24","Nov '24","Dic '24","Ene '25","Feb '25","Mar '25","Abr '25","May '25","Jun '25","Jul '25","Ago '25","Sep '25","Oct '25","Nov '25","Dic '25","Ene '26","Feb '26","Mar '26","Abr '26","May '26","Jun '26"];
+const escrVals=[1882,2213,3399,3636,4599,4232,4946,5297,5157,5987,5755,7667,3645,4293,4747,5471,5610,5762,6651,6370,6998,7018,5250,7646,3423,3567,5590,5472,5435,5990];
+const hipVals=[69,79,106,114,141,115,225,416,705,944,950,1130,945,965,992,1192,1300,1216,1393,1338,1486,1501,737,888,765,592,834,609,587,765];
+new Chart(document.getElementById('cEscr'),{type:'bar',
+  data:{labels:escrLabels,datasets:[
+    {type:'bar',data:escrVals,borderRadius:3,borderSkipped:false,backgroundColor:'#1a7aff88',borderWidth:0,label:'Escrituras'},
+    {type:'line',data:hipVals,borderColor:'#e05a3a',backgroundColor:'#e05a3a22',borderWidth:2,pointRadius:3,pointBackgroundColor:'#e05a3a',tension:.3,label:'Con Hipoteca',yAxisID:'y'}
+  ]},
+  options:{...base,plugins:{...base.plugins,legend:{display:true,labels:{color:tc,font:{size:10,family:'Inter'},boxWidth:12}}},
+    scales:{x:{ticks:{color:tc,font:{size:8}},grid:{color:gc}},y:{ticks:{color:tc,font:{size:9},callback:v=>v.toLocaleString('es-AR')},grid:{color:gc}}}}
+});
+
+// Comparables charts
+const cLabels=['Bolívar 6306','Bismark 801','Mitre 6505\n(reciclar)','Mitre 6505\n(edificio)'];
+const cPrecios=[43000,35000,35000,42000];
+const cUsdM2=[956,778,1094,977];
+const cDias=[31,42,14,255];
+const cColors=cDias.map(d=>d<90?'#1a7aff88':d<=180?'#f59e0b88':'#ef444488');
+const cBorder=cDias.map(d=>d<90?'#1a7aff':d<=180?'#f59e0b':'#ef4444');
+
+new Chart(document.getElementById('cPrecios'),{type:'bar',
+  data:{labels:cLabels,datasets:[{data:cPrecios,borderRadius:4,borderSkipped:false,backgroundColor:cColors,borderColor:cBorder,borderWidth:1.5}]},
+  options:{...base,scales:{x:{ticks:{color:tc,font:{size:9}},grid:{color:gc}},y:{ticks:{color:tc,font:{size:9},callback:v=>'USD '+v.toLocaleString('es-AR')},grid:{color:gc}}}}
+});
+new Chart(document.getElementById('cUsd'),{type:'bar',
+  data:{labels:cLabels,datasets:[{data:cUsdM2,borderRadius:4,borderSkipped:false,backgroundColor:cColors,borderColor:cBorder,borderWidth:1.5}]},
+  options:{...base,scales:{x:{ticks:{color:tc,font:{size:9}},grid:{color:gc}},y:{ticks:{color:tc,font:{size:9},callback:v=>v.toLocaleString('es-AR')},grid:{color:gc}}}}
+});
+
+const cVizData=[3.4,5.6,9.3,3.3];
+const cVizColors=cVizData.map(v=>v>8?'#22c55e44':v>=5?'#f59e0b44':'#ef444444');
+const cVizBorder=cVizData.map(v=>v>8?'#22c55e':v>=5?'#f59e0b':'#ef4444');
+new Chart(document.getElementById('cViz'),{type:'bar',
+  data:{labels:cLabels,datasets:[{data:cVizData,borderRadius:4,borderSkipped:false,backgroundColor:cVizColors,borderColor:cVizBorder,borderWidth:1.5}]},
+  options:{...base,scales:{x:{ticks:{color:tc,font:{size:9}},grid:{color:gc}},y:{ticks:{color:tc,font:{size:9}},grid:{color:gc},suggestedMax:12}}}
+});
+
+new Chart(document.getElementById('cDias'),{type:'bar',
+  data:{labels:cLabels,datasets:[{data:cDias,borderRadius:4,borderSkipped:false,backgroundColor:cColors,borderColor:cBorder,borderWidth:1.5}]},
+  options:{...base,scales:{x:{ticks:{color:tc,font:{size:9}},grid:{color:gc}},y:{ticks:{color:tc,font:{size:9}},grid:{color:gc}}}}
+});
+</script>
+</body>
+</html>
