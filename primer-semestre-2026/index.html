@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mercado Inmobiliario CABA — Primeros 5 meses 2026</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-XXXXXXXXXX');
+</script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6}
+
+/* PORTADA */
+.portada{background:#0d1b2e;color:#fff;padding:0;position:relative;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
+.portada-foto-wrap{position:relative;height:280px;overflow:hidden}
+.portada-foto{width:100%;height:280px;object-fit:cover;object-position:center 60%;display:block;opacity:.35;filter:sepia(.2) brightness(.8)}
+.portada-overlay{position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(to bottom,#0d1b2e 0%,transparent 40%,#0d1b2e 100%)}
+.portada-content{padding:40px 56px 0;position:relative;z-index:2;margin-top:-80px}
+.portada-logo-row{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.portada-logo-box{background:#1a7aff22;border:1px solid #1a7aff44;border-radius:8px;padding:8px 14px;display:flex;align-items:center;gap:8px}
+.portada-eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:14px;font-weight:500}
+.portada-titulo{font-size:36px;font-weight:300;color:#f0f1f3;line-height:1.1;margin-bottom:8px}
+.portada-titulo strong{font-weight:700;color:#fff}
+.portada-subtitulo{font-size:14px;color:#9ca3af;margin-bottom:36px;max-width:600px;line-height:1.5}
+.portada-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid #2a3a50;border-radius:10px;overflow:hidden;margin-bottom:0}
+.portada-meta-item{padding:18px 20px;border-right:1px solid #2a3a50}
+.portada-meta-item:last-child{border-right:none}
+.portada-meta-label{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.portada-meta-val{font-size:22px;font-weight:700;color:#fff}
+.portada-meta-sub{font-size:10px;color:#6b7280;margin-top:2px}
+.portada-footer{padding:28px 56px;border-top:1px solid #2a3a50;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;position:relative;z-index:2}
+.portada-autor{display:flex;align-items:center;gap:14px}
+.portada-autor-info strong{color:#f0f1f3;font-size:14px;display:block}
+.portada-autor-info span{color:#9ca3af;font-size:11px}
+.portada-tags{display:flex;gap:8px;flex-wrap:wrap}
+.portada-tag{font-size:10px;color:#6b9fff;background:#1a7aff11;padding:4px 12px;border-radius:20px;border:1px solid #1a7aff33}
+
+/* SECCIONES */
+.seccion{padding:40px 56px;border-bottom:1px solid #e1e0d9}
+.seccion:last-child{border-bottom:none}
+.seccion-blanca{background:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:3px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:22px;font-weight:300;color:#0b0b0b;line-height:1.2}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:#52514e;margin-top:5px;line-height:1.6}
+
+/* KPIs */
+.kpi-grid{display:grid;gap:8px;margin-bottom:20px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.kpi{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:14px 18px}
+.seccion-blanca .kpi{background:#f9f8f5}
+.kpi-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:4px}
+.kpi-val{font-size:24px;font-weight:700;color:#0b0b0b;line-height:1}
+.kpi-val.verde{color:#1a7a4a}
+.kpi-val.rojo{color:#c0392b}
+.kpi-val.azul{color:#1F4E79}
+.kpi-val.naranja{color:#b45309}
+.kpi-note{font-size:10px;color:#b4b2a9;margin-top:4px}
+
+/* CHARTS */
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.chart-card{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px 18px}
+.seccion-blanca .chart-card{background:#f9f8f5}
+.chart-card.full{grid-column:1/-1}
+.chart-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin-bottom:10px}
+.chart-wrap{position:relative;height:200px}
+.chart-wrap.tall{height:260px}
+.chart-wrap.xtall{height:320px}
+
+/* ALERTAS */
+.alert{border-radius:8px;padding:14px 18px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
+.a-rojo{background:#fdf0f0;border:0.5px solid #e8b4b4}
+.a-verde{background:#edf7f1;border:0.5px solid #9fd4b6}
+.a-azul{background:#e6f1fb;border:0.5px solid #b5d4f4}
+.a-amarillo{background:#fff8e1;border:0.5px solid #f0c040}
+.a-gris{background:#f5f4f0;border:0.5px solid #d3d1c7}
+.alert-ico{font-size:17px;flex-shrink:0;margin-top:1px}
+.alert-titulo{font-size:12px;font-weight:600;margin-bottom:3px}
+.a-rojo .alert-titulo{color:#c0392b}
+.a-verde .alert-titulo{color:#1a7a4a}
+.a-azul .alert-titulo{color:#1F4E79}
+.a-amarillo .alert-titulo{color:#7d5a00}
+.a-gris .alert-titulo{color:#52514e}
+.alert-body{font-size:12px;color:#52514e;line-height:1.65}
+
+/* TABLA */
+.tabla{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px}
+.tabla th{background:#f5f4f0;color:#52514e;font-weight:500;padding:8px 10px;border-bottom:0.5px solid #e1e0d9;text-align:left}
+.tabla td{padding:8px 10px;border-bottom:0.5px solid #f0efea;vertical-align:middle}
+.tabla tr:last-child td{border-bottom:none}
+
+/* TABLA TIEMPO — ESPECIAL */
+.tabla-tiempo{width:100%;border-collapse:collapse;margin-top:8px;font-size:12px}
+.tabla-tiempo th{background:#0d1b2e;color:#6b9fff;font-size:10px;letter-spacing:.5px;text-transform:uppercase;padding:10px 14px;font-weight:500;text-align:center}
+.tabla-tiempo th:first-child{text-align:left}
+.tabla-tiempo td{padding:12px 14px;text-align:center;border-bottom:0.5px solid #e1e0d9}
+.tabla-tiempo td:first-child{text-align:left;font-weight:600;color:#0b0b0b}
+.tabla-tiempo tr:nth-child(odd) td{background:#fafaf8}
+.tabla-tiempo tr:last-child td{border-bottom:none;background:#fff3e0}
+.tabla-tiempo .td-warn{color:#c0392b;font-weight:700}
+.tabla-tiempo .td-ok{color:#1a7a4a;font-weight:700}
+.tabla-tiempo .td-mid{color:#b45309;font-weight:700}
+
+/* BARRAS BARRIOS */
+.barrio-list{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.barrio-row{display:flex;align-items:center;gap:8px}
+.barrio-nom{font-size:11px;color:#52514e;width:90px;flex-shrink:0}
+.barrio-track{flex:1;height:22px;background:#f0efea;border-radius:4px;overflow:hidden}
+.barrio-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:8px}
+.barrio-fill span{font-size:10px;font-weight:600;color:#fff}
+
+/* TREEMAP BARRIOS */
+.treemap{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:auto auto;gap:3px;height:220px}
+.tm-cell{border-radius:4px;display:flex;flex-direction:column;justify-content:flex-end;padding:8px 10px;font-size:10px;color:#fff;font-weight:600;overflow:hidden}
+.tm-barrio{font-size:11px;font-weight:700}
+.tm-num{font-size:13px;font-weight:700;opacity:.9;margin-top:2px}
+
+/* SEPARADOR */
+.sep{height:0.5px;background:#e1e0d9;margin:20px 0}
+
+/* FUENTE */
+.fuente{font-size:10px;color:#b4b2a9;margin-top:10px;font-style:italic}
+
+/* CONCLUSION ESPECIAL */
+.conc-tiempo{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid #e1e0d9;border-radius:10px;overflow:hidden;margin-top:16px}
+.ct-col{padding:16px;border-right:1px solid #e1e0d9;text-align:center}
+.ct-col:last-child{border-right:none}
+.ct-mes{font-size:11px;font-weight:700;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:10px;padding-bottom:8px;border-bottom:0.5px solid #e1e0d9}
+.ct-stat{margin-bottom:8px}
+.ct-ico{font-size:16px;margin-bottom:2px}
+.ct-val{font-size:20px;font-weight:700;line-height:1}
+.ct-lbl{font-size:9px;color:#898781;text-transform:uppercase;letter-spacing:.5px;margin-top:2px}
+.ct-neg{font-size:15px;font-weight:700;margin-top:6px;padding-top:6px;border-top:0.5px solid #e1e0d9}
+
+/* PÁGINA CONTACTO */
+.contacto-page{background:#0d1b2e;color:#fff;padding:56px}
+.contacto-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid #2a3a50}
+.contacto-nombre{font-size:28px;font-weight:700;color:#fff;margin-bottom:4px}
+.contacto-titulo{font-size:13px;color:#6b9fff;margin-bottom:12px;letter-spacing:.5px}
+.contacto-bio{font-size:12px;color:#9ca3af;line-height:1.7;max-width:560px}
+.contacto-redes{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.red-btn{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:500;padding:7px 14px;border-radius:20px;border:1px solid #2a3a50;color:#9ca3af;text-decoration:none}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.contacto-card{background:#0f2440;border:1px solid #2a3a50;border-radius:10px;padding:20px 22px}
+.contacto-card-ico{font-size:20px;margin-bottom:10px}
+.contacto-card-titulo{font-size:13px;font-weight:600;color:#f0f1f3;margin-bottom:6px}
+.contacto-card-desc{font-size:11px;color:#6b7280;line-height:1.6;margin-bottom:12px}
+.contacto-links{display:flex;flex-direction:column;gap:6px}
+.contacto-link{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;color:#6b9fff;text-decoration:none;padding:6px 12px;background:#1a7aff11;border:1px solid #1a7aff22;border-radius:6px}
+.contacto-contacto{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:32px}
+.contacto-dato{background:#0f2440;border:1px solid #2a3a50;border-radius:8px;padding:14px 16px}
+.contacto-dato-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4b5a6e;margin-bottom:5px}
+.contacto-dato-val{font-size:12px;font-weight:500;color:#6b9fff}
+
+/* FOOTER */
+.doc-footer{background:#0d1b2e;color:#9ca3af;padding:24px 56px;font-size:11px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-top:1px solid #1a2a3a}
+.doc-footer strong{color:#f0f1f3}
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+  <div class="portada-foto-wrap">
+    <img class="portada-foto"
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/01/Buenos_Aires_-_Skyline_at_night.jpg/1280px-Buenos_Aires_-_Skyline_at_night.jpg"
+      onerror="this.style.display='none'" alt="Buenos Aires skyline">
+    <div class="portada-overlay"></div>
+  </div>
+
+  <div class="portada-content">
+    <div class="portada-logo-row">
+      <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/logoml.png" alt="Matías Leiblich" style="height:48px;object-fit:contain">
+    </div>
+
+    <div class="portada-eyebrow">Análisis de mercado CABA · Julio 2026</div>
+    <div class="portada-titulo">Ciudad de Buenos Aires<br><strong>¿Qué pasó en los primeros 5 meses del año?</strong></div>
+    <div class="portada-subtitulo">Oferta · Escrituras · Crédito hipotecario · Valores de publicación · Precios de cierre · Conclusiones para vendedores</div>
+
+    <div class="portada-meta">
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Inmuebles en venta CABA</div>
+        <div class="portada-meta-val">112.000</div>
+        <div class="portada-meta-sub">total · 77.000 son departamentos</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Escrituras mayo 2026</div>
+        <div class="portada-meta-val">5.435</div>
+        <div class="portada-meta-sub">tercer mejor mayo / 15 años</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Crédito hipotecario</div>
+        <div class="portada-meta-val">−68%</div>
+        <div class="portada-meta-sub">vs. pico oct. 2025</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Precios de cierre</div>
+        <div class="portada-meta-val">−5%</div>
+        <div class="portada-meta-sub">vs. 2025</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="portada-footer">
+    <div class="portada-autor">
+      <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada.jpg" style="width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:center 15%;border:2px solid #1a7aff55;flex-shrink:0">
+      <div class="portada-autor-info">
+        <strong>Matías Leiblich</strong>
+        <span>Ingeniero Civil · Asesor Real Estate</span>
+      </div>
+    </div>
+    <div class="portada-tags">
+      <span class="portada-tag">#MercadoInmobiliario</span>
+      <span class="portada-tag">#CABA</span>
+      <span class="portada-tag">#Propiedades2026</span>
+    </div>
+  </div>
+</div>
+
+<!-- 01: OFERTA -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <div>
+      <div class="sec-titulo"><strong>Oferta</strong> de departamentos en CABA</div>
+      <div class="sec-desc">La cantidad de inmuebles publicados bajó de su pico histórico, pero sigue siendo alta — y creciendo más rápido que la demanda.</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid g3">
+    <div class="kpi">
+      <div class="kpi-label">Total inmuebles en venta CABA</div>
+      <div class="kpi-val">112.000</div>
+      <div class="kpi-note">todas las tipologías</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Solo departamentos</div>
+      <div class="kpi-val azul">77.000</div>
+      <div class="kpi-note">publicados en Zonaprop</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Reducción desde el pico (2022)</div>
+      <div class="kpi-val verde">−48.000</div>
+      <div class="kpi-note">desde los 120.000 del pico</div>
+    </div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">Evolución de oferta de departamentos en CABA (miles)</div>
+      <div class="chart-wrap tall">
+        <canvas id="ch-oferta-hist"></canvas>
+      </div>
+      <div class="fuente">Fuente: Zonaprop / bryn.com.ar</div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Departamentos publicados por barrio (Top 9)</div>
+      <div class="chart-wrap tall">
+        <canvas id="ch-barrios"></canvas>
+      </div>
+      <div class="fuente">Fuente: Zonaprop — avisos publicados</div>
+    </div>
+  </div>
+
+  <div class="alert a-amarillo">
+    <span class="alert-ico">⚠️</span>
+    <div>
+      <div class="alert-titulo">La oferta crece más rápido que la demanda</div>
+      <div class="alert-body">Si bien la oferta bajó significativamente desde el pico de 2021–2022, la tendencia reciente es nuevamente ascendente. Más oferta con demanda constante implica más competencia entre vendedores y mayor poder de negociación para el comprador. En los barrios con mayor stock — Palermo, Recoleta, Belgrano — la diferenciación en la comercialización es determinante para concretar la venta.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 02: ESCRITURAS -->
+<div class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <div>
+      <div class="sec-titulo"><strong>Escrituras</strong> — mayo de cada año</div>
+      <div class="sec-desc">El nivel de escrituras mide la demanda efectiva: cuántas operaciones se están concretando realmente.</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid g4">
+    <div class="kpi">
+      <div class="kpi-label">Escrituras mayo 2026</div>
+      <div class="kpi-val">5.435</div>
+      <div class="kpi-note">operaciones escrituradas</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Variación interanual</div>
+      <div class="kpi-val rojo">−3,1%</div>
+      <div class="kpi-note">vs. mayo 2025</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Ranking histórico (15 años)</div>
+      <div class="kpi-val verde">3°</div>
+      <div class="kpi-note">tercer mejor mayo desde 2010</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Pico histórico (2002)</div>
+      <div class="kpi-val">8.098</div>
+      <div class="kpi-note">referencia máxima</div>
+    </div>
+  </div>
+
+  <div class="chart-card full" style="margin-bottom:20px">
+    <div class="chart-label">Escrituras en mayo — comparativo histórico (1998–2026)</div>
+    <div class="chart-wrap xtall">
+      <canvas id="ch-escrituras"></canvas>
+    </div>
+    <div class="fuente">Fuente: Colegio de Escribanos de la Ciudad de Buenos Aires</div>
+  </div>
+
+  <div class="alert a-verde">
+    <span class="alert-ico">✅</span>
+    <div>
+      <div class="alert-titulo">Tercer mejor mayo de los últimos 15 años — la demanda está activa</div>
+      <div class="alert-body">Con 5.435 escrituras, mayo 2026 se ubica como el tercer mejor mayo desde 2010, superado únicamente por 2025 y 2011. La caída interanual del 3,1% respecto a mayo 2025 se explica principalmente por el retroceso en el crédito hipotecario. La demanda contado permanece sólida.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 03: CRÉDITO -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <div>
+      <div class="sec-titulo"><strong>Crédito hipotecario</strong> — el freno del mercado</div>
+      <div class="sec-desc">El crédito fue el gran impulsor del mercado en 2025. En 2026, todavía no se recuperó.</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid g4">
+    <div class="kpi">
+      <div class="kpi-label">Crédito otorgado — oct. 2025 (pico)</div>
+      <div class="kpi-val">USD 372M</div>
+      <div class="kpi-note">máximo reciente</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Crédito otorgado — may. 2026</div>
+      <div class="kpi-val rojo">USD 116M</div>
+      <div class="kpi-note">nivel actual</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Caída desde el pico</div>
+      <div class="kpi-val rojo">−68%</div>
+      <div class="kpi-note">en volumen en dólares</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">% escrituras con hipoteca</div>
+      <div class="kpi-val naranja">10,8%</div>
+      <div class="kpi-note">vs. 25,9% en ene. 2026</div>
+    </div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">Crédito hipotecario UVA en millones de dólares</div>
+      <div class="chart-wrap tall">
+        <canvas id="ch-credito-usd"></canvas>
+      </div>
+      <div class="fuente">Fuente: Empiria en base a BCRA</div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Cantidad de créditos hipotecarios otorgados (altas mensuales)</div>
+      <div class="chart-wrap tall">
+        <canvas id="ch-credito-cant"></canvas>
+      </div>
+      <div class="fuente">Fuente: Empiria en base a Tejido Urbano y BCRA / @SalinasAndres</div>
+    </div>
+  </div>
+
+  <div class="chart-card full" style="margin-bottom:20px">
+    <div class="chart-label">Hipotecas como % del total de compraventas — jun.2025 a may.2026 vs. año anterior</div>
+    <div class="chart-wrap">
+      <canvas id="ch-credito-pct"></canvas>
+    </div>
+  </div>
+
+  <div class="alert a-rojo">
+    <span class="alert-ico">📉</span>
+    <div>
+      <div class="alert-titulo">Caída del 68% desde el pico — y el BNA es el único jugador activo</div>
+      <div class="alert-body">El retroceso del crédito se explica por dos factores: el resultado de las PASO 2025 generó incertidumbre, los bancos subieron tasas y endurecieron el scoring. La baja posterior del scoring del BNA ayudó, pero todavía no alcanzó para recuperar los volúmenes. El BNA concentra prácticamente todo el mercado hipotecario activo. Bancos como el Francés e ICBC empezaron a bajar tasas — el ICBC incluso permite crédito para segunda vivienda — pero el impacto aún no se refleja en los números. Hay un gap claro: si el crédito vuelve a los niveles del año pasado, la demanda puede repuntar significativamente.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04: VALORES DE PUBLICACIÓN -->
+<div class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">04</span>
+    <div>
+      <div class="sec-titulo"><strong>Valores de publicación</strong> — estabilización con matices</div>
+      <div class="sec-desc">Los precios que piden los vendedores se estabilizaron después de la recuperación post-pandemia. El mercado de pozos muestra una anomalía importante.</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid g4">
+    <div class="kpi">
+      <div class="kpi-label">Promedio CABA (USD/m²)</div>
+      <div class="kpi-val">USD 2.650</div>
+      <div class="kpi-note">todas las tipologías</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Usado (USD/m²)</div>
+      <div class="kpi-val">USD 2.219</div>
+      <div class="kpi-note">estabilizado</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">A estrenar (USD/m²)</div>
+      <div class="kpi-val azul">USD 2.939</div>
+      <div class="kpi-note">leve suba</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">En pozo (USD/m²)</div>
+      <div class="kpi-val naranja">USD 3.125</div>
+      <div class="kpi-note">supera al a estrenar</div>
+    </div>
+  </div>
+
+  <div class="chart-card full" style="margin-bottom:20px">
+    <div class="chart-label">Evolución USD/m² de publicación por tipología en CABA (2017–2026)</div>
+    <div class="chart-wrap tall">
+      <canvas id="ch-valores-pub"></canvas>
+    </div>
+    <div class="fuente">Fuente: Zonaprop / bryn.com.ar</div>
+  </div>
+
+  <div class="alert a-amarillo">
+    <span class="alert-ico">⚠️</span>
+    <div>
+      <div class="alert-titulo">El pozo supera al a estrenar — una anomalía que no es casual</div>
+      <div class="alert-body">El precio promedio de los departamentos en pozo (USD 3.125/m²) ya supera al de los inmuebles a estrenar (USD 2.939/m²). Esto sucede porque los desarrolladores mantienen precios altos basados en costos de construcción en dólares, mientras que el mercado de usados y a estrenar ya ajustó. En la práctica, significa que quien quiere comprar un departamento nuevo puede encontrar mejores opciones comprando uno a estrenar que directamente del pozo. Para los pozos que no tienen marca reconocida de desarrollador, esto los deja en una posición muy difícil.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 05: PRECIOS DE CIERRE -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">05</span>
+    <div>
+      <div class="sec-titulo"><strong>Precios de cierre</strong> — lo que realmente se paga</div>
+      <div class="sec-desc">Los precios de publicación son lo que se pide. Los precios de cierre son lo que se paga. Son dos cosas distintas.</div>
+    </div>
+  </div>
+
+  <div class="kpi-grid g3">
+    <div class="kpi">
+      <div class="kpi-label">Variación precios de cierre 2026 vs. 2025</div>
+      <div class="kpi-val rojo">−5%</div>
+      <div class="kpi-note">datos de operaciones cerradas</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Ticket promedio 2025 (pico)</div>
+      <div class="kpi-val">USD 132.985</div>
+      <div class="kpi-note">mejor año reciente</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-label">Ticket promedio 2026</div>
+      <div class="kpi-val naranja">USD 126.509</div>
+      <div class="kpi-note">leve retroceso</div>
+    </div>
+  </div>
+
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">Ticket promedio de cierre (USD) — evolución 2021–2026</div>
+      <div class="chart-wrap tall">
+        <canvas id="ch-cierres"></canvas>
+      </div>
+      <div class="fuente">Fuente: datos de operaciones cerradas en CABA</div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Recoleta — precio de cierre vs. valor de publicación (USD/m²)</div>
+      <div class="chart-wrap tall">
+        <canvas id="ch-recoleta"></canvas>
+      </div>
+      <div class="fuente">Fuente: elaboración propia en base a datos de operaciones cerradas en Recoleta</div>
+    </div>
+  </div>
+
+  <div class="alert a-azul">
+    <span class="alert-ico">💡</span>
+    <div>
+      <div class="alert-titulo">El precio de publicación no es el precio de mercado</div>
+      <div class="alert-body">Los valores de publicación se estabilizaron o bajaron levemente. Pero los precios de cierre cayeron un 5% versus 2025. En Recoleta, los cierres se están lateralizando sin mostrar suba real. La brecha entre precio pedido y precio pagado existe en todos los mercados — conocerla es la diferencia entre tasar bien o vender mal. Tasar con datos reales de cierre, no solo con lo que el vecino publicó, es lo que permite tomar decisiones correctas.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 06: CONCLUSIONES PARA VENDEDORES -->
+<div class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">06</span>
+    <div>
+      <div class="sec-titulo"><strong>¿Cuándo querés vender?</strong> — lo que el tiempo le hace a tu operación</div>
+      <div class="sec-desc">Cada mes que una propiedad permanece publicada sin venderse, su poder de captación cae y el margen de negociación del comprador crece. Los datos lo confirman.</div>
+    </div>
+  </div>
+
+  <div class="conc-tiempo">
+    <div class="ct-col" style="background:#edf7f1">
+      <div class="ct-mes" style="color:#1a7a4a">Mes 1</div>
+      <div class="ct-stat">
+        <div class="ct-ico">👁️</div>
+        <div class="ct-val" style="color:#1a7a4a">35</div>
+        <div class="ct-lbl">Visualiz./día</div>
+      </div>
+      <div class="ct-stat">
+        <div class="ct-ico">🚶</div>
+        <div class="ct-val" style="color:#1a7a4a">3,6</div>
+        <div class="ct-lbl">Visitas pres./sem.</div>
+      </div>
+      <div class="ct-neg" style="color:#1a7a4a">−5% negociación</div>
+    </div>
+    <div class="ct-col" style="background:#fff8e1">
+      <div class="ct-mes" style="color:#b45309">Mes 2</div>
+      <div class="ct-stat">
+        <div class="ct-ico">👁️</div>
+        <div class="ct-val" style="color:#b45309">29</div>
+        <div class="ct-lbl">Visualiz./día</div>
+      </div>
+      <div class="ct-stat">
+        <div class="ct-ico">🚶</div>
+        <div class="ct-val" style="color:#b45309">2,1</div>
+        <div class="ct-lbl">Visitas pres./sem.</div>
+      </div>
+      <div class="ct-neg" style="color:#b45309">−10% negociación</div>
+    </div>
+    <div class="ct-col" style="background:#fdf0f0">
+      <div class="ct-mes" style="color:#c0392b">Meses 3–4</div>
+      <div class="ct-stat">
+        <div class="ct-ico">👁️</div>
+        <div class="ct-val" style="color:#c0392b">22</div>
+        <div class="ct-lbl">Visualiz./día</div>
+      </div>
+      <div class="ct-stat">
+        <div class="ct-ico">🚶</div>
+        <div class="ct-val" style="color:#c0392b">1,4</div>
+        <div class="ct-lbl">Visitas pres./sem.</div>
+      </div>
+      <div class="ct-neg" style="color:#c0392b">−11% negociación</div>
+    </div>
+    <div class="ct-col" style="background:#fdf0f0">
+      <div class="ct-mes" style="color:#7b0f0f">Mes +5</div>
+      <div class="ct-stat">
+        <div class="ct-ico">👁️</div>
+        <div class="ct-val" style="color:#7b0f0f">20</div>
+        <div class="ct-lbl">Visualiz./día</div>
+      </div>
+      <div class="ct-stat">
+        <div class="ct-ico">🚶</div>
+        <div class="ct-val" style="color:#7b0f0f">1,2</div>
+        <div class="ct-lbl">Visitas pres./sem.</div>
+      </div>
+      <div class="ct-neg" style="color:#7b0f0f">−13% negociación</div>
+    </div>
+  </div>
+
+  <div class="fuente" style="margin-top:8px">Fuente: análisis Ing. Fernando Caro / IN² Ingenieros Inmobiliarios</div>
+
+  <div class="sep"></div>
+
+  <div class="alert a-rojo">
+    <span class="alert-ico">🕐</span>
+    <div>
+      <div class="alert-titulo">El tiempo juega en contra del vendedor, siempre</div>
+      <div class="alert-body">Una propiedad en su primer mes recibe casi el triple de visualizaciones que una que lleva cinco meses publicada (35 vs. 20 por día). Las visitas presenciales caen de 3,6 a 1,2 semanales. Y el comprador que llega después de 5 meses sabe perfectamente que puede negociar con fuerza — lo que implica un descuento adicional del 8% respecto al mes de lanzamiento. Si la propiedad está publicada hace meses sin resultado, el precio o la estrategia de comercialización necesitan una revisión urgente.</div>
+    </div>
+  </div>
+
+  <div class="alert a-azul" style="margin-top:8px">
+    <span class="alert-ico">💡</span>
+    <div>
+      <div class="alert-titulo">El mercado es bueno. El contexto no siempre ayuda. La estrategia sí.</div>
+      <div class="alert-body">Mayo 2026 fue el tercer mejor mayo de los últimos 15 años en escrituras. Hay compradores reales. Pero la oferta sigue siendo alta, el crédito frenó, y los precios de cierre cayeron un 5%. En este escenario, vende quien llegó primero al mercado con precio correcto y estrategia activa. El resto espera.</div>
+    </div>
+  </div>
+</div>
+
+<!-- PÁGINA CONTACTO -->
+<div class="contacto-page">
+  <div class="contacto-hero">
+    <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada.jpg" style="width:100px;height:100px;border-radius:50%;object-fit:cover;object-position:center 15%;border:2px solid #1a7aff55;flex-shrink:0">
+    <div>
+      <div class="contacto-nombre">Matías Leiblich</div>
+      <div class="contacto-titulo">Ingeniero Civil · Asesor Real Estate</div>
+      <div class="contacto-bio">Soy Ingeniero Civil graduado en la UBA y asesor en Real Estate. Mi enfoque combina el análisis técnico de cada inmueble con el estudio de las condiciones actuales del mercado. Cada tasación se realiza cruzando oferta activa con operaciones cerradas, sin basarse únicamente en precios de publicación.</div>
+      <div class="contacto-redes">
+        <a class="red-btn" href="https://wa.me/5491161737552" target="_blank">📱 WhatsApp</a>
+        <a class="red-btn" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank">✉️ Mail</a>
+        <a class="red-btn" href="https://linkedin.com/in/matias-leiblich" target="_blank">💼 LinkedIn</a>
+        <a class="red-btn" href="https://www.instagram.com/tutemudas" target="_blank">📷 @tutemudas</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">¿Cómo puedo ayudarte?</div>
+  <div class="contacto-grid">
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🏠</div>
+      <div class="contacto-card-titulo">¿Tu propiedad lleva meses publicada sin resultado?</div>
+      <div class="contacto-card-desc">Hacemos un diagnóstico gratuito: precio, estrategia de comercialización y comparación con operaciones cerradas en la zona.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20que%20analices%20la%20estrategia%20de%20venta%20de%20mi%20propiedad." target="_blank">
+          🔍 Quiero un diagnóstico →
+        </a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📊</div>
+      <div class="contacto-card-titulo">¿Estás pensando en vender y querés saber cuánto vale tu propiedad?</div>
+      <div class="contacto-card-desc">Tasación profesional con datos de cierre reales, no solo precios de publicación. El valor publicado no es el valor de mercado.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20una%20tasacion%20de%20mi%20propiedad." target="_blank">
+          💰 Quiero tasar mi propiedad →
+        </a>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <div><strong>Matías Leiblich</strong> · Ingeniero Civil · Asesor Real Estate · Julio 2026</div>
+  <div>Fuentes: Zonaprop · BCRA · Colegio de Escribanos CABA · bryn.com.ar · @SalinasAndres</div>
+</div>
+
+<script>
+const opts = () => ({
+  responsive:true,
+  maintainAspectRatio:false,
+  plugins:{legend:{display:false}},
+  scales:{
+    x:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781'}},
+    y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781'}}
+  }
+});
+
+// CH-OFERTA-HIST: evolución oferta departamentos CABA en miles (aprox de datos del gráfico)
+const mesesOferta = ['Feb-17','Ago-17','Feb-18','Ago-18','Feb-19','Ago-19','Feb-20','Ago-20','Feb-21','Ago-21','Feb-22','Ago-22','Feb-23','Ago-23','Feb-24','Ago-24','Feb-25','Ago-25','Feb-26','May-26'];
+const valOferta   = [49,53,70,82,88,91,89,48,70,95,110,120,95,65,68,73,74,77,78,80];
+new Chart(document.getElementById('ch-oferta-hist'),{
+  type:'line',
+  data:{
+    labels:mesesOferta,
+    datasets:[{
+      data:valOferta,
+      borderColor:'#1a7aff',
+      backgroundColor:'rgba(26,122,255,0.08)',
+      fill:true,
+      tension:0.4,
+      pointRadius:2,
+      borderWidth:2
+    }]
+  },
+  options:{
+    ...opts(),
+    plugins:{
+      legend:{display:false},
+      annotation:{},
+      tooltip:{callbacks:{label:c=>`${c.raw}k depts.`}}
+    },
+    scales:{
+      x:{grid:{color:'#f0efea'},ticks:{font:{size:8},color:'#898781',maxRotation:45,maxTicksLimit:10}},
+      y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781',callback:v=>v+'k'},min:40,suggestedMax:130}
+    }
+  }
+});
+
+// CH-BARRIOS: top barrios
+new Chart(document.getElementById('ch-barrios'),{
+  type:'bar',
+  data:{
+    labels:['Palermo','Recoleta','Belgrano','Caballito','Balvanera','Flores','Floresta','Puerto Madero','Colegiales'],
+    datasets:[{
+      data:[13892,8014,7246,5794,3778,2441,2441,2095,1490],
+      backgroundColor:['#1a7aff','#1a7aff','#1a7aff','#4e90d9','#4e90d9','#88b4e8','#88b4e8','#88b4e8','#88b4e8'],
+      borderWidth:0,
+      borderRadius:3
+    }]
+  },
+  options:{
+    ...opts(),
+    indexAxis:'y',
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.toLocaleString()} depts.`}}},
+    scales:{
+      x:{grid:{color:'#f0efea'},ticks:{font:{size:8},color:'#898781',callback:v=>v>=1000?(v/1000).toFixed(0)+'k':v}},
+      y:{grid:{display:false},ticks:{font:{size:9},color:'#52514e'}}
+    }
+  }
+});
+
+// CH-ESCRITURAS: mayo histórico
+const aniosEsc = ['1998','1999','2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020','2021','2022','2023','2024','2025','2026'];
+const valEsc   = [6400,5600,5600,5100,8098,5750,5350,6050,6450,6050,6450,3700,5100,5500,4700,3450,2950,3200,3700,5100,5944,3200,681,1950,2850,3350,4600,5600,5435];
+const colEsc   = aniosEsc.map((a,i)=>{
+  if(a==='2002') return '#c0392b';
+  if(a==='2018') return '#c9a84c';
+  if(a==='2020') return '#1a7a4a';
+  if(a==='2026') return '#1a7aff';
+  return '#4e79a7';
+});
+new Chart(document.getElementById('ch-escrituras'),{
+  type:'bar',
+  data:{
+    labels:aniosEsc,
+    datasets:[{data:valEsc,backgroundColor:colEsc,borderWidth:0,borderRadius:3}]
+  },
+  options:{
+    ...opts(),
+    plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.toLocaleString()} escrituras`}}},
+    scales:{
+      x:{grid:{display:false},ticks:{font:{size:9},color:'#898781'}},
+      y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781'}}
+    }
+  }
+});
+
+// CH-CREDITO-USD: crédito hipotecario en millones USD
+const mesesCred = ['may-16','…','may-17','…','may-18','…','may-19','…','may-20','…','may-21','…','may-22','…','may-23','…','may-24','ago-24','oct-24','dic-24','feb-25','abr-25','jun-25','ago-25','oct-25','dic-25','feb-26','may-26'];
+const valCred   = [5,8,12,15,689,446,80,20,5,3,4,6,10,18,30,60,80,150,244,193,280,350,420,390,372,200,150,116];
+new Chart(document.getElementById('ch-credito-usd'),{
+  type:'line',
+  data:{
+    labels:mesesCred,
+    datasets:[{
+      data:valCred,
+      borderColor:'#1a7aff',
+      backgroundColor:'rgba(26,122,255,0.07)',
+      fill:true,tension:0.4,pointRadius:2,borderWidth:2
+    }]
+  },
+  options:{
+    ...opts(),
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:c=>`USD ${c.raw}M`}}
+    },
+    scales:{
+      x:{grid:{color:'#f0efea'},ticks:{font:{size:8},color:'#898781',maxRotation:45,maxTicksLimit:10}},
+      y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781',callback:v=>'USD '+v+'M'}}
+    }
+  }
+});
+
+// CH-CREDITO-CANT: cantidad de créditos
+const mesesCantCred = ['ene-24','feb-24','mar-24','abr-24','may-24','jun-24','jul-24','ago-24','sep-24','oct-24','nov-24','dic-24','ene-25','feb-25','mar-25','abr-25','may-25','jun-25','jul-25','ago-25','sep-25','oct-25','nov-25','dic-25','ene-26','feb-26','mar-26','abr-26'];
+const valCantCred   = [154,165,202,177,283,254,326,836,1466,2395,2414,3209,2825,2465,3028,3874,3866,3978,4235,4252,4745,5020,2943,2486,2430,1855,2392,1534];
+new Chart(document.getElementById('ch-credito-cant'),{
+  type:'bar',
+  data:{
+    labels:mesesCantCred,
+    datasets:[{
+      data:valCantCred,
+      backgroundColor: mesesCantCred.map(m=>m.includes('26')?'#e8c45a':'#1a7aff'),
+      borderWidth:0,borderRadius:3
+    }]
+  },
+  options:{
+    ...opts(),
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:c=>`${c.raw.toLocaleString()} créditos`}}
+    },
+    scales:{
+      x:{grid:{display:false},ticks:{font:{size:7},color:'#898781',maxRotation:55,maxTicksLimit:14}},
+      y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781'}}
+    }
+  }
+});
+
+// CH-CREDITO-PCT: hipotecas como % de compraventas
+const mesesPct = ['Jun\'25','Jul\'25','Ago\'25','Sep\'25','Oct\'25','Nov\'25','Dic\'25','Ene\'26','Feb\'26','Mar\'26','Abr\'26','May\'26'];
+const pct25    = [2.7,4.5,7.9,13.7,15.8,16.5,14.7,25.9,22.5,20.9,21.8,23.2];
+const pct26    = [21.1,20.9,21.0,21.4,21.4,14.0,11.6,22.3,16.6,14.9,11.1,10.8];
+new Chart(document.getElementById('ch-credito-pct'),{
+  type:'line',
+  data:{
+    labels:mesesPct,
+    datasets:[
+      {label:'Jun 2024 – May 2025',data:pct25,borderColor:'#b4b2a9',borderDash:[4,3],tension:0.3,pointRadius:3,borderWidth:1.5,backgroundColor:'rgba(26,122,255,0.04)',fill:false},
+      {label:'Jun 2025 – May 2026',data:pct26,borderColor:'#1a7aff',tension:0.3,pointRadius:4,borderWidth:2.5,backgroundColor:'rgba(26,122,255,0.06)',fill:false}
+    ]
+  },
+  options:{
+    ...opts(),
+    plugins:{
+      legend:{display:true,position:'top',labels:{font:{size:10},color:'#52514e',boxWidth:16}},
+      tooltip:{callbacks:{label:c=>`${c.dataset.label}: ${c.raw}%`}}
+    },
+    scales:{
+      x:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781'}},
+      y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781',callback:v=>v+'%'},min:0,max:30}
+    }
+  }
+});
+
+// CH-VALORES-PUB: evolución USD/m² publicación
+const mesesVP = ['Feb-17','Ago-17','Feb-18','Ago-18','Feb-19','Ago-19','Feb-20','Ago-20','Feb-21','Ago-21','Feb-22','Ago-22','Feb-23','Ago-23','Feb-24','Ago-24','Feb-25','Ago-25','Feb-26','May-26'];
+const vpPozo     = [2600,2700,2850,3000,3000,2950,2800,2400,2200,2200,2200,2300,2400,2500,2700,2900,3000,3050,3100,3125];
+const vpEstrenar = [2500,2600,2800,2950,3100,3050,2800,2400,2250,2300,2350,2450,2550,2600,2700,2800,2850,2900,2920,2939];
+const vpUsado    = [2300,2450,2700,2700,2650,2600,2450,2150,2100,2050,2050,2100,2150,2100,2100,2150,2180,2200,2210,2219];
+new Chart(document.getElementById('ch-valores-pub'),{
+  type:'line',
+  data:{
+    labels:mesesVP,
+    datasets:[
+      {label:'En pozo',data:vpPozo,borderColor:'#1a7aff',tension:0.4,pointRadius:2,borderWidth:2,fill:false},
+      {label:'A estrenar',data:vpEstrenar,borderColor:'#1a7a4a',tension:0.4,pointRadius:2,borderWidth:2,fill:false},
+      {label:'Usado',data:vpUsado,borderColor:'#c9a84c',tension:0.4,pointRadius:2,borderWidth:2,fill:false}
+    ]
+  },
+  options:{
+    ...opts(),
+    plugins:{
+      legend:{display:true,position:'top',labels:{font:{size:10},color:'#52514e',boxWidth:16}},
+      tooltip:{callbacks:{label:c=>`${c.dataset.label}: USD ${c.raw}/m²`}}
+    },
+    scales:{
+      x:{grid:{color:'#f0efea'},ticks:{font:{size:8},color:'#898781',maxRotation:45,maxTicksLimit:10}},
+      y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781',callback:v=>'USD '+v},min:2000}
+    }
+  }
+});
+
+// CH-CIERRES: ticket promedio de cierre por año
+new Chart(document.getElementById('ch-cierres'),{
+  type:'bar',
+  data:{
+    labels:['2021','2022','2023','2024','2025','2026'],
+    datasets:[{
+      label:'Ticket promedio de cierre (USD)',
+      data:[128756,101774,108570,124061,132985,126509],
+      backgroundColor:['#4e90d9','#4e90d9','#4e90d9','#4e90d9','#1a7aff','#c9a84c'],
+      borderWidth:0,borderRadius:3
+    }]
+  },
+  options:{
+    ...opts(),
+    plugins:{
+      legend:{display:false},
+      tooltip:{callbacks:{label:c=>`USD ${c.raw.toLocaleString()}`}}
+    },
+    scales:{
+      x:{grid:{display:false},ticks:{font:{size:10},color:'#898781'}},
+      y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781',callback:v=>'USD '+(v/1000).toFixed(0)+'k'},min:90000}
+    }
+  }
+});
+
+// CH-RECOLETA: precios cierre vs publicación
+const mesesRec = ['Ene-23','Abr-23','Jul-23','Oct-23','Ene-24','Abr-24','Jul-24','Oct-24','Ene-25','Abr-25','Jul-25','Oct-25','Ene-26','Abr-26'];
+const recCierre = [1900,1875,1850,1804,1875,1950,2100,2200,2250,2300,2300,2250,2200,2150];
+const recPub    = [2715,2650,2620,2604,2533,2512,2502,2522,2532,2652,2722,2752,2752,2731];
+new Chart(document.getElementById('ch-recoleta'),{
+  type:'line',
+  data:{
+    labels:mesesRec,
+    datasets:[
+      {label:'Precio de cierre',data:recCierre,borderColor:'#1a7aff',tension:0.4,pointRadius:3,borderWidth:2.5,fill:false},
+      {label:'Valor de publicación',data:recPub,borderColor:'#e8b4b4',tension:0.4,pointRadius:3,borderWidth:2,borderDash:[4,3],fill:false}
+    ]
+  },
+  options:{
+    ...opts(),
+    plugins:{
+      legend:{display:true,position:'top',labels:{font:{size:10},color:'#52514e',boxWidth:16}},
+      tooltip:{callbacks:{label:c=>`${c.dataset.label}: USD ${c.raw}/m²`}}
+    },
+    scales:{
+      x:{grid:{color:'#f0efea'},ticks:{font:{size:8},color:'#898781',maxRotation:45,maxTicksLimit:8}},
+      y:{grid:{color:'#f0efea'},ticks:{font:{size:9},color:'#898781',callback:v=>'USD '+v},min:1600}
+    }
+  }
+});
+</script>
+</body>
+</html>
