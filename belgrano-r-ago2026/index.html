@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Informe de Mercado — Belgrano R · Agosto 2026</title>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MC47CJF0VL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MC47CJF0VL');
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6}
+.portada{background:#0d1b2e;color:#fff;padding:0;position:relative;overflow:hidden;display:grid;grid-template-rows:auto 1fr auto}
+.portada-content{padding:40px 56px 0;position:relative;z-index:2;margin-top:-30px}
+.portada-logo-row{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.portada-eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:14px;font-weight:500}
+.portada-titulo{font-size:38px;font-weight:300;color:#f0f1f3;line-height:1.1;margin-bottom:8px}
+.portada-titulo strong{font-weight:700;color:#fff}
+.portada-subtitulo{font-size:14px;color:#9ca3af;margin-bottom:36px;max-width:540px;line-height:1.5}
+.portada-meta{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid #2a3a50;border-radius:10px;overflow:hidden;margin-bottom:0}
+.portada-meta-item{padding:18px 20px;border-right:1px solid #2a3a50}
+.portada-meta-item:last-child{border-right:none}
+.portada-meta-label{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.portada-meta-val{font-size:22px;font-weight:700;color:#fff}
+.portada-meta-sub{font-size:10px;color:#6b7280;margin-top:2px}
+.portada-footer{padding:28px 56px;border-top:1px solid #2a3a50;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;position:relative;z-index:2}
+.portada-autor{display:flex;align-items:center;gap:14px}
+.portada-autor-info strong{color:#f0f1f3;font-size:14px;display:block}
+.portada-autor-info span{color:#9ca3af;font-size:11px}
+.portada-tags{display:flex;gap:8px;flex-wrap:wrap}
+.portada-tag{font-size:10px;color:#6b9fff;background:#1a7aff11;padding:4px 12px;border-radius:20px;border:1px solid #1a7aff33}
+.seccion{padding:40px 56px;border-bottom:1px solid #e1e0d9}
+.seccion:last-child{border-bottom:none}
+.seccion-blanca{background:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:3px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:22px;font-weight:300;color:#0b0b0b;line-height:1.2}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:#52514e;margin-top:5px;line-height:1.6}
+.kpi-grid{display:grid;gap:8px;margin-bottom:20px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.kpi{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:14px 18px}
+.kpi-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:4px}
+.kpi-val{font-size:24px;font-weight:700;color:#0b0b0b;line-height:1}
+.kpi-val.verde{color:#1a7a4a}
+.kpi-val.rojo{color:#c0392b}
+.kpi-val.azul{color:#1F4E79}
+.kpi-note{font-size:10px;color:#b4b2a9;margin-top:4px}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:20px}
+.chart-card{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px 18px}
+.chart-card.full{grid-column:1/-1}
+.chart-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin-bottom:10px}
+.chart-wrap{position:relative;height:180px}
+.chart-wrap.tall{height:240px}
+.alert{border-radius:8px;padding:14px 18px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
+.a-rojo{background:#fdf0f0;border:0.5px solid #e8b4b4}
+.a-verde{background:#edf7f1;border:0.5px solid #9fd4b6}
+.a-azul{background:#e6f1fb;border:0.5px solid #b5d4f4}
+.a-amarillo{background:#fff8e1;border:0.5px solid #f0c040}
+.alert-ico{font-size:17px;flex-shrink:0;margin-top:1px}
+.alert-titulo{font-size:12px;font-weight:600;margin-bottom:3px}
+.a-rojo .alert-titulo{color:#c0392b}
+.a-verde .alert-titulo{color:#1a7a4a}
+.a-azul .alert-titulo{color:#1F4E79}
+.a-amarillo .alert-titulo{color:#7d5a00}
+.alert-body{font-size:12px;color:#52514e;line-height:1.65}
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.bar-lbl{font-size:11px;color:#52514e;width:130px;flex-shrink:0;text-align:right}
+.bar-track{flex:1;height:30px;background:#f5f4f0;border-radius:4px;overflow:hidden}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:10px}
+.bar-fill span{font-size:11px;font-weight:600;color:#fff}
+.bar-pct{font-size:11px;color:#898781;width:38px;flex-shrink:0}
+.bar-note{font-size:10px;color:#b4b2a9;margin-left:140px;margin-top:-4px;margin-bottom:8px;font-style:italic}
+.tabla{width:100%;border-collapse:collapse;font-size:11px;margin-top:12px}
+.tabla th{background:#f5f4f0;color:#52514e;font-weight:500;padding:7px 10px;border-bottom:0.5px solid #e1e0d9;text-align:left}
+.tabla td{padding:7px 10px;border-bottom:0.5px solid #f0efea;vertical-align:middle}
+.tabla tr:last-child td{border-bottom:none}
+.tabla tr:hover td{background:#fafaf8}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:500}
+.b-super{background:#e8f5e9;color:#1b5e20}
+.b-dest{background:#e3f2fd;color:#0d47a1}
+.b-sin{background:#f5f4f0;color:#898781}
+.sep{height:0.5px;background:#e1e0d9;margin:20px 0}
+.conc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.conc-item{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:14px 16px}
+.conc-num{font-size:26px;font-weight:700;line-height:1;margin-bottom:4px}
+.conc-lbl{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:6px}
+.conc-desc{font-size:11px;color:#52514e;line-height:1.5}
+.case-box{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px 18px;margin-top:14px}
+.case-box-hdr{font-size:12px;font-weight:600;color:#0b0b0b;margin-bottom:8px}
+.case-box-body{font-size:12px;color:#52514e;line-height:1.65}
+.guia-card{background:#0d1b2e;border-radius:10px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:20px;margin-top:20px;flex-wrap:wrap}
+.guia-card-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px;font-weight:600}
+.guia-card-titulo{font-size:16px;font-weight:700;color:#fff;margin-bottom:6px}
+.guia-card-desc{font-size:12px;color:#9ca3af;line-height:1.6}
+.guia-btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;padding:12px 22px;border-radius:8px;text-decoration:none;white-space:nowrap;flex-shrink:0}
+.contacto-page{background:#0d1b2e;color:#fff;padding:56px}
+.contacto-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid #2a3a50}
+.contacto-nombre{font-size:28px;font-weight:700;color:#fff;margin-bottom:4px}
+.contacto-titulo-rol{font-size:13px;color:#6b9fff;margin-bottom:12px;letter-spacing:.5px}
+.contacto-bio{font-size:12px;color:#9ca3af;line-height:1.7;max-width:560px}
+.contacto-redes{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.red-btn{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:500;padding:7px 14px;border-radius:20px;border:1px solid #2a3a50;color:#9ca3af;text-decoration:none}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.contacto-card{background:#0f2440;border:1px solid #2a3a50;border-radius:10px;padding:20px 22px}
+.contacto-card-ico{font-size:20px;margin-bottom:10px}
+.contacto-card-titulo{font-size:13px;font-weight:600;color:#f0f1f3;margin-bottom:6px}
+.contacto-card-desc{font-size:11px;color:#6b7280;line-height:1.6;margin-bottom:12px}
+.contacto-links{display:flex;flex-direction:column;gap:6px}
+.contacto-link{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;color:#6b9fff;text-decoration:none;padding:6px 12px;background:#1a7aff11;border:1px solid #1a7aff22;border-radius:6px}
+.contacto-link-arrow{font-size:10px;margin-left:auto}
+.contacto-contacto{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:32px}
+.contacto-dato{background:#0f2440;border:1px solid #2a3a50;border-radius:8px;padding:14px 16px}
+.contacto-dato-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4b5a6e;margin-bottom:5px}
+.contacto-dato-val{font-size:12px;font-weight:500;color:#6b9fff}
+.doc-footer{background:#0d1b2e;color:#9ca3af;padding:28px 56px;font-size:11px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.doc-footer strong{color:#f0f1f3}
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+  <div style="position:relative">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/BelgranoR_Buenos_Aires.jpg/1280px-BelgranoR_Buenos_Aires.jpg"
+         onerror="this.style.display='none'"
+         style="width:100%;height:260px;object-fit:cover;object-position:center 40%;display:block;opacity:.4;filter:sepia(.3) brightness(.7)" alt="Belgrano R">
+    <div style="position:absolute;top:0;left:0;right:0;height:260px;background:linear-gradient(to bottom,#0d1b2e 0%,transparent 35%,#0d1b2e 100%)"></div>
+  </div>
+  <div class="portada-content">
+    <div class="portada-logo-row">
+      <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/logoml.png" alt="Matías Leiblich" style="height:48px;object-fit:contain">
+    </div>
+    <div class="portada-eyebrow">Análisis de mercado · Datos propios · Agosto 2026</div>
+    <div class="portada-titulo">Belgrano R<br><strong>Informe completo de mercado</strong></div>
+    <div class="portada-subtitulo">Precios · Distribución por tipología · Publicidad · Patrones de oferta · 422 propiedades relevadas</div>
+    <div class="portada-meta">
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Propiedades analizadas</div>
+        <div class="portada-meta-val">422</div>
+        <div class="portada-meta-sub">fichas individuales</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Precio mediano</div>
+        <div class="portada-meta-val">USD 210k</div>
+        <div class="portada-meta-sub">de publicación</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">USD / m² mediano</div>
+        <div class="portada-meta-val">USD 2.869</div>
+        <div class="portada-meta-sub">sobre superficie total</div>
+      </div>
+      <div class="portada-meta-item">
+        <div class="portada-meta-label">Con publicidad paga</div>
+        <div class="portada-meta-val">50%</div>
+        <div class="portada-meta-sub">superdestacado o destacado</div>
+      </div>
+    </div>
+  </div>
+  <div class="portada-footer">
+    <div class="portada-autor">
+      <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada.jpg" style="width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid #1a7aff55;flex-shrink:0">
+      <div class="portada-autor-info">
+        <strong>Matías Leiblich</strong>
+        <span>Ingeniero Civil · Real Estate</span>
+      </div>
+    </div>
+    <div class="portada-tags">
+      <span class="portada-tag">#BelgranoR</span>
+      <span class="portada-tag">#Belgrano</span>
+      <span class="portada-tag">#MercadoInmobiliario</span>
+      <span class="portada-tag">#CABA</span>
+    </div>
+  </div>
+</div>
+
+<!-- 01: PRECIOS -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <div>
+      <div class="sec-titulo">Precios de <strong>publicación</strong></div>
+      <div class="sec-desc">Lo que el mercado pide — no necesariamente lo que vale. El precio publicado es el punto de partida de la negociación, no el precio de cierre.</div>
+    </div>
+  </div>
+  <div class="kpi-grid g4">
+    <div class="kpi"><div class="kpi-label">Precio mínimo</div><div class="kpi-val">USD 62k</div><div class="kpi-note">monoambiente a reciclar</div></div>
+    <div class="kpi"><div class="kpi-label">Precio mediano</div><div class="kpi-val azul">USD 210k</div><div class="kpi-note">mitad arriba, mitad abajo</div></div>
+    <div class="kpi"><div class="kpi-label">Precio promedio</div><div class="kpi-val">USD 275k</div><div class="kpi-note">elevado por segmento premium</div></div>
+    <div class="kpi"><div class="kpi-label">Precio máximo</div><div class="kpi-val">USD 1,5M</div><div class="kpi-note">segmento de lujo</div></div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">Distribución por rango de precio (cantidad de propiedades)</div>
+      <div class="chart-wrap"><canvas id="ch-rangos"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Precio mediano por ambientes (USD)</div>
+      <div class="chart-wrap"><canvas id="ch-precio-amb"></canvas></div>
+    </div>
+  </div>
+  <div class="alert a-amarillo">
+    <span class="alert-ico">⚠️</span>
+    <div>
+      <div class="alert-titulo">El precio mediano de publicación no es el precio de mercado</div>
+      <div class="alert-body">USD 210.000 es la mediana de lo que <em>está a la venta</em>, no de lo que <em>se vendió</em>. Son cosas distintas. Una propiedad publicada en ese valor no está bien tasada por el solo hecho de que sus vecinas valgan lo mismo — si las vecinas tampoco se venden, el precio de referencia es inválido. Tasar correctamente requiere cruzar oferta activa con precios reales de cierre, y analizar cada propiedad en particular.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 02: TIPOLOGÍAS -->
+<div class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <div>
+      <div class="sec-titulo">Distribución por <strong>tipología</strong></div>
+      <div class="sec-desc">Cómo se compone la oferta actual de Belgrano R por cantidad de ambientes y cuánto vale el m² en cada segmento.</div>
+    </div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">Distribución de la oferta por ambientes (%)</div>
+      <div class="chart-wrap"><canvas id="ch-amb-donut"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">USD / m² mediano por ambientes</div>
+      <div class="chart-wrap"><canvas id="ch-m2-amb"></canvas></div>
+    </div>
+  </div>
+  <div class="sep"></div>
+  <div class="chart-label" style="margin-bottom:12px">Resumen por tipología</div>
+  <table class="tabla">
+    <thead><tr><th>Tipología</th><th>Cantidad</th><th>% del total</th><th>Precio mediano</th><th>USD/m² mediano</th></tr></thead>
+    <tbody>
+      <tr><td>1 ambiente</td><td>52</td><td>12%</td><td>USD 116.500</td><td>USD 3.205/m²</td></tr>
+      <tr><td>2 ambientes</td><td>101</td><td>24%</td><td>USD 160.000</td><td>USD 3.029/m²</td></tr>
+      <tr><td>3 ambientes</td><td>119</td><td>28%</td><td>USD 198.000</td><td>USD 2.589/m²</td></tr>
+      <tr><td>4 ambientes</td><td>112</td><td>27%</td><td>USD 375.500</td><td>USD 2.938/m²</td></tr>
+      <tr><td>5+ ambientes</td><td>28</td><td>7%</td><td>USD 630.000</td><td>USD 2.806/m²</td></tr>
+    </tbody>
+  </table>
+  <div class="alert a-azul" style="margin-top:16px">
+    <span class="alert-ico">💡</span>
+    <div>
+      <div class="alert-titulo">Los monoambientes y 2 ambientes tienen el mayor USD/m² del mercado</div>
+      <div class="alert-body">El precio por m² baja a medida que sube la tipología — un fenómeno habitual en zonas premium donde las unidades grandes compiten con un comprador más específico y selectivo. Los monoambientes a USD 3.205/m² y los 2 ambientes a USD 3.029/m² concentran la mayor demanda relativa. El salto más notorio está entre 3 y 4 ambientes: de USD 198k a USD 375k de mediana.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 03: PUBLICIDAD -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <div>
+      <div class="sec-titulo">Publicidad paga: <strong>el mercado que no duerme</strong></div>
+      <div class="sec-desc">En Belgrano R el 50% de las propiedades invierte en publicidad paga. Un mercado competitivo donde la visibilidad es una apuesta real — y donde el tipo de publicidad refleja el ticket de cada propiedad.</div>
+    </div>
+  </div>
+  <div class="kpi-grid g3">
+    <div class="kpi"><div class="kpi-label">Superdestacado</div><div class="kpi-val">184</div><div class="kpi-note">44% del total</div></div>
+    <div class="kpi"><div class="kpi-label">Destacado</div><div class="kpi-val">28</div><div class="kpi-note">7% del total</div></div>
+    <div class="kpi"><div class="kpi-label">Sin publicidad</div><div class="kpi-val">209</div><div class="kpi-note">50% — compiten solo con precio</div></div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">Distribución de publicidad — propiedades activas en Belgrano R</div>
+      <div class="chart-wrap"><canvas id="ch-pub-dist"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Precio mediano según tipo de publicidad (USD)</div>
+      <div class="chart-wrap"><canvas id="ch-pub-precio"></canvas></div>
+    </div>
+  </div>
+  <div class="alert a-rojo">
+    <span class="alert-ico">🔴</span>
+    <div>
+      <div class="alert-titulo">En Belgrano R, publicar sin superdestacado es casi invisible</div>
+      <div class="alert-body">Cuando el 44% de la competencia paga superdestacado, las propiedades sin publicidad quedan relegadas al fondo del listado. Acá la publicidad no es un diferencial — es el piso mínimo para tener visibilidad real. Y aun con publicidad, el precio sigue siendo el factor determinante: ninguna inversión en destacados compensa un precio fuera de mercado.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 04: DUPLICADOS -->
+<div class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">04</span>
+    <div>
+      <div class="sec-titulo">El problema de las publicaciones <strong>repetidas</strong></div>
+      <div class="sec-desc">555 avisos activos, 422 propiedades reales. Una de cada cuatro publicaciones es la misma propiedad listada por más de una inmobiliaria.</div>
+    </div>
+  </div>
+  <div class="kpi-grid g3">
+    <div class="kpi"><div class="kpi-label">Avisos totales en Zonaprop</div><div class="kpi-val">555</div><div class="kpi-note">publicaciones activas</div></div>
+    <div class="kpi"><div class="kpi-label">Propiedades únicas reales</div><div class="kpi-val azul">422</div><div class="kpi-note">después de depurar duplicados</div></div>
+    <div class="kpi"><div class="kpi-label">Avisos duplicados</div><div class="kpi-val rojo">133 (24%)</div><div class="kpi-note">misma prop., distintas inmob.</div></div>
+  </div>
+  <div class="alert a-rojo">
+    <span class="alert-ico">⚠️</span>
+    <div>
+      <div class="alert-titulo">Multi-publicar no vende más rápido — sí genera más confusión</div>
+      <div class="alert-body">El comprador de hoy detecta cuando la misma propiedad aparece publicada por varias inmobiliarias con precios o descripciones distintas. Eso genera desconfianza, no interés. Sin exclusividad, ninguna inmobiliaria tiene incentivo real para invertir en fotos profesionales, tour virtual o seguimiento activo de consultas. Los datos muestran consistentemente que las propiedades con exclusividad se venden hasta un 63% más rápido que las multi-publicadas.</div>
+    </div>
+  </div>
+  <div class="case-box">
+    <div class="case-box-hdr">📋 Lo que el comprador ve</div>
+    <div class="case-box-body">Cuando una propiedad aparece publicada por 3 inmobiliarias distintas con precios levemente diferentes, el comprador lo interpreta como una señal de alerta. La percepción de urgencia que se busca con más exposición se convierte en el efecto contrario: desconfianza y descarte. Una sola inmobiliaria comprometida, con presentación cuidada y estrategia de precio clara, genera mejores resultados que cinco inmobiliarias con el mismo aviso subido apurado.</div>
+  </div>
+</div>
+
+<!-- 05: MÁS VISTOS -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">05</span>
+    <div>
+      <div class="sec-titulo">Las <strong>30 más vistas</strong> del mercado</div>
+      <div class="sec-desc">Análisis de las propiedades con mayor interés real en Belgrano R. Mediana de 831 visualizaciones totales. El dato clave: muchas vistas no garantizan venta.</div>
+    </div>
+  </div>
+  <div class="kpi-grid g4">
+    <div class="kpi"><div class="kpi-label">Visualizaciones medianas</div><div class="kpi-val azul">831</div><div class="kpi-note">interés real del comprador</div></div>
+    <div class="kpi"><div class="kpi-label">Días medianos publicado</div><div class="kpi-val">80 días</div><div class="kpi-note">casi 3 meses sin cerrar</div></div>
+    <div class="kpi"><div class="kpi-label">Precio mediano</div><div class="kpi-val">USD 230k</div><div class="kpi-note">10% sobre la mediana general</div></div>
+    <div class="kpi"><div class="kpi-label">Vis/día medianas</div><div class="kpi-val verde">29</div><div class="kpi-note">interés sostenido</div></div>
+  </div>
+  <div class="charts-grid">
+    <div class="chart-card">
+      <div class="chart-label">Visualizaciones totales — top 15 propiedades</div>
+      <div class="chart-wrap tall"><canvas id="ch-mv-vis"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-label">Visualizaciones vs. días publicado (cada punto = 1 propiedad)</div>
+      <div class="chart-wrap tall"><canvas id="ch-mv-scatter"></canvas></div>
+    </div>
+  </div>
+  <div class="sep"></div>
+  <div class="alert a-rojo">
+    <span class="alert-ico">🔴</span>
+    <div>
+      <div class="alert-titulo">7 propiedades con más de 800 visualizaciones llevan más de 100 días sin vender</div>
+      <div class="alert-body">El interés existe — el precio no cierra. El comprador llega, compara, y descarta. Cada mes adicional deteriora la percepción de valor: después de 3 meses el aviso queda "marcado" en el portal y el comprador lo asocia con "algo que no se puede vender".</div>
+    </div>
+  </div>
+  <div class="sep"></div>
+  <div class="chart-label" style="margin-bottom:10px">Las 30 más vistas — detalle completo</div>
+  <table class="tabla">
+    <thead><tr><th>#</th><th>Visualizaciones</th><th>Días publicado</th><th>Vis/día</th><th>Precio publicado</th><th>Ambientes</th><th>Publicidad</th><th>Lectura</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td><strong>2.459</strong></td><td>123 días</td><td>82,0</td><td>USD 129.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">Alto interés, 4 meses sin cerrar. Precio algo elevado para el segmento.</td></tr>
+      <tr><td>2</td><td><strong>2.100</strong></td><td>14 días</td><td>150,0</td><td>USD 68.000</td><td>2 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#1a7a4a">El más eficiente del top. Precio bajo + publicidad = máxima tracción desde el día 1.</td></tr>
+      <tr><td>3</td><td><strong>1.456</strong></td><td>80 días</td><td>48,5</td><td>USD 80.000</td><td>2 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">Precio competitivo. Buen ritmo sostenido.</td></tr>
+      <tr><td>4</td><td><strong>1.301</strong></td><td>—</td><td>43,4</td><td>USD 325.000</td><td>4 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">Segmento premium con buen interés.</td></tr>
+      <tr><td>5</td><td><strong>1.213</strong></td><td>144 días</td><td>40,4</td><td>USD 320.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">Casi 5 meses con alto interés y sin cierre. El precio supera el rango activo.</td></tr>
+      <tr><td>6</td><td><strong>1.211</strong></td><td>69 días</td><td>40,4</td><td>USD 230.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">Precio en rango competitivo. Debería estar cerca del cierre.</td></tr>
+      <tr><td>7</td><td><strong>1.197</strong></td><td>22 días</td><td>54,4</td><td>USD 133.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#1a7a4a">Reciente, buen precio, ritmo excelente. Alta probabilidad de cierre próximo.</td></tr>
+      <tr><td>8</td><td><strong>1.192</strong></td><td>70 días</td><td>39,7</td><td>USD 79.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">Precio muy competitivo. El interés es genuino.</td></tr>
+      <tr><td>9</td><td><strong>1.180</strong></td><td>46 días</td><td>39,3</td><td>USD 76.000</td><td>2 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#1a7a4a">Precio bajo + publicidad. Buen posicionamiento.</td></tr>
+      <tr><td>10</td><td><strong>1.114</strong></td><td>165 días</td><td>37,1</td><td>USD 110.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">5+ meses. El interés existe pero algo no cierra.</td></tr>
+      <tr><td>11</td><td><strong>991</strong></td><td>100 días</td><td>33,0</td><td>USD 195.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">3 meses, precio en el límite superior del rango activo.</td></tr>
+      <tr><td>12</td><td><strong>986</strong></td><td>99 días</td><td>32,9</td><td>USD 269.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">3 meses. Precio elevado para el segmento.</td></tr>
+      <tr><td>13</td><td><strong>872</strong></td><td>329 días</td><td>29,1</td><td>USD 120.000</td><td>2 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">11 meses publicado. El aviso está quemado.</td></tr>
+      <tr><td>14</td><td><strong>869</strong></td><td>108 días</td><td>29,0</td><td>USD 298.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">3+ meses. Por encima del rango con mayor demanda.</td></tr>
+      <tr><td>15</td><td><strong>833</strong></td><td>93 días</td><td>27,8</td><td>USD 230.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#7d5a00">3 meses. Precio en rango activo, debería estar más cerca del cierre.</td></tr>
+      <tr><td>16</td><td><strong>830</strong></td><td>29 días</td><td>28,6</td><td>USD 107.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#1a7a4a">Reciente y bien posicionado en precio.</td></tr>
+      <tr><td>17</td><td><strong>823</strong></td><td>30 días</td><td>27,4</td><td>USD 371.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">PH dúplex — segmento distinto, precio coherente.</td></tr>
+      <tr><td>18</td><td><strong>816</strong></td><td>178 días</td><td>27,2</td><td>USD 249.999</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">6 meses. El anuncio está sobreexpuesto y sin resultado.</td></tr>
+      <tr><td>19</td><td><strong>815</strong></td><td>18 días</td><td>45,3</td><td>USD 245.000</td><td>4 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#1a7a4a">Reciente, buen ritmo. 4 amb con cochera — perfil claro de comprador.</td></tr>
+      <tr><td>20</td><td><strong>807</strong></td><td>143 días</td><td>26,9</td><td>USD 255.000</td><td>4 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">5 meses. Dúplex 4 amb — buyer pool reducido a ese precio.</td></tr>
+      <tr><td>21</td><td><strong>807</strong></td><td>45 días</td><td>26,9</td><td>USD 359.900</td><td>4 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">Patio y terraza — premium justificado, comprador específico.</td></tr>
+      <tr><td>22</td><td><strong>805</strong></td><td>35 días</td><td>26,8</td><td>USD 435.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">Semipiso dúplex 5 amb — segmento de lujo, proceso más largo esperado.</td></tr>
+      <tr><td>23</td><td><strong>764</strong></td><td>19 días</td><td>40,2</td><td>USD 255.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#1a7a4a">Reciente. Ofrece permuta — amplía el universo de compradores.</td></tr>
+      <tr><td>24</td><td><strong>761</strong></td><td>179 días</td><td>25,4</td><td>USD 115.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">6 meses con precio competitivo. Revisar situación documental o estado.</td></tr>
+      <tr><td>25</td><td><strong>745</strong></td><td>120 días</td><td>24,8</td><td>USD 395.000</td><td>4 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">4 meses. Precio alto para 4 amb estándar — comprador muy selectivo.</td></tr>
+      <tr><td>26</td><td><strong>733</strong></td><td>77 días</td><td>24,4</td><td>USD 65.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">Precio mínimo del top — monoambiente con vista panorámica.</td></tr>
+      <tr><td>27</td><td><strong>716</strong></td><td>36 días</td><td>23,9</td><td>USD 150.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#1a7a4a">Reciente, precio competitivo. Buen punto de entrada.</td></tr>
+      <tr><td>28</td><td><strong>695</strong></td><td>126 días</td><td>23,2</td><td>USD 335.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">4 meses. Cochera incluida pero precio por encima del segmento activo.</td></tr>
+      <tr><td>29</td><td><strong>692</strong></td><td>53 días</td><td>23,1</td><td>USD 115.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#52514e">Terraza amplia. Precio competitivo, interés sostenido.</td></tr>
+      <tr><td>30</td><td><strong>691</strong></td><td>115 días</td><td>23,0</td><td>USD 242.000</td><td>3 amb</td><td><span class="badge b-super">Superdestacado</span></td><td style="font-size:11px;color:#c0392b">4 meses. En el límite del rango activo — pequeño ajuste podría destrabar.</td></tr>
+    </tbody>
+  </table>
+  <div class="sep"></div>
+  <div class="alert a-azul">
+    <span class="alert-ico">📊</span>
+    <div>
+      <div class="alert-titulo">Lo que revelan las 30 más vistas</div>
+      <div class="alert-body">
+        <strong>El 100% tiene Superdestacado.</strong> En Belgrano R no hay propiedades de alto interés sin publicidad paga — la inversión en visibilidad es condición necesaria, no opcional.<br><br>
+        <strong>El precio bajo genera el mayor volumen de visitas.</strong> La propiedad más vista (2.459 vis) está a USD 129.000 — muy por debajo de la mediana del barrio. El comprador busca valor relativo, no precio absoluto.<br><br>
+        <strong>Las visualizaciones por día son el mejor indicador.</strong> 150 vis/día publicada hace 14 días: va a cerrarse. 25 vis/día con 6 meses acumulados: el anuncio ya está quemado aunque el total parezca alto.<br><br>
+        <strong>El umbral de referencia en Belgrano R: 30 vis/día.</strong> Por debajo de ese ritmo sostenido, la probabilidad de cierre sin ajuste es baja.
+      </div>
+    </div>
+  </div>
+  <div class="guia-card">
+    <div>
+      <div class="guia-card-eyebrow" style="color:#6b9fff">¿Estás buscando en Belgrano R?</div>
+      <div class="guia-card-titulo">Guía del Comprador — todo lo que necesitás saber antes de comprar</div>
+      <div class="guia-card-desc">Desde cómo evaluar una propiedad técnicamente hasta cómo negociar y qué gastos esperar. Gratis, sin datos requeridos.</div>
+    </div>
+    <a href="https://matiasleiblich.com/guias/guia-del-comprador/" target="_blank" class="guia-btn" style="background:#1a7aff;color:#fff">
+      📖 Ver Guía del Comprador →
+    </a>
+  </div>
+</div>
+
+<!-- 06: VENDEDOR -->
+<div class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">06</span>
+    <div>
+      <div class="sec-titulo">¿Necesitás vender tu propiedad<strong> en Belgrano R</strong>?</div>
+      <div class="sec-desc">Lo que los datos dicen sobre cómo vender bien en Belgrano R en agosto de 2026.</div>
+    </div>
+  </div>
+  <div class="conc-grid">
+    <div class="conc-item">
+      <div class="conc-num" style="color:#1F4E79">USD 2.869</div>
+      <div class="conc-lbl">USD/m² mediano</div>
+      <div class="conc-desc">El valor de referencia del mercado activo. Pero es precio de publicación, no de cierre. El precio real de venta requiere comparables reales de operaciones cerradas.</div>
+    </div>
+    <div class="conc-item">
+      <div class="conc-num" style="color:#7d5a00">44%</div>
+      <div class="conc-lbl">Con Superdestacado</div>
+      <div class="conc-desc">En Belgrano R la publicidad no es diferencial — es el piso mínimo para tener visibilidad real en el portal.</div>
+    </div>
+    <div class="conc-item">
+      <div class="conc-num" style="color:#c0392b">24%</div>
+      <div class="conc-lbl">Avisos duplicados</div>
+      <div class="conc-desc">1 de cada 4 avisos es la misma propiedad publicada por varias inmobiliarias. Genera confusión y reduce el compromiso de cada inmobiliaria.</div>
+    </div>
+    <div class="conc-item">
+      <div class="conc-num" style="color:#1a7a4a">USD 198k</div>
+      <div class="conc-lbl">Mediana 3 ambientes</div>
+      <div class="conc-desc">La tipología más ofertada (28% del total). El rango más competitivo está entre USD 160k y USD 230k.</div>
+    </div>
+    <div class="conc-item">
+      <div class="conc-num" style="color:#1F4E79">14%</div>
+      <div class="conc-lbl">Oferta sobre USD 500k</div>
+      <div class="conc-desc">Un segmento de lujo relevante — casi 60 propiedades. Comprador muy específico y proceso de venta más largo.</div>
+    </div>
+    <div class="conc-item">
+      <div class="conc-num" style="color:#c0392b">USD 375k</div>
+      <div class="conc-lbl">Mediana 4 ambientes</div>
+      <div class="conc-desc">El salto más pronunciado de la escala. Entre 3 y 4 ambientes el precio casi se duplica — refleja un cambio de perfil de comprador.</div>
+    </div>
+  </div>
+  <div class="sep"></div>
+  <div class="alert a-verde">
+    <span class="alert-ico">✅</span>
+    <div>
+      <div class="alert-titulo">Qué necesita una propiedad para vender bien en Belgrano R</div>
+      <div class="alert-body">
+        <strong>1. Tasación correcta basada en cierres reales</strong> — el precio de publicación de los vecinos no es un comparador válido si esos vecinos tampoco se venden.<br><br>
+        <strong>2. Superdestacado desde el día uno</strong> — en una zona donde el 44% de la competencia paga publicidad, publicar sin inversión en visibilidad es una desventaja estructural.<br><br>
+        <strong>3. Presentación premium</strong> — el comprador de Belgrano R es exigente. Fotos profesionales, tour virtual y descripción cuidada son el mínimo esperado, no un diferencial.<br><br>
+        <strong>4. Exclusividad real</strong> — una sola inmobiliaria con compromiso genuino y seguimiento activo. La multi-publicación genera ruido, no ventas.<br><br>
+        <strong>5. Monitoreo temprano</strong> — si en los primeros 30 días no hay consultas genuinas, hay que revisar precio o presentación. Cada mes adicional deteriora la percepción del comprador.
+      </div>
+    </div>
+  </div>
+  <div class="guia-card">
+    <div>
+      <div class="guia-card-eyebrow" style="color:#c9a84c">¿Querés vender tu propiedad?</div>
+      <div class="guia-card-titulo">Guía del Vendedor — cómo posicionar y vender al mejor precio</div>
+      <div class="guia-card-desc">Tasación, estrategia de precio, presentación y comercialización. Todo lo que necesitás saber antes de publicar.</div>
+    </div>
+    <a href="https://matiasleiblich.com/guias/guia-del-vendedor/" target="_blank" class="guia-btn" style="background:#c9a84c;color:#0d1b2e">
+      📋 Ver Guía del Vendedor →
+    </a>
+  </div>
+</div>
+
+<!-- CONTACTO -->
+<div class="contacto-page">
+  <div class="contacto-hero">
+    <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada.jpg" style="width:100px;height:100px;border-radius:50%;object-fit:cover;object-position:center top;border:2px solid #1a7aff55;flex-shrink:0">
+    <div>
+      <div class="contacto-nombre">Matías Leiblich</div>
+      <div class="contacto-titulo-rol">Ingeniero Civil · Real Estate</div>
+      <div class="contacto-bio">Soy Ingeniero Civil (UBA) y asesor en Real Estate. Mi enfoque combina el análisis técnico de cada inmueble con el estudio de las condiciones actuales del mercado, lo que permite elaborar valuaciones objetivas y fundamentadas. Cada tasación se realiza considerando las características particulares de la propiedad, los antecedentes de operaciones comparables y la dinámica vigente de la oferta y la demanda.</div>
+      <div class="contacto-redes">
+        <a class="red-btn" href="https://wa.me/5491161737552" target="_blank">📱 WhatsApp</a>
+        <a class="red-btn" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank">✉️ Mail</a>
+        <a class="red-btn" href="https://linkedin.com/in/matias-leiblich" target="_blank">💼 LinkedIn</a>
+        <a class="red-btn" href="https://www.instagram.com/tutemudas" target="_blank">📷 @tutemudas</a>
+        <a class="red-btn" href="https://whatsapp.com/channel/0029VbBiYGGLCoWvqOOv4y1O" target="_blank">📢 Canal WhatsApp</a>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">Datos de contacto</div>
+  <div class="contacto-contacto">
+    <div class="contacto-dato">
+      <div class="contacto-dato-label">Teléfono / WhatsApp</div>
+      <a class="contacto-dato-val" href="https://wa.me/5491161737552" target="_blank" style="text-decoration:none">11-6173-7552</a>
+    </div>
+    <div class="contacto-dato">
+      <div class="contacto-dato-label">Email</div>
+      <a class="contacto-dato-val" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank" style="text-decoration:none;font-size:11px">matiasleiblich@deinmobiliarios.com</a>
+    </div>
+    <div class="contacto-dato">
+      <div class="contacto-dato-label">Web</div>
+      <a class="contacto-dato-val" href="https://matiasleiblich.com" target="_blank" style="text-decoration:none">matiasleiblich.com</a>
+    </div>
+  </div>
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">¿Cómo puedo ayudarte?</div>
+  <div class="contacto-grid">
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🏠</div>
+      <div class="contacto-card-titulo">¿Necesitás ayuda con tu operación?</div>
+      <div class="contacto-card-desc">Asesoramiento personalizado para compradores y vendedores en CABA y GBA.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20recibir%20asesoramiento%20para%20analizar%20una%20operacion%20de%20compra." target="_blank">🏠 Quiero comprar <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20recibir%20asesoramiento%20para%20analizar%20la%20venta%20de%20una%20propiedad." target="_blank">💰 Quiero vender <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🔍</div>
+      <div class="contacto-card-titulo">¿Estás buscando tu próxima propiedad?</div>
+      <div class="contacto-card-desc">Acompañamiento profesional con visión técnica durante todo el proceso.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Estoy%20buscando%20una%20propiedad%20y%20quisiera%20recibir%20asesoramiento." target="_blank">🔍 Recibir asesoramiento <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📚</div>
+      <div class="contacto-card-titulo">Herramientas y recursos gratuitos</div>
+      <div class="contacto-card-desc">Calculadora de gastos, cartera de propiedades y biblioteca de guías.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://matiasleiblich.com/calculadora-inmobiliaria" target="_blank">🧮 Calculadora inmobiliaria <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://matiasleiblich.com/cartera" target="_blank">🏘 Cartera de propiedades <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📐</div>
+      <div class="contacto-card-titulo">¿Qué hacer con mi lote?</div>
+      <div class="contacto-card-desc">Análisis de indicadores urbanísticos y potencial constructivo.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20consultar%20por%20un%20analisis%20de%20prefactibilidad%20para%20un%20lote." target="_blank">📐 Solicitar análisis <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20que%20coordinemos%20una%20reunion." target="_blank">📅 Agendar reunión <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+  <div style="border-top:1px solid #2a3a50;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <div style="font-size:13px;font-weight:700;color:#f0f1f3">Matías Leiblich</div>
+      <div style="font-size:10px;color:#4b5a6e;margin-top:2px">Agosto 2026</div>
+    </div>
+    <div style="font-size:10px;color:#4b5a6e;text-align:right">Datos propios · Fuente: Zonaprop · 422 propiedades · Belgrano R · CABA</div>
+  </div>
+</div>
+
+<!-- DOC FOOTER -->
+<div class="doc-footer">
+  <div style="display:flex;align-items:center;gap:24px;flex-wrap:wrap">
+    <strong>Matías Leiblich</strong> · Ingeniero Civil · Real Estate
+    <a href="https://wa.me/5491161737552" target="_blank" style="color:#c9a84c;font-size:12px;font-weight:600;text-decoration:none">11-6173-7552</a>
+  </div>
+  <div style="text-align:right;font-size:10px;color:#4b5563">Datos propios · Fuente: Zonaprop · 422 propiedades · Belgrano R · CABA · Agosto 2026</div>
+</div>
+
+<script>
+const COLORES=['#4e79a7','#f28e2b','#59a14f','#e15759','#76b7b2','#b07aa1'];
+const opts=(extra={})=>({plugins:{legend:{display:false}},responsive:true,maintainAspectRatio:false,...extra});
+
+new Chart(document.getElementById('ch-rangos'),{type:'bar',data:{labels:['Hasta USD 100k','USD 100k–150k','USD 150k–200k','USD 200k–300k','USD 300k–500k','Más de USD 500k'],datasets:[{data:[32,97,70,84,74,60],backgroundColor:COLORES,borderWidth:0}]},options:{...opts(),indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw} propiedades`}}},scales:{x:{beginAtZero:true},y:{ticks:{font:{size:10}}}}}});
+
+new Chart(document.getElementById('ch-precio-amb'),{type:'bar',data:{labels:['1 amb','2 amb','3 amb','4 amb','5+ amb'],datasets:[{data:[116500,160000,198000,375500,630000],backgroundColor:COLORES,borderWidth:0}]},options:{...opts(),plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'USD '+c.raw.toLocaleString('es-AR')}}},scales:{y:{beginAtZero:false,ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}}}}});
+
+new Chart(document.getElementById('ch-amb-donut'),{type:'doughnut',data:{labels:['1 amb (12%)','2 amb (24%)','3 amb (28%)','4 amb (27%)','5+ amb (7%)'],datasets:[{data:[52,101,119,112,28],backgroundColor:COLORES,borderWidth:2,borderColor:'#fff'}]},options:{plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:12}}},responsive:true,maintainAspectRatio:false}});
+
+new Chart(document.getElementById('ch-m2-amb'),{type:'bar',data:{labels:['1 amb','2 amb','3 amb','4 amb','5+ amb'],datasets:[{data:[3205,3029,2589,2938,2806],backgroundColor:COLORES,borderWidth:0}]},options:{...opts(),plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'USD '+c.raw.toLocaleString('es-AR')+'/m²'}}},scales:{y:{beginAtZero:false,min:2300,ticks:{callback:v=>'$'+v.toLocaleString('es-AR')}}}}});
+
+new Chart(document.getElementById('ch-pub-dist'),{type:'doughnut',data:{labels:['Superdestacado (44%)','Destacado (7%)','Sin publicidad (50%)'],datasets:[{data:[184,28,209],backgroundColor:['#4caf91','#64b5d6','#b4b2a9'],borderWidth:2,borderColor:'#fff'}]},options:{plugins:{legend:{position:'right',labels:{font:{size:10},boxWidth:12}}},responsive:true,maintainAspectRatio:false}});
+
+new Chart(document.getElementById('ch-pub-precio'),{type:'bar',data:{labels:['Superdestacado','Destacado','Sin publicidad'],datasets:[{data:[280000,195000,160000],backgroundColor:['#4caf91','#64b5d6','#b4b2a9'],borderWidth:0}]},options:{...opts(),plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>'USD '+c.raw.toLocaleString('es-AR')}}},scales:{y:{beginAtZero:false,min:100000,ticks:{callback:v=>'$'+Math.round(v/1000)+'k'}}}}});
+
+new Chart(document.getElementById('ch-mv-vis'),{type:'bar',data:{labels:['Vidal 1651','Oportunidad 2amb','2amb $80k','4amb $325k','Piso Boulevard','3amb $230k','3amb $133k','3amb $79k','2amb $76k','3amb $110k','3amb $195k','3amb $269k','2amb $120k','Dúplex $298k','3amb $230k'],datasets:[{data:[2459,2100,1456,1301,1213,1211,1197,1192,1180,1114,991,986,872,869,833],backgroundColor:'#4e79a7',borderWidth:0}]},options:{...opts(),indexAxis:'y',plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>`${c.raw.toLocaleString('es-AR')} visualizaciones`}}},scales:{x:{beginAtZero:true},y:{ticks:{font:{size:9}}}}}});
+
+new Chart(document.getElementById('ch-mv-scatter'),{type:'scatter',data:{datasets:[{label:'Buen ritmo (reciente)',data:[{x:14,y:2100},{x:22,y:1197},{x:18,y:815},{x:19,y:764},{x:29,y:830},{x:30,y:823},{x:35,y:805},{x:36,y:716},{x:45,y:807},{x:46,y:1180}],backgroundColor:'#59a14f',pointRadius:6},{label:'Interés alto, sin cerrar',data:[{x:123,y:2459},{x:144,y:1213},{x:165,y:1114},{x:329,y:872},{x:108,y:869},{x:178,y:816},{x:143,y:807}],backgroundColor:'#e15759',pointRadius:6},{label:'En proceso',data:[{x:80,y:1456},{x:70,y:1192},{x:69,y:1211},{x:100,y:991},{x:99,y:986},{x:93,y:833},{x:77,y:733},{x:53,y:692},{x:115,y:691},{x:120,y:745},{x:126,y:695},{x:179,y:761}],backgroundColor:'#f28e2b',pointRadius:5}]},options:{plugins:{legend:{display:true,position:'top',labels:{font:{size:10},boxWidth:10}}},responsive:true,maintainAspectRatio:false,scales:{x:{title:{display:true,text:'Días publicado',font:{size:10}},min:0},y:{title:{display:true,text:'Visualizaciones totales',font:{size:10}},min:0}}}});
+</script>
+</body>
+</html>
