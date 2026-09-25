@@ -111,22 +111,22 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 /* TU UNIDAD — placeholders por informe */
 .placeholder-val{color:#b8860b;background:#fff8e1;border:1px dashed #e0b030;border-radius:6px;padding:2px 8px;display:inline-block}
 
-/* TARJETAS DE ESTADO */
-.estado-card{display:flex;border:1px solid #e1e0d9;border-radius:12px;overflow:hidden;margin-top:14px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+/* TARJETAS DE ESTADO — 3 columnas */
+.estado-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:6px}
+.estado-card{background:#fff;border:1px solid #e1e0d9;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column}
 .estado-card:hover{border-color:#1a7aff55;box-shadow:0 2px 10px #1a7aff14}
-.estado-card-info{flex:1;min-width:0;display:flex;align-items:center;gap:14px;padding:16px 18px;background:#fff}
-.estado-foto{width:64px;height:50px;object-fit:cover;border-radius:6px;display:block;flex-shrink:0}
-.estado-nombre{font-weight:700;color:#0b0b0b;font-size:14px}
-.estado-desc{font-size:11.5px;color:#898781;margin-top:2px}
-.estado-ver{font-size:11px;color:#1a7aff;font-weight:600;white-space:nowrap;margin-top:4px;display:inline-block}
-.estado-card-price{background:#0d1b2e;padding:16px 22px;display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:5px;flex-shrink:0;min-width:230px;text-align:right}
-.estado-price-label{font-size:10.5px;color:#9ca3af;line-height:1.35}
-.estado-price-val{font-size:24px;font-weight:800;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
-.estado-price-val .usd{font-size:12px;font-weight:600;color:#6b9fff;margin-right:2px}
+.estado-foto-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;height:100px;gap:1px;flex-shrink:0;background:#e1e0d9}
+.estado-foto-mini{width:100%;height:100%;object-fit:cover;display:block}
+.estado-card-body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
+.estado-nombre{font-weight:700;color:#0b0b0b;font-size:13.5px}
+.estado-desc{font-size:11px;color:#898781;margin-top:3px;flex:1}
+.estado-ver{font-size:10.5px;color:#1a7aff;font-weight:600;margin-top:8px;display:inline-block}
+.estado-card-price{background:#0d1b2e;margin:14px -16px -14px;padding:14px 16px;text-align:center}
+.estado-price-label{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#9ca3af;margin-bottom:4px}
+.estado-price-val{font-size:17px;font-weight:800;color:#fff;line-height:1.3;font-variant-numeric:tabular-nums;white-space:nowrap}
+.estado-price-val .usd{font-size:10.5px;font-weight:600;color:#6b9fff;display:inline;margin-right:5px}
 @media(max-width:640px){
-  .estado-card{flex-direction:column}
-  .estado-card-price{align-items:flex-start;text-align:left;min-width:0}
-  .estado-price-val{font-size:21px}
+  .estado-grid{grid-template-columns:1fr}
 }
 
 /* MODAL ESTADO */
@@ -136,12 +136,18 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 .modal-box img{width:100%;height:260px;object-fit:cover;display:block;background:#f5f4f0}
 .modal-box-noimg{width:100%;height:140px;background:#f5f4f0;display:flex;align-items:center;justify-content:center;color:#b4b2a9;font-size:11px}
 .modal-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
-.modal-gallery img{width:100%;height:150px;object-fit:cover;display:block;background:#f5f4f0}
+.modal-gallery img{width:100%;height:150px;object-fit:cover;display:block;background:#f5f4f0;cursor:zoom-in}
 .modal-body{padding:20px 24px 24px}
 .modal-titulo{font-size:16px;font-weight:700;color:#0b0b0b;margin-bottom:8px}
 .modal-desc{font-size:12.5px;color:#52514e;line-height:1.65}
 .modal-close{position:absolute;top:14px;right:18px;background:#0d1b2e;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;border:none}
 .modal-box{position:relative}
+
+/* LIGHTBOX — foto individual ampliada */
+.lightbox-overlay{display:none;position:fixed;inset:0;background:#000000e6;z-index:200;align-items:center;justify-content:center;padding:20px}
+.lightbox-overlay.on{display:flex}
+.lightbox-overlay img{max-width:100%;max-height:92vh;object-fit:contain;border-radius:6px}
+.lightbox-close{position:absolute;top:18px;right:22px;background:#ffffff22;color:#fff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;border:none}
 
 /* VISUALIZACIONES NECESARIAS PARA VENDER */
 .viz-row{display:flex;align-items:center;margin-bottom:8px;border-radius:8px;overflow:hidden;background:#fff;border:.5px solid #e1e0d9}
@@ -330,46 +336,57 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="sec-desc">Como no conocemos el estado real de tu unidad, te dejamos los 3 escenarios posibles — hacé clic en cada fila para ver a qué nos referimos, con fotos de referencia</div>
     </div>
   </div>
-  <div class="estado-card" onclick="verEstado('refaccionado')">
-    <div class="estado-card-info">
-      <img class="estado-foto" src="../IMG/refaccionado-1-living.jpg" alt="Refaccionado">
-      <div>
+  <div class="estado-grid">
+    <div class="estado-card" onclick="verEstado('refaccionado')">
+      <div class="estado-foto-grid">
+        <img class="estado-foto-mini" src="../IMG/refaccionado-1-living.jpg" alt="Refaccionado - living">
+        <img class="estado-foto-mini" src="../IMG/refaccionado-2-cocina.jpg" alt="Refaccionado - cocina">
+        <img class="estado-foto-mini" src="../IMG/refaccionado-3-bano.jpg" alt="Refaccionado - baño">
+        <img class="estado-foto-mini" src="../IMG/refaccionado-4-habitacion.jpg" alt="Refaccionado - habitación">
+      </div>
+      <div class="estado-card-body">
         <div class="estado-nombre">Refaccionado</div>
         <div class="estado-desc">Cocina y baño renovados, instalaciones al día</div>
         <span class="estado-ver">Ver fotos →</span>
+        <div class="estado-card-price">
+          <div class="estado-price-label">Rango estimado</div>
+          <div class="estado-price-val"><span class="usd">USD</span>175.000 – 194.000</div>
+        </div>
       </div>
     </div>
-    <div class="estado-card-price">
-      <div class="estado-price-label">Tu unidad en este estado debería valer entre</div>
-      <div class="estado-price-val"><span class="usd">USD</span> 175.000 – 194.000</div>
-    </div>
-  </div>
-  <div class="estado-card" onclick="verEstado('normal')">
-    <div class="estado-card-info">
-      <img class="estado-foto" src="../IMG/normal-1-living.jpg" alt="Antiguo, estado normal">
-      <div>
+    <div class="estado-card" onclick="verEstado('normal')">
+      <div class="estado-foto-grid">
+        <img class="estado-foto-mini" src="../IMG/normal-1-living.jpg" alt="Antiguo, estado normal - living">
+        <img class="estado-foto-mini" src="../IMG/normal-2-cocina.jpg" alt="Antiguo, estado normal - cocina">
+        <img class="estado-foto-mini" src="../IMG/normal-3-bano.jpg" alt="Antiguo, estado normal - baño">
+        <img class="estado-foto-mini" src="../IMG/normal-4-habitacion.jpg" alt="Antiguo, estado normal - habitación">
+      </div>
+      <div class="estado-card-body">
         <div class="estado-nombre">Antiguo, estado normal</div>
         <div class="estado-desc">Original, con desgaste de uso pero habitable sin obra</div>
         <span class="estado-ver">Ver fotos →</span>
+        <div class="estado-card-price">
+          <div class="estado-price-label">Rango estimado</div>
+          <div class="estado-price-val"><span class="usd">USD</span>154.000 – 173.000</div>
+        </div>
       </div>
     </div>
-    <div class="estado-card-price">
-      <div class="estado-price-label">Tu unidad en este estado debería valer entre</div>
-      <div class="estado-price-val"><span class="usd">USD</span> 154.000 – 173.000</div>
-    </div>
-  </div>
-  <div class="estado-card" onclick="verEstado('refaccionar')">
-    <div class="estado-card-info">
-      <img class="estado-foto" src="../IMG/refaccionar-1-living.jpg" alt="A refaccionar">
-      <div>
+    <div class="estado-card" onclick="verEstado('refaccionar')">
+      <div class="estado-foto-grid">
+        <img class="estado-foto-mini" src="../IMG/refaccionar-1-living.jpg" alt="A refaccionar - living">
+        <img class="estado-foto-mini" src="../IMG/refaccionar-2-cocina.jpg" alt="A refaccionar - cocina">
+        <img class="estado-foto-mini" src="../IMG/refaccionar-3-bano.jpg" alt="A refaccionar - baño">
+        <img class="estado-foto-mini" src="../IMG/refaccionar-4-habitacion.jpg" alt="A refaccionar - habitación">
+      </div>
+      <div class="estado-card-body">
         <div class="estado-nombre">A refaccionar</div>
         <div class="estado-desc">Necesita obra integral de cocina, baño e instalaciones</div>
         <span class="estado-ver">Ver fotos →</span>
+        <div class="estado-card-price">
+          <div class="estado-price-label">Rango estimado</div>
+          <div class="estado-price-val"><span class="usd">USD</span>115.000 – 135.000</div>
+        </div>
       </div>
-    </div>
-    <div class="estado-card-price">
-      <div class="estado-price-label">Tu unidad en este estado debería valer entre</div>
-      <div class="estado-price-val"><span class="usd">USD</span> 115.000 – 135.000</div>
     </div>
   </div>
 
@@ -696,6 +713,12 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
   </div>
 </div>
 
+<!-- LIGHTBOX FOTO INDIVIDUAL -->
+<div class="lightbox-overlay" id="lightbox" onclick="if(event.target===this)cerrarLightbox()">
+  <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
 <script>
 const ESTADOS = {
   refaccionado: {
@@ -720,11 +743,17 @@ function verEstado(key){
   document.getElementById('modal-desc').textContent = e.desc;
   const wrap = document.getElementById('modal-img-wrap');
   wrap.innerHTML = e.imgs && e.imgs.length
-    ? `<div class="modal-gallery">${e.imgs.map(src => `<img src="${src}" alt="${e.titulo}">`).join('')}</div>`
+    ? `<div class="modal-gallery">${e.imgs.map(src => `<img src="${src}" alt="${e.titulo}" onclick="event.stopPropagation();verFoto('${src}','${e.titulo}')">`).join('')}</div>`
     : `<div class="modal-box-noimg">Foto de referencia — pendiente de sumar</div>`;
   document.getElementById('modal-estado').classList.add('on');
 }
 function cerrarEstado(){ document.getElementById('modal-estado').classList.remove('on'); }
+function verFoto(src, alt){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-img').alt = alt;
+  document.getElementById('lightbox').classList.add('on');
+}
+function cerrarLightbox(){ document.getElementById('lightbox').classList.remove('on'); }
 </script>
 
 </body>
