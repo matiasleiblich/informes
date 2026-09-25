@@ -111,20 +111,23 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 /* TU UNIDAD — placeholders por informe */
 .placeholder-val{color:#b8860b;background:#fff8e1;border:1px dashed #e0b030;border-radius:6px;padding:2px 8px;display:inline-block}
 
-/* TABLA DE ESTADOS */
-.estado-tabla{width:100%;border-collapse:collapse;margin-top:6px}
-.estado-tabla td{padding:14px 10px;border-bottom:0.5px solid #e1e0d9;vertical-align:middle}
-.estado-tabla tr:last-child td{border-bottom:none}
-.estado-foto{width:68px;height:52px;object-fit:cover;border-radius:6px;display:block;cursor:pointer}
-.estado-foto-placeholder{width:68px;height:52px;border-radius:6px;background:#f5f4f0;border:1px dashed #d3d1c7;display:flex;align-items:center;justify-content:center;font-size:9px;color:#b4b2a9;text-align:center;cursor:pointer}
-.estado-nombre{font-weight:700;color:#0b0b0b;font-size:13px}
-.estado-desc{font-size:11px;color:#898781;margin-top:2px}
-.estado-ver{font-size:10px;color:#1a7aff;font-weight:600;margin-top:4px;cursor:pointer;text-decoration:underline;display:inline-block}
-.estado-rango{text-align:right;white-space:nowrap;width:190px}
-.estado-rango-label{font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#b4b2a9;margin-bottom:3px}
-.estado-rango-pill{display:inline-flex;align-items:baseline;justify-content:center;gap:4px;min-width:172px;background:#f5f9ff;border:1px solid #d9e8ff;border-radius:8px;padding:8px 12px;font-variant-numeric:tabular-nums}
-.estado-rango-pill .usd{font-size:11px;font-weight:600;color:#6b9fff}
-.estado-rango-pill .val{font-size:16px;font-weight:800;color:#0d1b2e}
+/* TARJETAS DE ESTADO */
+.estado-card{border:1px solid #e1e0d9;border-radius:12px;overflow:hidden;margin-top:14px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+.estado-card:hover{border-color:#1a7aff55;box-shadow:0 2px 10px #1a7aff14}
+.estado-card-top{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#fff}
+.estado-foto{width:64px;height:50px;object-fit:cover;border-radius:6px;display:block;flex-shrink:0}
+.estado-nombre{font-weight:700;color:#0b0b0b;font-size:14px}
+.estado-desc{font-size:11.5px;color:#898781;margin-top:2px}
+.estado-ver{margin-left:auto;font-size:11px;color:#1a7aff;font-weight:600;white-space:nowrap;flex-shrink:0}
+.estado-price-band{background:#0d1b2e;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.estado-price-label{font-size:11.5px;color:#9ca3af;line-height:1.4;max-width:280px}
+.estado-price-val{font-size:26px;font-weight:800;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
+.estado-price-val .usd{font-size:13px;font-weight:600;color:#6b9fff;margin-right:2px}
+@media(max-width:600px){
+  .estado-card-top{flex-wrap:wrap}
+  .estado-ver{margin-left:0}
+  .estado-price-val{font-size:22px}
+}
 
 /* MODAL ESTADO */
 .modal-overlay{display:none;position:fixed;inset:0;background:#0d1b2ecc;z-index:100;align-items:center;justify-content:center;padding:24px}
@@ -231,7 +234,6 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
     <div class="header-sub">Basada en la venta real del 4°B de tu edificio · Octubre 2026</div>
   </div>
   <div class="header-right">
-    <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/logoml.png" alt="Matías Leiblich" style="height:28px;margin-bottom:8px">
     <a href="https://matiasleiblich.com" target="_blank" style="text-decoration:none;color:inherit"><strong>Matías Leiblich</strong></a>
     Ingenieros Inmobiliarios<br>
     deinmobiliarios.com<br>
@@ -328,25 +330,48 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="sec-desc">Como no conocemos el estado real de tu unidad, te dejamos los 3 escenarios posibles — hacé clic en cada fila para ver a qué nos referimos, con fotos de referencia</div>
     </div>
   </div>
-  <table class="estado-tabla">
-    <tbody>
-      <tr onclick="verEstado('refaccionado')">
-        <td style="width:80px"><img class="estado-foto" src="../IMG/estados/refaccionado-1-living.jpg" alt="Refaccionado"></td>
-        <td><div class="estado-nombre">Refaccionado</div><div class="estado-desc">Cocina y baño renovados, instalaciones al día</div><span class="estado-ver">Ver ejemplo →</span></td>
-        <td class="estado-rango"><div class="estado-rango-label">Rango estimado</div><div class="estado-rango-pill"><span class="usd">USD</span><span class="val">175.000 – 194.000</span></div></td>
-      </tr>
-      <tr onclick="verEstado('normal')">
-        <td style="width:80px"><img class="estado-foto" src="../IMG/estados/normal-1-living.jpg" alt="Antiguo, estado normal"></td>
-        <td><div class="estado-nombre">Antiguo, estado normal</div><div class="estado-desc">Original, con desgaste de uso pero habitable sin obra</div><span class="estado-ver">Ver ejemplo →</span></td>
-        <td class="estado-rango"><div class="estado-rango-label">Rango estimado</div><div class="estado-rango-pill"><span class="usd">USD</span><span class="val">154.000 – 173.000</span></div></td>
-      </tr>
-      <tr onclick="verEstado('refaccionar')">
-        <td style="width:80px"><img class="estado-foto" src="../IMG/estados/refaccionar-1-living.jpg" alt="A refaccionar"></td>
-        <td><div class="estado-nombre">A refaccionar</div><div class="estado-desc">Necesita obra integral de cocina, baño e instalaciones</div><span class="estado-ver">Ver ejemplo →</span></td>
-        <td class="estado-rango"><div class="estado-rango-label">Rango estimado</div><div class="estado-rango-pill"><span class="usd">USD</span><span class="val">115.000 – 135.000</span></div></td>
-      </tr>
-    </tbody>
-  </table>
+  <div class="estado-card" onclick="verEstado('refaccionado')">
+    <div class="estado-card-top">
+      <img class="estado-foto" src="../IMG/refaccionado-1-living.jpg" alt="Refaccionado">
+      <div>
+        <div class="estado-nombre">Refaccionado</div>
+        <div class="estado-desc">Cocina y baño renovados, instalaciones al día</div>
+      </div>
+      <span class="estado-ver">Ver fotos →</span>
+    </div>
+    <div class="estado-price-band">
+      <div class="estado-price-label">El valor de tu unidad en este estado debería estar dentro de este rango</div>
+      <div class="estado-price-val"><span class="usd">USD</span> 175.000 – 194.000</div>
+    </div>
+  </div>
+  <div class="estado-card" onclick="verEstado('normal')">
+    <div class="estado-card-top">
+      <img class="estado-foto" src="../IMG/normal-1-living.jpg" alt="Antiguo, estado normal">
+      <div>
+        <div class="estado-nombre">Antiguo, estado normal</div>
+        <div class="estado-desc">Original, con desgaste de uso pero habitable sin obra</div>
+      </div>
+      <span class="estado-ver">Ver fotos →</span>
+    </div>
+    <div class="estado-price-band">
+      <div class="estado-price-label">El valor de tu unidad en este estado debería estar dentro de este rango</div>
+      <div class="estado-price-val"><span class="usd">USD</span> 154.000 – 173.000</div>
+    </div>
+  </div>
+  <div class="estado-card" onclick="verEstado('refaccionar')">
+    <div class="estado-card-top">
+      <img class="estado-foto" src="../IMG/refaccionar-1-living.jpg" alt="A refaccionar">
+      <div>
+        <div class="estado-nombre">A refaccionar</div>
+        <div class="estado-desc">Necesita obra integral de cocina, baño e instalaciones</div>
+      </div>
+      <span class="estado-ver">Ver fotos →</span>
+    </div>
+    <div class="estado-price-band">
+      <div class="estado-price-label">El valor de tu unidad en este estado debería estar dentro de este rango</div>
+      <div class="estado-price-val"><span class="usd">USD</span> 115.000 – 135.000</div>
+    </div>
+  </div>
 
   <div class="alert a-amarillo" style="margin-top:20px">
     <span class="alert-ico">✎</span>
@@ -675,17 +700,17 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 const ESTADOS = {
   refaccionado: {
     titulo: 'Refaccionado',
-    imgs: ['../IMG/estados/refaccionado-1-living.jpg','../IMG/estados/refaccionado-2-cocina.jpg','../IMG/estados/refaccionado-3-bano.jpg','../IMG/estados/refaccionado-4-habitacion.jpg'],
+    imgs: ['../IMG/refaccionado-1-living.jpg','../IMG/refaccionado-2-cocina.jpg','../IMG/refaccionado-3-bano.jpg','../IMG/refaccionado-4-habitacion.jpg'],
     desc: 'Cocina y baño renovados, instalaciones eléctricas y sanitarias al día, pisos y pintura sin desgaste. Es el estado del 4°B, el comparable de esta pretasación — fotos reales de la unidad.'
   },
   normal: {
     titulo: 'Antiguo, estado normal',
-    imgs: ['../IMG/estados/normal-1-living.jpg','../IMG/estados/normal-2-cocina.jpg','../IMG/estados/normal-3-bano.jpg','../IMG/estados/normal-4-habitacion.jpg'],
+    imgs: ['../IMG/normal-1-living.jpg','../IMG/normal-2-cocina.jpg','../IMG/normal-3-bano.jpg','../IMG/normal-4-habitacion.jpg'],
     desc: 'Terminaciones originales con el desgaste propio del uso y los años — pisos o pintura que muestran el paso del tiempo, alguna instalación para actualizar, pero habitable sin encarar una obra integral.'
   },
   refaccionar: {
     titulo: 'A refaccionar',
-    imgs: ['../IMG/estados/refaccionar-1-living.jpg','../IMG/estados/refaccionar-2-cocina.jpg','../IMG/estados/refaccionar-3-bano.jpg','../IMG/estados/refaccionar-4-habitacion.jpg'],
+    imgs: ['../IMG/refaccionar-1-living.jpg','../IMG/refaccionar-2-cocina.jpg','../IMG/refaccionar-3-bano.jpg','../IMG/refaccionar-4-habitacion.jpg'],
     desc: 'Necesita obra integral: cocina y baño a renovar, instalaciones eléctricas y/o sanitarias a actualizar, pisos y pintura a refaccionar. Es el escenario de mayor potencial de revalorización post-obra.'
   }
 };
