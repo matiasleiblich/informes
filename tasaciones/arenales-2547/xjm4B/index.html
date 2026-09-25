@@ -111,22 +111,21 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 /* TU UNIDAD — placeholders por informe */
 .placeholder-val{color:#b8860b;background:#fff8e1;border:1px dashed #e0b030;border-radius:6px;padding:2px 8px;display:inline-block}
 
-/* TARJETAS DE ESTADO */
-.estado-card{border:1px solid #e1e0d9;border-radius:12px;overflow:hidden;margin-top:14px;cursor:pointer;transition:border-color .15s,box-shadow .15s}
+/* TARJETAS DE ESTADO — 3 columnas */
+.estado-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:14px;margin-top:6px}
+.estado-card{background:#fff;border:1px solid #e1e0d9;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column}
 .estado-card:hover{border-color:#1a7aff55;box-shadow:0 2px 10px #1a7aff14}
-.estado-card-top{display:flex;align-items:center;gap:14px;padding:16px 18px;background:#fff}
-.estado-foto{width:64px;height:50px;object-fit:cover;border-radius:6px;display:block;flex-shrink:0}
-.estado-nombre{font-weight:700;color:#0b0b0b;font-size:14px}
-.estado-desc{font-size:11.5px;color:#898781;margin-top:2px}
-.estado-ver{margin-left:auto;font-size:11px;color:#1a7aff;font-weight:600;white-space:nowrap;flex-shrink:0}
-.estado-price-band{background:#0d1b2e;padding:16px 18px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.estado-price-label{font-size:11.5px;color:#9ca3af;line-height:1.4;max-width:280px}
-.estado-price-val{font-size:26px;font-weight:800;color:#fff;white-space:nowrap;font-variant-numeric:tabular-nums}
-.estado-price-val .usd{font-size:13px;font-weight:600;color:#6b9fff;margin-right:2px}
-@media(max-width:600px){
-  .estado-card-top{flex-wrap:wrap}
-  .estado-ver{margin-left:0}
-  .estado-price-val{font-size:22px}
+.estado-foto{width:100%;height:100px;object-fit:cover;display:block;flex-shrink:0}
+.estado-card-body{padding:14px 16px;flex:1;display:flex;flex-direction:column}
+.estado-nombre{font-weight:700;color:#0b0b0b;font-size:13.5px}
+.estado-desc{font-size:11px;color:#898781;margin-top:3px;flex:1}
+.estado-ver{font-size:10.5px;color:#1a7aff;font-weight:600;margin-top:8px;display:inline-block}
+.estado-card-price{background:#0d1b2e;margin:14px -16px -14px;padding:14px 16px;text-align:center}
+.estado-price-label{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#9ca3af;margin-bottom:4px}
+.estado-price-val{font-size:17px;font-weight:800;color:#fff;line-height:1.3;font-variant-numeric:tabular-nums}
+.estado-price-val .usd{font-size:10.5px;font-weight:600;color:#6b9fff;display:block;margin-bottom:1px}
+@media(max-width:640px){
+  .estado-grid{grid-template-columns:1fr}
 }
 
 /* MODAL ESTADO */
@@ -330,46 +329,42 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
       <div class="sec-desc">Como no conocemos el estado real de tu unidad, te dejamos los 3 escenarios posibles — hacé clic en cada fila para ver a qué nos referimos, con fotos de referencia</div>
     </div>
   </div>
-  <div class="estado-card" onclick="verEstado('refaccionado')">
-    <div class="estado-card-top">
+  <div class="estado-grid">
+    <div class="estado-card" onclick="verEstado('refaccionado')">
       <img class="estado-foto" src="../IMG/refaccionado-1-living.jpg" alt="Refaccionado">
-      <div>
+      <div class="estado-card-body">
         <div class="estado-nombre">Refaccionado</div>
         <div class="estado-desc">Cocina y baño renovados, instalaciones al día</div>
+        <span class="estado-ver">Ver fotos →</span>
+        <div class="estado-card-price">
+          <div class="estado-price-label">Rango estimado</div>
+          <div class="estado-price-val"><span class="usd">USD</span>175.000 – 194.000</div>
+        </div>
       </div>
-      <span class="estado-ver">Ver fotos →</span>
     </div>
-    <div class="estado-price-band">
-      <div class="estado-price-label">El valor de tu unidad en este estado debería estar dentro de este rango</div>
-      <div class="estado-price-val"><span class="usd">USD</span> 175.000 – 194.000</div>
-    </div>
-  </div>
-  <div class="estado-card" onclick="verEstado('normal')">
-    <div class="estado-card-top">
+    <div class="estado-card" onclick="verEstado('normal')">
       <img class="estado-foto" src="../IMG/normal-1-living.jpg" alt="Antiguo, estado normal">
-      <div>
+      <div class="estado-card-body">
         <div class="estado-nombre">Antiguo, estado normal</div>
         <div class="estado-desc">Original, con desgaste de uso pero habitable sin obra</div>
+        <span class="estado-ver">Ver fotos →</span>
+        <div class="estado-card-price">
+          <div class="estado-price-label">Rango estimado</div>
+          <div class="estado-price-val"><span class="usd">USD</span>154.000 – 173.000</div>
+        </div>
       </div>
-      <span class="estado-ver">Ver fotos →</span>
     </div>
-    <div class="estado-price-band">
-      <div class="estado-price-label">El valor de tu unidad en este estado debería estar dentro de este rango</div>
-      <div class="estado-price-val"><span class="usd">USD</span> 154.000 – 173.000</div>
-    </div>
-  </div>
-  <div class="estado-card" onclick="verEstado('refaccionar')">
-    <div class="estado-card-top">
+    <div class="estado-card" onclick="verEstado('refaccionar')">
       <img class="estado-foto" src="../IMG/refaccionar-1-living.jpg" alt="A refaccionar">
-      <div>
+      <div class="estado-card-body">
         <div class="estado-nombre">A refaccionar</div>
         <div class="estado-desc">Necesita obra integral de cocina, baño e instalaciones</div>
+        <span class="estado-ver">Ver fotos →</span>
+        <div class="estado-card-price">
+          <div class="estado-price-label">Rango estimado</div>
+          <div class="estado-price-val"><span class="usd">USD</span>115.000 – 135.000</div>
+        </div>
       </div>
-      <span class="estado-ver">Ver fotos →</span>
-    </div>
-    <div class="estado-price-band">
-      <div class="estado-price-label">El valor de tu unidad en este estado debería estar dentro de este rango</div>
-      <div class="estado-price-val"><span class="usd">USD</span> 115.000 – 135.000</div>
     </div>
   </div>
 
@@ -576,7 +571,7 @@ body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:
 
   <div class="contacto-hero">
     <div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:2px solid #1a7aff55;flex-shrink:0">
-      <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada.jpg" style="width:100%;height:100%;object-fit:cover;object-position:50% 33%;transform:scale(1.35);transform-origin:50% 33%">
+      <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada-avatar.jpg" style="width:100%;height:100%;object-fit:cover;display:block">
     </div>
     <div>
       <div class="contacto-nombre">Matías Leiblich</div>
