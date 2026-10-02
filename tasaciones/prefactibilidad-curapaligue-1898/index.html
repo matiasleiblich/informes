@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Prefactibilidad · Curapaligüe 1898 · Matías Leiblich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MC47CJF0VL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MC47CJF0VL', { 'anonymize_ip': true });
+  gtag('event', 'page_view', { 'informe': 'prefactibilidad-curapaligue-1898' });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:#1a7aff}
+/* HEADER */
+.header{background:#0d1b2e;color:#fff;padding:40px 56px 36px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:12px;font-weight:500}
+.header h1{font-size:32px;font-weight:300;color:#f0f1f3;line-height:1.15;margin-bottom:6px}
+.header h1 strong{font-weight:700;color:#fff}
+.header-sub{font-size:12px;color:#6b7280}
+.header-right{text-align:right;font-size:12px;color:#6b7280;line-height:1.9;flex-shrink:0}
+.header-right strong{display:block;color:#f0f1f3;font-size:13px;font-weight:600}
+.header-right .handle{font-size:10px;color:#c9a84c;letter-spacing:.5px;text-decoration:none}
+/* NAV */
+.nav{position:sticky;top:0;z-index:50;background:#0d1b2eee;backdrop-filter:blur(6px);display:flex;gap:4px;overflow-x:auto;padding:8px 56px;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{color:#c9d3e0;text-decoration:none;font-size:11px;font-weight:500;white-space:nowrap;padding:5px 11px;border-radius:14px}
+.nav a:hover,.nav a.on{background:#1a7aff33;color:#fff}
+/* SECCIONES */
+.section{padding:40px 56px;border-bottom:1px solid #e1e0d9;scroll-margin-top:44px}
+.section-blanca{background:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:2px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:22px;font-weight:300;color:#0b0b0b;line-height:1.2}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:#52514e;margin-top:5px;line-height:1.6}
+.lead{font-size:14px;line-height:1.75;color:#2b2b28;margin-bottom:14px}
+.firma{margin-top:18px;font-size:12.5px;color:#1F4E79;font-weight:600}
+/* RESUMEN TILES */
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.tile{background:#fff;border:.5px solid #e1e0d9;border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.tile-top{background:#0d1b2e;color:#fff;font-weight:900;font-size:22px;letter-spacing:1px;padding:14px 16px 12px}
+.tile-top small{display:block;font-size:9px;font-weight:600;letter-spacing:1.5px;color:#6b9fff;margin-top:2px}
+.tile-body{padding:14px 16px;flex:1}
+.tile-val{font-size:20px;font-weight:700;color:#1a7aff;line-height:1.2}
+.tile-sub{font-size:10.5px;color:#52514e;margin-top:6px;line-height:1.45}
+.tile.gold .tile-top{background:#c9a84c}.tile.gold .tile-top small{color:#fff}
+.tile.gold .tile-val{color:#0b0b0b}
+/* STATS */
+.mercado-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.mstat{background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:16px 20px;flex:1;min-width:150px}
+.mstat-num{font-size:24px;font-weight:700;color:#0b0b0b;margin-bottom:2px}
+.mstat-label{font-size:10px;color:#898781;text-transform:uppercase;letter-spacing:.8px}
+.mstat-sub{font-size:10.5px;color:#9a998f;margin-top:3px}
+.mstat-hl .mstat-num{color:#1a7aff}
+/* LOTE */
+.lote-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start}
+.ficha{background:#fff;border:.5px solid #e1e0d9;border-radius:12px;padding:18px 20px}
+.ficha-h{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#1a7aff;margin-bottom:10px;padding-bottom:8px;border-bottom:.5px solid #e1e0d9}
+.row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:.5px solid #f0efea;font-size:12px}
+.row:last-child{border-bottom:none}
+.row span:first-child{color:#52514e}
+.row span:last-child{font-weight:600;text-align:right}
+.fotos{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:150px 110px;gap:3px;border-radius:12px;overflow:hidden;background:#e1e0d9;margin-top:14px}
+.fotos div{overflow:hidden;position:relative;background:#e8edf2}
+.fotos div:first-child{grid-row:1/3}
+.fotos img{width:100%;height:100%;object-fit:cover;display:block}
+.fotos .mas{position:absolute;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:600;text-decoration:none}
+.caption{font-size:10.5px;color:#898781;margin-top:6px;font-style:italic}
+#map{height:320px;border-radius:12px;border:.5px solid #e1e0d9;z-index:1}
+.lote-grid>*,.build-grid>*,.calc>*,.charts-grid>*,.esc-grid>*,.chk-wrap>*{min-width:0}
+.paths{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.paths-o{font-size:18px;font-weight:700;color:#898781;text-align:center}
+/* CHECKLIST */
+.chk-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chk{display:flex;gap:12px;align-items:flex-start;background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:12px 14px}
+.chk-i{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+.chk-b{flex:1;min-width:0}
+.chk-t{font-size:12.5px;font-weight:600}
+.chk-d{font-size:11.5px;color:#52514e;line-height:1.5}
+.chk-r{font-size:9.5px;color:#9a998f;white-space:nowrap;margin-top:3px}
+/* CONSTRUIR */
+.build-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:24px;align-items:start}
+.svg-card{background:#fff;border:.5px solid #e1e0d9;border-radius:12px;padding:16px}
+.table-wrap{border-radius:10px;border:.5px solid #e1e0d9;overflow-x:auto;background:#fff}
+table{width:100%;border-collapse:collapse;font-size:12px}
+thead th{background:#f5f4f0;color:#52514e;font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:9px 11px;border-bottom:.5px solid #e1e0d9;text-align:left;white-space:nowrap}
+tbody td{padding:9px 11px;border-bottom:.5px solid #f0efea;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{padding:10px 11px;font-weight:700;background:#f9f8f5;border-top:.5px solid #e1e0d9;white-space:nowrap}
+.r{text-align:right}
+tr.hl td{background:#eef4ff}
+.pill-me{font-size:9px;font-weight:700;background:#1a7aff;color:#fff;padding:1px 7px;border-radius:8px;margin-left:6px;letter-spacing:.3px}
+.note-box{background:#fff8e1;border:.5px solid #f0c040;border-radius:8px;padding:13px 16px;font-size:12px;color:#52514e;line-height:1.65;margin-top:14px}
+.note-box strong{color:#7d5a00}
+.info-box{background:#f9f8f5;border-left:3px solid #1a7aff;border-radius:0 8px 8px 0;padding:12px 16px;font-size:12px;color:#52514e;line-height:1.65;margin-top:14px}
+.info-box strong{color:#0b0b0b}
+/* PLUSVALIA */
+.abc{display:grid;grid-template-columns:repeat(3,1fr) auto;gap:10px;align-items:stretch}
+.abc-c{background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:14px 16px}
+.abc-l{font-size:22px;font-weight:900;color:#1a7aff}
+.abc-t{font-size:11px;font-weight:600;color:#0b0b0b;margin:2px 0 6px}
+.abc-v{font-size:18px;font-weight:700}
+.abc-d{font-size:10.5px;color:#52514e;margin-top:4px;line-height:1.45}
+.abc-res{background:#0d1b2e;color:#fff;border-radius:10px;padding:14px 20px;display:flex;flex-direction:column;justify-content:center;min-width:170px}
+.abc-res .abc-v{color:#fff;font-size:22px}
+/* CALCULADORA */
+.calc{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;align-items:start}
+.ctrl{background:#fff;border:.5px solid #e1e0d9;border-radius:12px;padding:18px 20px}
+.ctrl-row{margin-bottom:16px}
+.ctrl-row:last-child{margin-bottom:0}
+.ctrl-lab{display:flex;justify-content:space-between;font-size:12px;color:#52514e;margin-bottom:6px}
+.ctrl-lab b{color:#0b0b0b;font-size:13px}
+input[type=range]{width:100%;accent-color:#1a7aff;height:28px}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.presets button{font-family:inherit;font-size:11px;font-weight:600;padding:7px 12px;border-radius:16px;border:1px solid #1a7aff55;background:#fff;color:#1a7aff;cursor:pointer}
+.presets button.on{background:#1a7aff;color:#fff}
+.out{background:#0d1b2e;border-radius:12px;padding:18px 20px;color:#fff}
+.out-lab{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#6b9fff}
+.out-val{font-size:34px;font-weight:700;line-height:1.15;margin:4px 0}
+.out-sub{font-size:11.5px;color:#c9d3e0}
+.casc{margin-top:14px}
+.casc-row{display:grid;grid-template-columns:130px 1fr 92px;gap:8px;align-items:center;font-size:11.5px;margin-bottom:6px}
+.casc-bar{height:14px;border-radius:4px;background:#1a7aff}
+.casc-row span:last-child{text-align:right;font-weight:600}
+/* ESCENARIOS */
+.esc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px}
+.esc{background:#fff;border:.5px solid #e1e0d9;border-radius:12px;padding:16px 16px;border-top:3px solid #1a7aff}
+.esc-t{font-size:12.5px;font-weight:700;margin-bottom:4px}
+.esc-v{font-size:17px;font-weight:700;margin:6px 0 4px}
+.esc-d{font-size:11px;color:#52514e;line-height:1.5}
+.chart-card{background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:16px 18px}
+.chart-eyebrow{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin-bottom:6px}
+.chart-title{font-size:12.5px;font-weight:600;color:#0b0b0b;margin-bottom:12px}
+.chart-wrap{position:relative;height:240px}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+/* PRECIOS */
+.precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.precio-block{background:#fff;border:.5px solid #e1e0d9;border-radius:10px;padding:16px 20px}
+.precio-block-label{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:#898781;margin-bottom:8px}
+.precio-block-valor{font-size:22px;font-weight:700;color:#0b0b0b;margin-bottom:3px}
+.precio-block-m2{font-size:11px;color:#52514e}
+.precio-block.main{border:1.5px solid #1a7aff;background:#f5f9ff}
+.precio-block.main .precio-block-valor{color:#1a7aff}
+/* CONVERGENCIA */
+.conv{background:#fff;border:.5px solid #e1e0d9;border-radius:12px;padding:18px 20px;margin-bottom:18px}
+/* FODA */
+.foda-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.foda-cell{border:.5px solid #e1e0d9;border-radius:8px;padding:11px 13px}
+.foda-cell-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:.5px solid #e1e0d9}
+.foda-cell-f{background:#f0faf4}.foda-cell-f .foda-cell-label{color:#1a7a4a}
+.foda-cell-o{background:#f0f4ff}.foda-cell-o .foda-cell-label{color:#1a7aff}
+.foda-cell-d{background:#fffbf0}.foda-cell-d .foda-cell-label{color:#b8860b}
+.foda-cell-a{background:#fff0f0}.foda-cell-a .foda-cell-label{color:#c0392b}
+.foda-line{display:flex;gap:7px;align-items:baseline;margin-bottom:4px;font-size:11.5px;color:#52514e}
+.concl-line{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:.5px solid #e1e0d9;font-size:13px;color:#0b0b0b;line-height:1.55}
+.concl-line:last-child{border-bottom:none}
+details.legal{font-size:11px;color:#898781;line-height:1.6}
+details.legal summary{cursor:pointer;font-weight:600;color:#52514e;margin-bottom:8px}
+/* LINKS AL PIE */
+.links-pie{background:#fff;padding:40px 56px;text-align:center;border-bottom:1px solid #e1e0d9}
+.links-pie-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#898781;margin-bottom:20px}
+.links-pie-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.links-pie-row a{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:14px 26px;border-radius:8px;text-decoration:none}
+.links-pie-row a.primary{background:#0d1b2e;color:#fff}
+.links-pie-row a.secondary{background:#fff;color:#0d1b2e;border:1.5px solid #0d1b2e}
+/* FOOTER */
+.footer{background:#0d1b2e;color:#6b7280;padding:24px 56px;font-size:11px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer strong{color:#f0f1f3}
+.footer a{color:#c9a84c;text-decoration:none}
+/* ANCHO DE CONTENIDO */
+.header,.nav,.section,.links-pie,.footer{padding-left:max(56px,calc((100% - 1180px)/2));padding-right:max(56px,calc((100% - 1180px)/2))}
+@media(max-width:980px){
+  .tiles{grid-template-columns:repeat(3,1fr)}
+  .esc-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:720px){
+  body{font-size:13.5px}
+  .header,.section,.links-pie,.footer,.nav{padding-left:18px;padding-right:18px}
+  .header{flex-direction:column;align-items:flex-start;gap:14px;padding-top:30px}
+  .header h1{font-size:27px}
+  .header-right{text-align:left}
+  .sec-titulo{font-size:19px}
+  .tiles{grid-template-columns:1fr 1fr}
+  .tiles .tile:last-child{grid-column:1/-1}
+  .lote-grid,.build-grid,.calc,.chk-wrap,.charts-grid,.foda-grid{grid-template-columns:1fr}
+  .abc{grid-template-columns:1fr}
+  .paths{grid-template-columns:1fr}
+  .esc-grid{grid-template-columns:1fr}
+  .precios-grid{grid-template-columns:1fr}
+  .casc-row{grid-template-columns:100px 1fr 84px}
+  .chk-r{display:none}
+  .out-val{font-size:28px}
+  #map{height:260px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Prefactibilidad y valor del lote · Flores Sur · CABA</div>
+    <h1><strong>Curapaligüe 1898</strong><br>esquina Miró · cabecera de manzana</h1>
+    <div class="header-sub">SMP 044-104-010 · 301,5 m² · U.S.A.B. 2 · Septiembre 2026</div>
+  </div>
+  <div class="header-right">
+    <strong>Matías Leiblich</strong>
+    Ingenieros Inmobiliarios<br>
+    deinmobiliarios.com<br>
+    <a href="https://wa.me/5491161737552" target="_blank" class="handle">11-6173-7552</a>
+  </div>
+</header>
+
+<nav class="nav" id="nav">
+  <a href="#s01">Resumen</a><a href="#s02">El lote</a><a href="#s03">Normativa</a><a href="#s04">Qué se construye</a><a href="#s05">Plusvalía</a><a href="#s06">Cálculo del desarrollador</a><a href="#s07">Mercado</a><a href="#s08">Quién lo compra</a><a href="#s09">Valor</a>
+</nav>
+
+<!-- 00 PRESENTACIÓN -->
+<section class="section section-blanca">
+  <p class="lead">Hola. Como te había comentado, acá está mi análisis del lote. Busqué responder la pregunta que se hace cualquier comprador antes de ofertar: <strong>¿qué se puede hacer en este terreno y cuánto puede pagar por él quien lo haga?</strong></p>
+  <p class="lead">Para eso revisé el Código Urbanístico vigente (con la reforma de diciembre de 2024), la información oficial de la parcela y el mercado de la zona: departamentos a estrenar, terrenos, casas y galpones. Además de un edificio, analicé quién más podría comprarlo: alguien que recicle la casa para vivir o un inversor que construya un galpón. El valor que te propongo al final sale de lo que puede pagar el mejor de esos compradores, con números concretos.</p>
+  <div class="firma">Matías Leiblich · Ingeniero Civil (UBA)</div>
+</section>
+
+<!-- 01 RESUMEN -->
+<section class="section" id="s01">
+  <div class="sec-header"><span class="sec-num">01</span><div><div class="sec-titulo"><strong>Resumen</strong> ejecutivo</div><div class="sec-desc">Lo esencial en cinco números</div></div></div>
+  <div class="tiles">
+    <div class="tile"><div class="tile-top">ZON.<small>ZONIFICACIÓN</small></div><div class="tile-body"><div class="tile-val">U.S.A.B. 2</div><div class="tile-sub">PB + 4 pisos · plano límite 14,60 m · 100% de ocupación</div></div></div>
+    <div class="tile"><div class="tile-top">CUr<small>CÓDIGO URBANÍSTICO</small></div><div class="tile-body"><div class="tile-val">1.290 m²</div><div class="tile-sub">Superficie vendible estimada (1.532 m² cubiertos)</div></div></div>
+    <div class="tile"><div class="tile-top">INC.<small>INCIDENCIA</small></div><div class="tile-body"><div class="tile-val">USD 51/m²</div><div class="tile-sub">Implícita en el valor propuesto · (terreno + plusvalía) ÷ m² vendibles</div></div></div>
+    <div class="tile gold"><div class="tile-top">USD<small>VALOR DEL TERRENO</small></div><div class="tile-body"><div class="tile-val">USD 55–60 mil</div><div class="tile-sub">Cierre estimado USD 55.000–60.000 · publicación sugerida USD 65.000</div></div></div>
+    <div class="tile"><div class="tile-top">PL.<small>PLUSVALÍA</small></div><div class="tile-body"><div class="tile-val">USD 8.436</div><div class="tile-sub">6.208,7 UVA · la paga quien construye</div></div></div>
+  </div>
+  <div class="info-box"><strong>En una frase:</strong> el lote tiene una normativa muy favorable (se puede construir sobre toda la superficie, con tres frentes y sin retiros), pero en esta zona los departamentos nuevos se venden por debajo de lo que cuesta construirlos. Por eso hoy un desarrollador de edificios no puede pagar por el terreno, y el valor lo fija su mejor comprador alternativo: quien recicla la casa para vivir. Eso lleva a un valor estimado de <strong>USD 55.000 a 60.000</strong>, a confirmar cuando se conozca el estado real de la casa.</div>
+</section>
+
+<!-- 02 EL LOTE -->
+<section class="section section-blanca" id="s02">
+  <div class="sec-header"><span class="sec-num">02</span><div><div class="sec-titulo"><strong>El lote</strong></div><div class="sec-desc">Datos oficiales de catastro y Ciudad 3D · geometría dibujada a escala</div></div></div>
+  <div class="lote-grid">
+    <div>
+      <div class="svg-card"><svg viewBox="0 0 608 672" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;display:block;margin:0 auto">
+<rect x="0" y="0" width="608" height="672" fill="#eef0f3" rx="10"/>
+<polygon points="240.8,170.5 275.3,219.4 263.8,227.7 278.4,248.2 299.4,278.0 255.5,306.6 193.5,346.9 192.2,344.7 179.0,323.9 159.3,292.7 126.0,240.0 183.6,205.1 197.5,196.9 222.3,181.8" fill="#fff" stroke="#b9bdc4" stroke-width="1.2"/>
+<polygon points="263.6,156.7 285.2,143.6 297.1,136.6 361.7,98.0 396.5,214.6 352.7,243.2 299.4,278.0 278.4,248.2 263.8,227.7 275.3,219.4 240.8,170.5 255.0,161.7" fill="#fff" stroke="#b9bdc4" stroke-width="1.2"/>
+<polygon points="440.2,360.6 478.1,487.3 481.9,500.1 446.8,558.2 441.3,559.6 381.1,573.9 321.4,549.3 305.0,523.5 267.0,463.2 193.5,346.9 255.5,306.6 299.4,278.0 352.7,243.2 396.5,214.6 437.2,350.8" fill="#1a7aff22" stroke="#1a7aff" stroke-width="2.4" stroke-linejoin="round"/>
+<text x="189" y="307" font-family="Inter,Arial,sans-serif" font-size="11" fill="#898781" text-anchor="end">009A · 1 planta</text>
+<text x="294" y="175" font-family="Inter,Arial,sans-serif" font-size="11" fill="#898781">009B · 1 planta</text>
+<g font-family="Inter,Arial,sans-serif" font-weight="700" fill="#0d1b2e" font-size="12">
+<text transform="translate(261,454) rotate(50.4)" text-anchor="middle">AV. CURAPALIGÜE · 17,1 m</text>
+<text transform="translate(465,351) rotate(73.3)" text-anchor="middle">MIRÓ · 21,3 m</text>
+<text transform="translate(414,596)" text-anchor="middle">CABECERA · 4,8 m + ochavas</text>
+</g>
+<text transform="translate(289,273) rotate(326.9)" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="11" fill="#c0392b">medianera 17,3 m</text>
+<text x="367" y="421" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="15" font-weight="700" fill="#1a7aff">301,5 m²</text>
+<g transform="translate(574,30)"><circle r="15" fill="#fff" stroke="#c9ccd2"/><path d="M0,-10 L5,6 L0,2 L-5,6 Z" fill="#0d1b2e"/><text y="-19" text-anchor="middle" font-family="Inter,Arial,sans-serif" font-size="9" fill="#52514e">N</text></g>
+</svg></div>
+      <div class="caption">Croquis a escala a partir de la geometría catastral oficial. En azul, el lote; en gris, los linderos.</div>
+    </div>
+    <div>
+      <div class="ficha">
+        <div class="ficha-h">Ficha de la parcela</div>
+        <div class="row"><span>ID catastral</span><span>044-104-010</span></div>
+        <div class="row"><span>Superficie</span><span>301,5 m²</span></div>
+        <div class="row"><span>Frentes</span><span>Miró 21,3 m · Curapaligüe 17,1 m · cabecera 4,8 m</span></div>
+        <div class="row"><span>Profundidad de manzana</span><span>17,3 m</span></div>
+        <div class="row"><span>Construido hoy</span><span>≈ 190 m² en 1 planta</span></div>
+        <div class="row"><span>Ancho de calles</span><span>17 m</span></div>
+        <div class="row"><span>Manzana atípica</span><span>Sí · exenta de LFI/LIB</span></div>
+        <div class="row"><span>Afectaciones / APH</span><span>No</span></div>
+        <div class="row"><span>Mixtura de usos</span><span>Área 2 (media)</span></div>
+      </div>
+      <div class="fotos">
+        <div><img src="https://imgar.zonapropcdn.com/avisos/1/00/57/14/04/80/720x532/2071833841.jpg" alt="Curapaligüe 1898" onerror="this.style.display='none'"></div>
+        <div><img src="https://imgar.zonapropcdn.com/avisos/1/00/57/14/04/80/720x532/2071833790.jpg" alt="" onerror="this.style.display='none'"></div>
+        <div><img src="https://imgar.zonapropcdn.com/avisos/1/00/57/14/04/80/720x532/2071833917.jpg" alt="" onerror="this.style.display='none'"><a class="mas" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=-34.642489,-58.442496" target="_blank">Ver en Street View</a></div>
+      </div>
+      <div class="caption">Fotos de la publicación vigente.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 NORMATIVA -->
+<section class="section" id="s03">
+  <div class="sec-header"><span class="sec-num">03</span><div><div class="sec-titulo"><strong>Qué dice el Código</strong> para este lote</div><div class="sec-desc">Código Urbanístico (Ley 6099 y modificatorias, incluida la Ley 6776 de 2024) · cada regla revisada contra la parcela</div></div></div>
+  <div class="chk-wrap"><div class="chk"><span class="chk-i" style="color:#1a7a4a;background:#edf7f1">✓</span><div class="chk-b"><div class="chk-t">Unidad de edificabilidad</div><div class="chk-d">U.S.A.B. 2 · plano límite 14,60 m · PB mínima 2,60 m</div></div><span class="chk-r">Art. 6.2.5</span></div><div class="chk"><span class="chk-i" style="color:#1a7a4a;background:#edf7f1">✓</span><div class="chk-b"><div class="chk-t">Línea de Frente Interno</div><div class="chk-d">Manzana atípica <strong>exenta de LFI y LIB</strong> → se puede ocupar el 100% del lote</div></div><span class="chk-r">Disp. DI-2022-2525-DGIUR</span></div><div class="chk"><span class="chk-i" style="color:#1a7a4a;background:#edf7f1">✓</span><div class="chk-b"><div class="chk-t">Frente a más de una calle</div><div class="chk-d">Cabecera de manzana con 3 frentes: sin fondo, sin retiro de contrafrente</div></div><span class="chk-r">Art. 6.4.7 · 6.4.2.4</span></div><div class="chk"><span class="chk-i" style="color:#1a7a4a;background:#edf7f1">✓</span><div class="chk-b"><div class="chk-t">Ochavas (L.O.E.)</div><div class="chk-d">Desde los 3 m se puede volar sobre la ochava hasta la prolongación de las L.O. (+6 m² por planta)</div></div><span class="chk-r">Art. 6.4.1.3.4</span></div><div class="chk"><span class="chk-i" style="color:#1a7a4a;background:#edf7f1">✓</span><div class="chk-b"><div class="chk-t">Balcones</div><div class="chk-d">Calles de 17 m → vuelo máximo 1,40 m (1/12 del ancho)</div></div><span class="chk-r">Art. 6.3.2</span></div><div class="chk"><span class="chk-i" style="color:#1a7a4a;background:#edf7f1">✓</span><div class="chk-b"><div class="chk-t">Sobre el plano límite</div><div class="chk-d">Tanque, sala de máquinas y escalera hasta +2,50 m</div></div><span class="chk-r">Art. 6.3.1</span></div><div class="chk"><span class="chk-i" style="color:#1a7a4a;background:#edf7f1">✓</span><div class="chk-b"><div class="chk-t">Afectaciones</div><div class="chk-d">Sin ensanche, apertura, riesgo hídrico ni L.E. particularizada</div></div><span class="chk-r">Ciudad 3D</span></div><div class="chk"><span class="chk-i" style="color:#1a7a4a;background:#edf7f1">✓</span><div class="chk-b"><div class="chk-t">Protección patrimonial</div><div class="chk-d">No catalogado · lindero 009A desestimado</div></div><span class="chk-r">Anexo I</span></div><div class="chk"><span class="chk-i" style="color:#898781;background:#f3f2ee">✗</span><div class="chk-b"><div class="chk-t">Completamiento de tejido</div><div class="chk-d">Los linderos son de 1 planta: no hay altura mayor que igualar</div></div><span class="chk-r">Art. 6.5.5</span></div><div class="chk"><span class="chk-i" style="color:#898781;background:#f3f2ee">✗</span><div class="chk-b"><div class="chk-t">Enrase</div><div class="chk-d">Ciudad 3D no registra parcelas aptas para enrase</div></div><span class="chk-r">Ciudad 3D</span></div><div class="chk"><span class="chk-i" style="color:#1a7aff;background:#eef4ff">i</span><div class="chk-b"><div class="chk-t">Compromiso ambiental</div><div class="chk-d">25% de la azotea con techo verde o techo frío (no afecta superficie vendible)</div></div><span class="chk-r">Art. 7.2.8.3.3</span></div><div class="chk"><span class="chk-i" style="color:#1a7aff;background:#eef4ff">i</span><div class="chk-b"><div class="chk-t">Usos permitidos</div><div class="chk-d">Área de Media Mixtura (2): vivienda y comercio; depósitos hasta 200 m²</div></div><span class="chk-r">Cuadro 3.3</span></div></div>
+  <div class="info-box"><strong>Lo más importante:</strong> la manzana es muy angosta (17 m de profundidad) y el Gobierno la declaró exenta de Línea de Frente Interno. En la práctica, <strong>se puede construir sobre el 100% del lote en todos los pisos</strong>, algo poco común en CABA. Como tiene tres frentes, todas las unidades pueden tener vista a la calle.</div>
+</section>
+
+<!-- 04 QUÉ SE CONSTRUYE -->
+<section class="section section-blanca" id="s04">
+  <div class="sec-header"><span class="sec-num">04</span><div><div class="sec-titulo"><strong>Qué se puede construir</strong></div><div class="sec-desc">Volumen máximo y superficie vendible estimada · sin proyecto de arquitectura</div></div></div>
+  <div class="build-grid">
+    <div class="svg-card">
+      <svg viewBox="0 -24 380 330" xmlns="http://www.w3.org/2000/svg" style="width:100%" font-family="Inter,Arial,sans-serif">
+        <line x1="20" y1="270" x2="330" y2="270" stroke="#52514e" stroke-width="1.5"/>
+        <g fill="#1a7aff" fill-opacity=".13" stroke="#1a7aff" stroke-width="1.2">
+          <rect x="80" y="214" width="190" height="56"/><rect x="80" y="162" width="190" height="52"/>
+          <rect x="80" y="110" width="190" height="52"/><rect x="80" y="58" width="190" height="52"/>
+          <rect x="80" y="6" width="190" height="52"/>
+        </g>
+        <rect x="150" y="-20" width="50" height="26" fill="#f0efea" stroke="#b0afa8" stroke-width="1"/>
+        <text x="175" y="-4" font-size="8.5" fill="#898781" text-anchor="middle">servicios +2,50</text>
+        <g font-size="11" fill="#0d1b2e" font-weight="600" text-anchor="middle">
+          <text x="175" y="246">Planta baja · locales / hall</text><text x="175" y="192">Piso 1</text>
+          <text x="175" y="140">Piso 2</text><text x="175" y="88">Piso 3</text><text x="175" y="36">Piso 4</text>
+        </g>
+        <line x1="40" y1="-1" x2="300" y2="-1" stroke="#c0392b" stroke-dasharray="5 4" stroke-width="1.4"/>
+        <text x="304" y="2" font-size="10" fill="#c0392b">plano límite 14,60 m</text>
+        <g font-size="10" fill="#52514e"><text x="276" y="274">±0,00</text><text x="276" y="62">+11,40</text><text x="276" y="10">+14,20</text><text x="276" y="218">+3,00</text></g>
+        <text x="80" y="290" font-size="10" fill="#898781">Curapaligüe</text><text x="270" y="290" font-size="10" fill="#898781" text-anchor="end">Miró</text>
+        <text x="175" y="302" font-size="10" fill="#898781" text-anchor="middle">← 17,3 m de calle a calle →</text>
+      </svg>
+      <div class="caption" style="text-align:center">Corte esquemático: 5 niveles sobre todo el lote, de calle a calle.</div>
+    </div>
+    <div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nivel</th><th class="r">Cubierta</th><th class="r">Circulación</th><th class="r">Balcones</th><th class="r">Vendible</th></tr></thead>
+          <tbody>
+            <tr><td>Planta baja</td><td class="r">301,5 m²</td><td class="r">40 m²</td><td class="r">—</td><td class="r">235,3 m²</td></tr>
+            <tr><td>Pisos 1 a 4 (c/u)</td><td class="r">307,7 m²</td><td class="r">32 m²</td><td class="r">31 m²</td><td class="r">248,1 m² + balcón</td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td class="r">1.532 m²</td><td class="r">168 m²</td><td class="r">124 m²</td><td class="r" style="color:#1a7aff">1.290 m²</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="info-box"><strong>Cómo se calculó lo vendible:</strong> a cada planta le restamos la circulación común (hall, escalera, ascensor y palier) y un 10% de muros. Los balcones (1,20 m de vuelo en la mitad de los frentes) suman al 50%. En los pisos altos se agregan unos 6 m² por planta volando sobre las ochavas, como permite el Código. El resultado equivale al 84% de lo cubierto: es alto porque la planta es grande y el núcleo de circulación pesa poco.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05 PLUSVALÍA -->
+<section class="section" id="s05">
+  <div class="sec-header"><span class="sec-num">05</span><div><div class="sec-titulo"><strong>Plusvalía</strong> · Derecho para el Desarrollo Urbano</div><div class="sec-desc">Lo paga quien construye, por los m² que el Código nuevo permite por encima del anterior</div></div></div>
+  <div class="abc">
+    <div class="abc-c"><div class="abc-l">A</div><div class="abc-t">Edificabilidad adicional</div><div class="abc-v">864,2 m²</div><div class="abc-d">A1 = 1.532 m² × 80% = 1.226 m²<br>A2 = 301,4 m² × FOT 1,2 (R2bII) = 361,7 m²</div></div>
+    <div class="abc-c"><div class="abc-l">B</div><div class="abc-t">Incidencia</div><div class="abc-v">40 UVA/m²</div><div class="abc-d">Ley Tarifaria · UVA $2.106 · dólar $1.550</div></div>
+    <div class="abc-c"><div class="abc-l">C</div><div class="abc-t">Alícuota</div><div class="abc-v">18%</div><div class="abc-d">Según zona</div></div>
+    <div class="abc-res"><div class="out-lab">A × B × C</div><div class="abc-v">USD 8.436</div><div class="out-sub">6.208,7 UVA</div></div>
+  </div>
+  <div class="info-box">Coincide con el cálculo oficial de Ciudad 3D (6.208,7 UVA). Es un monto bajo porque la incidencia de la zona es baja: no es un factor que frene el negocio.</div>
+</section>
+
+<!-- 06 CALCULADORA -->
+<section class="section section-blanca" id="s06">
+  <div class="sec-header"><span class="sec-num">06</span><div><div class="sec-titulo"><strong>¿Cómo calcula un desarrollador</strong> cuánto pagar?</div><div class="sec-desc">El valor del terreno es lo que queda después de vender, pagar la obra y ganar lo mínimo que justifica el riesgo</div></div></div>
+  <div class="calc">
+    <div class="ctrl">
+      <div class="presets">
+        <button data-c="1600" data-p="1950" data-r="10" class="on">Zona · USD 1.950/m²</button>
+        <button data-c="1600" data-p="2400" data-r="10">Precios de Parque Chacabuco</button>
+      </div>
+      <div class="ctrl-row"><div class="ctrl-lab"><span>Precio de venta de los departamentos</span><b id="lp"></b></div><input type="range" id="ip" min="1500" max="2800" step="25" value="1950"></div>
+      <div class="ctrl-row"><div class="ctrl-lab"><span>Costo de obra (todo incluido)</span><b id="lc"></b></div><input type="range" id="ic" min="900" max="1800" step="25" value="1600"></div>
+      <div class="ctrl-row"><div class="ctrl-lab"><span>Ganancia mínima buscada</span><b id="lr"></b></div><input type="range" id="ir" min="5" max="30" step="1" value="10"></div>
+      <div class="caption" style="margin-top:12px">Ventas: 20% en pozo al 80% del precio, 60% durante la obra al 90% y 20% terminado. Gastos de venta 3%, gastos de compra del terreno 7%.</div>
+    </div>
+    <div>
+      <div class="out">
+        <div class="out-lab">Lo que puede pagar por el terreno</div>
+        <div class="out-val" id="ov"></div>
+        <div class="out-sub" id="os"></div>
+        <div class="casc" id="casc"></div>
+      </div>
+    </div>
+  </div>
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin:26px 0 4px">¿Qué tendría que pasar para que un desarrollador pague USD 120.000?</div>
+  <div style="font-size:12px;color:#52514e;margin-bottom:12px">Alcanza con que se cumpla <strong>una</strong> de estas dos condiciones (en ambos casos, con una ganancia de apenas 10%):</div>
+  <div class="paths">
+    <div class="mstat"><div class="mstat-label">Camino 1 · construir más barato</div><div class="mstat-num" style="color:#c0392b">USD 1.189/m²</div><div class="mstat-sub">de costo de obra (26% menos que los USD 1.600/m² reales), vendiendo al precio de la zona: USD 1.950/m²</div></div>
+    <div class="paths-o">o</div>
+    <div class="mstat"><div class="mstat-label">Camino 2 · vender más caro</div><div class="mstat-num" style="color:#c0392b">USD 2.578/m²</div><div class="mstat-sub">de precio de venta (32% más que el precio de la zona), construyendo a USD 1.600/m²</div></div>
+  </div>
+  <div class="caption" style="margin:8px 0 0">También puede ser una combinación: por ejemplo, construir a USD 1.400/m² y vender a USD 2.272/m². Un 10% de ganancia es muy poco para un proyecto de 2 a 3 años con este riesgo; lo habitual es 20–30%.</div>
+  <div class="info-box" style="margin-top:12px"><strong>Aun con el terreno gratis</strong> y sin ninguna ganancia, haría falta construir a USD 1.372/m² o vender a USD 2.273/m² para que los números den. Los dos valores están lejos de los de la zona hoy.</div>
+  <div class="info-box"><strong>Conclusión:</strong> con los costos y precios reales de la zona, <strong>un edificio no genera valor para el terreno</strong>. Construir cada m² vendible cuesta más de lo que se vende. Para pagar los USD 120.000 habría que construir un 26% más barato o vender un 32% más caro, y aun así ganando solo un 10%. Ninguna de las dos cosas es realista hoy: ni siquiera con precios de Parque Chacabuco los números cierran. Por eso el comprador de este lote no va a ser un desarrollador de edificios.</div>
+</section>
+
+<!-- 07 MERCADO -->
+<section class="section" id="s07">
+  <div class="sec-header"><span class="sec-num">07</span><div><div class="sec-titulo"><strong>El mercado</strong> de la zona</div><div class="sec-desc">Avisos activos en Zonaprop · Septiembre 2026 · cada aviso ubicado en el mapa</div></div></div>
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin-bottom:10px">Terrenos en venta a menos de 1 km</div>
+  <div class="mercado-stats">
+    <div class="mstat mstat-hl"><div class="mstat-num">USD 399/m²</div><div class="mstat-label">Este lote</div><div class="mstat-sub">El más barato por m² de los terrenos publicados cerca</div></div>
+    <div class="mstat"><div class="mstat-num">USD 623/m²</div><div class="mstat-label">Mediana de la zona</div><div class="mstat-sub">9 terrenos publicados</div></div>
+    <div class="mstat"><div class="mstat-num" style="color:#c0392b">6 de 9</div><div class="mstat-label">Llevan más de 8 meses publicados</div><div class="mstat-sub">2 de ellos, más de un año</div></div>
+  </div>
+  <div class="note-box"><strong>Lo que dicen estos datos:</strong> este lote es el terreno más barato por m² de la zona y, aun así, lleva más de un año publicado sin venderse. Además, no es un caso aislado: 6 de los 9 terrenos cercanos llevan más de 8 meses publicados. <strong>El problema no es que este lote esté caro en comparación con los demás; los precios de lista de toda la zona están por encima de lo que un comprador puede pagar</strong> (sección 06). Por eso los precios de publicación de los terrenos no sirven como referencia de valor.</div>
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin:24px 0 10px">Departamentos a estrenar y en pozo · USD/m² publicado</div>
+  <div class="mercado-stats"><div class="mstat mstat-hl"><div class="mstat-num">USD 2.063</div><div class="mstat-label">Alrededores (sur de Asamblea)</div><div class="mstat-sub">Mediana USD/m² · 4 avisos · rango 1.288–2.464</div></div><div class="mstat"><div class="mstat-num">USD 1.990</div><div class="mstat-label">Flores Sur</div><div class="mstat-sub">Mediana USD/m² · 18 avisos · rango 1.324–2.257</div></div><div class="mstat"><div class="mstat-num">USD 2.367</div><div class="mstat-label">Parque Chacabuco</div><div class="mstat-sub">Mediana USD/m² · 19 avisos · rango 1.720–2.765</div></div></div>
+  <div id="map"></div>
+  <div class="caption">● azul: departamentos a estrenar · ● dorado: terrenos · ● verde: casas · ● gris: galpones. Tocá cada punto para ver el aviso.</div>
+  <div class="charts-grid">
+    <div class="chart-card"><div class="chart-eyebrow">Departamentos a estrenar</div><div class="chart-title">USD/m² según distancia al lote</div><div class="chart-wrap"><canvas id="cDep"></canvas></div></div>
+    <div class="chart-card"><div class="chart-eyebrow">Terrenos en venta · menos de 1 km</div><div class="chart-title">USD por m² de terreno · <span style="color:#c0392b">en rojo, más de 8 meses publicados</span></div><div class="chart-wrap"><canvas id="cTer"></canvas></div></div>
+  </div>
+  <details style="margin-top:16px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#1a7aff">Ver tabla de terrenos en venta</summary>
+    <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Dirección</th><th class="r">Distancia</th><th class="r">Superficie</th><th class="r">Precio</th><th class="r">USD/m²</th><th class="r">Publicado</th></tr></thead><tbody><tr class=hl><td style="font-weight:600">Curapaligüe 1898 <span class=pill-me>este lote</span></td><td class=r>0 m</td><td class=r>301 m²</td><td class=r style="font-weight:700">USD 120.000</td><td class=r>399</td><td class=r style="color:#c0392b">más de 1 año</td></tr><tr><td style="font-weight:600">Hortiguera 1766</td><td class=r>306 m</td><td class=r>251 m²</td><td class=r style="font-weight:700">USD 110.000</td><td class=r>438</td><td class=r style="color:#c0392b">327 días</td></tr><tr><td style="font-weight:600">Avenida Castañares al 1600</td><td class=r>371 m</td><td class=r>608 m²</td><td class=r style="font-weight:700">USD 460.000</td><td class=r>757</td><td class=r style="color:#c0392b">276 días</td></tr><tr><td style="font-weight:600">Saraza al 1500</td><td class=r>472 m</td><td class=r>124 m²</td><td class=r style="font-weight:700">USD 90.000</td><td class=r>726</td><td class=r style="color:#c0392b">251 días</td></tr><tr><td style="font-weight:600">Carabobo AV. al 1400</td><td class=r>489 m</td><td class=r>478 m²</td><td class=r style="font-weight:700">USD 259.000</td><td class=r>542</td><td class=r style="color:#52514e">127 días</td></tr><tr><td style="font-weight:600">Saraza 1400</td><td class=r>601 m</td><td class=r>1.305 m²</td><td class=r style="font-weight:700">USD 980.000</td><td class=r>751</td><td class=r style="color:#52514e">4 días</td></tr><tr><td style="font-weight:600">Cachimayo 1836</td><td class=r>702 m</td><td class=r>652 m²</td><td class=r style="font-weight:700">USD 260.000</td><td class=r>399</td><td class=r style="color:#c0392b">313 días</td></tr><tr><td style="font-weight:600">Av Cobo al 1400</td><td class=r>729 m</td><td class=r>770 m²</td><td class=r style="font-weight:700">USD 480.000</td><td class=r>623</td><td class=r style="color:#52514e">49 días</td></tr><tr><td style="font-weight:600">Picheuta al 1800</td><td class=r>852 m</td><td class=r>323 m²</td><td class=r style="font-weight:700">USD 180.000</td><td class=r>557</td><td class=r style="color:#c0392b">más de 1 año</td></tr><tr><td style="font-weight:600">Zañartu al 1200</td><td class=r>854 m</td><td class=r>380 m²</td><td class=r style="font-weight:700">USD 300.000</td><td class=r>789</td><td class=r style="color:#c0392b">más de 1 año</td></tr></tbody></table></div>
+  </details>
+  <details style="margin-top:10px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#1a7aff">Ver tabla de departamentos a estrenar</summary>
+    <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Dirección</th><th>Zona</th><th class="r">Distancia</th><th class="r">Sup.</th><th class="r">Precio</th><th class="r">USD/m²</th></tr></thead><tbody><tr><td style="font-weight:600">Zelarrayan al 1600</td><td>Alrededores</td><td class=r>417 m</td><td class=r>66 m²</td><td class=r style="font-weight:700">USD 85.000</td><td class=r>1.288</td></tr><tr><td style="font-weight:600">santander 1600</td><td>Parque Chacabuco</td><td class=r>630 m</td><td class=r>74 m²</td><td class=r style="font-weight:700">USD 145.000</td><td class=r>1.959</td></tr><tr><td style="font-weight:600">Avenida Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>40 m²</td><td class=r style="font-weight:700">USD 104.000</td><td class=r>2.600</td></tr><tr><td style="font-weight:600">Avenida Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>58 m²</td><td class=r style="font-weight:700">USD 144.000</td><td class=r>2.483</td></tr><tr><td style="font-weight:600">Av. Asamblea 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>60 m²</td><td class=r style="font-weight:700">USD 134.900</td><td class=r>2.248</td></tr><tr><td style="font-weight:600">Av. Asamblea 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>41 m²</td><td class=r style="font-weight:700">USD 94.900</td><td class=r>2.315</td></tr><tr><td style="font-weight:600">Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>34 m²</td><td class=r style="font-weight:700">USD 94.000</td><td class=r>2.765</td></tr><tr><td style="font-weight:600">Av Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>36 m²</td><td class=r style="font-weight:700">USD 94.000</td><td class=r>2.611</td></tr><tr><td style="font-weight:600">Avenida Asamblea 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>50 m²</td><td class=r style="font-weight:700">USD 108.000</td><td class=r>2.160</td></tr><tr><td style="font-weight:600">Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>60 m²</td><td class=r style="font-weight:700">USD 130.000</td><td class=r>2.167</td></tr><tr><td style="font-weight:600">Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>40 m²</td><td class=r style="font-weight:700">USD 99.000</td><td class=r>2.475</td></tr><tr><td style="font-weight:600">Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>40 m²</td><td class=r style="font-weight:700">USD 96.000</td><td class=r>2.400</td></tr><tr><td style="font-weight:600">Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>60 m²</td><td class=r style="font-weight:700">USD 140.000</td><td class=r>2.333</td></tr><tr><td style="font-weight:600">Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>60 m²</td><td class=r style="font-weight:700">USD 144.000</td><td class=r>2.400</td></tr><tr><td style="font-weight:600">Asamblea al 1600</td><td>Parque Chacabuco</td><td class=r>713 m</td><td class=r>60 m²</td><td class=r style="font-weight:700">USD 142.000</td><td class=r>2.367</td></tr><tr><td style="font-weight:600">Asamblea 1200</td><td>Parque Chacabuco</td><td class=r>733 m</td><td class=r>201 m²</td><td class=r style="font-weight:700">USD 550.000</td><td class=r>2.736</td></tr><tr><td style="font-weight:600">Asamblea al 1900</td><td>Alrededores</td><td class=r>780 m</td><td class=r>56 m²</td><td class=r style="font-weight:700">USD 138.000</td><td class=r>2.464</td></tr><tr><td style="font-weight:600">Av. Asamblea al 1100</td><td>Parque Chacabuco</td><td class=r>794 m</td><td class=r>75 m²</td><td class=r style="font-weight:700">USD 139.000</td><td class=r>1.853</td></tr><tr><td style="font-weight:600">Emilio Mitre 1355</td><td>Parque Chacabuco</td><td class=r>825 m</td><td class=r>103 m²</td><td class=r style="font-weight:700">USD 260.000</td><td class=r>2.524</td></tr><tr><td style="font-weight:600">Zañartu 1100</td><td>Alrededores</td><td class=r>986 m</td><td class=r>51 m²</td><td class=r style="font-weight:700">USD 95.000</td><td class=r>1.863</td></tr><tr><td style="font-weight:600">Zañartu 1100</td><td>Alrededores</td><td class=r>986 m</td><td class=r>38 m²</td><td class=r style="font-weight:700">USD 86.000</td><td class=r>2.263</td></tr><tr><td style="font-weight:600">Av. José María Moreno al 1700</td><td>Parque Chacabuco</td><td class=r>1.097 m</td><td class=r>25 m²</td><td class=r style="font-weight:700">USD 43.000</td><td class=r>1.720</td></tr><tr><td style="font-weight:600">Castañón 1200</td><td>Flores Sur</td><td class=r>1.554 m</td><td class=r>35 m²</td><td class=r style="font-weight:700">USD 65.000</td><td class=r>1.857</td></tr></tbody></table></div>
+  </details>
+</section>
+
+<!-- 08 OTROS USOS -->
+<section class="section section-blanca" id="s08">
+  <div class="sec-header"><span class="sec-num">08</span><div><div class="sec-titulo">Si no es un edificio, <strong>¿quién lo compra?</strong></div><div class="sec-desc">Cuánto puede pagar cada comprador posible, con supuestos concretos y los números de la zona</div></div></div>
+  <div class="esc-grid" style="grid-template-columns:repeat(3,1fr)">
+    <div class="esc" style="border-top-color:#c0392b"><div class="esc-t">Desarrollador de edificio</div><div class="esc-v" style="color:#c0392b">USD 0</div><div class="esc-d">Obra a USD 1.600/m², venta a USD 1.950/m², ganancia 10%: el resultado es negativo (sección 06).</div></div>
+    <div class="esc" style="border-top-color:#1a7a4a"><div class="esc-t">Alguien que recicla la casa para vivir</div><div class="esc-v" style="color:#1a7a4a">≈ USD 60.000</div><div class="esc-d">Reciclado a USD 800/m² (USD 152.000). Si consiguiera reciclarla por USD 100.000, podría pagar ≈ USD 104.000, pero es poco probable: la construcción está para demoler.</div></div>
+    <div class="esc" style="border-top-color:#898781"><div class="esc-t">Inversor que construye un galpón para alquilar</div><div class="esc-v" style="color:#52514e">≈ USD 9.000</div><div class="esc-d">Un galpón nuevo terminaría valiendo casi lo mismo que cuesta construirlo, porque en la zona se consiguen galpones hechos a precios similares. Por eso deja muy poco margen para pagar el terreno.</div></div>
+  </div>
+  <div class="chart-card"><div class="chart-eyebrow">Cuánto puede pagar cada comprador</div><div class="chart-title">Frente al precio pedido hoy</div><div class="chart-wrap" style="height:250px"><canvas id="cEsc"></canvas></div></div>
+
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin:26px 0 10px">Cómo se calcula · comprador que recicla para vivir</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th></th><th class="r">Reciclado a USD 800/m²</th><th class="r">Reciclado por USD 100.000</th></tr></thead>
+    <tbody>
+      <tr><td>Casa equivalente ya reciclada (190 m² × USD 1.100/m²)</td><td class="r">USD 209.000</td><td class="r">USD 209.000</td></tr>
+      <tr><td>− Costo del reciclado (descontando los gastos de compra que se ahorra)</td><td class="r">− USD 152.000 ÷ 1,07</td><td class="r">− USD 100.000 ÷ 1,07</td></tr>
+      <tr><td>= Máximo que podría pagar sin perder</td><td class="r">USD 67.000</td><td class="r">USD 116.000</td></tr>
+      <tr><td>− 10% por el riesgo y el tiempo de la obra</td><td class="r">−10%</td><td class="r">−10%</td></tr>
+    </tbody>
+    <tfoot><tr><td>Lo que pagaría por el lote</td><td class="r" style="color:#1a7a4a">≈ USD 60.000</td><td class="r" style="color:#7fb89a">≈ USD 104.000</td></tr></tfoot>
+  </table></div>
+  <div class="note-box"><strong>Este escenario es una estimación, no un número cerrado.</strong> No conocemos el interior de la casa: la superficie (190 m²) es el dato de catastro y, según nos comentaron, la construcción está para demoler. Por eso el reciclado difícilmente cueste menos de USD 800/m²; hacerlo por USD 100.000 es poco probable. El precio de la casa terminada (USD 1.100/m²) también es una estimación, a partir de casas en buen estado publicadas en la zona, con un 5% de negociación.</div>
+
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin:26px 0 10px">Cómo se calcula · galpón para alquilar</div>
+  <div class="table-wrap"><table>
+    <tbody>
+      <tr><td>Obra: 340 m² (PB + entrepiso) × USD 400/m² + demolición + 10% de honorarios y permisos</td><td class="r">USD 163.000</td></tr>
+      <tr><td>Alquiler: 300 m² × USD 6,8/m²/mes × 12, − 12% de vacancia, ABL y mantenimiento</td><td class="r">USD 21.500/año</td></tr>
+      <tr><td>Valor del galpón alquilado: lo que pagaría un inversor que busca un 11% anual (21.500 ÷ 0,11)</td><td class="r">USD 196.000</td></tr>
+      <tr><td>− 3% de gastos de venta, − 10% de ganancia del inversor, − obra, ÷ 1,07 de gastos de compra</td><td class="r"></td></tr>
+    </tbody>
+    <tfoot><tr><td>Lo que pagaría por el lote</td><td class="r">≈ USD 9.000</td></tr></tfoot>
+  </table></div>
+  <div class="info-box">El 11% sale de la propia zona: un galpón como este se vende usado a unos USD 628/m² (≈ USD 190.000 por 300 m², con terreno incluido), y con el alquiler de la zona eso le rinde a quien lo compra alrededor de un 11% anual. El alquiler (mediana de 9 galpones a menos de 1 km) y el precio de venta son datos de mercado; el costo de obra y el 10% de ganancia son supuestos. Por la zonificación, los depósitos tienen un máximo de 200 m² cada uno, así que serían dos galpones de unos 150 m².</div>
+  <details style="margin-top:12px"><summary style="cursor:pointer;font-size:12px;font-weight:600;color:#1a7aff">Ver casas en buen estado usadas como referencia</summary>
+    <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Dirección</th><th class="r">Sup.</th><th class="r">Precio</th><th class="r">USD/m²</th></tr></thead><tbody>
+      <tr><td>Avelino Díaz 1700 · esquina, excelente estado</td><td class="r">190 m²</td><td class="r">USD 240.000</td><td class="r">1.263</td></tr>
+      <tr><td>Zelarrayán 1100</td><td class="r">229 m²</td><td class="r">USD 290.000</td><td class="r">1.266</td></tr>
+      <tr><td>Santander 1316</td><td class="r">270 m²</td><td class="r">USD 329.000</td><td class="r">1.219</td></tr>
+      <tr><td>Dávila 1100</td><td class="r">233 m²</td><td class="r">USD 270.000</td><td class="r">1.158</td></tr>
+      <tr><td>Castañares 1500 · 5 amb. con garage</td><td class="r">140 m²</td><td class="r">USD 148.000</td><td class="r">1.057</td></tr>
+      <tr><td>Zañartu 1300 · 5 amb.</td><td class="r">205 m²</td><td class="r">USD 189.000</td><td class="r">922</td></tr>
+      <tr><td>Cachimayo 1800 · reciclada</td><td class="r">322 m²</td><td class="r">USD 289.000</td><td class="r">898</td></tr>
+    </tbody></table></div>
+  </details>
+</section>
+
+<!-- 09 VALOR -->
+<section class="section" id="s09">
+  <div class="sec-header"><span class="sec-num">09</span><div><div class="sec-titulo"><strong>El valor</strong> del lote</div><div class="sec-desc">Un lote vale lo que puede pagar el mejor comprador realista</div></div></div>
+  <div class="info-box" style="margin-top:0;margin-bottom:18px"><strong>Cómo llegamos al valor:</strong> el desarrollador de edificios, que normalmente es quien más paga por un lote, acá no puede pagar nada (sección 06). Entre los compradores que sí pueden, el que más paga es quien recicla la casa para vivir: ≈ USD 60.000, con un reciclado de USD 800/m². Para un galpón el margen es muy chico (≈ USD 9.000). Solo si el reciclado costara mucho menos de lo esperable el valor se acercaría a los USD 100.000, y eso hay que confirmarlo viendo la casa. Este análisis explica por qué el lote no se vendió en más de un año a USD 120.000.</div>
+  <div class="precios-grid">
+    <div class="precio-block"><div class="precio-block-label">Publicación sugerida</div><div class="precio-block-valor">USD 65.000</div><div class="precio-block-m2">USD 216/m² de terreno</div></div>
+    <div class="precio-block main"><div class="precio-block-label">Cierre esperado · 120 días</div><div class="precio-block-valor">USD 55–60 mil</div><div class="precio-block-m2">Comprador que recicla para vivir · a confirmar con la visita</div></div>
+    <div class="precio-block"><div class="precio-block-label">Precio pedido hoy</div><div class="precio-block-valor" style="color:#898781">USD 120.000</div><div class="precio-block-m2">Más de un año publicado sin cierre</div></div>
+  </div>
+  <div style="margin-top:22px">
+    <div class="concl-line"><span style="color:#1a7aff;font-size:15px;flex-shrink:0">◉</span><span>La normativa del lote es excelente: 100% de ocupación, tres frentes y sin retiros. <strong>El límite no está en el lote, sino en los precios de venta de la zona</strong>, que no alcanzan para pagar la obra.</span></div>
+    <div class="concl-line"><span style="color:#b8860b;font-size:15px;flex-shrink:0">◉</span><span>Mientras eso no cambie, el lote no le sirve a un desarrollador de edificios. Su comprador es alguien que lo quiere para vivir o para uso propio.</span></div>
+    <div class="concl-line"><span style="color:#b8860b;font-size:15px;flex-shrink:0">◉</span><span>Los precios de los otros terrenos de la zona no son una referencia: 6 de 9 llevan más de 8 meses publicados sin venderse.</span></div>
+    <div class="concl-line"><span style="color:#1a7a4a;font-size:15px;flex-shrink:0">◉</span><span>Publicado en USD 65.000 y dirigido a quien busca casa o espacio propio con triple frente, el lote entra en la zona de precio donde aparecen consultas y ofertas reales.</span></div>
+  </div>
+  <div style="font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin:26px 0 0">Análisis FODA del lote</div>
+  <div class="foda-grid">
+    <div class="foda-cell foda-cell-f"><div class="foda-cell-label">✓ Fortalezas</div>
+      <div class="foda-line"><span style="color:#1a7a4a">✓</span>100% de ocupación: sin LFI ni retiros</div>
+      <div class="foda-line"><span style="color:#1a7a4a">✓</span>Tres frentes y esquina: luz y vidrieras</div>
+      <div class="foda-line"><span style="color:#1a7a4a">✓</span>Lote propio de 301 m² sin afectaciones</div></div>
+    <div class="foda-cell foda-cell-o"><div class="foda-cell-label">◈ Oportunidades</div>
+      <div class="foda-line"><span style="color:#1a7aff">◈</span>Comprador de vivienda con local o taller propio</div>
+      <div class="foda-line"><span style="color:#1a7aff">◈</span>Si suben los precios de la zona, se habilita el desarrollo</div>
+      <div class="foda-line"><span style="color:#1a7aff">◈</span>Poca oferta de obra nueva en los alrededores</div></div>
+    <div class="foda-cell foda-cell-d"><div class="foda-cell-label">⚠ Debilidades</div>
+      <div class="foda-line"><span style="color:#b8860b">⚠</span>Construcción existente para demoler</div>
+      <div class="foda-line"><span style="color:#b8860b">⚠</span>Precios de venta de la zona por debajo del costo de obra</div>
+      <div class="foda-line"><span style="color:#b8860b">⚠</span>Esquina con tránsito (Castañares / Curapaligüe)</div></div>
+    <div class="foda-cell foda-cell-a"><div class="foda-cell-label">✗ Amenazas</div>
+      <div class="foda-line"><span style="color:#c0392b">✗</span>Costos de construcción altos en dólares</div>
+      <div class="foda-line"><span style="color:#c0392b">✗</span>Mercado de terrenos de la zona estancado</div>
+      <div class="foda-line"><span style="color:#c0392b">✗</span>Más tiempo publicado desgasta el aviso</div></div>
+  </div>
+</section>
+
+<!-- CONSIDERACIONES -->
+<section class="section section-blanca">
+  <details class="legal"><summary>Consideraciones del estudio</summary>
+    <p>Este estudio se realizó según el Código Urbanístico de la Ciudad Autónoma de Buenos Aires (Ley N° 6099, Decreto 99/19 y modificatorias, incluidas la Ley N° 6361 y la Ley N° 6776, B.O. 26/12/2024) y la información pública de catastro, Ciudad 3D y la Disposición DI-2022-2525-GCABA-DGIUR. Es de carácter orientativo y no vinculante: no se basa en un proyecto de arquitectura específico, y las superficies podrían ajustarse según el proyecto, las medidas reales de la parcela y la interpretación de la autoridad de aplicación. La plusvalía es estimada y queda sujeta al cálculo definitivo con las superficies finales. Los valores de mercado corresponden a precios de publicación en Zonaprop relevados en septiembre de 2026; los precios de cierre suelen ser menores. Tipo de cambio: $1.550 por dólar; UVA: $2.106.</p>
+  </details>
+</section>
+
+<div class="links-pie">
+  <div class="links-pie-label">Más información</div>
+  <div class="links-pie-row">
+    <a class="primary" href="https://matiasleiblich.com/guias/vendedor/" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Conocé el proceso de venta: Guía del Vendedor</a>
+    <a class="secondary" href="https://matiasleiblich.com/calculadora-inmobiliaria" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Calculá los gastos: Calculadora Inmobiliaria</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <span><strong>Matías Leiblich</strong> · Ingenieros Inmobiliarios · deinmobiliarios.com · <a href="https://wa.me/5491161737552" target="_blank">11-6173-7552</a></span>
+  <span>Fuentes: Código Urbanístico CABA · Ciudad 3D · Catastro GCBA · Zonaprop · Septiembre 2026</span>
+</footer>
+
+<script>
+const DATA = {"lote": [-34.642489, -58.442496], "dep": [{"a": "Avenida Directorio 3113", "p": 89000, "m": 44, "u": 2023, "d": 2657, "z": "fsur", "x": -58.47048, "y": -34.63632, "l": 2023}, {"a": "Pergamino al 300", "p": 210000, "m": 105, "u": 2000, "d": 2876, "z": "fsur", "x": -58.47284, "y": -34.63593, "l": 2000}, {"a": "Zelarrayan al 1600", "p": 85000, "m": 66, "u": 1288, "d": 417, "z": "cerca", "x": -58.43802, "y": -34.64184, "l": 1288}, {"a": "Directorio 3236", "p": 135000, "m": 102, "u": 1324, "d": 2758, "z": "fsur", "x": -58.4718, "y": -34.6369, "l": 1324}, {"a": "Directorio al 2900", "p": 104700, "m": 49, "u": 2137, "d": 2406, "z": "fsur", "x": -58.46735, "y": -34.63556, "l": 2137}, {"a": "Directorio al 2900", "p": 83500, "m": 37, "u": 2257, "d": 2406, "z": "fsur", "x": -58.46735, "y": -34.63556, "l": 2257}, {"a": "Avenida Asamblea al 1600", "p": 104000, "m": 40, "u": 2600, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2600}, {"a": "Avenida Asamblea al 1600", "p": 144000, "m": 58, "u": 2483, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2483}, {"a": "Av. San Pedrito al 500", "p": 88000, "m": 47, "u": 1872, "d": 2336, "z": "fsur", "x": -58.46693, "y": -34.63654, "l": 1872}, {"a": "Av. Asamblea 1600", "p": 134900, "m": 60, "u": 2248, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2248}, {"a": "Av. Asamblea 1600", "p": 94900, "m": 41, "u": 2315, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2315}, {"a": "Av San Pedrito al 500", "p": 86000, "m": 40, "u": 2150, "d": 2336, "z": "fsur", "x": -58.46693, "y": -34.63654, "l": 2150}, {"a": "Av. San Pedrito al 500", "p": 165000, "m": 85, "u": 1941, "d": 2336, "z": "fsur", "x": -58.46693, "y": -34.63654, "l": 1941}, {"a": "Portela al 400", "p": 95000, "m": 48, "u": 1979, "d": 2721, "z": "fsur", "x": -58.47129, "y": -34.63655, "l": 1979}, {"a": "Portela al 400", "p": 105000, "m": 53, "u": 1981, "d": 2721, "z": "fsur", "x": -58.47129, "y": -34.63655, "l": 1981}, {"a": "Pergamino al 300", "p": 210000, "m": 104, "u": 2019, "d": 2876, "z": "fsur", "x": -58.47284, "y": -34.63593, "l": 2019}, {"a": "Pergamino al 300", "p": 99000, "m": 46, "u": 2152, "d": 2876, "z": "fsur", "x": -58.47284, "y": -34.63593, "l": 2152}, {"a": "Av. Asamblea al 1100", "p": 139000, "m": 75, "u": 1853, "d": 794, "z": "pch", "x": -58.44017, "y": -34.6356, "l": 1853}, {"a": "Asamblea al 1600", "p": 94000, "m": 34, "u": 2765, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2765}, {"a": "AV. Directorio al 2900", "p": 75000, "m": 37, "u": 2027, "d": 2406, "z": "fsur", "x": -58.46735, "y": -34.63556, "l": 2027}, {"a": "Senillosa al 1900", "p": 49000, "m": 28, "u": 1750, "d": 1635, "z": "pch", "x": -58.42544, "y": -34.63822, "l": 1750}, {"a": "Av. José María Moreno al 1700", "p": 43000, "m": 25, "u": 1720, "d": 1097, "z": "pch", "x": -58.43183, "y": -34.63802, "l": 1720}, {"a": "Av Asamblea al 1600", "p": 94000, "m": 36, "u": 2611, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2611}, {"a": "Av Directorio 3100", "p": 90000, "m": 43, "u": 2093, "d": 2615, "z": "fsur", "x": -58.47003, "y": -34.63636, "l": 2093}, {"a": "Portela 400", "p": 104000, "m": 53, "u": 1962, "d": 2721, "z": "fsur", "x": -58.47129, "y": -34.63655, "l": 1962}, {"a": "Portela 400", "p": 94000, "m": 48, "u": 1958, "d": 2721, "z": "fsur", "x": -58.47129, "y": -34.63655, "l": 1958}, {"a": "Asamblea 1200", "p": 550000, "m": 201, "u": 2736, "d": 733, "z": "pch", "x": -58.44173, "y": -34.63592, "l": 2736}, {"a": "Asamblea al 1900", "p": 138000, "m": 56, "u": 2464, "d": 780, "z": "cerca", "x": -58.45026, "y": -34.63963, "l": 2464}, {"a": "Avenida Asamblea 1600", "p": 108000, "m": 50, "u": 2160, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2160}, {"a": "Emilio Mitre 1355", "p": 260000, "m": 103, "u": 2524, "d": 825, "z": "pch", "x": -58.43872, "y": -34.63574, "l": 2524}, {"a": "Zañartu 1100", "p": 95000, "m": 51, "u": 1863, "d": 986, "z": "cerca", "x": -58.43234, "y": -34.63958, "l": 1863}, {"a": "Zañartu 1100", "p": 86000, "m": 38, "u": 2263, "d": 986, "z": "cerca", "x": -58.43234, "y": -34.63958, "l": 2263}, {"a": "Portela 400", "p": 142000, "m": 77, "u": 1844, "d": 2721, "z": "fsur", "x": -58.47129, "y": -34.63655, "l": 1844}, {"a": "Asamblea al 1600", "p": 130000, "m": 60, "u": 2167, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2167}, {"a": "Asamblea al 1600", "p": 99000, "m": 40, "u": 2475, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2475}, {"a": "Castañón 1200", "p": 65000, "m": 35, "u": 1857, "d": 1554, "z": "fsur", "x": -58.45944, "y": -34.64231, "l": 1857}, {"a": "santander 1600", "p": 145000, "m": 74, "u": 1959, "d": 630, "z": "pch", "x": -58.44248, "y": -34.63681, "l": 1959}, {"a": "Asamblea al 1600", "p": 96000, "m": 40, "u": 2400, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2400}, {"a": "Asamblea al 1600", "p": 140000, "m": 60, "u": 2333, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2333}, {"a": "Asamblea al 1600", "p": 144000, "m": 60, "u": 2400, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2400}, {"a": "Asamblea al 1600", "p": 142000, "m": 60, "u": 2367, "d": 713, "z": "pch", "x": -58.4472, "y": -34.63738, "l": 2367}], "ter": [{"a": "Curapaligüe 1898", "p": 120000, "m": 301, "u": 399, "d": 0, "x": -58.4425, "y": -34.64249, "dias": 400, "pub": "más de 1 año"}, {"a": "Hortiguera 1766", "p": 110000, "m": 251, "u": 438, "d": 306, "x": -58.44011, "y": -34.64057, "dias": 327, "pub": "327 días"}, {"a": "Avenida Castañares al 1600", "p": 460000, "m": 608, "u": 757, "d": 371, "x": -58.44036, "y": -34.63965, "dias": 276, "pub": "276 días"}, {"a": "Saraza al 1500", "p": 90000, "m": 124, "u": 726, "d": 472, "x": -58.43881, "y": -34.63952, "dias": 251, "pub": "251 días"}, {"a": "Carabobo AV. al 1400", "p": 259000, "m": 478, "u": 542, "d": 489, "x": -58.44721, "y": -34.64043, "dias": 127, "pub": "127 días"}, {"a": "Saraza 1400", "p": 980000, "m": 1305, "u": 751, "d": 601, "x": -58.43734, "y": -34.63915, "dias": 4, "pub": "4 días"}, {"a": "Cachimayo 1836", "p": 260000, "m": 652, "u": 399, "d": 702, "x": -58.43528, "y": -34.64037, "dias": 313, "pub": "313 días"}, {"a": "Av Cobo al 1400", "p": 480000, "m": 770, "u": 623, "d": 729, "x": -58.43455, "y": -34.64225, "dias": 49, "pub": "49 días"}, {"a": "Picheuta al 1800", "p": 180000, "m": 323, "u": 557, "d": 852, "x": -58.4339, "y": -34.63956, "dias": 400, "pub": "más de 1 año"}, {"a": "Zañartu al 1200", "p": 300000, "m": 380, "u": 789, "d": 854, "x": -58.43381, "y": -34.6397, "dias": 400, "pub": "más de 1 año"}], "cas": [{"a": "Curapaligüe al 1900", "p": 96000, "m": 100, "d": 8, "x": -58.44245, "y": -34.64255}, {"a": "Curapaligüe 1800", "p": 298000, "m": 485, "d": 120, "x": -58.44315, "y": -34.64155}, {"a": "Puán 2000", "p": 115000, "m": 174, "d": 204, "x": -58.44049, "y": -34.64328}, {"a": "Saraza 1700", "p": 750000, "m": 1394, "d": 266, "x": -58.44165, "y": -34.6402}, {"a": "Zelarrayán 1700", "p": 145000, "m": 285, "d": 279, "x": -58.43948, "y": -34.64212}, {"a": "Puán 1650", "p": 249000, "m": 358, "d": 312, "x": -58.44182, "y": -34.63974}, {"a": "Balbastro al 2000", "p": 185000, "m": 450, "d": 337, "x": -58.44519, "y": -34.64042}, {"a": "LAUTARO 1596", "p": 99000, "m": 112, "d": 345, "x": -58.44624, "y": -34.64275}, {"a": "Avenida Castañares al 1600", "p": 460000, "m": 608, "d": 371, "x": -58.44036, "y": -34.63965}, {"a": "Hortiguera 1700", "p": 110000, "m": 251, "d": 373, "x": -58.44047, "y": -34.63957}, {"a": "Pasaje Valencia 2090", "p": 250000, "m": 360, "d": 423, "x": -58.43825, "y": -34.64399}, {"a": "Avelino Díaz 2000", "p": 189000, "m": 300, "d": 459, "x": -58.44616, "y": -34.63968}, {"a": "Avelino Díaz 2000", "p": 289000, "m": 500, "d": 459, "x": -58.44616, "y": -34.63968}, {"a": "Avelino Díaz 2002", "p": 170000, "m": 132, "d": 459, "x": -58.44634, "y": -34.63984}, {"a": "Avelino Díaz 2022", "p": 189000, "m": 300, "d": 460, "x": -58.44646, "y": -34.63995}, {"a": "Saraza al 1500", "p": 90000, "m": 124, "d": 472, "x": -58.43881, "y": -34.63952}, {"a": "Avelino Diaz al 1900", "p": 230000, "m": 366, "d": 475, "x": -58.44527, "y": -34.63887}, {"a": "Avelino Diaz al 1700", "p": 165000, "m": 213, "d": 477, "x": -58.44351, "y": -34.63828}, {"a": "Avelino Díaz 1700", "p": 240000, "m": 190, "d": 477, "x": -58.44351, "y": -34.63828}, {"a": "Miro 1500", "p": 220000, "m": 416, "d": 492, "x": -58.44361, "y": -34.63815}, {"a": "Balbastro 1519", "p": 199900, "m": 321, "d": 501, "x": -58.43965, "y": -34.63864}, {"a": "Avenida Castañares 1500", "p": 148000, "m": 140, "d": 526, "x": -58.4391, "y": -34.63867}, {"a": "Hortiguera al 1500", "p": 410000, "m": 481, "d": 551, "x": -58.44117, "y": -34.63765}, {"a": "Santander al 2000", "p": 199000, "m": 300, "d": 580, "x": -58.44711, "y": -34.63892}, {"a": "Avelino Díaz al 2300", "p": 172000, "m": 400, "d": 591, "x": -58.44893, "y": -34.64216}, {"a": "Bonorino al 1400", "p": 180000, "m": 315, "d": 606, "x": -58.44908, "y": -34.6421}, {"a": "Santander 2200", "p": 110000, "m": 115, "d": 631, "x": -58.44899, "y": -34.6406}, {"a": "Santander 2200", "p": 229000, "m": 295, "d": 631, "x": -58.44899, "y": -34.6406}, {"a": "Santander 1500", "p": 160000, "m": 119, "d": 659, "x": -58.44148, "y": -34.63661}, {"a": "Hortiguera al 1400", "p": 490000, "m": 270, "d": 672, "x": -58.44158, "y": -34.63648}, {"a": "Puán 1310", "p": 320000, "m": 125, "d": 684, "x": -58.4427, "y": -34.63632}, {"a": "Cachimayo al 1800", "p": 289000, "m": 322, "d": 711, "x": -58.43553, "y": -34.63969}, {"a": "Somellera 1635", "p": 98000, "m": 104, "d": 718, "x": -58.43477, "y": -34.64352}, {"a": "Zañartu 1300", "p": 189000, "m": 205, "d": 720, "x": -58.43534, "y": -34.63982}, {"a": "Thorne al 1200", "p": 170000, "m": 131, "d": 728, "x": -58.44734, "y": -34.6373}, {"a": "Avenida Cobo 1400", "p": 290000, "m": 508, "d": 729, "x": -58.43455, "y": -34.64225}, {"a": "Thorne 1184", "p": 240000, "m": 196, "d": 748, "x": -58.44745, "y": -34.63713}, {"a": "Pasaje Clemente Diez De Medina 1400", "p": 180000, "m": 365, "d": 750, "x": -58.43433, "y": -34.64285}, {"a": "Santander al 1352", "p": 245000, "m": 220, "d": 768, "x": -58.43917, "y": -34.63614}, {"a": "Thorne 1167", "p": 220000, "m": 147, "d": 770, "x": -58.44763, "y": -34.637}, {"a": "Santander 1316", "p": 329000, "m": 270, "d": 784, "x": -58.4389, "y": -34.63609}, {"a": "NEPPER 1297", "p": 330000, "m": 264, "d": 789, "x": -58.45109, "y": -34.64217}, {"a": "Pedernera al 1500", "p": 165000, "m": 329, "d": 836, "x": -58.4514, "y": -34.64409}, {"a": "Zuviria al 1900", "p": 990000, "m": 1700, "d": 849, "x": -58.448, "y": -34.63634}, {"a": "Davila al 1100", "p": 380000, "m": 521, "d": 853, "x": -58.449, "y": -34.637}, {"a": "Dávila 1100", "p": 269900, "m": 233, "d": 853, "x": -58.449, "y": -34.637}, {"a": "Picheuta al 2000", "p": 160000, "m": 230, "d": 865, "x": -58.4331, "y": -34.64179}, {"a": "Saraza al 1200", "p": 165000, "m": 227, "d": 879, "x": -58.43427, "y": -34.63841}, {"a": "Fabre 1200", "p": 167000, "m": 154, "d": 895, "x": -58.4522, "y": -34.64157}, {"a": "Lautaro 1100", "p": 239000, "m": 242, "d": 905, "x": -58.45135, "y": -34.63889}, {"a": "Avenida Riestra 1700", "p": 345000, "m": 710, "d": 909, "x": -58.43334, "y": -34.64562}, {"a": "ZUVIRIA 2300", "p": 95000, "m": 180, "d": 940, "x": -58.45219, "y": -34.63975}, {"a": "Evaristo Carriego 1183", "p": 120000, "m": 138, "d": 961, "x": -58.45297, "y": -34.6422}, {"a": "Pedernera 1300", "p": 169900, "m": 285, "d": 969, "x": -58.45305, "y": -34.64278}, {"a": "Salvigny al 1500", "p": 115000, "m": 166, "d": 976, "x": -58.43206, "y": -34.64422}, {"a": "Del Barco Centenera 1794", "p": 118000, "m": 99, "d": 985, "x": -58.43245, "y": -34.63934}, {"a": "Zañartu al 1100", "p": 295000, "m": 338, "d": 986, "x": -58.43234, "y": -34.63958}, {"a": "Evaristo Carriego 1141", "p": 149900, "m": 105, "d": 1005, "x": -58.45342, "y": -34.6418}, {"a": "Robertson al 1100", "p": 120000, "m": 138, "d": 1032, "x": -58.45355, "y": -34.64075}, {"a": "Avenida Eva Perón 2200", "p": 220000, "m": 224, "d": 1033, "x": -58.45241, "y": -34.63807}, {"a": "Picheuta 1331", "p": 260000, "m": 326, "d": 1046, "x": -58.43568, "y": -34.63493}, {"a": "Zelarrayan al 1100", "p": 290000, "m": 229, "d": 1053, "x": -58.43127, "y": -34.64049}, {"a": "Avenida José María Moreno 1773", "p": 360000, "m": 430, "d": 1055, "x": -58.43177, "y": -34.63904}, {"a": "Salvigny 1432", "p": 148000, "m": 280, "d": 1070, "x": -58.43098, "y": -34.64404}, {"a": "Del Progreso al 1200", "p": 225000, "m": 152, "d": 1081, "x": -58.43797, "y": -34.63349}, {"a": "Del Progreso 1200", "p": 189000, "m": 127, "d": 1081, "x": -58.43797, "y": -34.63349}, {"a": "Manuel Eguía al 1100", "p": 139000, "m": 120, "d": 1084, "x": -58.45424, "y": -34.64136}, {"a": "Manuel Eguía 1100", "p": 120000, "m": 130, "d": 1084, "x": -58.45424, "y": -34.64136}, {"a": "Peron Eva Av. al 2300", "p": 288000, "m": 236, "d": 1096, "x": -58.45352, "y": -34.63868}, {"a": "Perrault 1209", "p": 182000, "m": 240, "d": 1099, "x": -58.45447, "y": -34.64205}, {"a": "Del Comercio 1200", "p": 320000, "m": 206, "d": 1104, "x": -58.43772, "y": -34.63336}, {"a": "Del Comercio 1200", "p": 230000, "m": 210, "d": 1104, "x": -58.43772, "y": -34.63336}, {"a": "Avenida Coronel Esteban Bonorino 1000", "p": 240000, "m": 2133, "d": 1113, "x": -58.4537, "y": -34.63863}, {"a": "Beauchef 2000", "p": 370000, "m": 400, "d": 1166, "x": -58.4301, "y": -34.64014}, {"a": "Zelarrayan al 1000", "p": 189000, "m": 250, "d": 1170, "x": -58.43002, "y": -34.64027}, {"a": "Del Comercio al 1100", "p": 295000, "m": 212, "d": 1170, "x": -58.43838, "y": -34.63252}, {"a": "Rivera Indarte al 1000", "p": 275000, "m": 200, "d": 1178, "x": -58.45496, "y": -34.63991}, {"a": "Avelino Díaz 900", "p": 180000, "m": 120, "d": 1180, "x": -58.43219, "y": -34.63612}, {"a": "Del Barco Centenera 1200", "p": 430000, "m": 380, "d": 1180, "x": -58.43671, "y": -34.63299}, {"a": "Baldomero Fernandez Moreno al 1300", "p": 339000, "m": 242, "d": 1182, "x": -58.44497, "y": -34.63204}, {"a": "Primera Junta al 2000", "p": 210000, "m": 263, "d": 1188, "x": -58.4523, "y": -34.63548}, {"a": "DE LAS ARTES 1000", "p": 215000, "m": 143, "d": 1190, "x": -58.43996, "y": -34.63197}, {"a": "VARELA 1200", "p": 256000, "m": 530, "d": 1201, "x": -58.45559, "y": -34.64218}, {"a": "Av Varela al 1200", "p": 250000, "m": 270, "d": 1201, "x": -58.45559, "y": -34.64218}, {"a": "Lautaro al 900", "p": 186000, "m": 212, "d": 1205, "x": -58.45337, "y": -34.63641}, {"a": "Lautaro 900", "p": 186000, "m": 295, "d": 1205, "x": -58.45337, "y": -34.63641}, {"a": "LANZA 2300", "p": 320000, "m": 232, "d": 1216, "x": -58.42931, "y": -34.64361}, {"a": "Avenida Eva Perón 2500", "p": 179000, "m": 146, "d": 1223, "x": -58.45562, "y": -34.64049}, {"a": "Juan José Naón 916", "p": 180000, "m": 107, "d": 1255, "x": -58.45518, "y": -34.63824}, {"a": "Balbastro al 900", "p": 220000, "m": 163, "d": 1258, "x": -58.43068, "y": -34.63674}, {"a": "COBO AV. 911", "p": 180000, "m": 256, "d": 1259, "x": -58.42888, "y": -34.64104}, {"a": "Manuel Eguia 965", "p": 164000, "m": 155, "d": 1261, "x": -58.4559, "y": -34.63997}, {"a": "La Trilla al 2300", "p": 179000, "m": 215, "d": 1276, "x": -58.42864, "y": -34.6435}, {"a": "Avenida Riestra 1400", "p": 130000, "m": 241, "d": 1283, "x": -58.42886, "y": -34.64508}, {"a": "Albarracin 1982", "p": 249500, "m": 170, "d": 1289, "x": -58.42884, "y": -34.63972}, {"a": "Zelarrayan al 900", "p": 137000, "m": 169, "d": 1293, "x": -58.42871, "y": -34.64004}, {"a": "De la Industria al 1000", "p": 190000, "m": 135, "d": 1294, "x": -58.43863, "y": -34.63128}, {"a": "De La Industria al 1000", "p": 260000, "m": 142, "d": 1294, "x": -58.43863, "y": -34.63128}, {"a": "De la Industria al 1000", "p": 220000, "m": 230, "d": 1294, "x": -58.43863, "y": -34.63128}, {"a": "Achaval 600", "p": 290000, "m": 170, "d": 1300, "x": -58.44752, "y": -34.63154}], "gal": [{"a": "Av. Curapaligüe 1800", "p": 298000, "c": "USD", "m": 485, "op": "venta", "x": -58.44315, "y": -34.64155}, {"a": "Avenida Cobo 1800", "p": 300000, "c": "USD", "m": 823, "op": "venta", "x": -58.44037, "y": -34.64342}, {"a": "hortiguera 1861", "p": 520000, "c": "USD", "m": 494, "op": "venta", "x": -58.43989, "y": -34.64149}, {"a": "Pumacahua al 1500", "p": 69000, "c": "USD", "m": 230, "op": "venta", "x": -58.44535, "y": -34.64037}, {"a": "Avenida Curapaligüe 1428", "p": 3200000, "c": "$", "m": 500, "op": "alquiler", "x": -58.44483, "y": -34.63888}, {"a": "Zañartu 1461", "p": 4500000, "c": "$", "m": 600, "op": "alquiler", "x": -58.43791, "y": -34.64035}, {"a": "Avelino Díaz 2133", "p": 289000, "c": "USD", "m": 262, "op": "venta", "x": -58.44762, "y": -34.64088}, {"a": "Miró al 1400", "p": 3200000, "c": "$", "m": 280, "op": "alquiler", "x": -58.44389, "y": -34.63696}, {"a": "Miró al 1400", "p": 280000, "c": "USD", "m": 280, "op": "venta", "x": -58.44389, "y": -34.63696}, {"a": "Balbastro 2400", "p": 135000, "c": "USD", "m": 268, "op": "venta", "x": -58.44935, "y": -34.6441}, {"a": "Cachimayo al 1800", "p": 4150000, "c": "$", "m": 649, "op": "alquiler", "x": -58.43553, "y": -34.63969}, {"a": "Av Cobo al 1400", "p": 480000, "c": "USD", "m": 770, "op": "venta", "x": -58.43455, "y": -34.64225}, {"a": "Pasaje Clemente Diez De Medina 1400", "p": 180000, "c": "USD", "m": 365, "op": "venta", "x": -58.43433, "y": -34.64285}, {"a": "MOM al 2100", "p": 200000, "c": "USD", "m": 208, "op": "venta", "x": -58.43422, "y": -34.64334}, {"a": "Somellera al 1600", "p": 250000, "c": "USD", "m": 523, "op": "venta", "x": -58.43408, "y": -34.64344}, {"a": "Somellera al 1600", "p": 3500000, "c": "$", "m": 314, "op": "alquiler", "x": -58.43408, "y": -34.64344}, {"a": "Avenida Coronel Esteban Bonorino 1200", "p": 690000, "c": "USD", "m": 845, "op": "venta", "x": -58.45135, "y": -34.64044}, {"a": "Avenida Coronel Esteban Bonorino 1200", "p": 6000, "c": "USD", "m": 845, "op": "alquiler", "x": -58.45135, "y": -34.64044}, {"a": "Picheuta al 1900", "p": 1200000, "c": "$", "m": 90, "op": "alquiler", "x": -58.43348, "y": -34.64075}, {"a": "Av. Cobo al 1300", "p": 2800000, "c": "$", "m": 280, "op": "alquiler", "x": -58.433, "y": -34.64193}, {"a": "Somellera 1514", "p": 190000, "c": "USD", "m": 300, "op": "venta", "x": -58.43292, "y": -34.64318}, {"a": "Somellera al 1500", "p": 350000, "c": "USD", "m": 430, "op": "venta", "x": -58.43277, "y": -34.64314}], "scen": [{"n": "Desarrollador de edificio", "v": 0, "c": "#c0392b"}, {"n": "Recicla para vivir · USD 800/m²", "v": 60000.0, "c": "#1a7a4a"}, {"n": "Recicla para vivir · USD 100.000 (poco probable)", "v": 104000.0, "c": "#7fb89a"}, {"n": "Galpón para alquilar", "v": 9000.0, "c": "#898781"}, {"n": "Precio pedido hoy", "v": 120000, "c": "#c9a84c"}], "model": {"vend": 1289.9, "constr": 1594.3, "pl": 8436}};
+const fmt = n => Math.round(n).toLocaleString('es-AR');
+const gc='#ecebe5', tc='#52514e', tip={backgroundColor:'#fff',borderColor:'#e1e0d9',borderWidth:1,titleColor:'#0b0b0b',bodyColor:'#52514e',padding:10};
+Chart.defaults.font.family='Inter';
+
+// ---------- CALCULADORA ----------
+const M = DATA.model;
+function resid(P,c,r){ const F=M.vend*P, pozo=F*0.16, ventas=F*0.9, neto=ventas*0.97, obra=M.constr*c;
+  const T=((neto + r*pozo)/(1+r) - obra - M.pl)/1.07;
+  const inv = T*1.07 + obra + M.pl - pozo; const gan = neto - (T*1.07 + obra + M.pl);
+  return {T, ventas, gastosV:ventas-neto, obra, pl:M.pl, gan, compra:T*0.071}; }
+const ip=document.getElementById('ip'), ic=document.getElementById('ic'), ir=document.getElementById('ir');
+function upd(){
+  const P=+ip.value, c=+ic.value, r=+ir.value/100;
+  document.getElementById('lp').textContent='USD '+fmt(P)+'/m²';
+  document.getElementById('lc').textContent='USD '+fmt(c)+'/m²';
+  document.getElementById('lr').textContent=Math.round(r*100)+'%';
+  const x=resid(P,c,r);
+  const ov=document.getElementById('ov'), os=document.getElementById('os');
+  if(x.T<=0){ ov.textContent='No queda nada'; ov.style.color='#ff8a7a'; os.textContent='Con estos números el proyecto no cubre obra y ganancia: faltan USD '+fmt(-x.T*1.07)+'.'; }
+  else { ov.textContent='USD '+fmt(x.T); ov.style.color='#fff'; os.textContent='Incidencia USD '+fmt((x.T+M.pl)/M.vend)+'/m² vendible · '+fmt(M.vend)+' m² vendibles'; }
+  const rows=[['Ventas totales',x.ventas,'#6b9fff'],['Obra',x.obra,'#c9d3e0'],['Gastos y plusvalía',x.gastosV+x.pl+Math.max(x.compra,0),'#8a93a3'],['Ganancia buscada',Math.max(x.gan,0),'#c9a84c'],['Terreno',Math.max(x.T,0),x.T>0?'#22c55e':'#ff8a7a']];
+  const mx=x.ventas;
+  document.getElementById('casc').innerHTML=rows.map(([n,v,col])=>`<div class="casc-row"><span style="color:#c9d3e0">${n}</span><div style="background:#ffffff14;border-radius:4px"><div class="casc-bar" style="width:${Math.max(0.5,v/mx*100)}%;background:${col}"></div></div><span>USD ${fmt(v/1000)}k</span></div>`).join('');
+}
+[ip,ic,ir].forEach(e=>e.addEventListener('input',()=>{document.querySelectorAll('.presets button').forEach(b=>b.classList.remove('on'));upd();}));
+document.querySelectorAll('.presets button').forEach(b=>b.addEventListener('click',()=>{ip.value=b.dataset.p;ic.value=b.dataset.c;ir.value=b.dataset.r;document.querySelectorAll('.presets button').forEach(x=>x.classList.remove('on'));b.classList.add('on');upd();gtag('event','calc_preset',{preset:b.textContent});}));
+upd();
+
+// ---------- MAPA ----------
+try{
+  const map=L.map('map',{scrollWheelZoom:false}).setView(DATA.lote,15);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(map);
+  const add=(arr,col,lab)=>arr.forEach(o=>{ if(!o.x) return; L.circleMarker([o.y,o.x],{radius:6,color:'#fff',weight:1.5,fillColor:col,fillOpacity:.9}).addTo(map).bindPopup(`<b>${o.a}</b><br>${lab}: USD ${fmt(o.p)}${o.c==='$'?' (en $)':''} · ${fmt(o.m)} m²`); });
+  add(DATA.gal.filter(o=>o.c==='USD'),'#898781','Galpón'); add(DATA.cas,'#1a7a4a','Casa'); add(DATA.ter.filter(o=>o.d>0),'#c9a84c','Terreno'); add(DATA.dep,'#1a7aff','Depto a estrenar');
+  L.marker(DATA.lote).addTo(map).bindPopup('<b>Curapaligüe 1898</b><br>El lote').openPopup();
+}catch(e){ document.getElementById('map').style.display='none'; }
+
+// ---------- CHART DEPTOS ----------
+const zc={cerca:'#1a7aff',fsur:'#c9a84c',pch:'#b0afa8'}, zl={cerca:'Alrededores',fsur:'Flores Sur',pch:'Parque Chacabuco'};
+new Chart(document.getElementById('cDep'),{type:'scatter',data:{datasets:Object.keys(zc).map(z=>({label:zl[z],data:DATA.dep.filter(o=>o.z===z).map(o=>({x:o.d/1000,y:o.u,a:o.a})),backgroundColor:zc[z]+'cc',pointRadius:5}))},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:10,font:{size:10}}},tooltip:{...tip,callbacks:{label:c=>c.raw.a+' · USD '+fmt(c.raw.y)+'/m²'}}},scales:{x:{title:{display:true,text:'km al lote',font:{size:10}},ticks:{font:{size:9}},grid:{color:gc}},y:{ticks:{font:{size:9},callback:v=>fmt(v)},grid:{color:gc}}}}});
+
+// ---------- CHART TERRENOS ----------
+const T=[...DATA.ter].sort((a,b)=>a.u-b.u);
+new Chart(document.getElementById('cTer'),{type:'bar',data:{labels:T.map(o=>o.a.replace(/Avenida |Av\.? /,'Av. ').slice(0,18)),datasets:[{data:T.map(o=>o.u),backgroundColor:T.map(o=>o.d===0?'#1a7aff':(o.dias>240?'#c0392b66':'#c9a84c88')),borderColor:T.map(o=>o.d===0?'#1a7aff':(o.dias>240?'#c0392b':'#c9a84c')),borderWidth:1,borderRadius:4}]},
+ options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>{const o=T[c.dataIndex];return 'USD '+fmt(o.u)+'/m² · USD '+fmt(o.p)+' · '+o.pub;}}}},scales:{x:{ticks:{font:{size:9},callback:v=>fmt(v)},grid:{color:gc}},y:{ticks:{font:{size:9}},grid:{display:false}}}}});
+
+// ---------- CHART ESCENARIOS ----------
+const S=DATA.scen;
+new Chart(document.getElementById('cEsc'),{type:'bar',data:{labels:S.map(s=>s.n),datasets:[{data:S.map(s=>s.v),backgroundColor:S.map(s=>s.c+'66'),borderColor:S.map(s=>s.c),borderWidth:1.5,borderRadius:6,barThickness:24}]},
+ options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>'USD '+fmt(c.raw)}}},
+  scales:{x:{min:0,max:130000,ticks:{font:{size:9},callback:v=>'USD '+fmt(v/1000)+'k'},grid:{color:gc}},y:{ticks:{font:{size:10}},grid:{display:false}}}},
+ plugins:[{id:'lbl',afterDatasetsDraw(ch){const {ctx}=ch;const m=ch.getDatasetMeta(0);ctx.save();ctx.font='700 11px Inter,Arial';m.data.forEach((b,i)=>{ctx.fillStyle=S[i].c;ctx.fillText(S[i].v?('USD '+fmt(S[i].v)):'USD 0 · no cierra',b.x+6,b.y+4);});ctx.restore();}}]});
+
+// ---------- NAV ACTIVA ----------
+const links=[...document.querySelectorAll('.nav a')];
+const obs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id)); }}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+</script>
+</body>
+</html>
