@@ -1,0 +1,692 @@
+<title>Prefactibilidad San Mauro 540</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MC47CJF0VL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MC47CJF0VL', { 'anonymize_ip': true });
+  gtag('event', 'page_view', { 'informe': 'prefactibilidad-san-mauro-540' });
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+/* Estética de las prefactibilidades deinmobiliarios (plantilla Curapaligüe 1898): un solo tema claro, fondo hueso, azul noche y dorado. */
+:root{--bg:#f5f4f0;--paper:#fff;--ink:#0b0b0b;--muted:#52514e;--soft:#898781;--line:#e1e0d9;--navy:#0d1b2e;--blue:#1a7aff;--gold:#c9a84c;--red:#c0392b;--green:#1a7a4a;color-scheme:light}
+/* Leaflet (estilos mínimos inline) */
+.leaflet-pane,.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow,.leaflet-tile-container,.leaflet-pane>svg,.leaflet-pane>canvas,.leaflet-zoom-box,.leaflet-image-layer,.leaflet-layer{position:absolute;left:0;top:0}
+.leaflet-container{overflow:hidden;background:#dde3e8;outline:0;font-family:inherit}
+.leaflet-tile,.leaflet-marker-icon,.leaflet-marker-shadow{user-select:none;-webkit-user-drag:none}
+.leaflet-tile{filter:inherit;visibility:hidden}.leaflet-tile-loaded{visibility:inherit}
+.leaflet-container img.leaflet-tile{max-width:none!important;max-height:none!important;width:256px;height:256px}
+.leaflet-pane{z-index:400}.leaflet-tile-pane{z-index:200}.leaflet-overlay-pane{z-index:400}.leaflet-marker-pane{z-index:600}.leaflet-popup-pane{z-index:700}
+.leaflet-pane>svg path,.leaflet-interactive{cursor:pointer}
+.leaflet-control-container .leaflet-top,.leaflet-control-container .leaflet-bottom{position:absolute;z-index:800;pointer-events:none}
+.leaflet-top{top:0}.leaflet-bottom{bottom:0}.leaflet-left{left:0}.leaflet-right{right:0}
+.leaflet-control{position:relative;z-index:800;pointer-events:auto;float:left;clear:both}
+.leaflet-top .leaflet-control{margin-top:10px}.leaflet-left .leaflet-control{margin-left:10px}.leaflet-right .leaflet-control{float:right;margin-right:10px}.leaflet-bottom .leaflet-control{margin-bottom:0}
+.leaflet-bar{box-shadow:0 1px 5px rgba(0,0,0,.25);border-radius:4px}
+.leaflet-bar a{background:#fff;border-bottom:1px solid #ccc;width:28px;height:28px;line-height:28px;display:block;text-align:center;text-decoration:none;color:#000;font-size:18px}
+.leaflet-bar a:last-child{border-bottom:none}
+.leaflet-control-attribution{background:rgba(255,255,255,.8);margin:0;padding:0 5px;font-size:10px;color:#333}
+.leaflet-popup{position:absolute;text-align:center;margin-bottom:20px}
+.leaflet-popup-content-wrapper{padding:1px;text-align:left;border-radius:10px;background:#fff;box-shadow:0 3px 14px rgba(0,0,0,.25)}
+.leaflet-popup-content{margin:10px 14px;line-height:1.4;font-size:12px}
+.leaflet-popup-tip-container{width:40px;height:20px;position:absolute;left:50%;margin-top:-1px;margin-left:-20px;overflow:hidden;pointer-events:none}
+.leaflet-popup-tip{width:17px;height:17px;padding:1px;margin:-10px auto 0;transform:rotate(45deg);background:#fff}
+.leaflet-popup-close-button{position:absolute;top:0;right:0;border:none;text-align:center;width:24px;height:24px;font:16px/24px Tahoma,Verdana,sans-serif;color:#757575;text-decoration:none;background:transparent}
+.leaflet-marker-icon{display:block}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:13px;line-height:1.6;-webkit-text-size-adjust:100%}
+a{color:var(--blue)}
+a:focus-visible,button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.header{background:var(--navy);color:#fff;padding-top:40px;padding-bottom:36px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:12px;font-weight:500}
+.header h1{font-size:32px;font-weight:300;color:#f0f1f3;line-height:1.15;margin-bottom:6px;text-wrap:balance}
+.header h1 strong{font-weight:700;color:#fff}
+.header-sub{font-size:12px;color:#8a94a3}
+.header-right{text-align:right;font-size:12px;color:#8a94a3;line-height:1.9;flex-shrink:0}
+.header-right strong{display:block;color:#f0f1f3;font-size:13px;font-weight:600}
+.header-right .handle{font-size:10px;color:var(--gold);letter-spacing:.5px;text-decoration:none}
+.nav{position:sticky;top:0;z-index:50;background:#0d1b2eee;backdrop-filter:blur(6px);display:flex;gap:4px;overflow-x:auto;padding-top:8px;padding-bottom:8px;scrollbar-width:none}
+.nav::-webkit-scrollbar{display:none}
+.nav a{color:#c9d3e0;text-decoration:none;font-size:11px;font-weight:500;white-space:nowrap;padding:5px 11px;border-radius:14px}
+.nav a:hover,.nav a.on{background:#1a7aff33;color:#fff}
+.section{padding-top:40px;padding-bottom:40px;border-bottom:1px solid var(--line);scroll-margin-top:44px}
+.section-blanca{background:var(--paper)}
+.sec-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:24px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:var(--blue);background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:2px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:22px;font-weight:300;color:var(--ink);line-height:1.2;text-wrap:balance}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:var(--muted);margin-top:5px;line-height:1.6}
+.lead{font-size:14px;line-height:1.75;color:#2b2b28;margin-bottom:14px;max-width:74ch}
+.firma{margin-top:18px;font-size:12.5px;color:#1F4E79;font-weight:600}
+.sublabel{font-size:11px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin:26px 0 10px}
+.tiles{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.tile{background:var(--paper);border:.5px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+.tile-top{background:var(--navy);color:#fff;font-weight:900;font-size:22px;letter-spacing:1px;padding:14px 16px 12px}
+.tile-top small{display:block;font-size:9px;font-weight:600;letter-spacing:1.5px;color:#6b9fff;margin-top:2px}
+.tile-body{padding:14px 16px;flex:1}
+.tile-val{font-size:20px;font-weight:700;color:var(--blue);line-height:1.2}
+.tile-sub{font-size:10.5px;color:var(--muted);margin-top:6px;line-height:1.45}
+.tile.gold .tile-top{background:var(--gold)}.tile.gold .tile-top small{color:#fff}
+.tile.gold .tile-val{color:var(--ink)}
+.mercado-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:18px}
+.mstat{background:var(--paper);border:.5px solid var(--line);border-radius:10px;padding:16px 20px;flex:1;min-width:150px}
+.mstat-num{font-size:24px;font-weight:700;color:var(--ink);margin-bottom:2px;font-variant-numeric:tabular-nums}
+.mstat-label{font-size:10px;color:var(--soft);text-transform:uppercase;letter-spacing:.8px}
+.mstat-sub{font-size:10.5px;color:#9a998f;margin-top:3px}
+.mstat-hl .mstat-num{color:var(--blue)}
+.lote-grid{display:grid;grid-template-columns:1.1fr 1fr;gap:24px;align-items:start}
+.ficha{background:var(--paper);border:.5px solid var(--line);border-radius:12px;padding:18px 20px}
+.ficha-h{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--blue);margin-bottom:10px;padding-bottom:8px;border-bottom:.5px solid var(--line)}
+.row{display:flex;justify-content:space-between;gap:12px;padding:7px 0;border-bottom:.5px solid #f0efea;font-size:12px}
+.row:last-child{border-bottom:none}
+.row span:first-child{color:var(--muted)}
+.row span:last-child{font-weight:600;text-align:right}
+.sv{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;background:var(--navy);color:#fff;border-radius:12px;padding:14px 18px;text-decoration:none}
+.sv span{font-size:12px;color:#c9d3e0}.sv b{font-size:13px;color:#fff}
+.caption{font-size:10.5px;color:var(--soft);margin-top:6px;font-style:italic}
+#map{height:360px;border-radius:12px;border:.5px solid var(--line);z-index:1;position:relative}
+.lote-grid>*,.build-grid>*,.calc>*,.charts-grid>*,.esc-grid>*,.chk-wrap>*{min-width:0}
+.paths{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center}
+.paths-o{font-size:18px;font-weight:700;color:var(--soft);text-align:center}
+.chk-wrap{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.chk{display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:.5px solid var(--line);border-radius:10px;padding:12px 14px}
+.chk-i{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:12px;flex-shrink:0}
+.ok{color:var(--green);background:#edf7f1}.no{color:var(--soft);background:#f3f2ee}.inf{color:var(--blue);background:#eef4ff}.warn{color:#b8860b;background:#fff6dc}
+.chk-b{flex:1;min-width:0}
+.chk-t{font-size:12.5px;font-weight:600}
+.chk-d{font-size:11.5px;color:var(--muted);line-height:1.5}
+.chk-r{font-size:9.5px;color:#9a998f;white-space:nowrap;margin-top:3px}
+.build-grid{display:grid;grid-template-columns:1fr 1.25fr;gap:24px;align-items:start}
+.svg-card{background:var(--paper);border:.5px solid var(--line);border-radius:12px;padding:16px}
+.table-wrap{border-radius:10px;border:.5px solid var(--line);overflow-x:auto;background:var(--paper)}
+table{width:100%;border-collapse:collapse;font-size:12px;font-variant-numeric:tabular-nums}
+thead th{background:#f5f4f0;color:var(--muted);font-size:10px;font-weight:500;text-transform:uppercase;letter-spacing:.7px;padding:9px 11px;border-bottom:.5px solid var(--line);text-align:left;white-space:nowrap}
+tbody td{padding:9px 11px;border-bottom:.5px solid #f0efea;white-space:nowrap}
+tbody tr:last-child td{border-bottom:none}
+tfoot td{padding:10px 11px;font-weight:700;background:#f9f8f5;border-top:.5px solid var(--line);white-space:nowrap}
+td.wrap{white-space:normal;min-width:240px}
+.r{text-align:right}
+tr.hl td{background:#eef4ff}
+.pill-me{font-size:9px;font-weight:700;background:var(--blue);color:#fff;padding:1px 7px;border-radius:8px;margin-left:6px;letter-spacing:.3px}
+.note-box{background:#fff8e1;border:.5px solid #f0c040;border-radius:8px;padding:13px 16px;font-size:12px;color:var(--muted);line-height:1.65;margin-top:14px}
+.note-box strong{color:#7d5a00}
+.info-box{background:#f9f8f5;border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 16px;font-size:12px;color:var(--muted);line-height:1.65;margin-top:14px}
+.info-box strong{color:var(--ink)}
+.calc{display:grid;grid-template-columns:1fr 1.2fr;gap:24px;align-items:start}
+.ctrl{background:var(--paper);border:.5px solid var(--line);border-radius:12px;padding:18px 20px}
+.ctrl-row{margin-bottom:16px}
+.ctrl-row:last-child{margin-bottom:0}
+.ctrl-lab{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--muted);margin-bottom:6px}
+.ctrl-lab b{color:var(--ink);font-size:13px;white-space:nowrap}
+input[type=range]{width:100%;accent-color:var(--blue);height:28px}
+.presets{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px}
+.presets button{font-family:inherit;font-size:11px;font-weight:600;padding:7px 12px;border-radius:16px;border:1px solid #1a7aff55;background:var(--paper);color:var(--blue);cursor:pointer}
+.presets button.on{background:var(--blue);color:#fff}
+.out{background:var(--navy);border-radius:12px;padding:18px 20px;color:#fff}
+.out-lab{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#6b9fff}
+.out-val{font-size:34px;font-weight:700;line-height:1.15;margin:4px 0;font-variant-numeric:tabular-nums}
+.out-sub{font-size:11.5px;color:#c9d3e0}
+.casc{margin-top:14px}
+.casc-row{display:grid;grid-template-columns:130px 1fr 92px;gap:8px;align-items:center;font-size:11.5px;margin-bottom:6px}
+.casc-bar{height:14px;border-radius:4px;background:var(--blue)}
+.casc-row span:last-child{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
+.esc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:18px}
+.esc{background:var(--paper);border:.5px solid var(--line);border-radius:12px;padding:16px;border-top:3px solid var(--blue)}
+.esc-t{font-size:12.5px;font-weight:700;margin-bottom:4px}
+.esc-v{font-size:17px;font-weight:700;margin:6px 0 4px}
+.esc-d{font-size:11px;color:var(--muted);line-height:1.5}
+.chart-card{background:var(--paper);border:.5px solid var(--line);border-radius:10px;padding:16px 18px}
+.chart-eyebrow{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--soft);margin-bottom:6px}
+.chart-title{font-size:12.5px;font-weight:600;color:var(--ink);margin-bottom:12px}
+.chart-wrap{position:relative;height:260px}
+.charts-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.precios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.precio-block{background:var(--paper);border:.5px solid var(--line);border-radius:10px;padding:16px 20px}
+.precio-block-label{font-size:10px;font-weight:600;letter-spacing:.8px;text-transform:uppercase;color:var(--soft);margin-bottom:8px}
+.precio-block-valor{font-size:22px;font-weight:700;color:var(--ink);margin-bottom:3px}
+.precio-block-m2{font-size:11px;color:var(--muted)}
+.precio-block.main{border:1.5px solid var(--blue);background:#f5f9ff}
+.precio-block.main .precio-block-valor{color:var(--blue)}
+.foda-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:14px}
+.foda-cell{border:.5px solid var(--line);border-radius:8px;padding:11px 13px}
+.foda-cell-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:.5px solid var(--line)}
+.foda-cell-f{background:#f0faf4}.foda-cell-f .foda-cell-label{color:var(--green)}
+.foda-cell-o{background:#f0f4ff}.foda-cell-o .foda-cell-label{color:var(--blue)}
+.foda-cell-d{background:#fffbf0}.foda-cell-d .foda-cell-label{color:#b8860b}
+.foda-cell-a{background:#fff0f0}.foda-cell-a .foda-cell-label{color:var(--red)}
+.foda-line{display:flex;gap:7px;align-items:baseline;margin-bottom:4px;font-size:11.5px;color:var(--muted)}
+.concl-line{display:flex;gap:12px;align-items:baseline;padding:10px 0;border-bottom:.5px solid var(--line);font-size:13px;color:var(--ink);line-height:1.55}
+.concl-line:last-child{border-bottom:none}
+details.legal{font-size:11px;color:var(--soft);line-height:1.6}
+details.legal summary{cursor:pointer;font-weight:600;color:var(--muted);margin-bottom:8px}
+details>summary{cursor:pointer;font-size:12px;font-weight:600;color:var(--blue)}
+.links-pie{background:var(--paper);padding-top:40px;padding-bottom:40px;text-align:center;border-bottom:1px solid var(--line)}
+.links-pie-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--soft);margin-bottom:20px}
+.links-pie-row{display:flex;gap:16px;justify-content:center;flex-wrap:wrap}
+.links-pie-row a{display:inline-flex;align-items:center;gap:8px;font-size:13px;font-weight:600;padding:14px 26px;border-radius:8px;text-decoration:none}
+.links-pie-row a.primary{background:var(--navy);color:#fff}
+.links-pie-row a.secondary{background:var(--paper);color:var(--navy);border:1.5px solid var(--navy)}
+.footer{background:var(--navy);color:#8a94a3;padding-top:24px;padding-bottom:24px;font-size:11px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px}
+.footer strong{color:#f0f1f3}
+.footer a{color:var(--gold);text-decoration:none}
+.header,.nav,.section,.links-pie,.footer{padding-left:max(56px,calc((100% - 1180px)/2));padding-right:max(56px,calc((100% - 1180px)/2))}
+@media(max-width:980px){.tiles{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:720px){
+  body{font-size:13.5px}
+  .header,.section,.links-pie,.footer,.nav{padding-left:18px;padding-right:18px}
+  .header{flex-direction:column;align-items:flex-start;gap:14px;padding-top:30px}
+  .header h1{font-size:27px}
+  .header-right{text-align:left}
+  .sec-titulo{font-size:19px}
+  .tiles{grid-template-columns:1fr 1fr}
+  .tiles .tile:last-child{grid-column:1/-1}
+  .lote-grid,.build-grid,.calc,.chk-wrap,.charts-grid,.foda-grid,.esc-grid,.precios-grid,.paths{grid-template-columns:1fr}
+  .casc-row{grid-template-columns:100px 1fr 84px}
+  .chk-r{display:none}
+  .out-val{font-size:28px}
+  #map{height:280px}
+}
+.steps{list-style:none;counter-reset:st;display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.steps li{counter-increment:st;display:flex;gap:12px;align-items:flex-start;background:var(--paper);border:.5px solid var(--line);border-radius:10px;padding:14px 16px;min-width:0}
+.steps li::before{content:counter(st);width:24px;height:24px;border-radius:50%;background:var(--navy);color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.steps b{display:block;font-size:12.5px;margin-bottom:2px}.steps span{font-size:11.5px;color:var(--muted);line-height:1.5}
+.cta{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:var(--navy);color:#fff;font-weight:600;font-size:13px;padding:12px 22px;border-radius:8px;text-decoration:none}
+@media(max-width:720px){.steps{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Prefactibilidad y valor del lote · Quilmes Oeste · Provincia de Buenos Aires</div>
+    <h1><strong>San Mauro Castelverde 540</strong><br>entre Bernardo de Irigoyen y Manuel Quintana</h1>
+    <div class="header-sub">Circ. I · Secc. T · Mz. 62 · Parc. 11 · Partida 086-012695 · 848 m² · Zona R3 · Octubre 2026</div>
+  </div>
+  <div class="header-right">
+    <strong>Matías Leiblich</strong>
+    Ingenieros Inmobiliarios<br>
+    deinmobiliarios.com<br>
+    <a href="https://wa.me/5491161737552" target="_blank" class="handle">11-6173-7552</a>
+  </div>
+</header>
+
+<nav class="nav" id="nav">
+  <a href="#s01">Resumen</a><a href="#s02">El lote</a><a href="#s03">Normativa</a><a href="#s04">Qué se construye</a><a href="#s05">Cálculo del desarrollador</a><a href="#s06">Mercado</a><a href="#s07">Quién lo compra</a><a href="#s08">Valor</a><a href="#s09">Cómo vender</a>
+</nav>
+
+<section class="section section-blanca">
+  <p class="lead">Hola. Acá está el análisis del lote de San Mauro Castelverde 540. Busqué responder la pregunta que se hace cualquier comprador antes de ofertar: <strong>¿qué se puede hacer en este terreno y cuánto puede pagar por él quien lo haga?</strong></p>
+  <p class="lead">Revisé la Ordenanza de Zonificación de Quilmes con sus modificaciones (incluida la de 2025), la cartografía oficial de ARBA y el mercado de la zona: departamentos a estrenar, terrenos, casas y clubes de pádel. Analicé los tres compradores posibles que se plantearon: un desarrollador que construye un edificio, un proyecto de canchas de pádel y una familia que compra la casa y la recicla. El valor que propongo al final sale de lo que puede pagar el mejor de los tres.</p>
+  <div class="firma">Matías Leiblich · Ingeniero Civil (UBA)</div>
+</section>
+
+<section class="section" id="s01">
+  <div class="sec-header"><span class="sec-num">01</span><div><div class="sec-titulo"><strong>Resumen</strong> ejecutivo</div><div class="sec-desc">Lo esencial en cinco números</div></div></div>
+  <div class="tiles">
+    <div class="tile"><div class="tile-top">R3<small>ZONIFICACIÓN</small></div><div class="tile-body"><div class="tile-val">PB + 3 pisos</div><div class="tile-sub">FOS 0,6 · FOT 1,2 · con premios por ancho y retiro llega a 1,55</div></div></div>
+    <div class="tile"><div class="tile-top">EDIF.<small>EDIFICIO POSIBLE</small></div><div class="tile-body"><div class="tile-val">1.226 m²</div><div class="tile-sub">Vendibles estimados (1.443 m² cubiertos) · 20 unidades y 16 cocheras</div></div></div>
+    <div class="tile"><div class="tile-top">COMP.<small>MEJOR COMPRADOR</small></div><div class="tile-body"><div class="tile-val">Casa reciclada</div><div class="tile-sub">El edificio no cierra; el pádel llega a un valor parecido solo en el escenario optimista</div></div></div>
+    <div class="tile gold"><div class="tile-top">USD<small>VALOR DEL LOTE</small></div><div class="tile-body"><div class="tile-val">USD 110–120 mil</div><div class="tile-sub">Cierre estimado · publicación sugerida USD 129.000 · ≈ USD 136/m² de terreno</div></div></div>
+    <div class="tile"><div class="tile-top">HOY<small>PRECIO PUBLICADO</small></div><div class="tile-body"><div class="tile-val">USD 220.000</div><div class="tile-sub">USD 259/m² de terreno · publicado desde mayo de 2026 · ningún comprador analizado llega a ese valor</div></div></div>
+  </div>
+  <div class="info-box"><strong>En una frase:</strong> el lote es grande y está en una buena cuadra residencial, pero en esta zona los departamentos nuevos se venden por debajo de lo que cuesta construirlos, y la normativa R3 limita la altura a PB + 3 pisos. Por eso un desarrollador de edificios no puede pagar por el terreno. Un club de pádel, con dos canchas como máximo y mucha competencia cerca, paga entre USD 70.000 y 120.000 según la rentabilidad que se exija, con riesgo de habilitación. El comprador más firme es una familia que compra la casa y la recicla, y eso lleva a un valor de <strong>USD 110.000 a 120.000</strong>, a confirmar cuando se vea el estado real de la casa.</div>
+</section>
+
+<section class="section section-blanca" id="s02">
+  <div class="sec-header"><span class="sec-num">02</span><div><div class="sec-titulo"><strong>El lote</strong></div><div class="sec-desc">Geometría de la cartografía oficial de ARBA · manzana 62 dibujada a escala</div></div></div>
+  <div class="lote-grid">
+    <div>
+      <div class="svg-card"><svg viewBox="0 0 600 668" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:520px;display:block;margin:0 auto" font-family="Inter,Arial,sans-serif">
+<rect width="600" height="668" fill="#eef0f3" rx="10"/>
+<polygon points="529.9,62.0 540.0,72.1 537.7,210.3 537.0,255.4 536.3,299.9 535.5,349.1 534.8,394.4 534.0,438.6 533.2,486.3 532.4,540.3 531.4,598.2 521.2,608.1 446.1,608.1 379.9,608.1 331.2,608.1 240.2,608.1 189.9,608.1 142.3,608.1 100.5,608.1 78.3,608.1 60.0,589.4 60.5,537.9 60.9,485.3 61.8,393.9 62.2,347.5 62.6,298.5 63.0,253.3 63.4,207.4 63.8,159.4 64.7,70.4 74.2,60.0 108.3,60.2 153.2,60.4 225.3,60.7 297.0,61.0 342.8,61.2 388.4,61.4 461.8,61.7" fill="#fff" stroke="#b9bdc4" stroke-width="1.4"/>
+<polygon points="334.4,418.0 335.5,348.4 535.5,349.1 534.8,394.4 383.9,394.1 383.5,418.5 334.4,418.0" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="334.4,418.0 383.5,418.5 383.2,438.3 382.2,486.4 379.9,608.1 331.2,608.1 334.4,418.0" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="194.7,414.2 195.2,393.7 242.8,393.5 242.5,413.9 194.7,414.2" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="101.1,538.2 60.4,537.9 60.9,485.3 192.9,485.8 191.6,538.7 142.1,538.4 101.1,538.2" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="150.0,253.6 149.2,298.8 62.6,298.5 63.0,253.3 150.0,253.6" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="106.9,159.3 108.3,60.2 153.2,60.3 151.5,159.3 106.9,159.3" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="151.5,159.3 153.2,60.3 225.3,60.7 222.6,299.0 149.2,298.8 150.0,253.6 150.8,207.7 151.5,159.3" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="447.8,486.3 382.2,486.4 383.2,438.3 534.0,438.6 533.3,486.3 447.8,486.3" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="459.3,210.0 461.8,61.7 529.9,62.0 540.0,72.1 537.8,210.3 459.3,210.0" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="195.2,393.7 61.8,393.9 62.2,347.4 243.3,348.1 242.8,393.5 195.2,393.7" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="459.3,210.0 386.0,209.7 388.4,61.4 461.8,61.7 459.3,210.0" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="338.8,299.3 292.4,299.2 296.9,61.0 342.8,61.2 338.8,299.3" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="447.1,540.8 447.8,486.3 533.3,486.3 532.3,540.2 447.1,540.8" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="459.3,210.0 537.8,210.3 537.0,255.4 385.2,255.1 386.0,209.7 459.3,210.0" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="385.2,255.1 537.0,255.4 536.3,299.9 384.4,299.5 385.2,255.1" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="335.5,348.4 291.4,348.2 292.4,299.2 338.8,299.3 384.4,299.5 536.3,299.9 535.5,349.1 335.5,348.4" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="195.2,393.7 194.7,414.2 192.9,485.8 60.9,485.3 61.8,393.9 195.2,393.7" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="106.9,159.3 151.5,159.3 150.8,207.7 63.4,207.5 63.9,159.4 106.9,159.3" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="101.1,538.2 100.5,608.1 78.3,608.1 60.0,589.4 60.4,537.9 101.1,538.2" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="386.0,209.7 385.2,255.1 384.4,299.5 338.8,299.3 342.8,61.2 388.4,61.4 386.0,209.7" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="447.1,540.8 446.1,608.1 379.9,608.1 382.2,486.4 447.8,486.3 447.1,540.8" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="291.4,348.2 243.3,348.1 62.2,347.4 62.6,298.5 149.2,298.8 222.6,299.0 292.4,299.2 291.4,348.2" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="194.7,414.2 242.5,413.9 240.2,608.1 189.9,608.1 191.6,538.7 192.9,485.8 194.7,414.2" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="383.2,438.3 383.5,418.5 383.9,394.1 534.8,394.4 534.0,438.6 383.2,438.3" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="150.0,253.6 63.0,253.3 63.4,207.5 150.8,207.7 150.0,253.6" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="447.1,540.8 532.3,540.2 531.4,598.2 521.2,608.1 446.1,608.1 447.1,540.8" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="106.9,159.3 63.9,159.4 64.7,70.4 74.3,60.0 108.3,60.2 106.9,159.3" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="292.4,299.2 222.6,299.0 225.3,60.7 296.9,61.0 292.4,299.2" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="142.1,538.4 191.6,538.7 189.9,608.1 142.3,608.1 142.1,538.4" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="101.1,538.2 142.1,538.4 142.3,608.1 100.5,608.1 101.1,538.2" fill="#fff" stroke="#d3d6db" stroke-width="0.8"/>
+<polygon points="331.2,608.1 333.9,445.0 242.2,445.0 240.2,608.1" fill="#1a7aff22" stroke="none"/>
+<polygon points="242.8,393.5 243.3,348.1 291.4,348.2 335.5,348.4 334.4,418.0 331.2,608.1 240.2,608.1 242.5,413.9" fill="#1a7aff0f" stroke="#1a7aff" stroke-width="2.4" stroke-linejoin="round"/>
+<line x1="333.9" y1="445.0" x2="242.2" y2="445.0" stroke="#c0392b" stroke-dasharray="5 4" stroke-width="1.6"/>
+<text x="286.9" y="526.5" text-anchor="middle" font-size="13" font-weight="700" fill="#1a7aff">edificable</text>
+<text x="286.9" y="541.5" text-anchor="middle" font-size="10.5" fill="#1a7aff">primeros 30 m</text>
+<text x="288.7" y="400.6" text-anchor="middle" font-size="10.5" fill="#c0392b">patio de manzana</text>
+<text transform="translate(299.8,630.1) rotate(0.0)" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2e">SAN MAURO CASTELVERDE</text>
+<text transform="translate(40.4,329.7) rotate(-89.5)" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2e">MANUEL QUINTANA</text>
+<text transform="translate(557.7,335.5) rotate(-89.1)" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2e">BERNARDO DE IRIGOYEN</text>
+<text transform="translate(268.1,38.9) rotate(0.3)" text-anchor="middle" font-size="12" font-weight="700" fill="#0d1b2e">PRIMERO DE MAYO</text>
+<text x="285.7" y="600.1" text-anchor="middle" font-size="10.5" font-weight="600" fill="#0d1b2e">frente 17,32 m</text>
+<g transform="translate(566,34) rotate(-30.7)"><circle r="15" fill="#fff" stroke="#c9ccd2"/><path d="M0,-10 L5,6 L0,2 L-5,6 Z" fill="#0d1b2e"/></g><text x="566" y="62" text-anchor="middle" font-size="9" fill="#52514e">N</text>
+</svg></div>
+      <div class="caption">Croquis a escala a partir de la cartografía de ARBA. En azul, el lote; la línea roja marca hasta dónde se puede edificar (patio de manzana, sección 03).</div>
+    </div>
+    <div>
+      <div class="ficha">
+        <div class="ficha-h">Ficha de la parcela</div>
+        <div class="row"><span>Nomenclatura</span><span>Circ. I · Secc. T · Mz. 62 · Parc. 11</span></div>
+        <div class="row"><span>Partida</span><span>086-012695</span></div>
+        <div class="row"><span>Superficie según título</span><span>848 m²</span></div>
+        <div class="row"><span>Medidas</span><span>17,32 m de frente × 49,15 m de fondo</span></div>
+        <div class="row"><span>Forma</span><span>Rectangular, entre medianeras</span></div>
+        <div class="row"><span>Construido hoy</span><span>≈ 180 m² (el aviso informa 130 m²)</span></div>
+        <div class="row"><span>Parcela</span><span>Única · una sola partida</span></div>
+        <div class="row"><span>Ancho de calle</span><span>22 m</span></div>
+        <div class="row"><span>Linderos</span><span>Planta baja de ambos lados</span></div>
+        <div class="row"><span>Manzana</span><span>≈ 100 × 87 m · 8.750 m²</span></div>
+        <div class="row"><span>Zona</span><span>R3 · residencial de densidad media</span></div>
+      </div>
+      <a class="sv" href="https://www.google.com/maps/@?api=1&map_action=pano&viewpoint=-34.731538,-58.262758" target="_blank" rel="noopener"><span>Ver la cuadra en Google Street View</span><b>Abrir ↗</b></a>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="s03">
+  <div class="sec-header"><span class="sec-num">03</span><div><div class="sec-titulo"><strong>Qué dice la norma</strong> para este lote</div><div class="sec-desc">Ordenanza 4545/79 de Quilmes y sus modificatorias (4930/82, 10337/06, 11613/10, 12694/17 y 14323/25) · cada regla revisada contra la parcela</div></div></div>
+  <div class="chk-wrap">
+    <div class="chk"><span class="chk-i ok">✓</span><div class="chk-b"><div class="chk-t">Zona R3</div><div class="chk-d">Uso predominante vivienda · FOS 0,6 · FOT 1,2 · densidad neta 300 hab/ha. La rezonificación de 2025 no tocó este sector.</div><div class="chk-r">Art. 50 · Ord. 14323/25</div></div></div>
+    <div class="chk"><span class="chk-i ok">✓</span><div class="chk-b"><div class="chk-t">Altura máxima</div><div class="chk-d">Planta baja de hasta 4,50 m + 3 pisos. Sin retiro obligatorio de frente.</div><div class="chk-r">Ord. 11613/10</div></div></div>
+    <div class="chk"><span class="chk-i warn">!</span><div class="chk-b"><div class="chk-t">Patio de manzana</div><div class="chk-d">Los lados de la manzana paralelos al lote miden ≈ 96–101 m → se edifica hasta 30 m desde la línea municipal (32 m si la semisuma pasa los 100 m). Los últimos 19 m quedan libres.</div><div class="chk-r">Art. 9 · Ord. 4930/82</div></div></div>
+    <div class="chk"><span class="chk-i ok">✓</span><div class="chk-b"><div class="chk-t">FOS</div><div class="chk-d">Máximo 509 m² de planta. Entra dentro de los 30 m edificables (17,32 × 30 = 520 m²), así que la que limita es el FOS.</div><div class="chk-r">Art. 50</div></div></div>
+    <div class="chk"><span class="chk-i ok">✓</span><div class="chk-b"><div class="chk-t">Premio por ancho de parcela</div><div class="chk-d">17,32 m de frente: 7,32 m por encima de 10 m × 1,5% = <strong>+11,0%</strong> de FOT.</div><div class="chk-r">Art. 22 a</div></div></div>
+    <div class="chk"><span class="chk-i ok">✓</span><div class="chk-b"><div class="chk-t">Premio por separación de un eje lateral</div><div class="chk-d">Dejando 4 m libres sobre un costado: 4 × 2% = <strong>+8%</strong>. Esa franja sirve además de acceso vehicular al fondo.</div><div class="chk-r">Art. 22 b</div></div></div>
+    <div class="chk"><span class="chk-i ok">✓</span><div class="chk-b"><div class="chk-t">Premio por menor FOS</div><div class="chk-d">Ocupando menos del 80% del FOS máximo (planta de ≈ 360 m²): <strong>+10%</strong>.</div><div class="chk-r">Art. 22 d</div></div></div>
+    <div class="chk"><span class="chk-i inf">i</span><div class="chk-b"><div class="chk-t">FOT con premios</div><div class="chk-d">1,2 × (1 + 0,11 + 0,08 + 0,10) = <strong>1,548</strong> → 1.312 m² computables. Tope de premios: 70%.</div><div class="chk-r">Art. 22</div></div></div>
+    <div class="chk"><span class="chk-i inf">i</span><div class="chk-b"><div class="chk-t">Lo que no computa FOT</div><div class="chk-d">Circulaciones comunes, SUM, sala de máquinas en azotea y balcones de hasta el 50% de cada unidad.</div><div class="chk-r">Ord. 12694/17 · 14323/25</div></div></div>
+    <div class="chk"><span class="chk-i ok">✓</span><div class="chk-b"><div class="chk-t">Cocheras</div><div class="chk-d">3,5 m² por habitante: 56 habitantes → 16 cocheras. Entran descubiertas en el fondo libre (332 m²), con acceso por la franja lateral.</div><div class="chk-r">Art. 23 · Ord. 4930/82</div></div></div>
+    <div class="chk"><span class="chk-i warn">!</span><div class="chk-b"><div class="chk-t">Densidad neta</div><div class="chk-d">300 hab/ha × 848 m² = <strong>25 habitantes</strong>. El edificio que permite el FOT tendría 56. Si el Municipio controla la densidad, el edificio se reduce a la mitad.</div><div class="chk-r">Art. 50</div></div></div>
+    <div class="chk"><span class="chk-i no">–</span><div class="chk-b"><div class="chk-t">Plusvalía</div><div class="chk-d">Se aplica cuando cambia la norma (rezonificación o excepción). Un proyecto dentro de la R3 vigente no la genera.</div><div class="chk-r">Ord. 14254/24 · Ley 14.449</div></div></div>
+    <div class="chk"><span class="chk-i warn">!</span><div class="chk-b"><div class="chk-t">Canchas de pádel</div><div class="chk-d">La R3 no las lista como uso. Requiere factibilidad de uso del Municipio. Hay antecedentes de habilitación en Quilmes (Av. Vicente López 330).</div><div class="chk-r">Art. 50 · Dto. 2955/21</div></div></div>
+    <div class="chk"><span class="chk-i inf">i</span><div class="chk-b"><div class="chk-t">Subdivisión</div><div class="chk-d">Con 17,32 m de frente no se pueden hacer dos lotes reglamentarios.</div><div class="chk-r">Ley 8912</div></div></div>
+  </div>
+  <div class="info-box"><strong>Lo más importante:</strong> el lote es profundo (49 m), pero solo se puede construir en los primeros 30 m; el resto es patio de manzana. Con los premios, la norma permite unos 1.312 m² computables en planta baja y tres pisos. El punto débil es la densidad: si el Municipio la aplica, el edificio admite 25 habitantes, unas 6 o 7 unidades.</div>
+</section>
+
+<section class="section section-blanca" id="s04">
+  <div class="sec-header"><span class="sec-num">04</span><div><div class="sec-titulo"><strong>Qué se puede construir</strong></div><div class="sec-desc">Volumen máximo y superficie vendible estimada · sin proyecto de arquitectura</div></div></div>
+  <div class="build-grid">
+    <div class="svg-card">
+      <svg viewBox="0 -20 380 330" xmlns="http://www.w3.org/2000/svg" style="width:100%" font-family="Inter,Arial,sans-serif">
+        <line x1="10" y1="270" x2="370" y2="270" stroke="#52514e" stroke-width="1.5"/>
+        <g fill="#1a7aff" fill-opacity=".13" stroke="#1a7aff" stroke-width="1.2">
+          <rect x="30" y="200" width="182" height="70"/><rect x="30" y="148" width="182" height="52"/>
+          <rect x="30" y="96" width="182" height="52"/><rect x="30" y="44" width="182" height="52"/>
+        </g>
+        <rect x="150" y="24" width="40" height="20" fill="#f0efea" stroke="#b0afa8"/>
+        <text x="170" y="37" font-size="8" fill="#898781" text-anchor="middle">sala máq.</text>
+        <g font-size="10.5" fill="#0d1b2e" font-weight="600" text-anchor="middle">
+          <text x="121" y="240">Planta baja · 4 unidades</text><text x="121" y="178">Piso 1 · 5 unidades</text>
+          <text x="121" y="126">Piso 2 · 5 unidades</text><text x="121" y="74">Piso 3 · 5 unidades</text>
+        </g>
+        <rect x="218" y="258" width="150" height="12" fill="#c9a84c" fill-opacity=".25" stroke="#c9a84c"/>
+        <text x="293" y="252" font-size="9.5" fill="#7d5a00" text-anchor="middle">cocheras descubiertas</text>
+        <line x1="216" y1="20" x2="216" y2="270" stroke="#c0392b" stroke-dasharray="5 4" stroke-width="1.4"/>
+        <text x="220" y="30" font-size="9.5" fill="#c0392b">límite del patio de manzana</text>
+        <g font-size="9.5" fill="#52514e"><text x="2" y="203">+4,50</text><text x="2" y="47">+13,50</text></g>
+        <text x="30" y="288" font-size="9.5" fill="#898781">← San Mauro (frente)</text>
+        <text x="368" y="288" font-size="9.5" fill="#898781" text-anchor="end">fondo →</text>
+        <text x="121" y="303" font-size="9.5" fill="#898781" text-anchor="middle">edificio: 27 m de profundidad</text>
+        <text x="293" y="303" font-size="9.5" fill="#898781" text-anchor="middle">libre: 19 m</text>
+      </svg>
+      <div class="caption" style="text-align:center">Corte longitudinal esquemático: PB + 3 pisos de 13,3 m de ancho (4 m libres sobre un costado) y 27 m de profundidad.</div>
+    </div>
+    <div>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Nivel</th><th class="r">Cubierta</th><th class="r">Circulación</th><th class="r">Balcones</th><th class="r">Vendible</th></tr></thead>
+          <tbody>
+            <tr><td>Planta baja</td><td class="r">360,6 m²</td><td class="r">40 m²</td><td class="r">patios</td><td class="r">288,5 m²</td></tr>
+            <tr><td>Pisos 1 a 3 (c/u)</td><td class="r">360,6 m²</td><td class="r">30 m²</td><td class="r">30 m²</td><td class="r">297,5 m² + balcón</td></tr>
+          </tbody>
+          <tfoot><tr><td>Total</td><td class="r">1.443 m²</td><td class="r">130 m²</td><td class="r">90 m²</td><td class="r" style="color:#1a7aff">1.226 m²</td></tr></tfoot>
+        </table>
+      </div>
+      <div class="info-box"><strong>Cómo se calculó:</strong> a cada planta se le resta la circulación común (hall, escalera, ascensor) en m² fijos y un 10% de muros. Los balcones suman al 50%. La superficie a construir, contando balcones al 50% y sala de máquinas, es de 1.508 m². Mix supuesto: 12 dos ambientes y 8 tres ambientes (56 habitantes), con 16 cocheras descubiertas en el fondo.</div>
+      <div class="note-box"><strong>Si se controla la densidad:</strong> con 25 habitantes entran unas 6 o 7 unidades (≈ 450 m² vendibles). En ese caso el edificio deja de tener sentido y el análisis de la sección 05 queda todavía más lejos de cerrar.</div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="s05">
+  <div class="sec-header"><span class="sec-num">05</span><div><div class="sec-titulo"><strong>¿Cómo calcula un desarrollador</strong> cuánto pagar?</div><div class="sec-desc">El valor del terreno es lo que queda después de vender, pagar la obra y ganar lo mínimo que justifica el riesgo</div></div></div>
+  <div class="calc">
+    <div class="ctrl">
+      <div class="presets">
+        <button type="button" data-c="1600" data-p="1900" data-r="20" class="on">Zona · USD 1.900/m² · 20%</button>
+        <button type="button" data-c="1600" data-p="2200" data-r="20">Precios de Quilmes centro</button>
+        <button type="button" data-c="1600" data-p="1900" data-r="10">Ganancia de 10%</button>
+      </div>
+      <div class="ctrl-row"><div class="ctrl-lab"><label for="ip">Precio de venta de los departamentos</label><b id="lp"></b></div><input type="range" id="ip" min="1400" max="3000" step="25" value="1900"></div>
+      <div class="ctrl-row"><div class="ctrl-lab"><label for="ic">Costo de obra (todo incluido)</label><b id="lc"></b></div><input type="range" id="ic" min="800" max="1800" step="25" value="1600"></div>
+      <div class="ctrl-row"><div class="ctrl-lab"><label for="ir">Ganancia mínima buscada</label><b id="lr"></b></div><input type="range" id="ir" min="5" max="30" step="1" value="20"></div>
+      <div class="caption" style="margin-top:12px">Ventas: 20% en pozo al 80% del precio, 60% durante la obra al 90% y 20% terminado. 16 cocheras descubiertas a USD 7.000. Gastos de venta 3%, gastos de compra del terreno 7%. Demolición y obras exteriores: USD 30.000. Sin plusvalía.</div>
+    </div>
+    <div>
+      <div class="out">
+        <div class="out-lab">Lo que puede pagar por el terreno</div>
+        <div class="out-val" id="ov"></div>
+        <div class="out-sub" id="os"></div>
+        <div class="casc" id="casc"></div>
+      </div>
+    </div>
+  </div>
+  <div class="sublabel">¿Qué tendría que pasar para que un desarrollador pague USD 220.000?</div>
+  <div style="font-size:12px;color:#52514e;margin-bottom:12px">Alcanza con que se cumpla <strong>una</strong> de estas dos condiciones (en ambos casos, con una ganancia de 20%):</div>
+  <div class="paths">
+    <div class="mstat"><div class="mstat-label">Camino 1 · construir más barato</div><div class="mstat-num" style="color:#c0392b">USD 1.045/m²</div><div class="mstat-sub">de costo de obra (35% menos que los USD 1.600/m² reales), vendiendo al precio de la zona: USD 1.900/m²</div></div>
+    <div class="paths-o">o</div>
+    <div class="mstat"><div class="mstat-label">Camino 2 · vender más caro</div><div class="mstat-num" style="color:#c0392b">USD 2.805/m²</div><div class="mstat-sub">de precio de venta (48% más que el precio de la zona), construyendo a USD 1.600/m²</div></div>
+  </div>
+  <div class="info-box" style="margin-top:12px"><strong>Aun con el terreno gratis</strong> y sin ninguna ganancia, haría falta construir a USD 1.393/m² o vender a USD 2.191/m² para que los números den. Hoy construir cada m² vendible cuesta unos USD 1.990, más de lo que se vende.</div>
+  <div class="info-box"><strong>Conclusión:</strong> con los costos y precios reales de la zona, <strong>un edificio no genera valor para el terreno</strong>. No es un problema de este lote: en toda la zona R3 de Quilmes Oeste los departamentos nuevos se venden por debajo de su costo de obra con PB + 3 pisos. Por eso el comprador de este lote no va a ser un desarrollador de edificios.</div>
+</section>
+
+<section class="section section-blanca" id="s06">
+  <div class="sec-header"><span class="sec-num">06</span><div><div class="sec-titulo"><strong>El mercado</strong> de la zona</div><div class="sec-desc">Avisos activos en Zonaprop · octubre 2026 · cada aviso ubicado en el mapa con sus coordenadas</div></div></div>
+  <div class="sublabel" style="margin-top:0">Terrenos en venta a menos de 700 m (zona residencial)</div>
+  <div class="mercado-stats">
+    <div class="mstat mstat-hl"><div class="mstat-num">USD 259/m²</div><div class="mstat-label">Este lote, al precio publicado</div><div class="mstat-sub">USD 220.000 por 848 m² · desde mayo de 2026</div></div>
+    <div class="mstat"><div class="mstat-num">USD 314/m²</div><div class="mstat-label">Mediana publicada</div><div class="mstat-sub">8 terrenos · rango USD 136–559/m²</div></div>
+    <div class="mstat"><div class="mstat-num">USD 136/m²</div><div class="mstat-label">Lote más parecido</div><div class="mstat-sub">Irigoyen al 1300 · 820 m² a USD 111.111</div></div>
+    <div class="mstat"><div class="mstat-num" style="color:#c0392b">2 de 2</div><div class="mstat-label">Lotes grandes caros sin vender</div><div class="mstat-sub">Perón 600 y Amoedo: más de 1 año publicados</div></div>
+  </div>
+  <div class="note-box"><strong>Lo que dicen estos datos:</strong> los dos lotes grandes publicados por encima de USD 450/m² (Perón 600, 680 m², y Amoedo y Sáenz Peña, 855 m²) llevan más de un año sin venderse. El de San Mauro al 400 fue republicado después de 217 días. El lote más parecido en tamaño, Irigoyen al 1300 (820 m²), se publica a USD 136/m². Los terrenos que están más cerca del centro superan los USD 600/m², pero están en zonas con más FOT y no son comparables.</div>
+
+  <div class="sublabel">Departamentos a estrenar · USD/m² publicado</div>
+  <div class="mercado-stats">
+    <div class="mstat mstat-hl"><div class="mstat-num">USD 2.000</div><div class="mstat-label">A menos de 1 km</div><div class="mstat-sub">Mediana · 31 avisos · rango 1.304–2.561 · la mayoría hacia el centro</div></div>
+    <div class="mstat"><div class="mstat-num">USD 1.858</div><div class="mstat-label">De 1 a 1,5 km</div><div class="mstat-sub">Mediana · 67 avisos · rango 1.130–3.208</div></div>
+    <div class="mstat"><div class="mstat-num">USD 1.900</div><div class="mstat-label">Valor usado en el cálculo</div><div class="mstat-sub">Edificio sin amenities en cuadra residencial</div></div>
+  </div>
+
+  <div class="sublabel">Clubes de pádel cerca del lote</div>
+  <div class="mercado-stats">
+    <div class="mstat mstat-hl"><div class="mstat-num">330 m</div><div class="mstat-label">Padel VIP</div><div class="mstat-sub">Perón 568 esquina Quintana: a una cuadra y media</div></div>
+    <div class="mstat"><div class="mstat-num">780 m</div><div class="mstat-label">El Portal Padel</div><div class="mstat-sub">5 canchas, 4 techadas, abierto las 24 horas</div></div>
+    <div class="mstat"><div class="mstat-num">7 clubes</div><div class="mstat-label">A menos de 3,3 km</div><div class="mstat-sub">4 de ellos a menos de 2 km</div></div>
+  </div>
+
+  <div id="map" role="region" aria-label="Mapa de comparables"></div>
+  <div class="caption">● azul: departamentos a estrenar · ● dorado: terrenos · ● verde: casas · ● rojo: clubes de pádel. Tocá cada punto para ver el aviso.</div>
+  <div class="charts-grid">
+    <div class="chart-card"><div class="chart-eyebrow">Departamentos a estrenar</div><div class="chart-title">USD/m² según distancia al lote</div><div class="chart-wrap"><canvas id="cDep" aria-label="USD por m² de departamentos a estrenar según distancia"></canvas></div></div>
+    <div class="chart-card"><div class="chart-eyebrow">Terrenos en venta · menos de 1 km</div><div class="chart-title">USD por m² de terreno · <span style="color:#c0392b">en rojo, más de 8 meses publicados</span></div><div class="chart-wrap"><canvas id="cTer" aria-label="USD por m² de terrenos cercanos"></canvas></div></div>
+  </div>
+  <details style="margin-top:16px"><summary>Ver tabla de terrenos en venta</summary>
+    <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Dirección</th><th class="r">Distancia</th><th class="r">Superficie</th><th class="r">Precio</th><th class="r">USD/m²</th><th class="r">Publicado</th></tr></thead><tbody id="tTer"></tbody></table></div>
+  </details>
+  <details style="margin-top:10px"><summary>Ver tabla de departamentos a estrenar a menos de 1 km</summary>
+    <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Dirección</th><th class="r">Distancia</th><th class="r">Sup.</th><th class="r">Precio</th><th class="r">USD/m²</th></tr></thead><tbody id="tDep"></tbody></table></div>
+  </details>
+</section>
+
+<section class="section" id="s07">
+  <div class="sec-header"><span class="sec-num">07</span><div><div class="sec-titulo">Los tres compradores: <strong>¿cuánto puede pagar cada uno?</strong></div><div class="sec-desc">Con supuestos concretos y los números de la zona</div></div></div>
+  <div class="esc-grid">
+    <div class="esc" style="border-top-color:#c0392b"><div class="esc-t">Desarrollador de edificio</div><div class="esc-v" style="color:#c0392b">USD 0</div><div class="esc-d">Obra a USD 1.600/m², venta a USD 1.900/m², ganancia 20%: el resultado es negativo (sección 05).</div></div>
+    <div class="esc" style="border-top-color:#b8860b"><div class="esc-t">Proyecto de canchas de pádel</div><div class="esc-v" style="color:#b8860b">USD 70.000 a 120.000</div><div class="esc-d">Una cancha techada y una descubierta, exigiendo entre 15% y 12% anual. Depende de que el Municipio habilite el uso y de ganarle clientes a dos clubes cercanos.</div></div>
+    <div class="esc" style="border-top-color:#1a7a4a"><div class="esc-t">Familia que recicla la casa para vivir</div><div class="esc-v" style="color:#1a7a4a">≈ USD 120.000</div><div class="esc-d">Reciclado a USD 600/m² (USD 108.000). Con un reciclado más pesado, a USD 800/m², baja a ≈ USD 90.000.</div></div>
+  </div>
+  <div class="chart-card"><div class="chart-eyebrow">Cuánto puede pagar cada comprador</div><div class="chart-title">Frente al precio publicado hoy</div><div class="chart-wrap" style="height:270px"><canvas id="cEsc" aria-label="Lo que puede pagar cada comprador frente al precio publicado"></canvas></div></div>
+
+  <div class="sublabel">Cómo se calcula · proyecto de canchas de pádel</div>
+<div class="svg-card" style="margin-bottom:16px">
+  <svg viewBox="0 0 680 440" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;display:block;margin:0 auto" font-family="Inter,Arial,sans-serif" role="img" aria-label="Croquis de canchas de pádel sobre el lote">
+    <rect x="120" y="40" width="116" height="128" fill="#f1efe8"/><rect x="430" y="40" width="116" height="128" fill="#f1efe8"/>
+    <rect x="120" y="40" width="116" height="329" rx="2" fill="none" stroke="#898781" stroke-width="1"/>
+    <rect x="430" y="40" width="116" height="329" rx="2" fill="none" stroke="#898781" stroke-width="1"/>
+    <rect x="120" y="329" width="116" height="40" fill="#e1e0d9"/><rect x="430" y="329" width="116" height="40" fill="#e1e0d9"/>
+    <rect x="120" y="181" width="77" height="148" fill="#eef4ff" stroke="#1a7aff" stroke-width="1"/>
+    <g fill="#e1f5ee" stroke="#0f6e56" stroke-width="0.8">
+      <rect x="125" y="188" width="67" height="134" rx="2"/><rect x="125" y="44" width="67" height="134" rx="2"/>
+      <rect x="435" y="191" width="67" height="134" rx="2"/><rect x="435" y="51" width="67" height="134" rx="2"/>
+    </g>
+    <g stroke="#0f6e56" stroke-width="0.8"><line x1="125" y1="255" x2="192" y2="255"/><line x1="125" y1="111" x2="192" y2="111"/><line x1="435" y1="258" x2="502" y2="258"/><line x1="435" y1="118" x2="502" y2="118"/></g>
+    <g stroke="#c0392b" stroke-width="1.4" stroke-dasharray="5 4"><line x1="112" y1="168" x2="244" y2="168"/><line x1="422" y1="168" x2="554" y2="168"/></g>
+    <g font-size="12" fill="#52514e">
+      <text x="178" y="30" text-anchor="middle">17,32 m</text><text x="488" y="30" text-anchor="middle">17,32 m</text>
+      <text x="246" y="100">Cancha descubierta</text><text x="246" y="116">20 × 10 m</text>
+      <text x="246" y="164" fill="#c0392b">Límite 30 m</text>
+      <text x="246" y="250" fill="#1a7aff">Cancha techada</text><text x="246" y="266">tinglado 11,5 × 22 m</text>
+      <text x="246" y="352">Recepción y baños</text>
+      <text x="556" y="114">Cancha 2</text><text x="556" y="164" fill="#c0392b">Límite 30 m</text>
+      <text x="556" y="254">Cancha 1</text><text x="556" y="352">Recepción</text>
+      <text x="178" y="388" text-anchor="middle">Frente · San Mauro</text><text x="488" y="388" text-anchor="middle">Frente · San Mauro</text>
+      <text x="40" y="104" fill="#898781">patio de</text><text x="40" y="120" fill="#898781">manzana</text>
+    </g>
+    <g font-size="13.5" font-weight="700" fill="#0d1b2e"><text x="178" y="416" text-anchor="middle">A · techada + descubierta</text><text x="488" y="416" text-anchor="middle">B · dos descubiertas</text></g>
+  </svg>
+  <div class="caption" style="text-align:center">Planta a escala del lote (17,32 × 49,15 m). En gris claro, el patio de manzana detrás de los 30 m. Con 17,32 m de ancho entra una sola fila de canchas.</div>
+</div>
+  <div class="calc">
+    <div class="ctrl">
+      <div class="ctrl-row"><div class="ctrl-lab"><label for="pt">Turno de 90 min en horario pico</label><b id="lpt"></b></div><input type="range" id="pt" min="20000" max="50000" step="1000" value="36000"></div>
+      <div class="ctrl-row"><div class="ctrl-lab"><label for="po">Ocupación en horario pico (4 turnos)</label><b id="lpo"></b></div><input type="range" id="po" min="40" max="100" step="5" value="85"></div>
+      <div class="ctrl-row"><div class="ctrl-lab"><label for="pr">Rentabilidad que exige el inversor</label><b id="lpr"></b></div><input type="range" id="pr" min="10" max="25" step="1" value="15"></div>
+      <div class="caption" style="margin-top:12px">Dólar $1.540. Turnos de valle a dos tercios del precio pico, 30% de ocupación en 6 turnos diarios. La cancha descubierta rinde el 60% de la techada. Clases, torneos y buffet suman 15%. Gastos de operación: USD 39.000 por año (dos empleados, energía, mantenimiento, tasas y seguros).</div>
+    </div>
+    <div>
+      <div class="out">
+        <div class="out-lab">Lo que puede pagar por el terreno</div>
+        <div class="out-val" id="pv"></div>
+        <div class="out-sub" id="ps"></div>
+        <div class="casc" id="pcasc"></div>
+      </div>
+    </div>
+  </div>
+  <div class="table-wrap" style="margin-top:14px"><table>
+    <tbody>
+      <tr><td class="wrap">Qué entra: una cancha techada en los primeros 30 m (tinglado de 11,5 × 22,5 m, más recepción, baños y buffet al frente) y una cancha descubierta en el fondo. Dos canchas techadas en fila necesitan 44 m de profundidad y quedarían dentro del patio de manzana.</td><td class="r">2 canchas</td></tr>
+      <tr><td class="wrap">Inversión: demolición USD 10.000 · cancha techada USD 25.000 (instalada, con base de hormigón) · tinglado de 259 m² a ≈ USD 103/m² (USD 70/m² hasta 5 m de altura + USD 7/m² por cada metro hasta 8 m + fundaciones) USD 27.000 · cancha descubierta USD 25.000 · recepción y baños USD 40.000 (cerramiento de vidrio, piso, módulo de baños y mobiliario) · proyecto, habilitación y honorarios 10%</td><td class="r">USD 139.700</td></tr>
+      <tr><td class="wrap">Resultado operativo con los supuestos base (ingresos USD 71.000 − gastos USD 39.000)</td><td class="r">USD 32.000/año</td></tr>
+      <tr><td class="wrap">Para pagar los USD 220.000 pedidos con 15% de rentabilidad, el club tendría que ganar USD 56.000 por año</td><td class="r">1,75 veces lo estimado</td></tr>
+      <tr><td class="wrap">Variante B, dos canchas descubiertas: sin tinglado la inversión baja a USD 110.000, pero factura menos. Si cada descubierta rinde el 60% de una techada queda entre USD 0 (15%) y 25.000 (12%); con 70%, ≈ USD 55.000 a 94.000; con 80%, ≈ USD 110.000 a 164.000</td><td class="r">USD 0 a 164.000</td></tr>
+    </tbody>
+  </table></div>
+  <div class="note-box"><strong>El pádel no alcanza para sostener el precio pedido.</strong> La norma solo deja techar dentro de los primeros 30 m, así que caben dos canchas, una de ellas al aire libre. Poner las dos descubiertas abarata la obra, pero una cancha con vidrios, alambrado y luces dentro del patio de manzana requiere consulta previa al Municipio. A 330 m ya funciona Padel VIP y a 780 m El Portal, con cinco canchas. Además, el uso necesita factibilidad municipal en zona residencial, con linderos de planta baja a ambos lados que pueden objetar ruidos y horarios. Los costos salen de notas de prensa y guías de precios de 2026 (canchas instaladas USD 20.000 a 25.000; tinglados USD 65 a 80/m² hasta 5 m de altura) y los precios de turno, de relevamientos de prensa de 2026 ($ 25.000 a $ 45.000 por turno de 90 minutos en horario pico); conviene confirmarlos con los clubes de la zona.</div>
+
+  <div class="sublabel">Cómo se calcula · familia que recicla la casa para vivir</div>
+  <div class="table-wrap"><table>
+    <thead><tr><th></th><th class="r">Reciclado a USD 600/m²</th><th class="r">Reciclado a USD 800/m²</th></tr></thead>
+    <tbody>
+      <tr><td class="wrap">Casa equivalente ya reciclada: 180 m² en un lote de 848 m² (valor de cierre)</td><td class="r">USD 235.000</td><td class="r">USD 235.000</td></tr>
+      <tr><td class="wrap">− Costo del reciclado (descontando los gastos de compra que se ahorra)</td><td class="r">− USD 108.000 ÷ 1,07</td><td class="r">− USD 144.000 ÷ 1,07</td></tr>
+      <tr><td class="wrap">= Máximo que podría pagar sin perder</td><td class="r">USD 134.100</td><td class="r">USD 100.400</td></tr>
+      <tr><td class="wrap">− 10% por el riesgo y el tiempo de la obra</td><td class="r">−10%</td><td class="r">−10%</td></tr>
+    </tbody>
+    <tfoot><tr><td>Lo que pagaría por el lote</td><td class="r" style="color:#1a7a4a">≈ USD 120.700</td><td class="r" style="color:#7fb89a">≈ USD 90.400</td></tr></tfoot>
+  </table></div>
+  <div class="info-box"><strong>De dónde sale el valor de la casa reciclada:</strong> casas en buen estado de 140 a 250 m² a menos de 1 km se publican entre USD 180.000 y 265.000. La más parecida es una casa de 5 ambientes con jardín en San Mauro al 400, de 210 m², publicada a USD 240.000 desde hace más de un año. Para una casa de 180 m² con un lote más grande que el promedio tomamos USD 235.000 como valor de cierre. Un inversor que recicla para revender pagaría menos, ≈ USD 77.000, porque necesita ganar un 20%.</div>
+  <div class="note-box"><strong>Este escenario es una estimación.</strong> No vimos el interior de la casa: el reciclado a USD 600/m² es el supuesto que nos indicaron, y si la casa necesita más trabajo, el valor baja. Es el número que más conviene confirmar con una visita.</div>
+  <details style="margin-top:12px"><summary>Ver casas usadas como referencia</summary>
+    <div class="table-wrap" style="margin-top:10px"><table><thead><tr><th>Dirección</th><th class="r">Distancia</th><th class="r">Cubierta</th><th class="r">Total</th><th class="r">Precio</th><th class="r">USD/m² cub.</th></tr></thead><tbody>
+      <tr><td><a href="https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-de-5-ambientes-en-venta.-terminaciones-de-gran-51520396.html" target="_blank" rel="noopener">San Mauro Castelverde al 400 · 5 amb., jardín, 25 años</a></td><td class="r">134 m</td><td class="r">210 m²</td><td class="r">215 m²</td><td class="r">USD 240.000</td><td class="r">1.143</td></tr>
+      <tr><td><a href="https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-quilmes-oeste-60309286.html" target="_blank" rel="noopener">Primero de Mayo al 400 · 4 amb., 56 años</a></td><td class="r">186 m</td><td class="r">120 m²</td><td class="r">425 m²</td><td class="r">USD 180.000</td><td class="r">1.500</td></tr>
+      <tr><td><a href="https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-3-dorm.-3-banos-quilmes-60310022.html" target="_blank" rel="noopener">Felipe Amoedo · 4 amb., 15 años</a></td><td class="r">280 m</td><td class="r">176 m²</td><td class="r">276 m²</td><td class="r">USD 230.000</td><td class="r">1.307</td></tr>
+      <tr><td><a href="https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-con-galpon-en-venta-54084071.html" target="_blank" rel="noopener">Bernardo de Irigoyen 1381 · 4 amb., 55 años</a></td><td class="r">477 m</td><td class="r">149 m²</td><td class="r">450 m²</td><td class="r">USD 200.000</td><td class="r">1.342</td></tr>
+      <tr><td><a href="https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-quilmes-4-ambientes-con-pileta-60011905.html" target="_blank" rel="noopener">Larrea al 1300 · 4 amb., a estrenar</a></td><td class="r">611 m</td><td class="r">140 m²</td><td class="r">300 m²</td><td class="r">USD 210.000</td><td class="r">1.500</td></tr>
+      <tr><td><a href="https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-apta-credito-chalet-en-impecable-estado-a-m-de-58252004.html" target="_blank" rel="noopener">Vélez Sarsfield 1463 · 4 amb., 30 años</a></td><td class="r">817 m</td><td class="r">317 m²</td><td class="r">327 m²</td><td class="r">USD 265.000</td><td class="r">836</td></tr>
+      <tr><td><a href="https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-quilmes-3-amb.-c-locales-en-block-60223301.html" target="_blank" rel="noopener">Andrés Baranda 1800 · 3 amb., 53 años</a></td><td class="r">163 m</td><td class="r">238 m²</td><td class="r">448 m²</td><td class="r">USD 155.000</td><td class="r">651</td></tr>
+    </tbody></table></div>
+  </details>
+</section>
+
+<section class="section section-blanca" id="s08">
+  <div class="sec-header"><span class="sec-num">08</span><div><div class="sec-titulo"><strong>El valor</strong> del lote</div><div class="sec-desc">Un lote vale lo que puede pagar el mejor comprador realista</div></div></div>
+  <div class="info-box" style="margin-top:0;margin-bottom:18px"><strong>Cómo llegamos al valor:</strong> el desarrollador de edificios, que normalmente es quien más paga, acá no puede pagar nada (sección 05). El proyecto de pádel deja entre USD 70.000 y 120.000 según la rentabilidad que se exija, pero depende de una habilitación incierta y de competir con dos clubes cercanos. El comprador más firme es una familia que compra la casa para reciclarla: ≈ USD 120.000 con un reciclado de USD 600/m². Ese valor coincide con lo que muestra el mercado de lotes grandes de la zona: el de Irigoyen al 1300, de 820 m², se publica a USD 111.111.</div>
+  <div class="precios-grid">
+    <div class="precio-block"><div class="precio-block-label">Publicación sugerida</div><div class="precio-block-valor">USD 129.000</div><div class="precio-block-m2">USD 152/m² de terreno</div></div>
+    <div class="precio-block main"><div class="precio-block-label">Cierre esperado · 120 días</div><div class="precio-block-valor">USD 110–120 mil</div><div class="precio-block-m2">Familia que recicla la casa · a confirmar con la visita</div></div>
+    <div class="precio-block"><div class="precio-block-label">Precio publicado hoy</div><div class="precio-block-valor" style="color:#898781">USD 220.000</div><div class="precio-block-m2">USD 259/m² · publicado desde mayo de 2026</div></div>
+  </div>
+  <div style="margin-top:22px">
+    <div class="concl-line"><span style="color:#1a7aff;font-size:15px;flex-shrink:0">◉</span><span>El lote tiene buenas medidas y una cuadra residencial tranquila. <strong>El límite está en la zona</strong>: la R3 permite PB + 3 pisos y los departamentos nuevos se venden por debajo de lo que cuesta construirlos.</span></div>
+    <div class="concl-line"><span style="color:#b8860b;font-size:15px;flex-shrink:0">◉</span><span>Las canchas de pádel no superan ese valor: solo entran dos, una al aire libre, y ya hay un club a una cuadra y media.</span></div>
+    <div class="concl-line"><span style="color:#b8860b;font-size:15px;flex-shrink:0">◉</span><span>Los lotes grandes publicados en la zona por encima de USD 450/m² llevan más de un año sin venderse.</span></div>
+    <div class="concl-line"><span style="color:#1a7a4a;font-size:15px;flex-shrink:0">◉</span><span>Publicado en USD 129.000 y dirigido a familias que buscan casa con mucho terreno, el lote entra en la franja de precio donde aparecen consultas y ofertas reales.</span></div>
+  </div>
+  <div class="sublabel" style="margin-bottom:0">Análisis FODA del lote</div>
+  <div class="foda-grid">
+    <div class="foda-cell foda-cell-f"><div class="foda-cell-label">✓ Fortalezas</div>
+      <div class="foda-line"><span style="color:#1a7a4a">✓</span>848 m² con 17,32 m de frente</div>
+      <div class="foda-line"><span style="color:#1a7a4a">✓</span>Calle ancha (22 m) y cuadra residencial</div>
+      <div class="foda-line"><span style="color:#1a7a4a">✓</span>Casa existente que se puede reciclar</div></div>
+    <div class="foda-cell foda-cell-o"><div class="foda-cell-label">◈ Oportunidades</div>
+      <div class="foda-line"><span style="color:#1a7aff">◈</span>Familias que buscan casa con jardín grande o pileta</div>
+      <div class="foda-line"><span style="color:#1a7aff">◈</span>Uso propio con taller o depósito al fondo</div>
+      <div class="foda-line"><span style="color:#1a7aff">◈</span>Si suben los precios de la zona, se habilita el desarrollo</div></div>
+    <div class="foda-cell foda-cell-d"><div class="foda-cell-label">⚠ Debilidades</div>
+      <div class="foda-line"><span style="color:#b8860b">⚠</span>Solo se edifican los primeros 30 m</div>
+      <div class="foda-line"><span style="color:#b8860b">⚠</span>La densidad R3 limita la cantidad de unidades</div>
+      <div class="foda-line"><span style="color:#b8860b">⚠</span>Estado de la casa a confirmar</div></div>
+    <div class="foda-cell foda-cell-a"><div class="foda-cell-label">✗ Amenazas</div>
+      <div class="foda-line"><span style="color:#c0392b">✗</span>Costos de construcción altos en dólares</div>
+      <div class="foda-line"><span style="color:#c0392b">✗</span>Lotes grandes de la zona con más de un año publicados</div>
+      <div class="foda-line"><span style="color:#c0392b">✗</span>Más tiempo publicado desgasta el aviso</div></div>
+  </div>
+</section>
+
+<section class="section" id="s09">
+  <div class="sec-header"><span class="sec-num">09</span><div><div class="sec-titulo"><strong>Cómo conviene</strong> salir a vender</div><div class="sec-desc">Lo que hace falta para que el lote llegue a su comprador</div></div></div>
+  <div class="info-box" style="margin-top:0;margin-bottom:18px"><strong>Dónde está hoy:</strong> la propiedad se ofrece a USD 220.000 desde mayo de 2026, con cuatro fotos, en el sitio de una inmobiliaria y sin aparecer en Zonaprop, que es donde buscan casi todos los compradores de la zona. El aviso la presenta como una casa con un "lote adicional", pero para ARBA es una sola parcela con una sola partida, y con 17,32 m de frente no se puede dividir en dos lotes reglamentarios. Después de unos 150 días sin vender, el precio y la presentación juegan en contra: cada mes que pasa el aviso pierde fuerza.</div>
+  <ol class="steps">
+    <li><div><b>Salir al precio de su comprador real</b><span>Publicar en USD 129.000 y revisar a los 45 días según la cantidad de consultas y visitas. Un precio cercano al valor atrae ofertas; uno lejano solo sirve de referencia para vender otras propiedades.</span></div></li>
+    <li><div><b>Contar bien lo que es</b><span>Una casa de 3 ambientes en un lote único de 17,32 × 49 m. Hablar de "dos lotes" genera expectativas que no se cumplen y el comprador se entera en la visita o en la escritura.</span></div></li>
+    <li><div><b>Hablarle a quien lo va a comprar</b><span>Familias que buscan casa con mucho terreno: pileta, quincho, huerta, taller o espacio para los chicos. En segundo lugar, quien busca un espacio de uso propio, como un pequeño club deportivo, con la factibilidad municipal previa.</span></div></li>
+    <li><div><b>Mostrar el terreno</b><span>Fotos profesionales con luz de día, video o dron que muestre los 49 m de fondo, un plano con medidas y el croquis de lo que se puede hacer. El fondo es el principal atractivo y hoy no se ve.</span></div></li>
+    <li><div><b>Tener los papeles listos</b><span>Título, plano de la casa (o su regularización, porque las medidas publicadas no coinciden), informe de dominio y certificado urbanístico. Un comprador con dudas no oferta.</span></div></li>
+    <li><div><b>Difundir donde buscan</b><span>Zonaprop, Argenprop y Mercado Libre, más la red de colegas de la zona, con un plan de trabajo de 120 días y una persona responsable de mostrar y seguir cada consulta.</span></div></li>
+  </ol>
+  <a class="cta" href="https://matiasleiblich.com/guias/vendedor/" target="_blank" rel="noopener">Leé el paso a paso completo en la Guía del Vendedor ↗</a>
+</section>
+
+<section class="section">
+  <details class="legal"><summary>Consideraciones del estudio</summary>
+    <p>Este estudio se realizó según la Ordenanza de Zonificación de Quilmes (Ord. 4545/79 y modificatorias: 4930/82, 10337/06, 11613/10, 12694/17 y 14323/25) y la cartografía de ARBA. Es de carácter orientativo y no vinculante: no se basa en un proyecto de arquitectura específico, y las superficies podrían ajustarse según el proyecto, las medidas reales de la parcela y la interpretación del Municipio. La medida del patio de manzana se estimó con la cartografía de ARBA; el control de densidad y la factibilidad de uso para canchas de pádel deben confirmarse con la Dirección de Planeamiento. Los valores de mercado son precios de publicación en Zonaprop relevados en octubre de 2026; los precios de cierre suelen ser menores. Los datos del negocio de pádel son estimaciones a partir de notas de prensa de 2026. Tipo de cambio: $1.540 por dólar.</p>
+  </details>
+</section>
+
+<div class="links-pie">
+  <div class="links-pie-label">Más información</div>
+  <div class="links-pie-row">
+    <a class="primary" href="https://matiasleiblich.com/guias/vendedor/" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>Conocé el proceso de venta: Guía del Vendedor</a>
+    <a class="secondary" href="https://matiasleiblich.com/calculadora-inmobiliaria" target="_blank" rel="noopener"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>Calculá los gastos: Calculadora Inmobiliaria</a>
+  </div>
+</div>
+
+<footer class="footer">
+  <span><strong>Matías Leiblich</strong> · Ingenieros Inmobiliarios · deinmobiliarios.com · <a href="https://wa.me/5491161737552" target="_blank">11-6173-7552</a></span>
+  <span>Fuentes: Ordenanza de Zonificación de Quilmes · ARBA · Zonaprop · Octubre 2026</span>
+</footer>
+
+<script>
+const DATA = {"lote": [-34.7315385, -58.262758], "ter": [{"a": "San Mauro Castelverde al 400", "p": 165000, "m": 467.0, "u": 353, "d": 104, "dias": 217, "pub": "217 días", "y": -34.7308041, "x": -58.2620447, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-terreno-en-venta-en-quilmes-ideal-inversor!-58604624.html"}, {"a": "Bernardo de Irigoyen al 1900", "p": 169000, "m": 615.0, "u": 275, "d": 184, "dias": 207, "pub": "207 días", "y": -34.7328185915, "x": -58.2614790884, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-terreno-doble-con-17-m-de-frente-a-pasos-de-amoedo-y-58686279.html"}, {"a": "Manuel Quintana 1675", "p": 80000, "m": 299.0, "u": 268, "d": 186, "dias": 11, "pub": "11 días", "y": -34.730589699999996, "x": -58.264433, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-lote-en-venta-de-8-66x34-50-ideal-para-emprendimiento-60385702.html"}, {"a": "Amoedo y Roque Saenz Peña", "p": 420000, "m": 855.0, "u": 491, "d": 299, "dias": 400, "pub": "más de 1 año", "y": -34.7325228, "x": -58.2597164, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-terreno-quilmes-54843502.html"}, {"a": "Perón 600", "p": 380000, "m": 680.0, "u": 559, "d": 348, "dias": 400, "pub": "más de 1 año", "y": -34.72912216, "x": -58.2651825, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-lote-680-m-sup2--totales-peron-600-quilmes-oeste-57171772.html"}, {"a": "Bernardo de Irigoyen al 1300", "p": 111111, "m": 820.0, "u": 136, "d": 490, "dias": 96, "pub": "96 días", "y": -34.7274736, "x": -58.2648357, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-lote-en-venta-ideal-desarrollo-quilmes-59623982.html"}, {"a": "Urquiza 1900", "p": 149000, "m": 332.0, "u": 449, "d": 569, "dias": 22, "pub": "22 días", "y": -34.7351599, "x": -58.2671578, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-venta-galpon-comercial-oficina-trifasica-quilmes-60262712.html"}, {"a": "Larrea 2391", "p": 47000, "m": 277.0, "u": 170, "d": 654, "dias": 400, "pub": "más de 1 año", "y": -34.7373714, "x": -58.2636848, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-terreno-nuevo-precio-47667770.html"}, {"a": "Lote Extraordinario Olavarria 175- Quilmes", "p": 680000, "m": 720.0, "u": 944, "d": 720, "dias": 400, "pub": "más de 1 año", "y": -34.7266614, "x": -58.2575673, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-terreno-lote-extraordinario-olavarria-quilmes-centro-49177280.html"}, {"a": "IRALA 550", "p": 140000, "m": 1000.0, "u": 140, "d": 739, "dias": 400, "pub": "más de 1 año", "y": -34.7374916, "x": -58.2591743, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-vendo-o-permuto-excepcional-l-1.000-m-sup2-53753820.html"}, {"a": "Ortiz de Ocampo 73", "p": 170000, "m": 270.0, "u": 630, "d": 750, "dias": 171, "pub": "171 días", "y": -34.7297788, "x": -58.2548331, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-venta-terreno-en-quilmes-centro-ideal-inversor-59001210.html"}, {"a": "Olavarria 77", "p": 200000, "m": 407.0, "u": 491, "d": 780, "dias": 400, "pub": "más de 1 año", "y": -34.7263059, "x": -58.2570664, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-terreno-en-venta-quilmes-8-66-m-x-47-m-54880639.html"}, {"a": "Guido 128", "p": 230000, "m": 346.0, "u": 665, "d": 856, "dias": 400, "pub": "más de 1 año", "y": -34.729657, "x": -58.25367199999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-casa-lote-en-zona-residencial-ideal-para-53361825.html"}, {"a": "Humberto Primo al 100", "p": 175000, "m": 172.0, "u": 1017, "d": 889, "dias": 400, "pub": "más de 1 año", "y": -34.7251889, "x": -58.2568536, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-venta-lote-quilmes-centro-56533327.html"}, {"a": "Moreno1065", "p": 185000, "m": 240.0, "u": 771, "d": 927, "dias": 400, "pub": "más de 1 año", "y": -34.7299891, "x": -58.252787, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-terreno-para-desarrollo-en-altura-en-venta-ideal-49888145.html"}, {"a": "Ideal Desarrollador Inmob. 25 DE Mayo  al ", "p": 192000, "m": 252.0, "u": 762, "d": 937, "dias": 103, "pub": "103 días", "y": -34.7261251, "x": -58.2548988, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-terreno-en-quilmes-cambio-x-m-sup2-59571666.html"}, {"a": "Roque Sáenz Peña  al 900", "p": 170000, "m": 221.0, "u": 769, "d": 939, "dias": 400, "pub": "más de 1 año", "y": -34.7236207, "x": -58.2663279, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-venta-terreno-221-m-sup2--con-planos-aprobados-p-dptos-56688564.html"}, {"a": "Gran Canaria al 1061", "p": 135000, "m": 337.0, "u": 401, "d": 939, "dias": 14, "pub": "14 días", "y": -34.7231145, "x": -58.2634921, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-lote-r2-q-en-venta-505-m-sup2--construibles-60357519.html"}, {"a": "Olavarria 100", "p": 270000, "m": 243.0, "u": 1111, "d": 970, "dias": 400, "pub": "más de 1 año", "y": -34.72539234060102, "x": -58.25522479126091, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-lote-en-venta-en-quilmes-centro-55871562.html"}, {"a": "Garay 0", "p": 170000, "m": 391.0, "u": 435, "d": 971, "dias": 5, "pub": "5 días", "y": -34.732164, "x": -58.2521589, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/vecltrin-lote-propio-venta-quilmes-galpon-391-m-sup2-60436946.html"}], "dep": [{"a": "Peron 800 3°B", "p": 92700, "m": 44.0, "u": 2107, "d": 457, "y": -34.7304457, "x": -58.2675814, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-en-quilmes-oeste-59093992.html"}, {"a": "Presidente Peron 852", "p": 92700, "m": 44.0, "u": 2107, "d": 457, "y": -34.730446, "x": -58.2675812, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-2-ambientes-con-cochera-a-estrenar-en-56870140.html"}, {"a": "Av. Hipólito Yrigoyen 861", "p": 220000, "m": 110.0, "u": 2000, "d": 650, "y": -34.72793961, "x": -58.25715256, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-piso-3-amb-c-cochera-cubierta-av-h.-yrigoyen-861-56769461.html"}, {"a": "Yrigoyen 861, Quilmes ¡excelente Piso de", "p": 210000, "m": 100.0, "u": 2100, "d": 650, "y": -34.7279397, "x": -58.2571512, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-piso-de-tres-ambientes-a-la-venta-en-58970812.html"}, {"a": "3 de Febrero e/ Gran Canaria y Aristóbul", "p": 178000, "m": 98.0, "u": 1816, "d": 654, "y": -34.7256795671, "x": -58.2620929356, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-dorm.-2-banos-101-m-sup2-59883431.html"}, {"a": "Yrigoyen al 900", "p": 125000, "m": 68.0, "u": 1838, "d": 663, "y": -34.7296713, "x": -58.2558624, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-con-cochera-en-venta-en-59292621.html"}, {"a": "Hipolito Yrigoyen  al 900", "p": 182000, "m": 90.0, "u": 2022, "d": 663, "y": -34.7288001823, "x": -58.2563083027, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-tres-ambientes-con-cochera-en-venta-58805110.html"}, {"a": "Y858 - Semipiso de 5 Ambientes en Venta ", "p": 463600, "m": 181.0, "u": 2561, "d": 691, "y": -34.7276426, "x": -58.2568627, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semipiso-de-5-ambientes-en-venta-de-gran-calidad-60390815.html"}, {"a": "Y858 - Semipiso de 4 Ambientes en Venta ", "p": 615125, "m": 356.0, "u": 1728, "d": 691, "y": -34.7276426, "x": -58.2568627, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semipiso-de-4-ambientes-en-venta-de-gran-calidad-60390910.html"}, {"a": "Bernardo de Irigoyen al 2600", "p": 72000, "m": 48.0, "u": 1500, "d": 764, "y": -34.7365342, "x": -58.2570179, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-quilmes-oeste-59094188.html"}, {"a": "Av. Vicente Lopez al 1155", "p": 90000, "m": 69.0, "u": 1304, "d": 771, "y": -34.724771, "x": -58.2645705, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-duplex-2-ambientes-con-patio-59001265.html"}, {"a": "Guido 100", "p": 115000, "m": 56.0, "u": 2054, "d": 808, "y": -34.7299184, "x": -58.2541336, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-57944212.html"}, {"a": "San Martin  al 1026", "p": 73500, "m": 44.0, "u": 1670, "d": 821, "y": -34.7296898, "x": -58.254061, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-quilmes-60117169.html"}, {"a": "San Martín 1000", "p": 45000, "m": 24.0, "u": 1875, "d": 827, "y": -34.7297267, "x": -58.25398269999999, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta.-depto.-monoambiente.-balcon.-a-estrenar.-59368332.html"}, {"a": "San Martín 1000", "p": 78000, "m": 47.0, "u": 1660, "d": 827, "y": -34.7297267, "x": -58.25398269999999, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta.-depto.-monoambiente.-balcon.-a-estrenar.-59368332.html"}, {"a": "Matienzo 126", "p": 71900, "m": 45.0, "u": 1598, "d": 827, "y": -34.728273229316876, "x": -58.2546330558197, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-tipo-loft-a-estrenar-en-venta-de-2-57811385.html"}, {"a": "25 de Mayo 100", "p": 117400, "m": 64.0, "u": 1834, "d": 828, "y": -34.7267636, "x": -58.2558003, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-en-quilmes-a-53745836.html"}, {"a": "Matienzo al 100", "p": 187000, "m": 110.0, "u": 1700, "d": 832, "y": -34.7284199234, "x": -58.2544817184, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-tres-ambientes-en-venta-piso-59439924.html"}, {"a": "Ortiz de Ocampo al 100", "p": 166000, "m": 74.0, "u": 2243, "d": 833, "y": -34.729272, "x": -58.254073, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-financia-en-ahsta-120-cuotas.-departamento-3-ambientes-59162112.html"}, {"a": "Ortiz de Ocampo Entre Moreno y Lavale", "p": 125000, "m": 56.0, "u": 2232, "d": 833, "y": -34.729272, "x": -58.254073, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-financia-en-hasta-120-cuotas.-departamento-2-ambientes-58550008.html"}, {"a": "25 DE Mayo al 100", "p": 154737, "m": 114.0, "u": 1357, "d": 834, "y": -34.726753, "x": -58.2557366, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-4-ambientes-en-venta-en-quilmes-54843338.html"}, {"a": "25 DE Mayo al 100", "p": 89465, "m": 47.0, "u": 1904, "d": 834, "y": -34.726753, "x": -58.2557366, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-4-ambientes-en-venta-en-quilmes-54843338.html"}, {"a": "Ortiz de Ocampo 100", "p": 172000, "m": 93.0, "u": 1849, "d": 854, "y": -34.729110166656, "x": -58.253889083862, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-dos-ambientes-apto-credito-cochera-quilmes-60318346.html"}, {"a": "Matienzo al 100", "p": 100000, "m": 45.0, "u": 2222, "d": 883, "y": -34.7281243, "x": -58.2540298, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-de-departamento-matienzo-151-quilmes-centro-con-59001232.html"}, {"a": "Moreno al 900", "p": 120000, "m": 60.0, "u": 2000, "d": 904, "y": -34.7283311, "x": -58.25367, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-2-ambientes-con-cochera-56894444.html"}, {"a": "Ortiz de Ocampo al 100", "p": 125000, "m": 68.0, "u": 1838, "d": 928, "y": -34.7288119297, "x": -58.2531588577, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamentos-2-ambientes-en-quilmes-centro-a-59001297.html"}, {"a": "Ortiz de Ocampo  157", "p": 166000, "m": 82.0, "u": 2024, "d": 929, "y": -34.7288468, "x": -58.2531359, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-al-frente-a-estrenar-en-venta-58965388.html"}, {"a": "Ortiz de Ocampo  157", "p": 170000, "m": 82.0, "u": 2073, "d": 929, "y": -34.7288468, "x": -58.2531359, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-al-frente-a-estrenar-en-venta-58965388.html"}, {"a": "Ortiz de Ocampo  157", "p": 125000, "m": 62.0, "u": 2016, "d": 929, "y": -34.7288468, "x": -58.2531359, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-al-frente-a-estrenar-en-venta-58965388.html"}, {"a": "Matienzo  e/ Moreno y Lavalle QUILMES", "p": 113000, "m": 54.0, "u": 2093, "d": 937, "y": -34.7279381, "x": -58.2534911, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-a-estrenar-2-amb-con-cochera-47438245.html"}, {"a": "Guido 161. Entre Lavalle y Moreno", "p": 115000, "m": 52.0, "u": 2212, "d": 948, "y": -34.7295836, "x": -58.2526586, "z": "cerca", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes.-guido-al-100-60400515.html"}, {"a": "Nicolás Videla 22", "p": 62300, "m": 33.0, "u": 1888, "d": 1011, "y": -34.722491399999996, "x": -58.261611599999995, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-monoambiente-de-pozo-videla-22-quilmes-centro-59804504.html"}, {"a": "Vicente Lopez  al 800", "p": 95000, "m": 55.0, "u": 1727, "d": 1036, "y": -34.7226801, "x": -58.2662655, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-venta-2-ambientes-quilmes-centro-a-58652543.html"}, {"a": "OLAVARRIA 200. Entre Lavalle y Brown", "p": 323933, "m": 153.0, "u": 2117, "d": 1044, "y": -34.72496581691367, "x": -58.25459986925126, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-4-ambientes.-olavarria-al-200-60400314.html"}, {"a": "Lavalle 1102 1º", "p": 240000, "m": 90.0, "u": 2667, "d": 1052, "y": -34.7303324, "x": -58.2513383, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-tres-ambientes-en-alquiler-anton-59675416.html"}, {"a": "Moreno 634, Quilmes Centro ¡excelente y ", "p": 115000, "m": 92.0, "u": 1250, "d": 1052, "y": -34.7229713, "x": -58.2578867, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-tres-ambientes-a-la-venta-en-quilmes-56292558.html"}, {"a": "25 DE MAYO 244. Entre Lavalle y Brown", "p": 370000, "m": 150.0, "u": 2467, "d": 1058, "y": -34.7255368851569, "x": -58.253768488954925, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-piso-a-la-venta-en-edificio-con-seguridad-24h-50489269.html"}, {"a": "Olavarría  234", "p": 333000, "m": 153.0, "u": 2176, "d": 1066, "y": -34.7247244, "x": -58.2545457, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-4-ambientes-piso-completo-con-vista-al-60442364.html"}, {"a": "Olavarría  234", "p": 323933, "m": 153.0, "u": 2117, "d": 1066, "y": -34.7247244, "x": -58.2545457, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-4-ambientes-piso-completo-con-vista-al-60442364.html"}, {"a": "Olavarria al 200", "p": 323933, "m": 153.0, "u": 2117, "d": 1067, "y": -34.724717, "x": -58.2545513, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-de-piso-4-ambientes-con-balcon-aterrazado-en-59144045.html"}, {"a": "Rivadavia al 100, Quilmes Centro", "p": 85900, "m": 76.0, "u": 1130, "d": 1089, "y": -34.7225188357, "x": -58.2581044407, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-venta-quilmes-60253565.html"}, {"a": "Videla 81", "p": 78000, "m": 43.0, "u": 1814, "d": 1091, "y": -34.7218681736, "x": -58.2607205366, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-monoambiente-en-venta-quilmes-centro.-58202791.html"}, {"a": "Videla 81", "p": 180000, "m": 129.0, "u": 1395, "d": 1091, "y": -34.7218681736, "x": -58.2607205366, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-monoambiente-en-venta-quilmes-centro.-58202791.html"}, {"a": "Lavalle 1183", "p": 97000, "m": 60.0, "u": 1617, "d": 1103, "y": -34.7316025, "x": -58.2506887, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-moderno-departamento-de-2-ambientes-con-balcon-57881570.html"}, {"a": "25 de mayo", "p": 390000, "m": 250.0, "u": 1560, "d": 1116, "y": -34.7252554, "x": -58.25323969999999, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-4-ambientes-con-2-cocheras-y-terraza-56884265.html"}, {"a": "Alvear 921, Entre Brandsen y Matienzo. T", "p": 104000, "m": 52.0, "u": 2000, "d": 1151, "y": -34.7263245, "x": -58.2518717, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-2-ambientes-a-estrenar-con-financiacion-tower-i-59386276.html"}, {"a": "Alvear", "p": 104000, "m": 50.0, "u": 2080, "d": 1151, "y": -34.7263245, "x": -58.2518717, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamentos-de-2-ambientes-a-estrenar-en-quilmes-56869696.html"}, {"a": "Alvear 921", "p": 104000, "m": 45.0, "u": 2311, "d": 1151, "y": -34.7263245, "x": -58.251871699999995, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamentos-de-2-ambientes-en-venta-a-estrenar-59990871.html"}, {"a": "ALVEAR 921", "p": 104000, "m": 52.0, "u": 2000, "d": 1154, "y": -34.7263033, "x": -58.2518579, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-quilmes-centro-56900315.html"}, {"a": "Alvear al 900", "p": 104000, "m": 51.0, "u": 2039, "d": 1155, "y": -34.726293, "x": -58.2518467, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-en-venta-en-quilmes-centro-58202745.html"}, {"a": "Brown 600", "p": 134844, "m": 76.0, "u": 1774, "d": 1178, "y": -34.7226869, "x": -58.2556696, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-quilmes-centro-53624380.html"}, {"a": "Brown 600", "p": 94768, "m": 51.0, "u": 1858, "d": 1178, "y": -34.7226869, "x": -58.2556696, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-quilmes-centro-53624380.html"}, {"a": "Brown 600", "p": 140291, "m": 67.0, "u": 2094, "d": 1178, "y": -34.7226869, "x": -58.2556696, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-quilmes-centro-53624380.html"}, {"a": "Alvear  al 900", "p": 100000, "m": 46.0, "u": 2174, "d": 1194, "y": -34.7270909, "x": -58.2508714, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-vende-departamento-2-ambientes-con-balcon-y-cochera-en-59640389.html"}, {"a": "G.b.a. Zona Sur, Quilmes, Ortiz de Ocamp", "p": 110000, "m": 53.0, "u": 2075, "d": 1221, "y": -34.7271143, "x": -58.2505269, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-en-venta-cochera-quilmes-58202753.html"}, {"a": "Alem  al 200 Entre Brown y Alvear", "p": 77000, "m": 50.0, "u": 1540, "d": 1231, "y": -34.7221622, "x": -58.2555905, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-quilmes-58255749.html"}, {"a": "Olavarria 342! 2 Ambientes. 2do Piso A", "p": 88000, "m": 51.0, "u": 1725, "d": 1274, "y": -34.7237363, "x": -58.252542, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-ambientes-quilmes-centro-58954799.html"}, {"a": "Lavalle al 100", "p": 56000, "m": 40.0, "u": 1400, "d": 1287, "y": -34.72053380815549, "x": -58.25839577214306, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-dos-ambientes-quilmes-59957560.html"}, {"a": "Avenida Mitre 804", "p": 161144, "m": 89.0, "u": 1811, "d": 1309, "y": -34.7237678, "x": -58.2520047, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-3-ambientes-en-quilmes-centro-59691019.html"}, {"a": "Avenida Mitre 804", "p": 87938, "m": 55.0, "u": 1599, "d": 1309, "y": -34.7237678, "x": -58.2520047, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-3-ambientes-en-quilmes-centro-59691019.html"}, {"a": "Laprida  79", "p": 55000, "m": 42.0, "u": 1310, "d": 1327, "y": -34.7372651, "x": -58.2500156, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-en-venta-quilmes-57457007.html"}, {"a": "Laprida  79", "p": 60000, "m": 42.0, "u": 1429, "d": 1327, "y": -34.7372651, "x": -58.2500156, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-en-venta-quilmes-57457007.html"}, {"a": "Ortiz de Ocampo 300", "p": 93000, "m": 53.0, "u": 1755, "d": 1330, "y": -34.7268122, "x": -58.2493882, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta.-depto.-2-ambientes.-en-pozo.-60294421.html"}, {"a": "Alvear al 1100 6ºA - Anton Chill", "p": 126600, "m": 52.0, "u": 2435, "d": 1334, "y": -34.7307281, "x": -58.2481977, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-dos-ambientes-en-venta-anton-chill-58805885.html"}, {"a": "Alvear al 1100 4ºB - Anton Chill", "p": 112816, "m": 55.0, "u": 2051, "d": 1334, "y": -34.7307281, "x": -58.2481977, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-dos-ambientes-en-venta-anton-chill-58805857.html"}, {"a": "Ortiz de Ocampo 370", "p": 217000, "m": 96.0, "u": 2260, "d": 1337, "y": -34.7265729, "x": -58.2494364, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-pozo-opcional-57086175.html"}, {"a": "Ortiz de Ocampo 370", "p": 184227, "m": 100.0, "u": 1842, "d": 1337, "y": -34.7265729, "x": -58.2494364, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-en-pozo-opcional-57086175.html"}, {"a": "Guido  al 300", "p": 84500, "m": 48.0, "u": 1760, "d": 1337, "y": -34.7274430492, "x": -58.2490015954, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-dpto-2-amb-a-estrenar-6-piso-con-balcon-dormitorio-59686731.html"}, {"a": "Guido  al 300", "p": 131900, "m": 71.0, "u": 1858, "d": 1341, "y": -34.7274087, "x": -58.2489764, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-semi-piso-3-amb-a-estrenar-suite-balcon-al-59686739.html"}, {"a": "Guido 374", "p": 91000, "m": 45.0, "u": 2022, "d": 1344, "y": -34.7273117, "x": -58.24898149999999, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-depto-2-amb-a-estrenar-con-cochera-ultimo-60315567.html"}, {"a": "Av. Mitre  al 1100", "p": 250000, "m": 106.0, "u": 2358, "d": 1346, "y": -34.7288222, "x": -58.2484037, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-cuatro-ambientes-con-cochera-en-venta-59448715.html"}, {"a": "Sarmiento al 900", "p": 100297, "m": 61.0, "u": 1644, "d": 1352, "y": -34.7253407, "x": -58.2500329, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-en-venta-61-m-sup2--57832300.html"}, {"a": "Olavarria al 300 - 1º", "p": 105000, "m": 55.0, "u": 1909, "d": 1359, "y": -34.7233345, "x": -58.2517332, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-dos-ambientes-a-estrenar-en-alquiler-59623974.html"}, {"a": "Mitre al 1125", "p": 125000, "m": 54.0, "u": 2315, "d": 1367, "y": -34.7294364, "x": -58.2480234, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-a-estrenar-con-cochera-59415490.html"}, {"a": "Alvear al 400", "p": 100000, "m": 46.0, "u": 2174, "d": 1368, "y": -34.7195626, "x": -58.2593534, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-de-dos-ambientes-en-quilmes-59348278.html"}, {"a": "Ortiz DE Ocampo 398", "p": 175000, "m": 101.0, "u": 1733, "d": 1371, "y": -34.7264881, "x": -58.2490745, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-de-3-ambientes-quilmes-centro-59973029.html"}, {"a": "Ortiz de Ocampo al 300", "p": 175000, "m": 101.0, "u": 1733, "d": 1371, "y": -34.7264881, "x": -58.24907449999999, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-en-venta-en-quilmes-centro-60439604.html"}, {"a": "Av. Mitre  al 1100", "p": 125000, "m": 54.0, "u": 2315, "d": 1371, "y": -34.7294217929, "x": -58.2479745466, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-dos-ambientes-con-cochera-en-venta-a-59458806.html"}, {"a": "Sarmiento  al 800", "p": 510000, "m": 159.0, "u": 3208, "d": 1374, "y": -34.7241238397, "x": -58.2507308582, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-pozo-5-ambientes-con-cochera-54843456.html"}, {"a": "Sarmiento  al 800", "p": 286000, "m": 108.0, "u": 2648, "d": 1380, "y": -34.7241062035, "x": -58.2506664852, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-pozo-con-financiacion-quilmes-58957205.html"}, {"a": "Sarmiento  al 800", "p": 277000, "m": 105.0, "u": 2638, "d": 1381, "y": -34.7240885673, "x": -58.2506664852, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-en-pozo-con-financiacion-quilmes-57774164.html"}, {"a": "Avenida Mitre al 1100", "p": 115000, "m": 66.0, "u": 1742, "d": 1383, "y": -34.7294321413011, "x": -58.24783798856964, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-2-ambientes-quilmes-centro-a-59745477.html"}, {"a": "Humberto Primo al 390", "p": 125000, "m": 56.0, "u": 2232, "d": 1384, "y": -34.7225821, "x": -58.2522422, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-venta-departamento-2-ambientes-a-estrenar-con-59001364.html"}, {"a": "Sarmiento 1010, Quilmes ¡amplio y Modern", "p": 175000, "m": 100.0, "u": 1750, "d": 1404, "y": -34.7267115, "x": -58.2485625, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-piso-de-tres-ambientes-a-la-venta-en-58970844.html"}, {"a": "Mitre  1144 - 2º", "p": 116000, "m": 66.0, "u": 1758, "d": 1405, "y": -34.7296086, "x": -58.2475612, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-dos-ambientes-en-venta-quilmes-centro-60001172.html"}, {"a": "Sarmiento  700 6°", "p": 130000, "m": 50.0, "u": 2600, "d": 1419, "y": -34.7221595896, "x": -58.2522240598, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semipiso-en-venta-2-ambientes-con-cochera-58804940.html"}, {"a": "Garibaldi 424", "p": 210000, "m": 155.0, "u": 1355, "d": 1423, "y": -34.7206336, "x": -58.2546051, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-de-3-ambientes-con-terraza-parrilla-59992175.html"}, {"a": "San Martin 764", "p": 127000, "m": 68.0, "u": 1868, "d": 1423, "y": -34.7206336, "x": -58.2546051, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-3-ambientes-en-quilmes-60302332.html"}, {"a": "Av. Mitre 1170", "p": 74000, "m": 47.0, "u": 1574, "d": 1448, "y": -34.7302955, "x": -58.24698549999999, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-oferta-lanzamiento-departamentos-en-primer-piso-2-55888949.html"}, {"a": "Guido  al 400", "p": 190000, "m": 98.0, "u": 1939, "d": 1470, "y": -34.7275535, "x": -58.2474171, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-4-ambientes-en-quilmes-59858375.html"}, {"a": "Guido al 400", "p": 193206, "m": 105.0, "u": 1840, "d": 1470, "y": -34.7275535, "x": -58.2474171, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-4-ambientes-con-vista-al-frente-58161246.html"}, {"a": "Guido al 400", "p": 135434, "m": 74.0, "u": 1830, "d": 1470, "y": -34.7275535, "x": -58.2474171, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-en-venta-4-ambientes-con-vista-al-frente-58161246.html"}, {"a": "Guido  al 400", "p": 130000, "m": 74.0, "u": 1757, "d": 1470, "y": -34.7275535, "x": -58.2474171, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-4-ambientes-en-quilmes-59858375.html"}, {"a": "Garibaldi 424", "p": 125000, "m": 82.0, "u": 1524, "d": 1490, "y": -34.7213875, "x": -58.2521223, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-con-galeria-jardin-59865815.html"}, {"a": "Garibaldi  al 424", "p": 230000, "m": 105.0, "u": 2190, "d": 1490, "y": -34.7213875, "x": -58.2521223, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-3-ambientes-con-patio-aterrazado-quincho-59992170.html"}, {"a": "Garibaldi 424", "p": 150000, "m": 85.0, "u": 1765, "d": 1490, "y": -34.7213875, "x": -58.2521223, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-con-galeria-jardin-59865815.html"}, {"a": "Garibaldi 424", "p": 110000, "m": 57.0, "u": 1930, "d": 1490, "y": -34.7213875, "x": -58.2521223, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-departamento-2-ambientes-a-estrenar-con-galeria-jardin-59865815.html"}, {"a": "Mitre 1213", "p": 83000, "m": 50.0, "u": 1660, "d": 1497, "y": -34.731351, "x": -58.2463792, "z": "centro", "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclapin-semipisos-de-2-ambientes-a-estrenar-en-venta-quilmes-58276605.html"}], "cas": [{"a": "Casa 5 Ambientes,  en Venta. Con Jardín ", "p": 240000, "m": 210.0, "t": 215.0, "d": 134, "y": -34.7309791, "x": -58.2614587, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-de-5-ambientes-en-venta.-terminaciones-de-gran-51520396.html"}, {"a": "1ro de Mayo  448", "p": 180000, "m": 90.0, "t": 120.0, "d": 153, "y": -34.7302043, "x": -58.2623341, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-4-ambientes-con-jardin-en-venta-apta-credito-59501337.html"}, {"a": "Andrés Baranda 1800", "p": 155000, "m": 238.0, "t": 448.0, "d": 163, "y": -34.7321748, "x": -58.2643645, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-quilmes-3-amb.-c-locales-en-block-60223301.html"}, {"a": "Primero de Mayo al 400", "p": 180000, "m": 120.0, "t": 425.0, "d": 186, "y": -34.729869, "x": -58.2626035, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-quilmes-oeste-60309286.html"}, {"a": "Saenz Peña al 1700", "p": 210000, "m": 240.0, "t": 240.0, "d": 210, "y": -34.729994, "x": -58.2614375, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-quilmes-oeste-4-ambientes-54638058.html"}, {"a": "Benito Pérez Galdós al 300", "p": 105000, "m": 150.0, "t": 330.0, "d": 232, "y": -34.7311081, "x": -58.2602723, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-de-3-ambientes-en-quilmes-oeste-centro-58804883.html"}, {"a": "Benito Perez Galdos 780", "p": 100000, "m": 100.0, "t": 171.0, "d": 256, "y": -34.733454, "x": -58.264311, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-en-quilmes-oeste-quilmes-g.-b.-a.-zona-59094090.html"}, {"a": "Felipe Amoedo e/ Marcelo Torcuato de Alv", "p": 230000, "m": 176.0, "t": 276.0, "d": 280, "y": -34.7338688, "x": -58.2639332, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-3-dorm.-3-banos-quilmes-60310022.html"}, {"a": "Andres Baranda 2100", "p": 150000, "m": 250.0, "t": 407.0, "d": 308, "y": -34.73429489, "x": -58.26243591, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-a-la-venta-en-quilmes-oeste.-53618449.html"}, {"a": "Felipe Amoedo 377", "p": 68000, "m": 168.0, "t": 174.0, "d": 316, "y": -34.7323282, "x": -58.2594336, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-con-local-al-frente.-av-amoedo.-quilmes-60387489.html"}, {"a": "Felipe Amoedo  al 700", "p": 98000, "m": 189.0, "t": 189.0, "d": 317, "y": -34.7342929, "x": -58.26363929999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-4-ambientes-en-venta-en-felipe-amoedo-796-60260817.html"}, {"a": "Andres Baranda e/  Amoedo y Madres Pza d", "p": 139000, "m": 250.0, "t": 400.0, "d": 327, "y": -34.7344769, "x": -58.2628624, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-en-quilmes-oeste-58581926.html"}, {"a": "Andres Baranda al 2100", "p": 140000, "m": 222.0, "t": 222.0, "d": 327, "y": -34.7344769, "x": -58.2628624, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-quilmes-oeste-59927907.html"}, {"a": "Marcelo T. de Alvear al 2200", "p": 119000, "m": 107.0, "t": 189.0, "d": 455, "y": -34.7356147949, "x": -58.2632053053, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-triplex-4-ambientes-proximo-a-andres-baranda-y-amoedo-58634786.html"}, {"a": "Ayolas al 44", "p": 128000, "m": 58.0, "t": 183.0, "d": 459, "y": -34.7340297, "x": -58.2587583, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-3-ambientes-p.-h.-planta-alta-en-venta-villa-60031094.html"}, {"a": "Presidente Juan Domingo Perón 845", "p": 128000, "m": 91.0, "t": 375.0, "d": 477, "y": -34.7301639, "x": -58.26770689999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-de-4-ambientes-excelente-para-vivienda-o-59783958.html"}, {"a": "Bernardo de Irigoyen Nº 1381", "p": 200000, "m": 149.0, "t": 450.0, "d": 477, "y": -34.7277232, "x": -58.26514179999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-con-galpon-en-venta-54084071.html"}, {"a": "AYOLAS 47. Entre Vicente Lopez", "p": 138000, "m": 102.0, "t": 224.0, "d": 500, "y": -34.7333755, "x": -58.2577599, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-3-ambientes.-ayolas-al-100-60400306.html"}, {"a": "M. T. de Alvear al 1400", "p": 140000, "m": 180.0, "t": 200.0, "d": 507, "y": -34.7293472, "x": -58.2676234, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-con-local-en-venta-de-5-ambientes-en-quilmes-58804695.html"}, {"a": "Marcelo Torcuato De Alvear y Corrientes", "p": 155000, "m": 152.0, "t": 152.0, "d": 537, "y": -34.7292135, "x": -58.2679091, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-4-dorm.-2-banos-local-152-m-sup2-59748741.html"}, {"a": "Quintana e/ Iralas y Ayolas", "p": 120000, "m": 138.0, "t": 160.0, "d": 564, "y": -34.7361566812, "x": -58.2602159045, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-4-dorm.-3-banos-quincho-con-parrilla-59617466.html"}, {"a": "Larrea   al 1300", "p": 210000, "m": 140.0, "t": 300.0, "d": 611, "y": -34.7296583, "x": -58.2690376, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-quilmes-4-ambientes-con-pileta-60011905.html"}, {"a": "Urquiza e/ Primero de Mayo y San Mauro", "p": 120000, "m": 134.0, "t": 226.0, "d": 624, "y": -34.7342130253, "x": -58.2687558976, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-4-dorm.-2-banos-patio-y-parrilla-59749906.html"}, {"a": "Av. Hipolito Yrigoyen 951", "p": 240000, "m": 130.0, "t": 243.0, "d": 660, "y": -34.7293011, "x": -58.25607309999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-ideal-para-desarrollo-54843341.html"}, {"a": "Vélez Sarsfield 1774", "p": 80000, "m": 80.0, "t": 248.0, "d": 661, "y": -34.7340302, "x": -58.2693239, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-con-departamento-y-galpon-excelente-potencial-y-57521468.html"}, {"a": "Triunvirato 500", "p": 185000, "m": 263.0, "t": 263.0, "d": 661, "y": -34.736798, "x": -58.2593777, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-pa-con-cochera-local-y-taller-quilmes-60413161.html"}, {"a": "Brandsen 50", "p": 250000, "m": 230.0, "t": 260.0, "d": 669, "y": -34.7282232, "x": -58.2566488, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-importante-casa-en-quilmes-centro-56785972.html"}, {"a": "Larrea al 1300", "p": 209900, "m": 140.0, "t": 300.0, "d": 681, "y": -34.7288363, "x": -58.2694503, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-quilmes-58847828.html"}, {"a": "Velez Sarsfield al 2000", "p": 100000, "m": 130.0, "t": 180.0, "d": 705, "y": -34.73643480563057, "x": -58.267652478698736, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-3-dorm.-quilmes-oeste-con-cochera-60309667.html"}, {"a": "Azcuénaga 1316", "p": 89000, "m": 55.0, "t": 80.0, "d": 718, "y": -34.7293721, "x": -58.2701568, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-duplex-en-venta-en-quilmes-oeste-59094000.html"}, {"a": "Pasaje Gaboto 714", "p": 70000, "m": 50.0, "t": 60.0, "d": 738, "y": -34.7253598, "x": -58.259800299999995, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-duplex-quilmes-centro-43884789.html"}, {"a": "Guido 64 Quilmes", "p": 210000, "m": 236.0, "t": 560.0, "d": 749, "y": -34.7302369, "x": -58.2547108, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-propiedad-en-bloque-guido-64-quilmes-59578698.html"}, {"a": "Marcelo Torcuato de Alvear 2600", "p": 59000, "m": 83.0, "t": 188.0, "d": 763, "y": -34.7382918, "x": -58.2612706, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-3-ambientes-con-terraza-en-quilmes-60323713.html"}, {"a": "Marcelo T. de Alvear al 2600", "p": 83000, "m": 85.0, "t": 85.0, "d": 764, "y": -34.7382195, "x": -58.2608132, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-duplex-a-pasos-parque-de-la-cerveceria-55775986.html"}, {"a": "12 de Octubre al 1200", "p": 290000, "m": 375.0, "t": 415.0, "d": 780, "y": -34.7329115717, "x": -58.2711308479, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-quilmes-oeste-50981958.html"}, {"a": "Irala 1102", "p": 250000, "m": 110.0, "t": 340.0, "d": 785, "y": -34.7381896, "x": -58.265627099999996, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-hermosa-casa-chalet-de-6-ambientes-en-quilmes-59924011.html"}, {"a": "Vélez Sarsfield 1463", "p": 280000, "m": 316.0, "t": 327.0, "d": 817, "y": -34.73167979999999, "x": -58.2716937, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-apta-credito-chalet-en-impecable-estado-a-m-de-58252004.html"}, {"a": "Velez Sarsfield 1463", "p": 265000, "m": 317.0, "t": 327.0, "d": 817, "y": -34.7316772, "x": -58.2716956, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-4-ambientes-con-jardin-en-venta-y-alquiler-apta-60448465.html"}, {"a": "Roque Sáenz Peña 1000", "p": 140000, "m": 107.0, "t": 167.0, "d": 824, "y": -34.7245285, "x": -58.2656851, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-duplex-3-ambientes-en-venta-en-quilmes-cochera-60466087.html"}, {"a": "Urquiza 2555", "p": 110000, "m": 137.0, "t": 240.0, "d": 832, "y": -34.73881531, "x": -58.26488495, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-3-ambientes-cochera-patio-y-pileta-de-material.-49445020.html"}, {"a": "Urquiza  al 1200", "p": 190000, "m": 190.0, "t": 300.0, "d": 872, "y": -34.7294291, "x": -58.2719506, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-4-ambientes-con-quincho-quilmes-oeste-59398172.html"}, {"a": "Urquiza e/ Avenida Pellegrini y Entre Rí", "p": 110000, "m": 156.0, "t": 156.0, "d": 874, "y": -34.7293403679, "x": -58.2719377851, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-2-dorm.-1-bano-156-m-sup2--quilmes-59864179.html"}, {"a": "ROQUE SAENZ PEÑA 1019 QUILMES OESTE", "p": 127000, "m": 79.0, "t": 126.0, "d": 878, "y": -34.7242477, "x": -58.2664535, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-duplex-con-fondo-libre-57095875.html"}, {"a": "Gran Canaria 1150", "p": 99000, "m": 135.0, "t": 310.0, "d": 880, "y": -34.7236301, "x": -58.2625759, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-de-3-ambientes-con-posesion-inmediata-y-60142886.html"}, {"a": "Larrea 1052", "p": 160000, "m": 145.0, "t": 329.0, "d": 903, "y": -34.726689, "x": -58.2706884, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-chalet-en-excelente-estado-quilmes-oeste-apto-56663412.html"}, {"a": "Azcuénaga 2700", "p": 129900, "m": 166.0, "t": 166.0, "d": 905, "y": -34.7396772, "x": -58.2629158, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-tipo-triplex-de-3-piso-con-cochera-60388037.html"}, {"a": "Gran Canaria esquina Islas Malvinas", "p": 100000, "m": 95.0, "t": 120.0, "d": 909, "y": -34.72336333631663, "x": -58.26303064477463, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-quilmes-casa-3-amb-c-cochera-y-patio-51362600.html"}, {"a": "Tucumán 665", "p": 110000, "m": 84.0, "t": 148.0, "d": 923, "y": -34.725037, "x": -58.2690436, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-4-ambientes-con-cochera-reciclada-en-venta-apto-59690610.html"}, {"a": "Moreno 1085", "p": 130000, "m": 200.0, "t": 251.0, "d": 935, "y": -34.7305186, "x": -58.2526015, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-ideal-consultorios-vivienda-o-59400922.html"}, {"a": "Tucumán 172", "p": 230000, "m": 162.0, "t": 172.0, "d": 964, "y": -34.7229475, "x": -58.2641808, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-senorial-chalet-en-inmejorable-ubicacion.-58979350.html"}, {"a": "O'Higgins 1485", "p": 230000, "m": 200.0, "t": 220.0, "d": 968, "y": -34.7328713, "x": -58.273226300000005, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-chalet-en-dos-plantas-200-m-sup2--cubiertos-ubicado-58553206.html"}, {"a": "Lavalle 916", "p": 198000, "m": 140.0, "t": 200.0, "d": 982, "y": -34.7270534, "x": -58.2534977, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-5-ambientes-excelente-ubicacion-quilmes-centro-58434461.html"}, {"a": "Beruti 259", "p": 114000, "m": 185.0, "t": 230.0, "d": 992, "y": -34.7366507, "x": -58.25385490000001, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-con-departamento-en-venta-en-quilmes-oeste-centro-47598841.html"}, {"a": "Larrea al 2800", "p": 79000, "m": 114.0, "t": 228.0, "d": 994, "y": -34.74038, "x": -58.261138, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-quilmes-oeste-60086746.html"}, {"a": "Entre Ríos 1300", "p": 219999, "m": 180.0, "t": 200.0, "d": 995, "y": -34.7311211, "x": -58.2736312, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-de-6-ambientes-garage-quincho-jardin-quilmes-60195250.html"}, {"a": "ROQUE SAENZ PEÑA 937. Entre Tucuman y Bo", "p": 230000, "m": 233.0, "t": 337.0, "d": 998, "y": -34.72320540751876, "x": -58.2668041282226, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-4-ambientes-en-quilmes-oeste.-57885773.html"}, {"a": "Bernardo de Irigoyen al 900", "p": 230000, "m": 203.0, "t": 229.0, "d": 1011, "y": -34.7235541828, "x": -58.2680457594, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-multifamiliar-3-departamentos-60008237.html"}, {"a": "Ortiz DE Ocampo al 200", "p": 142000, "m": 102.0, "t": 136.0, "d": 1015, "y": -34.7282292, "x": -58.2524125, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-ph-de-4-ambientes-con-cochera-y-jardin-en-59785366.html"}, {"a": "Bernardo de Irigoyen al 900", "p": 200000, "m": 180.0, "t": 180.0, "d": 1017, "y": -34.7235001, "x": -58.2680729, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-multifamiliar-3-departamentos-60008237.html"}, {"a": "Martín Rodriguez al 1500", "p": 300000, "m": 409.0, "t": 409.0, "d": 1021, "y": -34.733603, "x": -58.2736446, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-5-ambientes-con-cochera-en-quilmes-59785178.html"}, {"a": "Lavalleja 800", "p": 110000, "m": 90.0, "t": 127.0, "d": 1031, "y": -34.74056483673469, "x": -58.2601852244898, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-triplex-en-venta-en-quilmes-oeste-58177554.html"}, {"a": "TUCUMAN 2. Entre Canal De Beagle y Gran ", "p": 80000, "m": 57.0, "t": 69.0, "d": 1033, "y": -34.722245, "x": -58.262838, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-3-ambientes.-tucuman-al-100-59297833.html"}, {"a": "Bernardo de Irigoyen 880", "p": 130000, "m": 110.0, "t": 225.0, "d": 1044, "y": -34.7232284, "x": -58.26807339999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-chalet-de-4-ambientes-con-cochera-en-venta-60399503.html"}, {"a": "Bombero Sanchez 795", "p": 98000, "m": 90.0, "t": 258.0, "d": 1054, "y": -34.7248578, "x": -58.2709457, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-venta.-bombero-sanchez-795.-quilmes-oeste.-53732562.html"}, {"a": "Aristóbulo del Valle 2861", "p": 120000, "m": 155.0, "t": 162.0, "d": 1055, "y": -34.73750520000001, "x": -58.2537885, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-2-plantas-con-amplias-terrazas-aptas-57477956.html"}, {"a": "Moreno 1250", "p": 142000, "m": 187.0, "t": 258.0, "d": 1058, "y": -34.7322223, "x": -58.2512065, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-5-ambientes-con-jardin-en-venta-apto-credito-59515939.html"}, {"a": "CORRIENTES 1450", "p": 250000, "m": 245.0, "t": 297.0, "d": 1060, "y": -34.73266, "x": -58.27427520000001, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-chalet-en-venta-quilmes-o.-55595034.html"}, {"a": "MORENO 1200. Entre Balcarce y French", "p": 210000, "m": 210.0, "t": 210.0, "d": 1076, "y": -34.7322339, "x": -58.25101849999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-5-ambientes.-moreno-al-1200-48552989.html"}, {"a": "Berutti 63", "p": 108000, "m": 127.0, "t": 620.0, "d": 1077, "y": -34.7357976, "x": -58.25216899999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-3-ambientes-sobre-dos-lotes-en-quilmes-57130840.html"}, {"a": "Bombero Sánchez al 200", "p": 130000, "m": 125.0, "t": 238.0, "d": 1087, "y": -34.7220097, "x": -58.2654093, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-en-quilmes-4-ambientes!-56158539.html"}, {"a": "O'higgins  al 2500", "p": 95000, "m": 75.0, "t": 132.0, "d": 1099, "y": -34.7404024, "x": -58.2680791, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-duplex-4-ambientes-apto-credito-con-cochera-y-patio-60399356.html"}, {"a": "Brown 700. Entre Olavarria y Humberto pr", "p": 188000, "m": 130.0, "t": 130.0, "d": 1101, "y": -34.724468943784316, "x": -58.25431586427919, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-duplex-4-ambientes-con-patio-60400441.html"}, {"a": "Andrés Baranda 800", "p": 105000, "m": 165.0, "t": 285.0, "d": 1101, "y": -34.7239589, "x": -58.270507, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-chalet-pintoresco-av-principal-z-comercial-quilmes-60242979.html"}, {"a": "O. de Ocampo al 200", "p": 105000, "m": 140.0, "t": 140.0, "d": 1102, "y": -34.7277819, "x": -58.2515998, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-de-4-ambientes-ideal-emprendimiento-57506640.html"}, {"a": "Gran Canaria 908", "p": 210000, "m": 150.0, "t": 320.0, "d": 1103, "y": -34.7216702, "x": -58.2640017, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-4-ambientes-en-venta-quilmes-oeste-58700828.html"}, {"a": "Ortiz de Ocampo al 200", "p": 105000, "m": 130.0, "t": 140.0, "d": 1105, "y": -34.7277585994, "x": -58.2515795682, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-4-ambientes-quilmes-58770564.html"}, {"a": "Rodolfo Lopez al 700", "p": 170000, "m": 190.0, "t": 280.0, "d": 1120, "y": -34.7242066, "x": -58.2711656, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-en-quilmes-oeste-59094043.html"}, {"a": "Beruti 1212", "p": 52000, "m": 85.0, "t": 105.0, "d": 1132, "y": -34.741622299999996, "x": -58.26445449999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-3-ambientes-con-cochera-quilmes-oeste-59456762.html"}, {"a": "Lavalleja 1127", "p": 68000, "m": 90.0, "t": 340.0, "d": 1135, "y": -34.741745, "x": -58.26306220000001, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-lote-de-340-m-sup2--en-venta-en-quilmes-con-casa-a-58666419.html"}, {"a": "TORCUATO DE ALVEAR 3058", "p": 140000, "m": 150.0, "t": 284.0, "d": 1139, "y": -34.7412475, "x": -58.2588009, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-chalet-en-dos-plantas-4-ambientes-56242735.html"}, {"a": "Balcarce 9", "p": 110000, "m": 250.0, "t": 320.0, "d": 1147, "y": -34.7345751, "x": -58.25076109999999, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-excelente-zona-de-quilmes.-oportunidad.-ideal-60068632.html"}, {"a": "Madres de Plaza de Mayo al 1500", "p": 98000, "m": 80.0, "t": 102.0, "d": 1150, "y": -34.7390483, "x": -58.2714147, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-quilmes-56065301.html"}, {"a": "Roque Sáenz Peña 779", "p": 138000, "m": 140.0, "t": 180.0, "d": 1153, "y": -34.7220861, "x": -58.2679407, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-hermosa-casa-en-venta-en-quilmes-58994770.html"}, {"a": "9 de Julio N°63", "p": 129900, "m": 130.0, "t": 130.0, "d": 1160, "y": -34.7211599, "x": -58.2614876, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-5-ambientes-reciclada-a-nueva-2-plantas-59859112.html"}, {"a": "Alvear  1017", "p": 350000, "m": 350.0, "t": 410.0, "d": 1171, "y": -34.7277832, "x": -58.25078964, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-cuatro-ambientes-en-venta-lote-de-10x40-54217533.html"}, {"a": "Colón 0", "p": 159000, "m": 289.0, "t": 289.0, "d": 1184, "y": -34.7208999, "x": -58.2631744, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-venta-casa-en-quilmes-con-jardin-quincho-pileta-60324943.html"}, {"a": "Alvear e/ Ortiz de Ocampo y Guido", "p": 450000, "m": 300.0, "t": 412.0, "d": 1191, "y": -34.7277047728, "x": -58.2505885948, "url": "https://www.zonaprop.com.ar/propiedades/clasificado/veclcain-casa-en-venta-4-dorm.-4-banos-cochera-412-60194059.html"}], "pad": [{"a": "Padel VIP · Perón 568 esq. Quintana", "y": -34.7290274, "x": -58.2647316, "c": "2 canchas", "d": 332}, {"a": "El Portal Padel · Triunvirato 969", "y": -34.7385203, "x": -58.2635055, "c": "5 canchas (4 techadas)", "d": 779}, {"a": "Paddle Center · Humberto Primo 257", "y": -34.7237446, "x": -58.2540317, "c": "2 canchas", "d": 1178}, {"a": "Gratz Paddle · Av. Vicente López 330", "y": -34.7179893, "x": -58.2695905, "c": "canchas + parrilla", "d": 1631}, {"a": "Padel Hall · Av. Mitre 1453", "y": -34.7353712, "x": -58.2424254, "c": "3 canchas (2 techadas)", "d": 1906}, {"a": "Conecta Padel · Zapiola 52", "y": -34.7126687, "x": -58.2760928, "c": "club nuevo", "d": 2426}, {"a": "Real Padel · Lafinur 3166", "y": -34.7553242, "x": -58.2833682, "c": "3 canchas techadas", "d": 3247}]};
+const fmt = n => Math.round(n).toLocaleString('es-AR');
+const gc='#ecebe5', tip={backgroundColor:'#fff',borderColor:'#e1e0d9',borderWidth:1,titleColor:'#0b0b0b',bodyColor:'#52514e',padding:10};
+if(window.Chart){Chart.defaults.font.family='Inter';Chart.defaults.color='#52514e';}
+
+// ---------- CALCULADORA EDIFICIO ----------
+const M = {vend:1226, constr:1508, coch:16*7000, extra:30000, pl:0};
+function resid(P,c,r){ const F=M.vend*P+M.coch, pozo=F*0.16, ventas=F*0.9, neto=ventas*0.97, obra=M.constr*c+M.extra;
+  const T=((neto + r*pozo)/(1+r) - obra - M.pl)/1.07;
+  const gan = neto - (T*1.07 + obra + M.pl);
+  return {T, ventas, gastosV:ventas-neto, obra, gan, compra:T*0.07}; }
+const ip=document.getElementById('ip'), ic=document.getElementById('ic'), ir=document.getElementById('ir');
+function bars(el,rows,mx){ el.innerHTML=rows.map(([n,v,col])=>`<div class="casc-row"><span style="color:#c9d3e0">${n}</span><div style="background:#ffffff14;border-radius:4px"><div class="casc-bar" style="width:${Math.max(0.5,Math.min(100,v/mx*100))}%;background:${col}"></div></div><span>USD ${fmt(v/1000)}k</span></div>`).join(''); }
+function upd(){
+  const P=+ip.value, c=+ic.value, r=+ir.value/100;
+  document.getElementById('lp').textContent='USD '+fmt(P)+'/m²';
+  document.getElementById('lc').textContent='USD '+fmt(c)+'/m²';
+  document.getElementById('lr').textContent=Math.round(r*100)+'%';
+  const x=resid(P,c,r);
+  const ov=document.getElementById('ov'), os=document.getElementById('os');
+  if(x.T<=0){ ov.textContent='No queda nada'; ov.style.color='#ff8a7a'; os.textContent='Con estos números el proyecto no cubre obra y ganancia: faltan USD '+fmt(-x.T*1.07)+'.'; }
+  else { ov.textContent='USD '+fmt(x.T); ov.style.color='#fff'; os.textContent='Incidencia USD '+fmt(x.T/M.vend)+'/m² vendible · USD '+fmt(x.T/848)+'/m² de terreno'; }
+  bars(document.getElementById('casc'),[['Ventas totales',x.ventas,'#6b9fff'],['Obra',x.obra,'#c9d3e0'],['Gastos',x.gastosV+Math.max(x.compra,0),'#8a93a3'],['Ganancia buscada',Math.max(x.gan,0),'#c9a84c'],['Terreno',Math.max(x.T,0),x.T>0?'#22c55e':'#ff8a7a']],x.ventas);
+}
+[ip,ic,ir].forEach(e=>e.addEventListener('input',()=>{document.querySelectorAll('.presets button').forEach(b=>b.classList.remove('on'));upd();}));
+document.querySelectorAll('.presets button').forEach(b=>b.addEventListener('click',()=>{ip.value=b.dataset.p;ic.value=b.dataset.c;ir.value=b.dataset.r;document.querySelectorAll('.presets button').forEach(x=>x.classList.remove('on'));b.classList.add('on');upd();if(window.gtag)gtag('event','calc_preset',{preset:b.textContent});}));
+upd();
+
+// ---------- CALCULADORA PÁDEL ----------
+const FX=1540, INV=139700, COST=39000;
+const pt=document.getElementById('pt'), po=document.getElementById('po'), pr=document.getElementById('pr');
+function padel(pico,occ,r){ const p=pico/FX, v=p*2/3; const tech=(4*occ*p+6*0.30*v)*30*12; const desc=tech*0.6; const extra=(tech+desc)*0.15;
+  const ing=tech+desc+extra, ebitda=ing-COST, valor=ebitda/r, T=(valor-INV)/1.07; return {ing,ebitda,valor,T}; }
+function updP(){ const x=padel(+pt.value,+po.value/100,+pr.value/100);
+  document.getElementById('lpt').textContent='$ '+fmt(+pt.value)+' (USD '+fmt(+pt.value/FX)+')';
+  document.getElementById('lpo').textContent=po.value+'%';
+  document.getElementById('lpr').textContent=pr.value+'% anual';
+  const pv=document.getElementById('pv'), ps=document.getElementById('ps');
+  if(x.T<=0){pv.textContent='No queda nada';pv.style.color='#ff8a7a';ps.textContent='El negocio vale USD '+fmt(Math.max(x.valor,0))+', menos que la inversión de USD '+fmt(INV)+'.';}
+  else {pv.textContent='USD '+fmt(x.T);pv.style.color='#fff';ps.textContent='Resultado operativo USD '+fmt(x.ebitda)+' por año · el negocio vale USD '+fmt(x.valor);}
+  bars(document.getElementById('pcasc'),[['Ingresos por año',x.ing,'#6b9fff'],['Resultado por año',Math.max(x.ebitda,0),'#c9a84c'],['Valor del negocio',Math.max(x.valor,0),'#c9d3e0'],['Inversión',INV,'#8a93a3'],['Terreno',Math.max(x.T,0),x.T>0?'#22c55e':'#ff8a7a']],Math.max(x.valor,INV,1));
+}
+[pt,po,pr].forEach(e=>e.addEventListener('input',updP)); updP();
+
+// ---------- TABLAS ----------
+document.getElementById('tTer').innerHTML = DATA.ter.map(o=>`<tr><td style="font-weight:600">${o.url?`<a href="${o.url}" target="_blank" rel="noopener">${o.a}</a>`:o.a}</td><td class="r">${fmt(o.d)} m</td><td class="r">${fmt(o.m)} m²</td><td class="r" style="font-weight:700">USD ${fmt(o.p)}</td><td class="r">${fmt(o.u)}</td><td class="r" style="color:${o.dias>240?'#c0392b':'#52514e'}">${o.pub}</td></tr>`).join('');
+document.getElementById('tDep').innerHTML = DATA.dep.filter(o=>o.d<=1000).map(o=>`<tr><td style="font-weight:600">${o.url?`<a href="${o.url}" target="_blank" rel="noopener">${o.a}</a>`:o.a}</td><td class="r">${fmt(o.d)} m</td><td class="r">${fmt(o.m)} m²</td><td class="r" style="font-weight:700">USD ${fmt(o.p)}</td><td class="r">${fmt(o.u)}</td></tr>`).join('');
+
+// ---------- MAPA ----------
+try{
+  const map=L.map('map',{scrollWheelZoom:false}).setView(DATA.lote,15);
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{attribution:'© OpenStreetMap',maxZoom:19}).addTo(map);
+  const add=(arr,col,lab,f)=>arr.forEach(o=>{ if(!o.x) return; L.circleMarker([o.y,o.x],{radius:6,color:'#fff',weight:1.5,fillColor:col,fillOpacity:.9}).addTo(map).bindPopup(f(o,lab)); });
+  const std=(o,lab)=>`<b>${o.a}</b><br>${lab}: USD ${fmt(o.p)} · ${fmt(o.m)} m²${o.url?`<br><a href="${o.url}" target="_blank" rel="noopener">Ver aviso</a>`:''}`;
+  add(DATA.cas,'#1a7a4a','Casa',std); add(DATA.dep,'#1a7aff','Depto a estrenar',std); add(DATA.ter,'#c9a84c','Terreno',std);
+  add(DATA.pad,'#c0392b','',(o)=>`<b>${o.a}</b><br>${o.c} · a ${fmt(o.d)} m`);
+  L.circleMarker(DATA.lote,{radius:10,color:'#0d1b2e',weight:3,fillColor:'#fff',fillOpacity:1}).addTo(map).bindPopup('<b>San Mauro Castelverde 540</b><br>El lote').openPopup();
+}catch(e){ document.getElementById('map').hidden=true; }
+
+if(window.Chart){
+// ---------- CHART DEPTOS ----------
+const zc={cerca:'#1a7aff',centro:'#b0afa8'}, zl={cerca:'A menos de 1 km',centro:'De 1 a 1,5 km'};
+new Chart(document.getElementById('cDep'),{type:'scatter',data:{datasets:Object.keys(zc).map(z=>({label:zl[z],data:DATA.dep.filter(o=>o.z===z).map(o=>({x:o.d/1000,y:o.u,a:o.a})),backgroundColor:zc[z]+'cc',pointRadius:5}))},
+ options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{labels:{boxWidth:10,font:{size:10}}},tooltip:{...tip,callbacks:{label:c=>c.raw.a+' · USD '+fmt(c.raw.y)+'/m²'}}},scales:{x:{min:0,max:1.6,title:{display:true,text:'km al lote',font:{size:10}},ticks:{font:{size:9}},grid:{color:gc}},y:{ticks:{font:{size:9},callback:v=>fmt(v)},grid:{color:gc}}}}});
+// ---------- CHART TERRENOS ----------
+const T=[{a:'San Mauro 540 (este lote)',u:259,d:0,dias:150,p:220000,pub:'≈ 150 días'},...DATA.ter].sort((a,b)=>a.u-b.u);
+new Chart(document.getElementById('cTer'),{type:'bar',data:{labels:T.map(o=>o.a.replace(/Avenida |Av\.? /,'Av. ').slice(0,24)),datasets:[{data:T.map(o=>o.u),backgroundColor:T.map(o=>o.d===0?'#1a7aff':(o.dias>240?'#c0392b66':'#c9a84c88')),borderColor:T.map(o=>o.d===0?'#1a7aff':(o.dias>240?'#c0392b':'#c9a84c')),borderWidth:1,borderRadius:4}]},
+ options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>{const o=T[c.dataIndex];return 'USD '+fmt(o.u)+'/m² · USD '+fmt(o.p)+' · '+o.pub;}}}},scales:{x:{ticks:{font:{size:9},callback:v=>fmt(v)},grid:{color:gc}},y:{ticks:{font:{size:8.5},autoSkip:false},grid:{display:false}}}}});
+// ---------- CHART ESCENARIOS ----------
+const S=[{n:'Desarrollador de edificio',v:0,c:'#c0392b'},{n:'Canchas de pádel (15%)',v:70200,c:'#b8860b'},{n:'Canchas de pádel (12%, optimista)',v:120400,c:'#d9b65a'},{n:'Recicla para vivir · USD 800/m²',v:90400,c:'#7fb89a'},{n:'Recicla para vivir · USD 600/m²',v:120700,c:'#1a7a4a'},{n:'Precio publicado hoy',v:220000,c:'#c9a84c'}];
+new Chart(document.getElementById('cEsc'),{type:'bar',data:{labels:S.map(s=>s.n),datasets:[{data:S.map(s=>s.v),backgroundColor:S.map(s=>s.c+'66'),borderColor:S.map(s=>s.c),borderWidth:1.5,borderRadius:6,barThickness:22}]},
+ options:{indexAxis:'y',responsive:true,maintainAspectRatio:false,layout:{padding:{right:10}},plugins:{legend:{display:false},tooltip:{...tip,callbacks:{label:c=>'USD '+fmt(c.raw)}}},
+  scales:{x:{min:0,max:270000,ticks:{font:{size:9},callback:v=>'USD '+fmt(v/1000)+'k'},grid:{color:gc}},y:{ticks:{font:{size:10}},grid:{display:false}}}},
+ plugins:[{id:'lbl',afterDatasetsDraw(ch){const {ctx}=ch;const m=ch.getDatasetMeta(0);ctx.save();ctx.font='700 11px Inter,Arial';m.data.forEach((b,i)=>{ctx.fillStyle=S[i].c==='#c9a84c'?'#7d5a00':S[i].c;ctx.fillText(S[i].v?('USD '+fmt(S[i].v)):'USD 0 · no cierra',b.x+6,b.y+4);});ctx.restore();}}]});
+}
+
+// ---------- NAV ACTIVA ----------
+const links=[...document.querySelectorAll('.nav a')];
+const obs=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ links.forEach(l=>l.classList.toggle('on',l.getAttribute('href')==='#'+e.target.id)); }}),{rootMargin:'-45% 0px -50% 0px'});
+document.querySelectorAll('section[id]').forEach(s=>obs.observe(s));
+</script>
