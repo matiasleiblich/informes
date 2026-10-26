@@ -1,0 +1,961 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Línea F de subte — Cómo se va a construir · Octubre 2026</title>
+<meta name="description" content="Informe técnico de la Línea F del subte de Buenos Aires: traza, tuneladoras EPB, túneles, estaciones, desafíos de obra y contrato. Por Matías Leiblich, Ingeniero Civil.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://matiasleiblich.com/informes/subte-F/">
+<meta property="og:title" content="Línea F de subte — Cómo se va a construir">
+<meta property="og:description" content="La H tardó 17 años. La F promete 5. Tuneladoras, túneles gemelos, estaciones y los riesgos de obra, explicados por un ingeniero civil.">
+<meta property="og:image" content="https://matiasleiblich.com/informes/subte-F/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+<meta name="twitter:card" content="summary_large_image">
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MC47CJF0VL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MC47CJF0VL');
+</script>
+
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6}
+
+/* PORTADA */
+.portada{background:#0d1b2e;color:#fff;position:relative;overflow:hidden}
+.portada-hero{position:relative;height:260px;overflow:hidden}
+.portada-hero svg{position:absolute;inset:0;width:100%;height:100%}
+.portada-hero-fade{position:absolute;inset:0;background:linear-gradient(to bottom,#0d1b2e 0%,transparent 35%,#0d1b2e 100%)}
+.portada-content{padding:40px 56px 0;position:relative;z-index:2;margin-top:-80px}
+.portada-logo-row{display:flex;align-items:center;gap:16px;margin-bottom:32px}
+.portada-eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:14px;font-weight:500}
+.portada-titulo{font-size:38px;font-weight:300;color:#f0f1f3;line-height:1.1;margin-bottom:8px}
+.portada-titulo strong{font-weight:700;color:#fff}
+.portada-subtitulo{font-size:14px;color:#9ca3af;margin-bottom:36px;max-width:560px;line-height:1.5}
+.portada-meta{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid #2a3a50;border-radius:10px;overflow:hidden}
+.portada-meta-item{padding:18px 20px;border-right:1px solid #2a3a50}
+.portada-meta-item:last-child{border-right:none}
+.portada-meta-label{font-size:10px;color:#6b7280;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.portada-meta-val{font-size:22px;font-weight:700;color:#fff}
+.portada-meta-sub{font-size:10px;color:#6b7280;margin-top:2px}
+.portada-footer{padding:28px 56px;border-top:1px solid #2a3a50;margin-top:40px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;position:relative;z-index:2}
+.portada-autor{display:flex;align-items:center;gap:14px}
+.portada-autor-info strong{color:#f0f1f3;font-size:14px;display:block}
+.portada-autor-info span{color:#9ca3af;font-size:11px}
+.portada-tags{display:flex;gap:8px;flex-wrap:wrap}
+.portada-tag{font-size:10px;color:#6b9fff;background:#1a7aff11;padding:4px 12px;border-radius:20px;border:1px solid #1a7aff33}
+
+/* SECCIONES */
+.seccion{padding:40px 56px;border-bottom:1px solid #e1e0d9}
+.seccion-blanca{background:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:3px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:22px;font-weight:300;color:#0b0b0b;line-height:1.2}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:#52514e;margin-top:5px;line-height:1.6;max-width:720px}
+.texto{font-size:13px;color:#2c2c2a;line-height:1.75;max-width:760px;margin-bottom:16px}
+.texto strong{color:#0b0b0b}
+
+/* KPIs */
+.kpi-grid{display:grid;gap:8px;margin-bottom:20px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.kpi{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:14px 18px}
+.seccion-blanca .kpi{background:#fafaf8}
+.kpi-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:4px}
+.kpi-val{font-size:24px;font-weight:700;color:#0b0b0b;line-height:1}
+.kpi-val.azul{color:#1F4E79}
+.kpi-val.rojo{color:#c0392b}
+.kpi-val.verde{color:#1a7a4a}
+.kpi-note{font-size:10px;color:#898781;margin-top:4px}
+
+/* FIGURAS */
+.figura{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px;margin-bottom:16px}
+.figura svg{width:100%;height:auto;display:block}
+.figura-pie{font-size:10px;color:#898781;margin-top:8px;line-height:1.5}
+.figura-grid{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:start}
+
+/* CHARTS */
+.chart-card{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px 18px;margin-bottom:16px}
+.chart-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin-bottom:10px}
+.chart-wrap{position:relative;height:220px}
+
+/* PASOS */
+.pasos{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:16px}
+.paso{background:#fafaf8;border:0.5px solid #e1e0d9;border-radius:8px;padding:14px 16px;border-top:3px solid #1a7aff}
+.paso-num{font-size:10px;font-weight:700;letter-spacing:1.5px;color:#1a7aff;margin-bottom:4px}
+.paso-tit{font-size:12.5px;font-weight:700;margin-bottom:4px}
+.paso-desc{font-size:11.5px;color:#52514e;line-height:1.55}
+
+/* ALERTAS */
+.alert{border-radius:8px;padding:14px 18px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
+.a-rojo{background:#fdf0f0;border:0.5px solid #e8b4b4}
+.a-verde{background:#edf7f1;border:0.5px solid #9fd4b6}
+.a-azul{background:#e6f1fb;border:0.5px solid #b5d4f4}
+.a-amarillo{background:#fff8e1;border:0.5px solid #f0c040}
+.a-gris{background:#f5f4f0;border:0.5px solid #d3d1c7}
+.alert-ico{font-size:17px;flex-shrink:0;margin-top:1px}
+.alert-titulo{font-size:12px;font-weight:600;margin-bottom:3px}
+.a-rojo .alert-titulo{color:#c0392b}
+.a-verde .alert-titulo{color:#1a7a4a}
+.a-azul .alert-titulo{color:#1F4E79}
+.a-amarillo .alert-titulo{color:#7d5a00}
+.a-gris .alert-titulo{color:#52514e}
+.alert-body{font-size:12px;color:#52514e;line-height:1.65}
+
+/* DESAFÍOS */
+.desafios{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.desafio{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px 18px;border-left:3px solid #1a7aff}
+.desafio-ico{font-size:20px;margin-bottom:6px}
+.desafio-tit{font-size:13px;font-weight:700;margin-bottom:4px}
+.desafio-dato{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#1a7aff;margin-bottom:6px}
+.desafio-desc{font-size:11.5px;color:#52514e;line-height:1.6}
+.desafio-sol{font-size:11px;color:#1a7a4a;margin-top:8px;line-height:1.5}
+
+/* BARRAS TIEMPO */
+.bar-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.bar-lbl{font-size:11px;color:#52514e;width:150px;flex-shrink:0;text-align:right}
+.bar-track{flex:1;height:30px;background:#f5f4f0;border-radius:4px;overflow:hidden;position:relative}
+.bar-fill{height:100%;border-radius:4px;display:flex;align-items:center;padding-left:10px;position:absolute;top:0}
+.bar-fill span{font-size:11px;font-weight:600;color:#fff;white-space:nowrap}
+.bar-note{font-size:10px;color:#898781;margin-left:160px;margin-top:-4px;margin-bottom:10px;font-style:italic}
+.axis{display:flex;justify-content:space-between;margin-left:160px;font-size:9.5px;color:#b4b2a9;margin-bottom:6px}
+
+/* TABLA */
+.tabla{width:100%;border-collapse:collapse;font-size:11.5px;margin-top:6px;background:#fff}
+.tabla th{background:#f5f4f0;color:#52514e;font-weight:500;padding:8px 10px;border-bottom:0.5px solid #e1e0d9;text-align:left}
+.tabla td{padding:8px 10px;border-bottom:0.5px solid #f0efea;vertical-align:middle}
+.tabla tr:last-child td{border-bottom:none}
+.badge{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:600;color:#fff;min-width:20px;text-align:center}
+.b-tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:10px;font-weight:500}
+.b-si{background:#edf7f1;color:#1a7a4a}
+.b-no{background:#fdf0f0;color:#c0392b}
+.b-gris{background:#f5f4f0;color:#898781}
+
+/* CONCLUSIONES */
+.conc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:8px}
+.conc-item{background:#fafaf8;border:0.5px solid #e1e0d9;border-radius:8px;padding:14px 16px}
+.conc-num{font-size:26px;font-weight:700;line-height:1;margin-bottom:4px}
+.conc-lbl{font-size:10px;font-weight:600;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:6px}
+.conc-desc{font-size:11px;color:#52514e;line-height:1.5}
+
+/* TEASER */
+.teaser{background:#0d1b2e;border-radius:10px;padding:28px 32px;color:#f0f1f3;margin-top:20px;border-left:4px solid #c9a84c}
+.teaser-eyebrow{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#c9a84c;margin-bottom:8px;font-weight:600}
+.teaser-tit{font-size:22px;font-weight:300;line-height:1.25;margin-bottom:8px}
+.teaser-tit strong{font-weight:700}
+.teaser-desc{font-size:12px;color:#9ca3af;line-height:1.65;max-width:620px}
+
+.sep{height:0.5px;background:#e1e0d9;margin:20px 0}
+.fuentes{font-size:10.5px;color:#52514e;line-height:1.8;columns:2;column-gap:32px}
+.fuentes a{color:#1F4E79;text-decoration:none}
+.fuentes a:hover{text-decoration:underline}
+
+/* CONTACTO */
+.contacto-page{background:#0d1b2e;color:#fff;padding:56px}
+.contacto-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid #2a3a50}
+.contacto-nombre{font-size:28px;font-weight:700;color:#fff;margin-bottom:4px}
+.contacto-titulo{font-size:13px;color:#6b9fff;margin-bottom:12px;letter-spacing:.5px}
+.contacto-bio{font-size:12px;color:#9ca3af;line-height:1.7;max-width:560px}
+.contacto-redes{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.red-btn{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:500;padding:7px 14px;border-radius:20px;border:1px solid #2a3a50;color:#9ca3af;text-decoration:none}
+.red-btn:hover{border-color:#4a7aaa}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.contacto-card{background:#0f2440;border:1px solid #2a3a50;border-radius:10px;padding:20px 22px}
+.contacto-card-ico{font-size:20px;margin-bottom:10px}
+.contacto-card-titulo{font-size:13px;font-weight:600;color:#f0f1f3;margin-bottom:6px}
+.contacto-card-desc{font-size:11px;color:#6b7280;line-height:1.6;margin-bottom:12px}
+.contacto-links{display:flex;flex-direction:column;gap:6px}
+.contacto-link{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;color:#6b9fff;text-decoration:none;padding:6px 12px;background:#1a7aff11;border:1px solid #1a7aff22;border-radius:6px}
+.contacto-link:hover{background:#1a7aff22}
+.contacto-link-arrow{font-size:10px;margin-left:auto}
+.contacto-contacto{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:32px}
+.contacto-dato{background:#0f2440;border:1px solid #2a3a50;border-radius:8px;padding:14px 16px}
+.contacto-dato-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4b5a6e;margin-bottom:5px}
+.contacto-dato-val{font-size:12px;font-weight:500;color:#c9a84c;text-decoration:none}
+
+.doc-footer{background:#0d1b2e;color:#9ca3af;padding:28px 56px;font-size:11px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;border-top:1px solid #2a3a50}
+.doc-footer strong{color:#f0f1f3}
+
+/* RESPONSIVE */
+@media(max-width:760px){
+  .portada-content,.seccion,.contacto-page{padding-left:18px;padding-right:18px}
+  .portada-footer,.doc-footer{padding-left:18px;padding-right:18px}
+  .portada-titulo{font-size:28px}
+  .portada-meta,.g4{grid-template-columns:repeat(2,1fr)}
+  .portada-meta-item:nth-child(2){border-right:none}
+  .portada-meta-item:nth-child(-n+2){border-bottom:1px solid #2a3a50}
+  .g3,.desafios,.conc-grid,.contacto-grid,.contacto-contacto,.figura-grid{grid-template-columns:1fr}
+  .pasos{grid-template-columns:1fr 1fr}
+  .contacto-hero{grid-template-columns:1fr}
+  .bar-lbl{width:96px;font-size:10px}
+  .bar-note,.axis{margin-left:106px}
+  .fuentes{columns:1}
+  .tabla{font-size:10.5px}
+  .tabla-wrap{overflow-x:auto}
+  .bar-fill span{font-size:9.5px}
+  .figura{padding:8px;overflow-x:auto}
+  .figura svg{min-width:560px}
+}
+</style>
+</head>
+<body>
+
+<!-- PORTADA -->
+<div class="portada">
+  <div class="portada-hero">
+    <svg viewBox="0 0 1200 260" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+      <rect width="1200" height="260" fill="#0f2440"/>
+      <g fill="none" stroke="#1a7aff" stroke-opacity=".35">
+        <circle cx="900" cy="150" r="40" stroke-width="2"/><circle cx="900" cy="150" r="80" stroke-width="2"/>
+        <circle cx="900" cy="150" r="130" stroke-width="3"/><circle cx="900" cy="150" r="190" stroke-width="4"/>
+        <circle cx="900" cy="150" r="260" stroke-width="6"/><circle cx="900" cy="150" r="340" stroke-width="8"/>
+      </g>
+      <g stroke="#1a7aff" stroke-opacity=".25" stroke-width="2">
+        <line x1="900" y1="-200" x2="900" y2="500"/><line x1="550" y1="150" x2="1250" y2="150"/>
+        <line x1="650" y1="-100" x2="1150" y2="400"/><line x1="1150" y1="-100" x2="650" y2="400"/>
+      </g>
+      <path d="M0,200 L380,200 L440,140 L700,140" stroke="#e07b1a" stroke-width="6" fill="none" stroke-opacity=".7"/>
+      <g fill="#0d1b2e" stroke="#e07b1a" stroke-width="3" stroke-opacity=".8"><circle cx="120" cy="200" r="7"/><circle cx="260" cy="200" r="7"/><circle cx="480" cy="140" r="7"/><circle cx="600" cy="140" r="7"/></g>
+    </svg>
+    <div class="portada-hero-fade"></div>
+  </div>
+
+  <div class="portada-content">
+    <div class="portada-logo-row">
+      <img src="../IMG/logoml.png" alt="Matías Leiblich" style="height:48px;object-fit:contain">
+    </div>
+    <div class="portada-eyebrow">Infraestructura · Análisis técnico · Octubre 2026</div>
+    <div class="portada-titulo">Línea F de subte<br><strong>Cómo se va a construir</strong></div>
+    <div class="portada-subtitulo">La traza, las tuneladoras, los túneles, las estaciones y los desafíos de obra de la primera línea nueva en 25 años, explicados por un ingeniero civil.</div>
+    <div class="portada-meta">
+      <div class="portada-meta-item"><div class="portada-meta-label">Extensión</div><div class="portada-meta-val">9,8 km</div><div class="portada-meta-sub">Barracas → Palermo</div></div>
+      <div class="portada-meta-item"><div class="portada-meta-label">Estaciones</div><div class="portada-meta-val">12</div><div class="portada-meta-sub">8 de combinación</div></div>
+      <div class="portada-meta-item"><div class="portada-meta-label">Tuneladoras</div><div class="portada-meta-val">2 EPB</div><div class="portada-meta-sub">primera vez en el subte</div></div>
+      <div class="portada-meta-item"><div class="portada-meta-label">Presupuesto oficial</div><div class="portada-meta-val">USD 1.350 M</div><div class="portada-meta-sub">obra civil, IVA incluido</div></div>
+    </div>
+  </div>
+
+  <div class="portada-footer">
+    <div class="portada-autor">
+      <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada.jpg" alt="" style="width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:center 15%;border:2px solid #1a7aff55;flex-shrink:0">
+      <div class="portada-autor-info"><strong>Matías Leiblich</strong><span>Ingeniero Civil · Real Estate</span></div>
+    </div>
+    <div class="portada-tags">
+      <span class="portada-tag">#LíneaF</span><span class="portada-tag">#Subte</span><span class="portada-tag">#Ingeniería</span><span class="portada-tag">#BuenosAires</span>
+    </div>
+  </div>
+</div>
+
+<!-- 01 TRAZA -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header"><span class="sec-num">01</span><div>
+    <div class="sec-titulo">La <strong>traza</strong></div>
+    <div class="sec-desc">De Barracas a Palermo por Hornos, Garay, Entre Ríos, Callao y Las Heras. Es una línea <strong>transversal</strong>: no va al centro, cruza las seis líneas existentes y conecta con dos trenes.</div>
+  </div></div>
+
+  <div>
+    <div class="figura" style="max-width:820px;margin-left:auto;margin-right:auto"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 880" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <rect width="1000" height="880" fill="#ffffff"/>
+
+  <!-- Título -->
+  <text x="40" y="40" font-size="11" font-weight="600" letter-spacing="2" fill="#1a7aff">LÍNEA F · TRAZA ESQUEMÁTICA</text>
+  <text x="40" y="58" font-size="10" fill="#898781">Barracas → Palermo · no a escala</text>
+
+  <!-- Extensión futura California (viaducto) -->
+  <line x1="640" y1="750" x2="640" y2="822" stroke="#e07b1a" stroke-width="6" stroke-dasharray="8 7" opacity="0.55"/>
+  <circle cx="640" cy="830" r="8" fill="#fff" stroke="#e07b1a" stroke-width="3" stroke-dasharray="3 3"/>
+  <text x="662" y="828" font-size="12" fill="#52514e" font-weight="600">California</text>
+  <text x="662" y="843" font-size="10" fill="#898781">extensión futura, en viaducto (suelos del Riachuelo)</text>
+
+  <!-- Cocheras futuras Parque Vuelta de Obligado -->
+  <rect x="408" y="632" width="212" height="40" rx="6" fill="#f5f4f0" stroke="#b4b2a9" stroke-dasharray="4 3"/>
+  <text x="514" y="648" font-size="9.5" fill="#52514e" text-anchor="middle" font-weight="600">Cocheras bajo Pq. Vuelta de Obligado</text>
+  <text x="514" y="663" font-size="9" fill="#898781" text-anchor="middle">fuera de esta licitación (etapa posterior)</text>
+  <line x1="514" y1="632" x2="514" y2="616" stroke="#b4b2a9" stroke-dasharray="3 3"/>
+
+  <!-- Cruce túnel FCO -->
+  <line x1="250" y1="410" x2="520" y2="410" stroke="#898781" stroke-width="3" stroke-dasharray="2 4"/>
+  <text x="420" y="402" font-size="9.5" fill="#52514e" font-weight="600" text-anchor="end">Túnel de cargas FCO (1916)</text>
+  <text x="420" y="425" font-size="9" fill="#898781" text-anchor="end">~20 m de prof. · la F debe cruzarlo</text>
+
+  <!-- Enlace operativo F-H -->
+  <line x1="355" y1="205" x2="292" y2="252" stroke="#e8c400" stroke-width="4" stroke-dasharray="6 5"/>
+  <text x="250" y="270" font-size="9.5" fill="#52514e" font-weight="600">Túnel de enlace F–H</text>
+  <text x="250" y="283" font-size="9" fill="#898781">bajo Pacheco de Melo · excluido</text>
+
+  <!-- Traza principal -->
+  <path d="M640,750 L640,640 L610,610 L470,610 L440,580 L440,290 L225,75" fill="none" stroke="#e07b1a" stroke-width="10" stroke-linejoin="round" stroke-linecap="round"/>
+
+  <!-- Separador de etapas -->
+  <line x1="426" y1="350" x2="454" y2="350" stroke="#0d1b2e" stroke-width="2"/>
+  <text x="300" y="356" font-size="9" fill="#0d1b2e" font-weight="700" letter-spacing="1">ETAPA 1 ↓ · ETAPA 2 ↑</text>
+
+  <!-- Estaciones: Brandsen -->
+  <circle cx="640" cy="750" r="11" fill="#fff" stroke="#0d1b2e" stroke-width="3.5"/>
+  <text x="664" y="748" font-size="14" font-weight="700" fill="#0b0b0b">Brandsen</text>
+  <text x="664" y="764" font-size="10" fill="#898781">Cabecera sur · Barracas · taller y cocheras menores</text>
+
+  <!-- Constitución -->
+  <circle cx="640" cy="665" r="11" fill="#fff" stroke="#0d1b2e" stroke-width="3.5"/>
+  <text x="664" y="663" font-size="14" font-weight="700" fill="#0b0b0b">Constitución</text>
+  <text x="664" y="679" font-size="10" fill="#898781">Nodo intermodal regional · bajo vereda de Hornos</text>
+  <circle cx="612" cy="690" r="10" fill="#233aa8"/><text x="612" y="694" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">C</text>
+  <rect x="580" y="704" width="44" height="16" rx="8" fill="#52514e"/><text x="602" y="716" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">ROCA</text>
+
+  <!-- Cochabamba -->
+  <circle cx="440" cy="555" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="462" y="559" font-size="13" font-weight="600" fill="#0b0b0b">Cochabamba</text>
+  <circle cx="414" cy="555" r="10" fill="#c618cc"/><text x="414" y="559" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">E</text>
+
+  <!-- Chile -->
+  <circle cx="440" cy="495" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="462" y="499" font-size="13" font-weight="600" fill="#0b0b0b">Chile</text>
+
+  <!-- Congreso -->
+  <circle cx="440" cy="440" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="462" y="444" font-size="13" font-weight="600" fill="#0b0b0b">Congreso</text>
+  <circle cx="414" cy="440" r="10" fill="#18b8cc"/><text x="414" y="444" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">A</text>
+
+  <!-- Corrientes -->
+  <circle cx="440" cy="380" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="462" y="384" font-size="13" font-weight="600" fill="#0b0b0b">Corrientes</text>
+  <circle cx="414" cy="380" r="10" fill="#eb0909"/><text x="414" y="384" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">B</text>
+
+  <!-- Pizzurno -->
+  <circle cx="440" cy="320" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="462" y="324" font-size="13" font-weight="600" fill="#0b0b0b">Pizzurno – Santa Fe</text>
+  <circle cx="414" cy="320" r="10" fill="#02a82a"/><text x="414" y="324" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">D</text>
+
+  <!-- Junín -->
+  <circle cx="400" cy="250" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="422" y="254" font-size="13" font-weight="600" fill="#0b0b0b">Junín – Recoleta</text>
+
+  <!-- Pueyrredón -->
+  <circle cx="355" cy="205" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="377" y="209" font-size="13" font-weight="600" fill="#0b0b0b">Pueyrredón – Hosp. Rivadavia</text>
+  <circle cx="331" cy="189" r="10" fill="#ffd400"/><text x="331" y="193" font-size="11" font-weight="700" fill="#0b0b0b" text-anchor="middle">H</text>
+
+  <!-- Parque Las Heras -->
+  <circle cx="310" cy="160" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="332" y="164" font-size="13" font-weight="600" fill="#0b0b0b">Ruggieri – Parque Las Heras</text>
+
+  <!-- Ecoparque -->
+  <circle cx="265" cy="115" r="9" fill="#fff" stroke="#0d1b2e" stroke-width="3"/>
+  <text x="287" y="119" font-size="13" font-weight="600" fill="#0b0b0b">Ecoparque – Plaza Italia</text>
+
+  <!-- Pacífico -->
+  <circle cx="225" cy="75" r="11" fill="#fff" stroke="#0d1b2e" stroke-width="3.5"/>
+  <text x="249" y="79" font-size="14" font-weight="700" fill="#0b0b0b">Pacífico – Juan B. Justo</text>
+  <text x="278" y="96" font-size="10" fill="#898781">Cabecera norte · nodo intermodal metropolitano</text>
+  <circle cx="199" cy="96" r="10" fill="#02a82a"/><text x="199" y="100" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">D</text>
+  <rect x="150" y="110" width="72" height="16" rx="8" fill="#52514e"/><text x="186" y="122" font-size="9" font-weight="700" fill="#fff" text-anchor="middle">SAN MARTÍN</text>
+
+  <!-- Ficha técnica -->
+  <rect x="660" y="140" width="300" height="300" rx="10" fill="#0d1b2e"/>
+  <text x="684" y="170" font-size="10" font-weight="600" letter-spacing="2" fill="#6b9fff">FICHA TÉCNICA</text>
+  <g font-size="12" fill="#f0f1f3">
+    <text x="684" y="200"><tspan font-weight="700" font-size="20">9,8 km</tspan><tspan fill="#9ca3af" font-size="11">  · 12 estaciones</tspan></text>
+    <text x="684" y="232">2 tuneladoras EPB</text>
+    <text x="684" y="249" fill="#9ca3af" font-size="10.5">exigidas por pliego (8 km urbanos, 6 estaciones)</text>
+    <text x="684" y="276">2 túneles gemelos · Ø int. 5,4 m</text>
+    <text x="684" y="293" fill="#9ca3af" font-size="10.5">avance estimado 300–500 m/mes por frente</text>
+    <text x="684" y="320">Estaciones de 137 m · andén central</text>
+    <text x="684" y="337" fill="#9ca3af" font-size="10.5">accesos dentro de edificios · 100% accesibles</text>
+    <text x="684" y="364">Automatización GoA4 (sin conductor)</text>
+    <text x="684" y="381" fill="#9ca3af" font-size="10.5">señalamiento y trenes: licitaciones aparte</text>
+    <text x="684" y="408">Plazo de obra: 5 años (pliego)</text>
+    <text x="684" y="425" fill="#9ca3af" font-size="10.5">presupuesto oficial USD 1.350 M</text>
+  </g>
+
+  <!-- Leyenda -->
+  <g font-size="10" fill="#52514e">
+    <line x1="40" y1="790" x2="70" y2="790" stroke="#e07b1a" stroke-width="7"/><text x="78" y="794">Traza licitada</text>
+    <line x1="40" y1="810" x2="70" y2="810" stroke="#e07b1a" stroke-width="5" stroke-dasharray="6 5" opacity="0.55"/><text x="78" y="814">Extensión futura</text>
+    <line x1="40" y1="830" x2="70" y2="830" stroke="#e8c400" stroke-width="4" stroke-dasharray="6 5"/><text x="78" y="834">Obra excluida de esta licitación</text>
+  </g>
+  <text x="40" y="866" font-size="9" fill="#b4b2a9">Fuentes: pliego LPI 10241-0094-LPU25 (síntesis Estudio O'Farrell, 11/2025), enelSubte (07/2026), Ámbito (10/2026), Vitruvius (EIA, 08/2026). Etapas según anuncio GCBA 2025.</text>
+</svg></div>
+    <div>
+      <div class="tabla-wrap"><table class="tabla">
+        <thead><tr><th>Estación</th><th>Combina con</th><th>Etapa</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Brandsen</strong> <span style="color:#898781">· Barracas</span></td><td><span class="b-tag b-gris">Taller y cocheras</span></td><td>1</td></tr>
+          <tr><td><strong>Constitución</strong></td><td><span class="badge" style="background:#233aa8">C</span> <span class="badge" style="background:#52514e">Roca</span></td><td>1</td></tr>
+          <tr><td><strong>Cochabamba</strong></td><td><span class="badge" style="background:#c618cc">E</span></td><td>1</td></tr>
+          <tr><td><strong>Chile</strong></td><td>—</td><td>1</td></tr>
+          <tr><td><strong>Congreso</strong></td><td><span class="badge" style="background:#18b8cc">A</span></td><td>1</td></tr>
+          <tr><td><strong>Corrientes</strong></td><td><span class="badge" style="background:#eb0909">B</span></td><td>1</td></tr>
+          <tr><td><strong>Pizzurno – Santa Fe</strong></td><td><span class="badge" style="background:#02a82a">D</span></td><td>2</td></tr>
+          <tr><td><strong>Junín – Recoleta</strong></td><td>—</td><td>2</td></tr>
+          <tr><td><strong>Pueyrredón – Hosp. Rivadavia</strong></td><td><span class="badge" style="background:#ffd400;color:#0b0b0b">H</span></td><td>2</td></tr>
+          <tr><td><strong>Ruggieri – Pq. Las Heras</strong></td><td>—</td><td>2</td></tr>
+          <tr><td><strong>Ecoparque – Plaza Italia</strong></td><td><span class="b-tag b-gris">Nodo intermodal</span></td><td>2</td></tr>
+          <tr><td><strong>Pacífico – Juan B. Justo</strong></td><td><span class="badge" style="background:#02a82a">D</span> <span class="badge" style="background:#52514e">San Martín</span></td><td>2</td></tr>
+        </tbody>
+      </table></div>
+      <div class="figura-pie">Nombres según el pliego de licitación. Las etapas siguen el anuncio de 2025: la primera llega a Corrientes (antes llamada "Tucumán"), a confirmar en el contrato.</div>
+    </div>
+  </div>
+
+  <div class="alert a-azul" style="margin-top:8px">
+    <span class="alert-ico">💡</span>
+    <div><div class="alert-titulo">Por qué una línea transversal descongestiona la red</div>
+    <div class="alert-body">Hoy, quien viaja de Constitución a Recoleta o Palermo tiene que bajar al centro y hacer combinación, casi siempre usando la Línea C, la más cargada en hora pico. La F permite hacer ese viaje sur-norte sin pasar por el microcentro. La Ciudad estima más de <strong>300.000 pasajeros por día</strong> y documentos oficiales la proyectan como la línea de mayor demanda potencial de la red.</div></div>
+  </div>
+</div>
+
+<!-- 02 CÓMO SE EXCAVA -->
+<div class="seccion">
+  <div class="sec-header"><span class="sec-num">02</span><div>
+    <div class="sec-titulo">Cómo se excava: la <strong>tuneladora EPB</strong></div>
+    <div class="sec-desc">Por primera vez el subte porteño se va a construir con tuneladoras (TBM, <em>Tunnel Boring Machine</em>). El pliego exige el tipo EPB, de presión de tierras balanceada, que es el estándar para suelos blandos con agua como los de Buenos Aires.</div>
+  </div></div>
+
+  <div class="figura"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 760" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs>
+    <pattern id="pamp" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#c9a77c"/><circle cx="3" cy="4" r="1.1" fill="#b08d63"/><circle cx="10" cy="10" r="1" fill="#b08d63"/></pattern>
+    <pattern id="puel" width="10" height="10" patternUnits="userSpaceOnUse"><rect width="10" height="10" fill="#e3cfa2"/><circle cx="2" cy="2" r=".9" fill="#cdb684"/><circle cx="7" cy="6" r=".9" fill="#cdb684"/></pattern>
+    <linearGradient id="steel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#5b6f8a"/><stop offset=".5" stop-color="#8ea2bd"/><stop offset="1" stop-color="#4a5c75"/></linearGradient>
+    <linearGradient id="ring" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9a9a94"/><stop offset=".5" stop-color="#c8c7c0"/><stop offset="1" stop-color="#8d8c86"/></linearGradient>
+  </defs>
+  <rect width="1200" height="760" fill="#fff"/>
+  <text x="40" y="38" font-size="11" font-weight="600" letter-spacing="2" fill="#1a7aff">CÓMO FUNCIONA UNA TUNELADORA EPB</text>
+  <text x="40" y="58" font-size="12" fill="#52514e">Corte longitudinal esquemático · avanza hacia la izquierda · no a escala</text>
+
+  <!-- Suelo -->
+  <rect x="0" y="90" width="1200" height="40" fill="#8a8a85"/>
+  <text x="1150" y="115" font-size="10" fill="#fff" text-anchor="end">Calle y servicios</text>
+  <rect x="0" y="130" width="1200" height="60" fill="#b9a58a"/>
+  <text x="1150" y="165" font-size="10" fill="#4a3d2c" text-anchor="end">Rellenos</text>
+  <rect x="0" y="190" width="1200" height="330" fill="url(#pamp)"/>
+  <text x="1150" y="215" font-size="10" fill="#4a3d2c" text-anchor="end">Formación Pampeano (limos y arcillas firmes)</text>
+  <rect x="0" y="520" width="1200" height="100" fill="url(#puel)"/>
+  <text x="1150" y="560" font-size="10" fill="#4a3d2c" text-anchor="end">Arenas Puelche · acuífero</text>
+  <line x1="0" y1="250" x2="1200" y2="250" stroke="#1a7aff" stroke-width="1.5" stroke-dasharray="8 5"/>
+  <text x="30" y="244" font-size="10" fill="#1a7aff">▽ nivel de napa</text>
+
+  <!-- Túnel ya construido (detrás) -->
+  <rect x="640" y="300" width="560" height="140" fill="#e9e7e0"/>
+  <g>
+    <rect x="640" y="290" width="560" height="12" fill="url(#ring)"/>
+    <rect x="640" y="438" width="560" height="12" fill="url(#ring)"/>
+    <g stroke="#7a7973" stroke-width="1.2">
+      <line x1="680" y1="290" x2="680" y2="302"/><line x1="720" y1="290" x2="720" y2="302"/><line x1="760" y1="290" x2="760" y2="302"/><line x1="800" y1="290" x2="800" y2="302"/><line x1="840" y1="290" x2="840" y2="302"/><line x1="880" y1="290" x2="880" y2="302"/><line x1="920" y1="290" x2="920" y2="302"/><line x1="960" y1="290" x2="960" y2="302"/><line x1="1000" y1="290" x2="1000" y2="302"/><line x1="1040" y1="290" x2="1040" y2="302"/><line x1="1080" y1="290" x2="1080" y2="302"/><line x1="1120" y1="290" x2="1120" y2="302"/><line x1="1160" y1="290" x2="1160" y2="302"/>
+      <line x1="680" y1="438" x2="680" y2="450"/><line x1="720" y1="438" x2="720" y2="450"/><line x1="760" y1="438" x2="760" y2="450"/><line x1="800" y1="438" x2="800" y2="450"/><line x1="840" y1="438" x2="840" y2="450"/><line x1="880" y1="438" x2="880" y2="450"/><line x1="920" y1="438" x2="920" y2="450"/><line x1="960" y1="438" x2="960" y2="450"/><line x1="1000" y1="438" x2="1000" y2="450"/><line x1="1040" y1="438" x2="1040" y2="450"/><line x1="1080" y1="438" x2="1080" y2="450"/><line x1="1120" y1="438" x2="1120" y2="450"/><line x1="1160" y1="438" x2="1160" y2="450"/>
+    </g>
+    <!-- mortero de relleno -->
+    <rect x="640" y="286" width="60" height="4" fill="#1a7aff" opacity=".5"/>
+    <rect x="640" y="450" width="60" height="4" fill="#1a7aff" opacity=".5"/>
+  </g>
+  <!-- Backup: carros y cinta -->
+  <g>
+    <rect x="720" y="330" width="420" height="70" fill="none" stroke="#0d1b2e" stroke-width="2" rx="4"/>
+    <line x1="720" y1="365" x2="1140" y2="365" stroke="#0d1b2e" stroke-width="1"/>
+    <rect x="740" y="340" width="70" height="20" fill="#1a7aff" opacity=".25"/><rect x="830" y="340" width="70" height="20" fill="#1a7aff" opacity=".25"/><rect x="920" y="340" width="70" height="20" fill="#1a7aff" opacity=".25"/>
+    <circle cx="745" cy="425" r="9" fill="#0d1b2e"/><circle cx="845" cy="425" r="9" fill="#0d1b2e"/><circle cx="1015" cy="425" r="9" fill="#0d1b2e"/><circle cx="1115" cy="425" r="9" fill="#0d1b2e"/>
+    <line x1="720" y1="320" x2="1200" y2="320" stroke="#c0392b" stroke-width="5"/>
+    <polygon points="1185,312 1200,320 1185,328" fill="#c0392b"/>
+  </g>
+
+  <!-- Escudo -->
+  <rect x="210" y="282" width="430" height="176" fill="url(#steel)" rx="6"/>
+  <rect x="220" y="296" width="410" height="148" fill="#dfe5ee"/>
+  <!-- Rueda de corte -->
+  <rect x="160" y="276" width="34" height="188" fill="#0d1b2e" rx="6"/>
+  <g fill="#ffd166"><polygon points="160,290 148,296 160,302"/><polygon points="160,320 148,326 160,332"/><polygon points="160,350 148,356 160,362"/><polygon points="160,380 148,386 160,392"/><polygon points="160,410 148,416 160,422"/><polygon points="160,440 148,446 160,452"/></g>
+  <!-- Cámara de tierras -->
+  <rect x="194" y="296" width="40" height="148" fill="#a88760"/>
+  <rect x="234" y="290" width="8" height="160" fill="#0d1b2e"/>
+  <!-- Tornillo -->
+  <g transform="rotate(-14 330 420)">
+    <rect x="230" y="408" width="210" height="24" fill="#6b7a8f" rx="12"/>
+    <path d="M240,408 l12,24 M262,408 l12,24 M284,408 l12,24 M306,408 l12,24 M328,408 l12,24 M350,408 l12,24 M372,408 l12,24 M394,408 l12,24 M416,408 l12,24" stroke="#c9a77c" stroke-width="5"/>
+  </g>
+  <!-- Motores -->
+  <rect x="250" y="320" width="70" height="40" fill="#0d1b2e" rx="4"/>
+  <!-- Cilindros de empuje -->
+  <g fill="#1a7aff"><rect x="520" y="300" width="110" height="10"/><rect x="520" y="430" width="110" height="10"/></g>
+  <!-- Erector -->
+  <circle cx="470" cy="370" r="22" fill="none" stroke="#0d1b2e" stroke-width="5"/>
+  <line x1="470" y1="370" x2="500" y2="320" stroke="#0d1b2e" stroke-width="6"/>
+  <rect x="490" y="306" width="30" height="12" fill="url(#ring)" stroke="#555"/>
+
+  <!-- Números -->
+  <g font-size="12" font-weight="700" fill="#fff">
+    <circle cx="120" cy="250" r="13" fill="#1a7aff"/><text x="120" y="254" text-anchor="middle">1</text>
+    <circle cx="214" cy="480" r="13" fill="#1a7aff"/><text x="214" y="484" text-anchor="middle">2</text>
+    <circle cx="370" cy="480" r="13" fill="#1a7aff"/><text x="370" y="484" text-anchor="middle">3</text>
+    <circle cx="420" cy="265" r="13" fill="#1a7aff"/><text x="420" y="269" text-anchor="middle">4</text>
+    <circle cx="575" cy="265" r="13" fill="#1a7aff"/><text x="575" y="269" text-anchor="middle">5</text>
+    <circle cx="670" cy="470" r="13" fill="#1a7aff"/><text x="670" y="474" text-anchor="middle">6</text>
+    <circle cx="930" cy="300" r="13" fill="#1a7aff"/><text x="930" y="304" text-anchor="middle">7</text>
+  </g>
+  <g stroke="#1a7aff" stroke-width="1"><line x1="128" y1="260" x2="152" y2="290"/><line x1="214" y1="467" x2="214" y2="440"/><line x1="370" y1="467" x2="350" y2="425"/><line x1="428" y1="276" x2="470" y2="330"/><line x1="575" y1="278" x2="575" y2="300"/><line x1="670" y1="457" x2="670" y2="450"/></g>
+
+  <!-- Referencias -->
+  <g font-size="12" fill="#0b0b0b">
+  <g transform="translate(40,650)">
+   <circle cx="9" cy="-4" r="9" fill="#1a7aff"/><text x="9" y="0" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">1</text><text x="26" y="0" font-weight="600">Rueda de corte</text><text x="26" y="16" fill="#52514e" font-size="10.5">Gira y desgrana el suelo con dientes y discos</text>
+  </g>
+  <g transform="translate(330,650)">
+   <circle cx="9" cy="-4" r="9" fill="#1a7aff"/><text x="9" y="0" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">2</text><text x="26" y="0" font-weight="600">Cámara de presión de tierras</text><text x="26" y="16" fill="#52514e" font-size="10.5">La tierra excavada sostiene el frente: no se hunde la calle</text>
+  </g>
+  <g transform="translate(700,650)">
+   <circle cx="9" cy="-4" r="9" fill="#1a7aff"/><text x="9" y="0" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">3</text><text x="26" y="0" font-weight="600">Tornillo sinfín</text><text x="26" y="16" fill="#52514e" font-size="10.5">Extrae la tierra regulando la presión</text>
+  </g>
+  <g transform="translate(40,700)">
+   <circle cx="9" cy="-4" r="9" fill="#1a7aff"/><text x="9" y="0" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">4</text><text x="26" y="0" font-weight="600">Erector de dovelas</text><text x="26" y="16" fill="#52514e" font-size="10.5">Coloca las piezas de hormigón que forman cada anillo</text>
+  </g>
+  <g transform="translate(330,700)">
+   <circle cx="9" cy="-4" r="9" fill="#1a7aff"/><text x="9" y="0" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">5</text><text x="26" y="0" font-weight="600">Cilindros de empuje</text><text x="26" y="16" fill="#52514e" font-size="10.5">Se apoyan en el último anillo y empujan la máquina</text>
+  </g>
+  <g transform="translate(700,700)">
+   <circle cx="9" cy="-4" r="9" fill="#1a7aff"/><text x="9" y="0" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">6</text><text x="26" y="0" font-weight="600">Anillos + mortero</text><text x="26" y="16" fill="#52514e" font-size="10.5">El túnel queda revestido apenas se excava</text>
+  </g>
+  <g transform="translate(980,650)">
+   <circle cx="9" cy="-4" r="9" fill="#1a7aff"/><text x="9" y="0" fill="#fff" font-size="10" font-weight="700" text-anchor="middle">7</text><text x="26" y="0" font-weight="600">Cinta y carros</text><text x="26" y="16" fill="#52514e" font-size="10.5">Sacan la tierra por el pozo</text><text x="26" y="30" fill="#52514e" font-size="10.5">de ataque, no por la calle</text>
+  </g>
+</g>
+</svg></div>
+
+  <p class="texto">La idea de fondo es simple: <strong>la máquina nunca deja el suelo sin apoyo</strong>. Adelante, la tierra recién cortada llena una cámara a presión que empuja contra el frente y lo mantiene en su lugar. Atrás, apenas avanza un metro y medio, se arma un anillo de hormigón que queda como revestimiento definitivo. Entre una cosa y la otra, el suelo está siempre sostenido. Eso es lo que evita que la calle se hunda.</p>
+
+  <div class="pasos">
+    <div class="paso"><div class="paso-num">PASO 1</div><div class="paso-tit">Excava</div><div class="paso-desc">La rueda de corte gira y desgrana el suelo. La tierra entra a la cámara y se mantiene a la misma presión que el terreno.</div></div>
+    <div class="paso"><div class="paso-num">PASO 2</div><div class="paso-tit">Extrae</div><div class="paso-desc">El tornillo sinfín saca la tierra a la velocidad justa para no descomprimir el frente. Cinta y carros la llevan al pozo de ataque.</div></div>
+    <div class="paso"><div class="paso-num">PASO 3</div><div class="paso-tit">Reviste</div><div class="paso-desc">El erector coloca las dovelas, piezas prefabricadas de hormigón, y arma un anillo completo. Se inyecta mortero detrás para rellenar el hueco.</div></div>
+    <div class="paso"><div class="paso-num">PASO 4</div><div class="paso-tit">Empuja</div><div class="paso-desc">Los cilindros hidráulicos se apoyan en el anillo recién armado y empujan la máquina hacia adelante. El ciclo vuelve a empezar.</div></div>
+  </div>
+
+  <div class="alert a-gris">
+    <span class="alert-ico">🏗</span>
+    <div><div class="alert-titulo">La diferencia con cómo se hizo la Línea H</div>
+    <div class="alert-body">La H se construyó con métodos tradicionales: excavación por tramos cortos, apuntalamiento y hormigonado en el lugar, con muchos pozos y frentes abiertos sobre la traza. Tardó <strong>17 años</strong> (2001–2018). Con TBM la excavación es continua, el túnel sale revestido y la tierra se retira por los pozos de ataque y no por la vereda. Según el ministro, la tierra "saldrá por el extremo inicial", lo que reduce camiones e interrupciones en la superficie.</div></div>
+  </div>
+</div>
+
+<!-- 03 TÚNEL -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header"><span class="sec-num">03</span><div>
+    <div class="sec-titulo">Anatomía del <strong>túnel</strong></div>
+    <div class="sec-desc">Dos túneles gemelos, uno por sentido, en lugar de un único túnel grande de doble vía.</div>
+  </div></div>
+
+  <div class="figura"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs>
+    <pattern id="pamp2" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#c9a77c"/><circle cx="3" cy="4" r="1.1" fill="#b08d63"/><circle cx="10" cy="10" r="1" fill="#b08d63"/></pattern>
+  </defs>
+  <rect width="1200" height="720" fill="#fff"/>
+  <text x="40" y="38" font-size="11" font-weight="600" letter-spacing="2" fill="#1a7aff">CORTE TRANSVERSAL · DOS TÚNELES GEMELOS</text>
+  <text x="40" y="58" font-size="12" fill="#52514e">Esquema bajo una avenida · un túnel por sentido · escala aproximada (1 m ≈ 16 px)</text>
+
+  <!-- Cielo y edificios -->
+  <rect x="0" y="70" width="1200" height="110" fill="#f5f4f0"/>
+  <g fill="#d3d1c7">
+    <rect x="40" y="96" width="120" height="84"/><rect x="170" y="80" width="100" height="100"/><rect x="280" y="110" width="80" height="70"/>
+    <rect x="840" y="88" width="110" height="92"/><rect x="960" y="76" width="90" height="104"/><rect x="1060" y="104" width="110" height="76"/>
+  </g>
+  <!-- Avenida -->
+  <rect x="380" y="168" width="440" height="12" fill="#52514e"/>
+  <g fill="#fff"><rect x="420" y="173" width="30" height="2"/><rect x="500" y="173" width="30" height="2"/><rect x="580" y="173" width="30" height="2"/><rect x="660" y="173" width="30" height="2"/><rect x="740" y="173" width="30" height="2"/></g>
+  <rect x="340" y="166" width="40" height="14" fill="#b4b2a9"/><rect x="820" y="166" width="40" height="14" fill="#b4b2a9"/>
+  <text x="600" y="160" font-size="11" fill="#52514e" text-anchor="middle">Avenida (ej. Entre Ríos / Callao)</text>
+
+  <!-- Suelo -->
+  <rect x="0" y="180" width="1200" height="540" fill="url(#pamp2)"/>
+  <!-- servicios -->
+  <circle cx="450" cy="205" r="7" fill="#1a7aff"/><circle cx="520" cy="210" r="5" fill="#59a14f"/><circle cx="700" cy="206" r="8" fill="#52514e"/><circle cx="760" cy="212" r="4" fill="#f28e2b"/>
+  <text x="790" y="215" font-size="10" fill="#3a2f22">agua, cloaca, gas, electricidad</text>
+  <line x1="0" y1="270" x2="1200" y2="270" stroke="#1a7aff" stroke-width="1.5" stroke-dasharray="8 5"/>
+  <text x="30" y="264" font-size="10" fill="#1a7aff">▽ napa</text>
+
+  <!-- Túnel izquierdo: Ø ext 6 m = 96px, int 5,4 = 86px -->
+  <g transform="translate(470,520)">
+    <circle r="49" fill="#a8a7a0"/>
+    <circle r="43" fill="#eef1f5"/>
+    <g stroke="#7a7973" stroke-width="1.5"><line x1="0" y1="-49" x2="0" y2="-43"/><line x1="42" y1="-24" x2="37" y2="-21"/><line x1="42" y1="24" x2="37" y2="21"/><line x1="-42" y1="24" x2="-37" y2="21"/><line x1="-42" y1="-24" x2="-37" y2="-21"/></g>
+    <rect x="-34" y="20" width="68" height="10" fill="#b4b2a9"/>
+    <rect x="-22" y="-26" width="44" height="46" rx="8" fill="#e07b1a"/>
+    <rect x="-17" y="-18" width="34" height="14" rx="3" fill="#0d1b2e"/>
+    <rect x="-24" y="28" width="6" height="3" fill="#52514e"/><rect x="18" y="28" width="6" height="3" fill="#52514e"/>
+  </g>
+  <!-- Túnel derecho -->
+  <g transform="translate(730,520)">
+    <circle r="49" fill="#a8a7a0"/>
+    <circle r="43" fill="#eef1f5"/>
+    <g stroke="#7a7973" stroke-width="1.5"><line x1="0" y1="-49" x2="0" y2="-43"/><line x1="42" y1="-24" x2="37" y2="-21"/><line x1="42" y1="24" x2="37" y2="21"/><line x1="-42" y1="24" x2="-37" y2="21"/><line x1="-42" y1="-24" x2="-37" y2="-21"/></g>
+    <rect x="-34" y="20" width="68" height="10" fill="#b4b2a9"/>
+    <rect x="-22" y="-26" width="44" height="46" rx="8" fill="#e07b1a"/>
+    <rect x="-17" y="-18" width="34" height="14" rx="3" fill="#0d1b2e"/>
+    <rect x="-24" y="28" width="6" height="3" fill="#52514e"/><rect x="18" y="28" width="6" height="3" fill="#52514e"/>
+  </g>
+  <text x="470" y="600" font-size="11" font-weight="600" fill="#0b0b0b" text-anchor="middle">→ hacia Palermo</text>
+  <text x="730" y="600" font-size="11" font-weight="600" fill="#0b0b0b" text-anchor="middle">→ hacia Barracas</text>
+
+  <!-- Cotas -->
+  <g stroke="#0d1b2e" stroke-width="1.2" fill="#0d1b2e" font-size="11">
+    <line x1="400" y1="180" x2="400" y2="471"/><line x1="392" y1="180" x2="408" y2="180"/><line x1="392" y1="471" x2="408" y2="471"/>
+  </g>
+  <rect x="300" y="310" width="92" height="36" rx="5" fill="#0d1b2e"/>
+  <text x="346" y="326" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">~18 m</text>
+  <text x="346" y="340" font-size="9" fill="#9ca3af" text-anchor="middle">tapada típica*</text>
+  <g stroke="#0d1b2e" stroke-width="1.2"><line x1="427" y1="640" x2="513" y2="640"/><line x1="427" y1="634" x2="427" y2="646"/><line x1="513" y1="634" x2="513" y2="646"/></g>
+  <text x="470" y="660" font-size="12" font-weight="700" fill="#0b0b0b" text-anchor="middle">Ø int. 5,4 m</text>
+  <g stroke="#0d1b2e" stroke-width="1.2"><line x1="681" y1="640" x2="779" y2="640"/><line x1="681" y1="634" x2="681" y2="646"/><line x1="779" y1="634" x2="779" y2="646"/></g>
+  <text x="730" y="660" font-size="12" font-weight="700" fill="#0b0b0b" text-anchor="middle">Ø ext. ~6 m</text>
+
+  <!-- persona escala -->
+  <g transform="translate(560,548)" fill="#0d1b2e"><circle cx="0" cy="-26" r="3.5"/><rect x="-3" y="-22" width="6" height="14" rx="2"/><rect x="-3" y="-8" width="2.5" height="10"/><rect x="0.5" y="-8" width="2.5" height="10"/></g>
+  <text x="560" y="565" font-size="9" fill="#3a2f22" text-anchor="middle">1,75 m</text>
+
+  <!-- Ficha -->
+  <rect x="890" y="300" width="270" height="200" rx="10" fill="#0d1b2e"/>
+  <text x="912" y="328" font-size="10" font-weight="600" letter-spacing="2" fill="#6b9fff">POR QUÉ DOS TÚNELES</text>
+  <g font-size="11.5" fill="#f0f1f3">
+    <text x="912" y="356">Cada tuneladora hace un tubo,</text>
+    <text x="912" y="374">en paralelo: más avance y</text>
+    <text x="912" y="392">diámetro chico = menos asiento</text>
+    <text x="912" y="410">en superficie.</text>
+    <text x="912" y="440">En las estaciones los tubos se</text>
+    <text x="912" y="458">separan y dejan en el medio</text>
+    <text x="912" y="476">el andén central.</text>
+  </g>
+  <text x="40" y="705" font-size="9.5" fill="#3a2f22">* Profundidad ilustrativa: el proyecto no publicó aún la cota por tramo. Diámetros según EIA (Vitruvius, 08/2026) y Ámbito (10/2026).</text>
+</svg></div>
+
+  <div class="kpi-grid g4">
+    <div class="kpi"><div class="kpi-label">Diámetro interno</div><div class="kpi-val azul">5,4 m</div><div class="kpi-note">según Estudio de Impacto Ambiental</div></div>
+    <div class="kpi"><div class="kpi-label">Diámetro exterior</div><div class="kpi-val">~6 m</div><div class="kpi-note">túneles gemelos</div></div>
+    <div class="kpi"><div class="kpi-label">Túnel total a excavar</div><div class="kpi-val">~19,6 km</div><div class="kpi-note">2 tubos × 9,8 km · cálculo propio</div></div>
+    <div class="kpi"><div class="kpi-label">Avance estimado</div><div class="kpi-val">300–500</div><div class="kpi-note">metros por mes, por máquina</div></div>
+  </div>
+
+  <div class="chart-card">
+    <div class="chart-label">Diámetro interno de túneles hechos con tuneladora en el AMBA</div>
+    <div class="bar-row"><div class="bar-lbl">Arroyo Vega (2º emisario)</div><div class="bar-track"><div class="bar-fill" style="left:0;width:44.2%;background:#b4b2a9"><span>5,3 m</span></div></div></div>
+    <div class="bar-row"><div class="bar-lbl"><strong style="color:#0b0b0b">Línea F</strong></div><div class="bar-track"><div class="bar-fill" style="left:0;width:45%;background:#e07b1a"><span>5,4 m</span></div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Arroyo Maldonado</div><div class="bar-track"><div class="bar-fill" style="left:0;width:57.5%;background:#b4b2a9"><span>6,9 m</span></div></div></div>
+    <div class="bar-row"><div class="bar-lbl">Soterramiento Sarmiento</div><div class="bar-track"><div class="bar-fill" style="left:0;width:91.7%;background:#b4b2a9"><span>~11 m · doble vía</span></div></div></div>
+    <div class="figura-pie">Línea F: EIA (2026). Arroyo Vega: GCBA. Arroyo Maldonado: ISSMGE / Vardé y Asoc. Sarmiento: La Nación. La F usa dos túneles chicos en lugar de uno grande: menos volumen excavado por metro y menos asiento en superficie.</div>
+  </div>
+</div>
+
+<!-- 04 ESTACIÓN -->
+<div class="seccion">
+  <div class="sec-header"><span class="sec-num">04</span><div>
+    <div class="sec-titulo">La <strong>estación tipo</strong></div>
+    <div class="sec-desc">Un diseño distinto al del resto de la red: andén central, accesos dentro de edificios y, en algunos casos, luz natural hasta el andén.</div>
+  </div></div>
+
+  <div class="figura"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 700" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs>
+    <pattern id="pamp3" width="14" height="14" patternUnits="userSpaceOnUse"><rect width="14" height="14" fill="#c9a77c"/><circle cx="3" cy="4" r="1.1" fill="#b08d63"/><circle cx="10" cy="10" r="1" fill="#b08d63"/></pattern>
+  </defs>
+  <rect width="1200" height="700" fill="#fff"/>
+  <text x="40" y="38" font-size="11" font-weight="600" letter-spacing="2" fill="#1a7aff">LA ESTACIÓN TIPO</text>
+  <text x="40" y="58" font-size="12" fill="#52514e">Corte transversal esquemático · andén central · acceso desde un edificio, sin bocas en la vereda</text>
+
+  <rect x="0" y="70" width="1200" height="130" fill="#f5f4f0"/>
+  <!-- Edificio con acceso -->
+  <rect x="80" y="86" width="210" height="114" fill="#d3d1c7"/>
+  <g fill="#fff" opacity=".7"><rect x="100" y="100" width="34" height="20"/><rect x="150" y="100" width="34" height="20"/><rect x="200" y="100" width="34" height="20"/><rect x="250" y="100" width="24" height="20"/><rect x="100" y="132" width="34" height="20"/><rect x="150" y="132" width="34" height="20"/><rect x="200" y="132" width="34" height="20"/></g>
+  <rect x="130" y="164" width="110" height="36" fill="#1a7aff"/>
+  <text x="185" y="187" font-size="11" font-weight="700" fill="#fff" text-anchor="middle">ACCESO F</text>
+  <!-- vereda y avenida -->
+  <rect x="290" y="190" width="60" height="10" fill="#b4b2a9"/>
+  <rect x="350" y="188" width="500" height="12" fill="#52514e"/>
+  <rect x="850" y="190" width="60" height="10" fill="#b4b2a9"/>
+  <rect x="910" y="100" width="220" height="100" fill="#d3d1c7"/>
+  <text x="600" y="180" font-size="11" fill="#fff" text-anchor="middle">Avenida</text>
+  <!-- lucernario -->
+  <polygon points="560,188 640,188 625,176 575,176" fill="#bfe0ff" stroke="#1a7aff"/>
+  <text x="660" y="172" font-size="10" fill="#1a7aff">lucernario (luz natural, en algunas estaciones)</text>
+
+  <rect x="0" y="200" width="1200" height="500" fill="url(#pamp3)"/>
+
+  <!-- Caja de estación -->
+  <rect x="300" y="290" width="600" height="320" fill="#f8f9fb" stroke="#52514e" stroke-width="10" rx="40"/>
+  <!-- haz de luz -->
+  <polygon points="575,200 625,200 700,560 500,560" fill="#ffe9a8" opacity=".35"/>
+  <rect x="575" y="200" width="50" height="95" fill="#bfe0ff" opacity=".6"/>
+
+  <!-- Vestíbulo / mezzanine -->
+  <rect x="320" y="380" width="160" height="10" fill="#52514e"/>
+  <rect x="720" y="380" width="160" height="10" fill="#52514e"/>
+  <text x="400" y="372" font-size="11" font-weight="600" fill="#0b0b0b" text-anchor="middle">Vestíbulo · molinetes</text>
+  <text x="800" y="372" font-size="11" font-weight="600" fill="#0b0b0b" text-anchor="middle">Balcón 360°</text>
+
+  <!-- Pasillo desde edificio -->
+  <path d="M185,200 L185,330 L320,330" fill="none" stroke="#1a7aff" stroke-width="16" stroke-linejoin="round" opacity=".35"/>
+  <text x="200" y="300" font-size="10" fill="#0d1b2e">escaleras y</text><text x="200" y="314" font-size="10" fill="#0d1b2e">ascensores</text><text x="200" y="328" font-size="10" fill="#0d1b2e">dentro del edificio</text>
+
+  <!-- Escalera mecánica al andén -->
+  <line x1="470" y1="390" x2="540" y2="520" stroke="#0d1b2e" stroke-width="6"/>
+  <line x1="730" y1="390" x2="660" y2="520" stroke="#0d1b2e" stroke-width="6"/>
+  <!-- Ascensor -->
+  <rect x="590" y="400" width="20" height="120" fill="#1a7aff" opacity=".5"/>
+  <text x="600" y="395" font-size="9.5" fill="#0d1b2e" text-anchor="middle">ascensor</text>
+
+  <!-- Andén central -->
+  <rect x="510" y="520" width="180" height="22" fill="#b4b2a9"/>
+  <text x="600" y="536" font-size="11" font-weight="700" fill="#0b0b0b" text-anchor="middle">ANDÉN CENTRAL</text>
+  <!-- puertas de andén -->
+  <g fill="#1a7aff"><rect x="506" y="470" width="4" height="50"/><rect x="690" y="470" width="4" height="50"/></g>
+  <!-- Trenes -->
+  <rect x="380" y="470" width="120" height="66" rx="10" fill="#e07b1a"/><rect x="395" y="482" width="90" height="18" rx="3" fill="#0d1b2e"/>
+  <rect x="700" y="470" width="120" height="66" rx="10" fill="#e07b1a"/><rect x="715" y="482" width="90" height="18" rx="3" fill="#0d1b2e"/>
+  <rect x="370" y="536" width="140" height="10" fill="#8d8c86"/><rect x="690" y="536" width="140" height="10" fill="#8d8c86"/>
+  <text x="440" y="572" font-size="11" fill="#52514e" text-anchor="middle">vía a Palermo</text>
+  <text x="760" y="572" font-size="11" fill="#52514e" text-anchor="middle">vía a Barracas</text>
+
+  <!-- Ficha -->
+  <rect x="930" y="300" width="230" height="250" rx="10" fill="#0d1b2e"/>
+  <text x="950" y="328" font-size="10" font-weight="600" letter-spacing="2" fill="#6b9fff">DATOS DEL PLIEGO</text>
+  <g font-size="11.5" fill="#f0f1f3">
+    <text x="950" y="360" font-weight="700" font-size="20">137 m</text><text x="950" y="378" fill="#9ca3af" font-size="10.5">largo de estación (eran 155)</text>
+    <text x="950" y="408">Andén central</text><text x="950" y="424" fill="#9ca3af" font-size="10.5">cambiás de sentido sin escaleras</text>
+    <text x="950" y="454">100% accesibles</text><text x="950" y="470" fill="#9ca3af" font-size="10.5">ascensores en todas</text>
+    <text x="950" y="500">Puertas de andén</text><text x="950" y="516" fill="#9ca3af" font-size="10.5">necesarias para operar sin conductor</text>
+  </g>
+  <text x="40" y="685" font-size="9.5" fill="#3a2f22">Esquema ilustrativo. Fuentes: pliego (síntesis O'Farrell), enelSubte 07/2026, La Política Online 01/2026, El Economista 07/2019 (puertas de andén). Las puertas de andén se infieren del modo GoA4; confirmar en planos.</text>
+</svg></div>
+
+
+  <div class="alert a-amarillo">
+    <span class="alert-ico">⚠️</span>
+    <div><div class="alert-titulo">Estaciones más cortas: un recorte con consecuencias a futuro</div>
+    <div class="alert-body">En junio de 2026 la Ciudad reemplazó los pliegos y bajó el largo de las estaciones de 155 a 137 metros. En subte, el largo del andén define el largo máximo del tren y, por lo tanto, la capacidad de la línea para siempre: alargar una estación ya construida es una obra muy cara. Es un ahorro inicial que limita cuánto va a poder crecer el servicio si la demanda supera lo previsto.</div></div>
+  </div>
+</div>
+
+<!-- 05 DESAFÍOS -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header"><span class="sec-num">05</span><div>
+    <div class="sec-titulo">Los <strong>desafíos</strong> de ingeniería</div>
+    <div class="sec-desc">Excavar 10 km bajo una ciudad de 100 años tiene problemas que no aparecen en los renders. Estos son los principales que surgen de la documentación pública.</div>
+  </div></div>
+
+  <div class="desafios">
+    <div class="desafio">
+      <div class="desafio-ico">🚂</div><div class="desafio-tit">Cruzar un túnel de 1916</div><div class="desafio-dato">Entre Ríos / Callao · ~20 m</div>
+      <div class="desafio-desc">Bajo Rivadavia corre el viejo túnel de cargas del Ferrocarril Oeste, de vía simple y con su punto más profundo a unos 23 m. La F tiene que pasarlo por arriba o por debajo sin afectarlo. Ese túnel ya obligó a hacer de Once (Línea H) la estación más profunda de la red.</div>
+      <div class="desafio-sol">→ Define la cota de la línea en ese tramo.</div>
+    </div>
+    <div class="desafio">
+      <div class="desafio-ico">💧</div><div class="desafio-tit">El agua: napa y Puelche</div><div class="desafio-dato">Suelo saturado</div>
+      <div class="desafio-desc">Debajo del Pampeano, el suelo arcilloso y firme típico de la Ciudad, está el acuífero Puelche, y la napa queda por encima de los túneles. En el Arroyo Vega la tuneladora arrancó con hasta 3 bar de presión de agua en la cámara.</div>
+      <div class="desafio-sol">→ Por eso se exige EPB: trabaja presurizada y sella el frente.</div>
+    </div>
+    <div class="desafio">
+      <div class="desafio-ico">🛢</div><div class="desafio-tit">Suelos contaminados</div><div class="desafio-dato">Hidrocarburos</div>
+      <div class="desafio-desc">El pliego prevé excavar suelos contaminados con hidrocarburos (por ejemplo, viejas estaciones de servicio) y los paga aparte, por metro cúbico. Un estudio ambiental de Fase I relevó 250 m a cada lado de la traza, pero los resultados no se publicaron.</div>
+      <div class="desafio-sol">→ Riesgo de costo y plazo con precio abierto.</div>
+    </div>
+    <div class="desafio">
+      <div class="desafio-ico">🏛</div><div class="desafio-tit">Edificios y patrimonio</div><div class="desafio-dato">Asentamientos</div>
+      <div class="desafio-desc">Toda excavación produce algún asentamiento en superficie. La traza pasa bajo edificios patrimoniales en Monserrat, Congreso y Recoleta. En Londres, la línea Elizabeth instaló miles de sensores para monitorear edificios en tiempo real.</div>
+      <div class="desafio-sol">→ Clave: instrumentación y control de presión de la TBM.</div>
+    </div>
+    <div class="desafio">
+      <div class="desafio-ico">〰</div><div class="desafio-tit">Ruido y vibraciones</div><div class="desafio-dato">Obra y operación</div>
+      <div class="desafio-desc">El Estudio de Impacto Ambiental mide el ruido actual en cada estación para comparar. Las vibraciones de la TBM durante la obra, y luego de los trenes, se transmiten por el suelo a las construcciones vecinas.</div>
+      <div class="desafio-sol">→ Vía con fijaciones antivibratorias y desacople en zonas sensibles.</div>
+    </div>
+    <div class="desafio">
+      <div class="desafio-ico">🔌</div><div class="desafio-tit">Interferencias y expropiaciones</div><div class="desafio-dato">12 parcelas</div>
+      <div class="desafio-desc">Caños, cables y conductos no informados se pagan aparte según el pliego. Además, los accesos dentro de edificios requieren expropiar 12 inmuebles, entre ellos la esquina de Zivals en Corrientes y Callao.</div>
+      <div class="desafio-sol">→ Proyecto de ley aún sin aprobar.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 06 TIEMPOS -->
+<div class="seccion">
+  <div class="sec-header"><span class="sec-num">06</span><div>
+    <div class="sec-titulo">Los <strong>tiempos</strong>, con perspectiva</div>
+    <div class="sec-desc">Lo que promete el pliego frente a lo que pasó en las últimas grandes obras subterráneas de Buenos Aires.</div>
+  </div></div>
+
+  <div class="axis"><span>2000</span><span>2005</span><span>2010</span><span>2015</span><span>2020</span><span>2025</span><span>2030</span><span>2035</span></div>
+  <div class="bar-row"><div class="bar-lbl">Línea H</div><div class="bar-track"><div class="bar-fill" style="left:2.9%;width:48.6%;background:#e8b400"><span>2001–2018</span></div></div></div>
+  <div class="bar-note">Primer tramo abierto en 2007; la última estación, en 2018.</div>
+  <div class="bar-row"><div class="bar-lbl">Soterramiento Sarmiento</div><div class="bar-track"><div class="bar-fill" style="left:34.3%;width:20%;background:#9e1b1b"><span>2012–2019 · detenida</span></div></div></div>
+  <div class="bar-note">La tuneladora excavó 7,2 km y está parada bajo Villa Luro desde 2019.</div>
+  <div class="bar-row"><div class="bar-lbl">Arroyo Vega (TBM)</div><div class="bar-track" style="overflow:visible"><div class="bar-fill" style="left:51.4%;width:5.7%;background:#59a14f;padding-left:0"><span style="position:absolute;left:calc(100% + 8px);color:#1a7a4a">2018–2019</span></div></div></div>
+  <div class="bar-note">5,9 km con tuneladora bajo la Ciudad: el antecedente local más parecido.</div>
+  <div class="bar-row"><div class="bar-lbl">Línea F (pliego)</div><div class="bar-track" style="overflow:visible"><div class="bar-fill" style="left:77.1%;width:14.3%;background:#e07b1a;padding-left:0"><span style="position:absolute;right:calc(100% + 8px);color:#b35c0a">2027–2032 · 5 años</span></div></div></div>
+  <div class="bar-note">5 años desde el acta de inicio. Primer tramo previsto para 2031, según el anuncio de 2025.</div>
+
+  <div class="tabla-wrap"><table class="tabla" style="margin-top:16px">
+    <thead><tr><th>Hito</th><th>Fecha</th><th>Estado</th></tr></thead>
+    <tbody>
+      <tr><td>Licitación lanzada</td><td>Octubre 2025</td><td><span class="b-tag b-si">Hecho</span></td></tr>
+      <tr><td>Endeudamiento aprobado por la Legislatura (hasta USD 1.350 M)</td><td>Junio 2026</td><td><span class="b-tag b-si">Hecho</span></td></tr>
+      <tr><td>Apertura de sobres técnicos: 2 consorcios</td><td>2 de octubre de 2026</td><td><span class="b-tag b-si">Hecho</span></td></tr>
+      <tr><td>Apertura de ofertas económicas</td><td>Noviembre 2026</td><td><span class="b-tag b-gris">Previsto</span></td></tr>
+      <tr><td>Adjudicación y firma del contrato</td><td>Diciembre 2026</td><td><span class="b-tag b-gris">Previsto</span></td></tr>
+      <tr><td>Inicio de obra (Barracas, Constitución, Cochabamba)</td><td>Principios de 2027</td><td><span class="b-tag b-gris">Previsto</span></td></tr>
+      <tr><td>Fin de obra según pliego</td><td>~2032</td><td><span class="b-tag b-gris">Proyectado</span></td></tr>
+    </tbody>
+  </table></div>
+</div>
+
+<!-- 07 CONTRATO -->
+<div class="seccion seccion-blanca">
+  <div class="sec-header"><span class="sec-num">07</span><div>
+    <div class="sec-titulo">Qué se licita y qué <strong>queda afuera</strong></div>
+    <div class="sec-desc">El contrato de USD 1.350 millones es la obra civil, no la línea funcionando. Hay piezas clave que se van a contratar por separado y sin fecha conocida.</div>
+  </div></div>
+
+  <div class="tabla-wrap"><table class="tabla">
+    <thead><tr><th>Componente</th><th>¿En esta licitación?</th><th>Comentario</th></tr></thead>
+    <tbody>
+      <tr><td>Ingeniería de detalle, túneles y estaciones</td><td><span class="b-tag b-si">Sí</span></td><td>Núcleo del contrato.</td></tr>
+      <tr><td>Taller y cocheras menores en Brandsen</td><td><span class="b-tag b-si">Sí</span></td><td>Incluye taller de averías y lavadero.</td></tr>
+      <tr><td>Cocheras principales bajo Parque Vuelta de Obligado</td><td><span class="b-tag b-no">No</span></td><td>Excluidas en junio de 2026; etapa posterior.</td></tr>
+      <tr><td>Túnel de enlace con la Línea H (Pacheco de Melo)</td><td><span class="b-tag b-no">No</span></td><td>Permitiría mover trenes entre líneas.</td></tr>
+      <tr><td>Trenes (material rodante)</td><td><span class="b-tag b-no">No</span></td><td>Licitación aparte.</td></tr>
+      <tr><td>Señalamiento automático GoA4 y comunicaciones</td><td><span class="b-tag b-no">No</span></td><td>Necesario para operar sin conductor.</td></tr>
+      <tr><td>Ventilación, escaleras mecánicas, ascensores, bombeo</td><td><span class="b-tag b-no">No</span></td><td>Confirmado por circular ante consultas de oferentes.</td></tr>
+    </tbody>
+  </table></div>
+
+  <div class="alert a-rojo" style="margin-top:16px">
+    <span class="alert-ico">🔴</span>
+    <div><div class="alert-titulo">El riesgo de tener túneles listos sin trenes para circular</div>
+    <div class="alert-body">Ya pasó. En la Línea A, las estaciones San José de Flores y San Pedrito tenían la obra civil terminada en 2007 y se inauguraron recién en 2013. En la B, Echeverría y Rosas también abrieron tarde. En los dos casos, el motivo fue que las cocheras se empezaron a construir cuando los túneles ya estaban hechos. Que la F avance a tiempo depende tanto de esta obra como de licitar a tiempo todo lo que quedó afuera.</div></div>
+  </div>
+
+  <div class="kpi-grid g3" style="margin-top:16px">
+    <div class="kpi"><div class="kpi-label">Plazo contractual</div><div class="kpi-val">5 años</div><div class="kpi-note">desde el acta de inicio</div></div>
+    <div class="kpi"><div class="kpi-label">Anticipo financiero</div><div class="kpi-val">20%</div><div class="kpi-note">del monto adjudicado</div></div>
+    <div class="kpi"><div class="kpi-label">Requisito técnico</div><div class="kpi-val" style="font-size:16px;line-height:1.3">8 km con EPB urbana</div><div class="kpi-note">y al menos 6 estaciones</div></div>
+  </div>
+
+  <p class="texto" style="margin-top:8px">Compiten dos consorcios. Uno lo forman <strong>Roggio</strong>, operador histórico del subte a través de Emova, y la italiana <strong>Ghella</strong>, que hizo los túneles del Arroyo Maldonado con tuneladoras. El otro reúne a las chinas <strong>CITIC Construction</strong> y <strong>Ranken Railway Construction</strong>, filial de CRCC especializada en túneles, con <strong>Supercemento</strong>, <strong>Eleprint</strong> y <strong>Panedile</strong>. Como ninguna constructora local tiene experiencia propia con EPB en subtes, ambos se armaron alrededor de un socio con esa experiencia.</p>
+</div>
+
+<!-- 08 CONCLUSIONES -->
+<div class="seccion">
+  <div class="sec-header"><span class="sec-num">08</span><div>
+    <div class="sec-titulo"><strong>Conclusiones</strong></div>
+    <div class="sec-desc">Lo que hay que mirar para saber si la Línea F va en serio.</div>
+  </div></div>
+
+  <div class="conc-grid">
+    <div class="conc-item"><div class="conc-num" style="color:#1F4E79">2 EPB</div><div class="conc-lbl">Salto tecnológico</div><div class="conc-desc">Es la forma correcta de excavar en el suelo de Buenos Aires: más rápida, más segura y con menos obra en superficie que el método de la H.</div></div>
+    <div class="conc-item"><div class="conc-num" style="color:#7d5a00">137 m</div><div class="conc-lbl">Capacidad fija</div><div class="conc-desc">El recorte en el largo de las estaciones fija para siempre el tren más largo posible. Ahorra hoy y limita el crecimiento futuro.</div></div>
+    <div class="conc-item"><div class="conc-num" style="color:#c0392b">4 piezas</div><div class="conc-lbl">Fuera del contrato</div><div class="conc-desc">Trenes, señales, cocheras principales e instalaciones electromecánicas. Sin ellas, los túneles no funcionan como línea.</div></div>
+    <div class="conc-item"><div class="conc-num" style="color:#1a7a4a">1,5–3</div><div class="conc-lbl">Años de excavación</div><div class="conc-desc">Con los rendimientos declarados, la excavación pura entra cómoda en 5 años. El cuello de botella son las estaciones y el equipamiento.</div></div>
+    <div class="conc-item"><div class="conc-num" style="color:#1F4E79">Dic-26</div><div class="conc-lbl">Primer hito a mirar</div><div class="conc-desc">Adjudicación y firma del contrato. Después, la llegada de las tuneladoras y la excavación del primer pozo de ataque en Barracas.</div></div>
+    <div class="conc-item"><div class="conc-num" style="color:#c0392b">6</div><div class="conc-lbl">Riesgos técnicos</div><div class="conc-desc">Túnel del FCO, agua, suelos contaminados, patrimonio, vibraciones e interferencias. Ninguno es inédito, pero todos cuestan tiempo y plata.</div></div>
+  </div>
+
+  <div class="teaser">
+    <div class="teaser-eyebrow">Próximo informe</div>
+    <div class="teaser-tit">¿Y qué pasa con el <strong>valor de las propiedades</strong>?</div>
+    <div class="teaser-desc">Qué pasó con los precios donde llegó la Línea H, qué dicen los estudios de Santiago, Bogotá y San Pablo, en qué momento de la obra se mueve el mercado y cómo están hoy los barrios de la traza. Un análisis para compradores e inversores, con datos y sin promesas.</div>
+  </div>
+</div>
+
+<!-- FUENTES -->
+<div class="seccion seccion-blanca">
+  <div class="chart-label" style="margin-bottom:12px">Fuentes</div>
+  <div class="fuentes">
+    <a href="https://www.estudio-ofarrell.com/?p=24115" target="_blank">Pliego LPI 10241-0094-LPU25 — síntesis Estudio O'Farrell (11/2025)</a><br>
+    <a href="https://enelsubte.com/noticias/malestar-en-el-sector-privado-por-los-cambios-sin-fin-al-proyecto-de-la-linea-f/" target="_blank">enelSubte — Cambios al proyecto de la Línea F (07/2026)</a><br>
+    <a href="https://www.ambito.com/informacion-general/subte-f-cuales-son-las-empresas-que-pelean-la-construccion-la-megaobra-y-como-sigue-la-licitacion-n6334687" target="_blank">Ámbito — Consorcios, tuneladoras y GoA4 (10/2026)</a><br>
+    <a href="https://www.acusticavitruvius.com/post/ruido-y-vibraciones-en-subterr%C3%A1neos-el-desaf%C3%ADo-de-la-nueva-l%C3%ADnea-f" target="_blank">Vitruvius — Ruido y vibraciones, EIA Línea F (08/2026)</a><br>
+    <a href="https://www.infobae.com/sociedad/2026/10/14/subte-linea-f-cuando-comenzaran-las-obras-que-recorrido-tendra-y-cuanto-tardara-su-construccion/" target="_blank">Infobae — Entrevista al ministro Bereciartua (10/2026)</a><br>
+    <a href="https://www.ambito.com/informacion-general/tras-demoras-caba-abrira-la-licitacion-del-subte-f-octubre-y-proyecta-iniciar-las-obras-el-verano-del-2027-n6313030" target="_blank">Ámbito — TBM frente al método de la Línea H (08/2026)</a><br>
+    <a href="https://www.lapoliticaonline.com/ciudad/luz-natural-andenes-centrales-y-balcones-360-como-sera-la-nueva-linea-f-6455/" target="_blank">La Política Online — Diseño de estaciones (01/2026)</a><br>
+    <a href="https://enelsubte.com/noticias/el-otro-subte-el-tunel-del-fco/" target="_blank">enelSubte — El túnel de cargas del FCO</a><br>
+    <a href="https://www.iprofesional.com/actualidad/460626-subte-linea-f-enfrenta-riesgo-ambiental-que-podria-frenar-la-obra-mas-esperada-de-caba" target="_blank">iProfesional — Suelos contaminados y patrimonio (07/2026)</a><br>
+    <a href="https://www.iprofesional.com/actualidad/465706-proyecto-propone-expropiar-la-iconica-libreria-zivals-por-el-subte-f" target="_blank">iProfesional — Expropiaciones y Zivals (10/2026)</a><br>
+    <a href="https://aus.sika.com/dam/dms/corporate/4/glo-tunnel-arroyo-vega-buenos-aires-argentina.pdf" target="_blank">Sika — Túnel Arroyo Vega con EPB</a><br>
+    <a href="https://www.issmge.org/uploads/publications/84/52/GEO11Paper992.pdf" target="_blank">ISSMGE — Túneles del Arroyo Maldonado con TBM</a><br>
+    <a href="https://www.lanacion.com.ar/editoriales/el-soterramiento-del-ferrocarril-sarmiento-nid05022024/" target="_blank">La Nación — Soterramiento del Sarmiento</a><br>
+    <a href="https://www.letrap.com.ar/sociedad/linea-f-dos-consorcios-competiran-la-obra-que-unira-barracas-palermo-n5427096" target="_blank">Letra P — Estaciones y presupuesto (10/2026)</a>
+  </div>
+  <div class="figura-pie" style="margin-top:14px">Ilustraciones: elaboración propia, esquemáticas y no a escala salvo que se indique. Las cifras marcadas como "cálculo propio" son estimaciones del autor con los datos publicados.</div>
+</div>
+
+<!-- CONTACTO -->
+<div class="contacto-page">
+  <div class="contacto-hero">
+    <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada.jpg" alt="Matías Leiblich" style="width:100px;height:100px;border-radius:50%;object-fit:cover;object-position:center 15%;border:2px solid #1a7aff55;flex-shrink:0">
+    <div>
+      <div class="contacto-nombre">Matías Leiblich</div>
+      <div class="contacto-titulo">Ingeniero Civil · Real Estate</div>
+      <div class="contacto-bio">Soy Ingeniero Civil (UBA) y asesor en Real Estate. Mi enfoque combina el análisis técnico de cada inmueble con el estudio de las condiciones actuales del mercado, lo que permite elaborar valuaciones objetivas y fundamentadas. Cada tasación se realiza considerando las características particulares de la propiedad, los antecedentes de operaciones comparables y la dinámica vigente de la oferta y la demanda.</div>
+      <div class="contacto-redes">
+        <a class="red-btn" href="https://wa.me/5491161737552" target="_blank">📱 WhatsApp</a>
+        <a class="red-btn" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank">✉️ Mail</a>
+        <a class="red-btn" href="https://linkedin.com/in/matias-leiblich" target="_blank">💼 LinkedIn</a>
+        <a class="red-btn" href="https://www.instagram.com/tutemudas" target="_blank">📷 @tutemudas</a>
+        <a class="red-btn" href="https://whatsapp.com/channel/0029VbBiYGGLCoWvqOOv4y1O" target="_blank">📢 Canal WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">Datos de contacto</div>
+  <div class="contacto-contacto">
+    <div class="contacto-dato"><div class="contacto-dato-label">Teléfono / WhatsApp</div><a class="contacto-dato-val" href="https://wa.me/5491161737552" target="_blank">11-6173-7552</a></div>
+    <div class="contacto-dato"><div class="contacto-dato-label">Email</div><a class="contacto-dato-val" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank" style="color:#6b9fff;font-size:11px">matiasleiblich@deinmobiliarios.com</a></div>
+    <div class="contacto-dato"><div class="contacto-dato-label">Web</div><a class="contacto-dato-val" href="https://matiasleiblich.com" target="_blank" style="color:#6b9fff">matiasleiblich.com</a></div>
+  </div>
+
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">¿Cómo puedo ayudarte?</div>
+  <div class="contacto-grid">
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🏠</div>
+      <div class="contacto-card-titulo">¿Necesitás ayuda con tu operación?</div>
+      <div class="contacto-card-desc">Asesoramiento personalizado para compradores y vendedores en CABA y GBA.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Le%C3%AD%20el%20informe%20de%20la%20L%C3%ADnea%20F%20y%20quisiera%20asesoramiento%20para%20comprar." target="_blank">🏠 Quiero comprar <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Le%C3%AD%20el%20informe%20de%20la%20L%C3%ADnea%20F%20y%20quisiera%20analizar%20la%20venta%20de%20una%20propiedad." target="_blank">💰 Quiero vender <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🚇</div>
+      <div class="contacto-card-titulo">¿Tenés una propiedad cerca de la traza?</div>
+      <div class="contacto-card-desc">Te ayudo a entender cómo te afecta la obra y qué valor tiene hoy tu propiedad, con comparables reales de cierre.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Tengo%20una%20propiedad%20cerca%20de%20la%20traza%20de%20la%20L%C3%ADnea%20F%20y%20quisiera%20una%20tasaci%C3%B3n." target="_blank">📍 Pedir tasación <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📚</div>
+      <div class="contacto-card-titulo">Herramientas y recursos gratuitos</div>
+      <div class="contacto-card-desc">Calculadora de gastos, cartera de propiedades y biblioteca de guías para compradores, vendedores e inversores.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://matiasleiblich.com/calculadora-inmobiliaria" target="_blank">🧮 Calculadora inmobiliaria <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://matiasleiblich.com/informes" target="_blank">📊 Más informes <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📐</div>
+      <div class="contacto-card-titulo">¿Qué hacer con mi lote?</div>
+      <div class="contacto-card-desc">Análisis de indicadores urbanísticos y potencial constructivo para proyectos de inversión.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20consultar%20por%20un%20analisis%20de%20prefactibilidad%20para%20un%20lote." target="_blank">📐 Solicitar análisis <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20que%20coordinemos%20una%20reunion." target="_blank">📅 Agendar reunión <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid #2a3a50;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div><div style="font-size:13px;font-weight:700;color:#f0f1f3">Matías Leiblich</div><div style="font-size:10px;color:#4b5a6e;margin-top:2px">Octubre 2026</div></div>
+    <div style="font-size:10px;color:#4b5a6e;text-align:right">Línea F de subte · Informe técnico · Fuentes públicas citadas</div>
+  </div>
+</div>
+
+</body>
+</html>
