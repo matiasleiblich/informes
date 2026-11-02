@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Comparables · Llavallol 3458 · Matías Leiblich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MC47CJF0VL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MC47CJF0VL', { 'anonymize_ip': true });
+  gtag('event', 'page_view', { 'informe': 'mapa-comparables-llavallol-3458' });
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.5;-webkit-text-size-adjust:100%}
+a{color:#1a7aff}
+.header{background:#0d1b2e;color:#fff;padding:28px 40px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap}
+.eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:10px;font-weight:500}
+.header h1{font-size:28px;font-weight:300;color:#f0f1f3;line-height:1.15;margin-bottom:4px}
+.header h1 strong{font-weight:700;color:#fff}
+.header-sub{font-size:12px;color:#8a93a3}
+.header-right{text-align:right;font-size:12px;color:#8a93a3;line-height:1.8}
+.header-right strong{display:block;color:#f0f1f3;font-size:13px;font-weight:600}
+.header-right a.tel{color:#c9a84c;text-decoration:none;font-weight:600}
+
+.wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;height:calc(100vh - 118px);min-height:560px}
+#map{height:100%;width:100%;background:#e8e6df}
+.side{background:#fff;border-left:1px solid #e1e0d9;overflow-y:auto;min-width:0}
+.side-head{padding:16px 18px 12px;border-bottom:1px solid #e1e0d9;position:sticky;top:0;background:#fff;z-index:2}
+.side-head h2{font-size:13px;font-weight:600}
+.side-head p{font-size:11px;color:#898781;margin-top:2px}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:10.5px;color:#52514e}
+.legend span{display:inline-flex;align-items:center;gap:5px}
+.legend i{width:10px;height:10px;border-radius:50%;display:inline-block}
+
+.item{display:grid;grid-template-columns:28px 76px minmax(0,1fr);gap:10px;padding:12px 18px;border-bottom:1px solid #efeee9;cursor:pointer;transition:background .15s}
+.item:hover,.item.active{background:#f5f8ff}
+.num{width:26px;height:26px;border-radius:50%;color:#fff;font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.thumb{width:76px;height:56px;border-radius:6px;object-fit:cover;background:#eee}
+.addr{font-size:12.5px;font-weight:600;line-height:1.3}
+.price{font-size:14px;font-weight:700;margin-top:3px;font-variant-numeric:tabular-nums}
+.price small{font-size:11px;font-weight:500;color:#52514e;margin-left:6px}
+.meta{font-size:11px;color:#6b6a65;margin-top:2px}
+.link{font-size:11px;font-weight:600;text-decoration:none;display:inline-block;margin-top:5px}
+.thumb-empty{display:flex;align-items:center;justify-content:center;font-size:10px;color:#898781;background:#efeee9}
+.subject-row{background:#fbf7ec}
+.subject-row .num{background:#c9a84c}
+
+.pin{border-radius:50%;color:#fff;font:700 12px/26px Inter,sans-serif;text-align:center;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.35)}
+.pin-subject{background:#0d1b2e;color:#c9a84c;border:2px solid #c9a84c;border-radius:50%;font:700 15px/30px Inter,sans-serif;text-align:center;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.leaflet-popup-content{margin:10px 12px;font-family:Inter,sans-serif}
+.pop img{width:220px;height:150px;object-fit:cover;border-radius:6px;display:block;margin-bottom:8px}
+.pop .addr{font-size:13px}
+.pop .price{font-size:15px}
+.pop .link{font-size:12px}
+
+.foot{background:#0d1b2e;color:#8a93a3;font-size:11px;padding:14px 40px;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.foot a{color:#c9a84c;text-decoration:none;font-weight:600}
+
+@media (max-width:860px){
+  .header{padding:22px 18px}
+  .header-right{text-align:left}
+  .wrap{grid-template-columns:1fr;height:auto}
+  #map{height:58vh;min-height:360px}
+  .side{border-left:none;border-top:1px solid #e1e0d9}
+  .foot{padding:14px 18px}
+}
+
+.tabs{display:flex;gap:6px;padding:10px 40px;background:#0d1b2e;border-top:1px solid #1d2c44}
+.tab{appearance:none;border:1px solid #2b3d5c;background:transparent;color:#c9d3e0;font:600 12.5px Inter,sans-serif;padding:8px 18px;border-radius:20px;cursor:pointer}
+.tab:hover{border-color:#6b9fff;color:#fff}
+.tab[aria-selected="true"]{background:#c9a84c;border-color:#c9a84c;color:#0d1b2e}
+.tab:focus-visible{outline:2px solid #6b9fff;outline-offset:2px}
+.wrap{height:calc(100vh - 170px)}
+@media (max-width:860px){.tabs{padding:10px 18px}.wrap{height:auto}}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Pre-tasación · Comparables en venta</div>
+    <h1>Llavallol <strong>3458</strong></h1>
+    <div class="header-sub">PH · Villa del Parque, CABA · 02/11/2026</div>
+  </div>
+  <div class="header-right">
+    <strong>Matías Leiblich</strong>
+    Ingenieros Inmobiliarios · deinmobiliarios<br>
+    <a class="tel" href="https://wa.me/5491161737552" target="_blank" rel="noopener">11-6173-7552</a>
+  </div>
+</header>
+
+<nav class="tabs" role="tablist" aria-label="Tipología">
+  <button class="tab" role="tab" id="tab-3amb" data-set="3amb" aria-selected="true">3 ambientes</button>
+  <button class="tab" role="tab" id="tab-4amb" data-set="4amb" aria-selected="false">4 ambientes</button>
+</nav>
+
+<div class="wrap">
+  <div id="map"></div>
+  <aside class="side">
+    <div class="side-head">
+      <h2 id="side-title"></h2>
+      <p>Tocá una propiedad para verla en el mapa. Color según USD/m² total.</p>
+      <div class="legend" id="legend"></div>
+    </div>
+    <div id="list"></div>
+  </aside>
+</div>
+
+<footer class="foot">
+  <span id="foot-src">Fuente: avisos de Zonaprop, hoy reservados. Ubicaciones tomadas de cada aviso.</span>
+  <span>Matías Leiblich · <a href="https://wa.me/5491161737552" target="_blank" rel="noopener">11-6173-7552</a> · matiasleiblich@deinmobiliarios.com</span>
+</footer>
+
+<script>
+const SUBJECT = { addr:'Llavallol 3458', lat:-34.5996339, lng:-58.5006218 };
+const IMG = 'https://imgar.zonapropcdn.com/avisos/1/00/';
+const SETS = {
+  '3amb': {
+    title: '11 PH de 3 ambientes que compiten',
+    subj: 'Propiedad tasada · PH 3 amb. · 105 m² tot.',
+    cuts: [1700, 2000, 2300],
+    src: 'Fuente: avisos de Zonaprop, hoy reservados. Ubicaciones tomadas de cada aviso.',
+    P: [
+  {amb:3, ban:1, id:'59455050', addr:'Llavallol al 2200', usd:119000, m2:2168, tot:'79',     cub:'43',    dorm:2, ant:null, lat:-34.6098059, lng:-58.4916291, img:'59/45/50/50/720x532/2061630556.jpg', slug:'ph-3-amb-en-planta-baja-con-terraza-propia-reciclado.-59455050'},
+  {amb:3, ban:1, id:'59716690', addr:'Llavallol 2258',    usd:167000, m2:1683, tot:'122',    cub:'88',    dorm:2, ant:40,   lat:-34.6096362, lng:-58.4917585, img:'59/71/66/90/720x532/2067962977.jpg', slug:'llavallol-2258:-al-frente-en-p.-b.-ph-3amb.-patio-59716690'},
+  {amb:3, ban:1, id:'59997312', addr:'Llavallol al 2200', usd:116000, m2:1661, tot:'100',    cub:'55',    dorm:1, ant:40,   lat:-34.6095773, lng:-58.4915730, img:'59/99/73/12/720x532/2074670552.jpg', slug:'ph-3-ambientes-en-villa-del-parque-59997312'},
+  {amb:3, ban:1, id:'60135185', addr:'Carranza al 2900',  usd:159900, m2:2027, tot:'105',    cub:'66',    dorm:2, ant:50,   lat:-34.6083086, lng:-58.4849389, img:'60/13/51/85/720x532/2078046650.jpg', slug:'venta-ph-3-ambientes-con-estudio-villa-del-parque-con-60135185'},
+  {amb:3, ban:1, id:'60149007', addr:'Emilio Lamarca 2200', usd:105000, m2:1781, tot:'69',   cub:'54',    dorm:2, ant:80,   lat:-34.6113046, lng:-58.4946502, img:'60/14/90/07/720x532/2080410522.jpg', slug:'ph-3-amb-c-terraza-propia-en-villa-del-parque-60149007'},
+  {amb:3, ban:1, id:'60180585', addr:'Av. Álvarez Jonte al 2300', usd:169900, m2:2018, tot:'113', cub:'70', dorm:2, ant:null, lat:-34.6063629, lng:-58.4755496, img:'60/18/05/85/720x532/2079163037.jpg', slug:'venta-ph-3-ambientes-con-patio-quincho-y-terraza-60180585'},
+  {amb:3, ban:1, id:'60452425', addr:'Baigorria al 2800', usd:159900, m2:2715, tot:'81',     cub:'48',    dorm:2, ant:null, lat:-34.6020343, lng:-58.4878701, img:'60/45/24/25/720x532/2085835650.jpg', slug:'venta-ph-3-ambientes-villa-del-parque-patio-y-terraza-60452425'},
+  {amb:3, ban:1, id:'60531228', addr:'Av. Álvarez Jonte al 2300', usd:189900, m2:2061, tot:'127', cub:'75', dorm:2, ant:null, lat:-34.6063629, lng:-58.4755496, img:'60/53/12/28/720x532/2087766101.jpg', slug:'venta-ph-3-ambientes-villa-del-parque-con-patio-60531228'},
+  {amb:3, ban:1, id:'60429920', addr:'Tobas 3400',        usd:120000, m2:1447, tot:'126,37', cub:'61,54', dorm:2, ant:54,   lat:-34.6080905, lng:-58.4937715, img:'60/42/99/20/720x532/2085259845.jpg', slug:'venta-ph-3-ambientes-villa-del-parque-60429920'},
+  {amb:3, ban:1, id:'60429685', addr:'José Pedro Varela 3300', usd:159000, m2:1938, tot:'94,3', cub:'76', dorm:2, ant:55,   lat:-34.5992105, lng:-58.4996309, img:'60/42/96/85/720x532/2085251535.jpg', slug:'venta-ph-3-amb.-con-quincho-v.-del-parque-60429685'},
+  {amb:3, ban:1, id:'59712534', addr:'Melincué 3700',     usd:177500, m2:1673, tot:'167,27', cub:'76',    dorm:2, ant:46,   lat:-34.6061971, lng:-58.4998585, img:'59/71/25/34/720x532/2067865594.jpg', slug:'ph-3-amb-con-terraza-apto-credito-v.-del-parque-59712534'}
+]
+  },
+  '4amb': {
+    title: '12 PH que compiten con un 4 ambientes',
+    subj: 'Propiedad tasada · PH 4 amb.',
+    cuts: [1300, 1700, 2100],
+    src: 'Fuente: avisos de Zonaprop, hoy reservados. Ubicaciones tomadas de cada aviso, salvo Nogoyá 2900 (aproximada).',
+    P: [
+  {addr:'Gral. José G. Artigas 3000', amb:4, usd:118500, m2:1148, tot:'130',    cub:'90',     dorm:3, ban:2, coch:0, ant:50, lat:-34.5983955, lng:-58.4857027, img:'59/37/10/42/720x532/2059551958.jpg'},
+  {addr:'Llavallol al 2200',          amb:3, usd:119000, m2:2168, tot:'79',     cub:'43',     dorm:2, ban:1, coch:0, ant:null, lat:-34.6098059, lng:-58.4916291, img:'59/45/50/50/720x532/2061630556.jpg'},
+  {addr:'Nazca 2423',                 amb:4, usd:175000, m2:1328, tot:'182',    cub:'107',    dorm:3, ban:2, coch:0, ant:71, lat:-34.6075754, lng:-58.4844603, img:'59/80/02/36/720x532/2070020846.jpg'},
+  {addr:'Marcos Sastre',              amb:4, usd:140000, m2:1403, tot:'140',    cub:'80',     dorm:3, ban:2, coch:0, ant:50, lat:-34.6034660, lng:-58.4890635, img:'60/13/72/76/720x532/2078099549.jpg'},
+  {addr:'Lascano al 2300',            amb:4, usd:153000, m2:1671, tot:'109',    cub:'83',     dorm:3, ban:1, coch:0, ant:40, lat:-34.6030780, lng:-58.4780410, img:'60/47/00/12/720x532/2086269168.jpg'},
+  {addr:'Av. Álvarez Jonte al 2300',  amb:3, usd:189900, m2:2061, tot:'127',    cub:'75',     dorm:2, ban:1, coch:0, ant:null, lat:-34.6063629, lng:-58.4755496, img:'60/53/12/28/720x532/2087766101.jpg'},
+  {addr:'Helguera 2500',              amb:4, usd:140000, m2:2771, tot:'68,05',  cub:'41,9',   dorm:3, ban:1, coch:0, ant:56, lat:-34.6057467, lng:-58.4899147, img:'60/30/82/19/720x532/2082389966.jpg'},
+  {addr:'Biarritz 2300',              amb:4, usd:99000,  m2:1195, tot:'119',    cub:'65',     dorm:3, ban:1, coch:0, ant:40, lat:-34.6053985, lng:-58.4769033, img:'60/48/53/21/720x532/2086645596.jpg'},
+  {addr:'Paula Albarracín de Sarmiento 3300', amb:4, usd:265000, m2:1782, tot:'203,03', cub:'122', dorm:3, ban:2, coch:1, ant:29, lat:-34.6148406, lng:-58.4864729, img:'60/01/41/22/720x532/2075086202.jpg'},
+  {addr:'Cuenca 1800',                amb:4, usd:155000, m2:1239, tot:'125,13', cub:'125,13', dorm:3, ban:2, coch:0, ant:52, lat:-34.6129855, lng:-58.4855086, img:'60/20/38/04/720x532/2079761691.jpg'},
+  {addr:'Nogoyá 2900',                amb:4, usd:169000, m2:1166, tot:'145',    cub:'145',    dorm:3, ban:2, coch:1, ant:36, lat:-34.6012819, lng:-58.4888850, img:null, aprox:true},
+  {addr:'Arregui 2500',               amb:4, usd:98000,  m2:1275, tot:'105',    cub:'63',     dorm:3, ban:1, coch:0, ant:56, lat:-34.6032940, lng:-58.4821200, img:'60/20/30/49/720x532/2079740922.jpg'}
+]
+  }
+};
+const COLORS = ['#2e9e5b', '#1a7aff', '#d9822b', '#c8423b'];
+const fmt = n => n.toLocaleString('es-AR');
+function distM(a,b){const R=6371000,t=Math.PI/180,dLa=(b.lat-a.lat)*t,dLo=(b.lng-a.lng)*t;
+  const h=Math.sin(dLa/2)**2+Math.cos(a.lat*t)*Math.cos(b.lat*t)*Math.sin(dLo/2)**2;return 2*R*Math.asin(Math.sqrt(h));}
+const distTxt = m => m < 1000 ? Math.round(m/10)*10 + ' m' : (m/1000).toFixed(1).replace('.',',') + ' km';
+
+// Si dos avisos comparten coordenada, se separan apenas para que se vean ambos pines.
+Object.values(SETS).forEach(S => { const seen = {};
+  S.P.forEach(p => { const k = p.lat + ',' + p.lng; if (seen[k]) p.lng += 0.00035; seen[k] = 1; }); });
+
+const map = L.map('map', { scrollWheelZoom: true });
+const osm = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  maxZoom: 19, attribution: '&copy; OpenStreetMap'
+}).addTo(map);
+// Respaldo: si OpenStreetMap no responde (por ejemplo, al abrir el archivo descargado), usa el mapa de Esri.
+let fallback = false;
+osm.on('tileerror', () => {
+  if (fallback) return; fallback = true; map.removeLayer(osm);
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer/tile/{z}/{y}/{x}', {
+    maxZoom: 19, attribution: 'Tiles &copy; Esri'
+  }).addTo(map);
+});
+
+const subjIcon = L.divIcon({ className:'', html:'<div class="pin-subject">★</div>', iconSize:[34,34], iconAnchor:[17,17] });
+const subj = L.marker([SUBJECT.lat, SUBJECT.lng], { icon: subjIcon, zIndexOffset: 1000 }).addTo(map);
+const layer = L.layerGroup().addTo(map);
+const list = document.getElementById('list');
+
+function render(key) {
+  const S = SETS[key];
+  const color = v => v < S.cuts[0] ? COLORS[0] : v < S.cuts[1] ? COLORS[1] : v < S.cuts[2] ? COLORS[2] : COLORS[3];
+  document.querySelectorAll('.tab').forEach(t => t.setAttribute('aria-selected', t.dataset.set === key));
+  document.getElementById('side-title').textContent = S.title;
+  document.getElementById('foot-src').textContent = S.src;
+  const c = S.cuts.map(fmt);
+  document.getElementById('legend').innerHTML =
+    '<span><i style="background:' + COLORS[0] + '"></i>&lt; ' + c[0] + '</span>' +
+    '<span><i style="background:' + COLORS[1] + '"></i>' + c[0] + ' – ' + c[1] + '</span>' +
+    '<span><i style="background:' + COLORS[2] + '"></i>' + c[1] + ' – ' + c[2] + '</span>' +
+    '<span><i style="background:' + COLORS[3] + '"></i>&gt; ' + c[2] + '</span>';
+
+  layer.clearLayers(); list.innerHTML = '';
+  subj.bindPopup('<div class="pop"><div class="addr">' + SUBJECT.addr + '</div><div class="meta">' + S.subj + '</div></div>');
+  list.insertAdjacentHTML('beforeend',
+    '<div class="item subject-row" id="row-s"><div class="num">★</div><div></div><div><div class="addr">' + SUBJECT.addr +
+    '</div><div class="meta">' + S.subj + '</div></div></div>');
+  document.getElementById('row-s').onclick = () => { map.setView([SUBJECT.lat, SUBJECT.lng], 16); subj.openPopup(); };
+
+  const markers = [];
+  S.P.forEach((p, i) => {
+    const n = i + 1, col = color(p.m2), img = p.img ? IMG + p.img : null;
+    const d = distTxt(distM(SUBJECT, p));
+    const meta = p.amb + ' amb. · ' + p.tot + ' m² tot. · ' + p.cub + ' m² cub. · ' + p.dorm + ' dorm. · ' + p.ban + (p.ban > 1 ? ' baños' : ' baño') + (p.coch ? ' · cochera' : '') + (p.ant ? ' · ' + p.ant + ' años' : '');
+    const aprox = p.aprox ? '<div class="meta">Ubicación aproximada por altura</div>' : '';
+    const icon = L.divIcon({ className:'', html:'<div class="pin" style="background:' + col + ';width:30px;height:30px">' + n + '</div>', iconSize:[30,30], iconAnchor:[15,15] });
+    const pop = '<div class="pop">' + (img ? '<img src="' + img + '" alt="" referrerpolicy="no-referrer">' : '') + '<div class="addr">' + n + '. PH en ' + p.addr + '</div>' +
+      '<div class="price">USD ' + fmt(p.usd) + '<small>' + fmt(p.m2) + ' USD/m²</small></div>' +
+      '<div class="meta">' + meta + '</div><div class="meta">A ' + d + ' de Llavallol 3458</div>' + aprox + '</div>';
+    const m = L.marker([p.lat, p.lng], { icon }).bindPopup(pop, { maxWidth: 250 });
+    layer.addLayer(m); markers.push(m);
+
+    list.insertAdjacentHTML('beforeend',
+      '<div class="item" id="row-' + n + '"><div class="num" style="background:' + col + '">' + n + '</div>' +
+      (img ? '<img class="thumb" src="' + img + '" alt="" loading="lazy" referrerpolicy="no-referrer">' : '<div class="thumb thumb-empty">Sin foto</div>') +
+      '<div><div class="addr">' + p.addr + '</div><div class="price">USD ' + fmt(p.usd) + '<small>' + fmt(p.m2) + ' USD/m²</small></div>' +
+      '<div class="meta">' + meta + ' · a ' + d + '</div>' + aprox + '</div></div>');
+    const row = document.getElementById('row-' + n);
+    row.onclick = () => {
+      document.querySelectorAll('.item.active').forEach(x => x.classList.remove('active'));
+      row.classList.add('active');
+      map.setView([p.lat, p.lng], 16); m.openPopup();
+      if (window.innerWidth <= 860) document.getElementById('map').scrollIntoView({ behavior: 'smooth' });
+    };
+    m.on('click', () => {
+      document.querySelectorAll('.item.active').forEach(x => x.classList.remove('active'));
+      row.classList.add('active'); row.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    });
+  });
+  map.closePopup();
+  map.fitBounds(L.featureGroup([subj, ...markers]).getBounds().pad(0.12));
+}
+
+function current() { return location.hash === '#4amb' ? '4amb' : '3amb'; }
+document.querySelectorAll('.tab').forEach(t => t.addEventListener('click', () => {
+  if (location.hash !== '#' + t.dataset.set) history.replaceState(null, '', '#' + t.dataset.set);
+  render(t.dataset.set);
+  gtag('event', 'cambio_tipologia', { informe: 'mapa-comparables-llavallol-3458', tipologia: t.dataset.set });
+}));
+window.addEventListener('hashchange', () => render(current()));
+render(current());
+</script>
+</body>
+</html>
