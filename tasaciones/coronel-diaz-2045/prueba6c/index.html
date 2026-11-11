@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Pretasación · Coronel Díaz 2045 · Matías Leiblich</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-MC47CJF0VL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-MC47CJF0VL', { 'anonymize_ip': true });
+  gtag('event', 'page_view', { 'unidad': 'prueba6c', 'edificio': 'coronel-diaz-2045' });
+</script>
+
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;background:#f5f4f0;color:#0b0b0b;font-size:13px;line-height:1.6}
+
+.header{background:#0d1b2e;color:#fff;padding:40px 56px 36px;display:flex;justify-content:space-between;align-items:flex-end;gap:24px}
+.eyebrow{font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:#6b9fff;margin-bottom:12px;font-weight:500}
+.header h1{font-size:32px;font-weight:300;color:#f0f1f3;line-height:1.15;margin-bottom:6px}
+.header h1 strong{font-weight:700;color:#fff}
+.header-sub{font-size:12px;color:#6b7280}
+.header-right{text-align:right;font-size:12px;color:#6b7280;line-height:1.9;flex-shrink:0}
+.header-right strong{display:block;color:#f0f1f3;font-size:13px;font-weight:600}
+.header-right .handle{font-size:10px;color:#6b9fff;letter-spacing:.5px}
+
+.seccion{padding:40px 56px;border-bottom:1px solid #e1e0d9}
+.seccion-blanca{background:#fff}
+.sec-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px}
+.sec-num{font-size:11px;font-weight:600;letter-spacing:2px;color:#1a7aff;background:#1a7aff11;padding:4px 10px;border-radius:20px;white-space:nowrap;margin-top:3px;border:1px solid #1a7aff22}
+.sec-titulo{font-size:22px;font-weight:300;color:#0b0b0b;line-height:1.2}
+.sec-titulo strong{font-weight:700}
+.sec-desc{font-size:12px;color:#52514e;margin-top:5px;line-height:1.6}
+
+.presentacion-wrap{display:grid;grid-template-columns:1fr 300px;gap:32px;align-items:start}
+.presentacion-texto p{font-size:14px;line-height:1.75;color:#2b2b28;max-width:760px;margin-bottom:14px}
+.presentacion-foto{border-radius:10px;overflow:hidden;position:relative;background:#e1e0d9;aspect-ratio:4/3}
+.presentacion-foto img{width:100%;height:100%;object-fit:cover;display:block}
+
+.kpi-grid{display:grid;gap:8px;margin-bottom:20px}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.kpi{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:14px 18px}
+.kpi-label{font-size:10px;font-weight:500;letter-spacing:.5px;text-transform:uppercase;color:#898781;margin-bottom:4px}
+.kpi-val{font-size:24px;font-weight:700;color:#0b0b0b;line-height:1.1}
+.kpi-val.verde{color:#1a7a4a}
+.kpi-val.azul{color:#1F4E79}
+.kpi-note{font-size:10px;color:#b4b2a9;margin-top:4px}
+.nota-ast{font-size:11px;color:#898781;margin-top:4px;line-height:1.55;max-width:760px}
+
+.alert{border-radius:8px;padding:14px 18px;margin-bottom:12px;display:flex;gap:12px;align-items:flex-start}
+.a-verde{background:#edf7f1;border:0.5px solid #9fd4b6}
+.a-azul{background:#e6f1fb;border:0.5px solid #b5d4f4}
+.a-amarillo{background:#fff8e1;border:0.5px solid #f0c040}
+.a-gris{background:#f5f4f0;border:0.5px solid #d3d1c7}
+.alert-ico{font-size:17px;flex-shrink:0;margin-top:1px}
+.alert-titulo{font-size:12px;font-weight:600;margin-bottom:3px}
+.a-verde .alert-titulo{color:#1a7a4a}
+.a-azul .alert-titulo{color:#1F4E79}
+.a-amarillo .alert-titulo{color:#7d5a00}
+.a-gris .alert-titulo{color:#52514e}
+.alert-body{font-size:12px;color:#52514e;line-height:1.65}
+.alert-body strong{color:#0b0b0b}
+
+.badge-vendido{display:inline-block;background:#edf7f1;color:#1a7a4a;border:0.5px solid #9fd4b6;border-radius:20px;padding:4px 12px;font-size:10.5px;font-weight:700;margin-bottom:14px;letter-spacing:.3px}
+.fotos-grid{display:grid;grid-template-columns:2fr 1fr;gap:6px;margin-bottom:18px;border-radius:10px;overflow:hidden;grid-template-rows:360px}
+.fotos-grid img{width:100%;height:100%;object-fit:cover;display:block;background:#e1e0d9}
+.fotos-grid .col-side{display:grid;grid-template-rows:minmax(0,1fr) minmax(0,1fr);gap:6px;min-height:0}
+.fotos-grid .col-side>div{position:relative;min-height:0;overflow:hidden}
+.fotos-grid .col-side>div img{position:absolute;inset:0}
+.foto-cap{position:absolute;bottom:6px;left:8px;background:#0d1b2ecc;color:#fff;font-size:9.5px;font-weight:600;padding:2px 8px;border-radius:10px;letter-spacing:.3px}
+.comp-precio{font-size:27px;font-weight:700;color:#0b0b0b;margin-top:4px}
+.comp-precio .m2{font-size:12.5px;color:#898781;font-weight:500;margin-left:6px}
+.comp-specs{display:flex;flex-wrap:wrap;gap:8px;margin:16px 0}
+.spec-pill{background:#f5f4f0;border:0.5px solid #e1e0d9;border-radius:14px;padding:5px 12px;font-size:11.5px;font-weight:600;color:#0d1b2e}
+.link-aviso{display:inline-flex;align-items:center;gap:6px;margin-top:16px;font-size:11.5px;font-weight:600;color:#1a7aff;text-decoration:none;padding:8px 14px;background:#1a7aff11;border:1px solid #1a7aff22;border-radius:6px}
+.link-video-destacado{display:inline-flex;align-items:center;gap:9px;margin-top:16px;font-size:12.5px;font-weight:700;color:#fff;text-decoration:none;padding:11px 20px;background:#0d1b2e;border-radius:8px}
+.link-video-destacado .play-ico{width:22px;height:22px;border-radius:50%;background:#1a7aff;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0}
+
+.estado-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:6px}
+.estado-card{background:#fff;border:1px solid #e1e0d9;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color .15s,box-shadow .15s;display:flex;flex-direction:column}
+.estado-card:hover{border-color:#1a7aff55;box-shadow:0 2px 10px #1a7aff14}
+.estado-foto-grid{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:70px 70px;height:140px;gap:1px;flex-shrink:0;background:#e1e0d9;overflow:hidden}
+.estado-foto-mini{width:100%;height:70px;object-fit:cover;display:block;background:#e1e0d9}
+.estado-card-body{padding:16px 18px;flex:1;display:flex;flex-direction:column}
+.estado-nombre{font-weight:700;color:#0b0b0b;font-size:14px}
+.estado-desc{font-size:11.5px;color:#6b6a65;margin-top:4px;flex:1;line-height:1.55}
+.estado-ver{font-size:10.5px;color:#1a7aff;font-weight:600;margin-top:8px;display:inline-block}
+.estado-card-price{background:#0d1b2e;margin:16px -18px -16px;padding:16px 18px;text-align:center}
+.estado-price-label{font-size:9.5px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#9ca3af;margin-bottom:4px}
+.estado-price-val{font-size:23px;font-weight:800;color:#fff;line-height:1.3;font-variant-numeric:tabular-nums;white-space:nowrap}
+.estado-price-val .usd{font-size:10.5px;font-weight:600;color:#c9a84c;display:inline;margin-right:5px}
+
+.modal-overlay{display:none;position:fixed;inset:0;background:#0d1b2ecc;z-index:100;align-items:center;justify-content:center;padding:24px}
+.modal-overlay.on{display:flex}
+.modal-box{background:#fff;border-radius:12px;max-width:520px;width:100%;overflow:hidden;max-height:88vh;overflow-y:auto;position:relative}
+.modal-gallery{display:grid;grid-template-columns:repeat(2,1fr);gap:2px}
+.modal-gallery img{width:100%;height:150px;object-fit:cover;display:block;background:#f5f4f0;cursor:zoom-in}
+.modal-body{padding:20px 24px 24px}
+.modal-titulo{font-size:16px;font-weight:700;color:#0b0b0b;margin-bottom:8px}
+.modal-desc{font-size:12.5px;color:#52514e;line-height:1.65}
+.modal-close{position:absolute;top:14px;right:18px;background:#0d1b2e;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:14px;border:none;z-index:2}
+.lightbox-overlay{display:none;position:fixed;inset:0;background:#000000e6;z-index:200;align-items:center;justify-content:center;padding:20px}
+.lightbox-overlay.on{display:flex}
+.lightbox-overlay img{max-width:100%;max-height:92vh;object-fit:contain;border-radius:6px}
+.lightbox-close{position:absolute;top:18px;right:22px;background:#ffffff22;color:#fff;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:16px;border:none}
+
+.embudo-wrap{display:flex;flex-direction:column;gap:6px;max-width:600px;margin:0 auto}
+.embudo-bar{border-radius:10px;padding:14px 22px;display:flex;justify-content:space-between;align-items:center;color:#fff;margin:0 auto}
+.embudo-bar .embudo-txt{font-size:12px;font-weight:600}
+.embudo-bar .embudo-val{font-size:16px;font-weight:800}
+.embudo-1{background:#c9d6e8;color:#0d1b2e;width:100%}
+.embudo-2{background:#8fb3de;color:#0d1b2e;width:84%}
+.embudo-3{background:#4e79a7;width:56%}
+.embudo-4{background:#1F4E79;width:49%}
+.embudo-5{background:#1a7a4a;width:32%}
+.embudo-caption{text-align:center;font-size:10px;color:#898781;text-transform:uppercase;letter-spacing:1px;margin-top:14px}
+
+.vender-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px}
+.vender-item{background:#fff;border:0.5px solid #e1e0d9;border-radius:8px;padding:16px 18px}
+.vender-item .ico{font-size:18px;margin-bottom:8px}
+.vender-item .tit{font-size:12.5px;font-weight:700;color:#0b0b0b;margin-bottom:4px}
+.vender-item .desc{font-size:11.5px;color:#52514e;line-height:1.55}
+
+.links-pie{background:#fff;padding:40px 56px;text-align:center;border-bottom:1px solid #e1e0d9}
+.links-pie-label{font-size:11px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:#898781;margin-bottom:20px}
+.links-pie-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.links-pie a{display:inline-flex;align-items:center;gap:8px;font-size:12.5px;font-weight:600;padding:12px 22px;border-radius:8px;text-decoration:none}
+.links-pie a.primary{background:#0d1b2e;color:#fff}
+.links-pie a.secondary{background:#f5f4f0;color:#0d1b2e;border:0.5px solid #e1e0d9}
+
+.contacto-page{background:#0d1b2e;color:#fff;padding:56px}
+.contacto-hero{display:grid;grid-template-columns:auto 1fr;gap:32px;align-items:center;margin-bottom:48px;padding-bottom:40px;border-bottom:1px solid #2a3a50}
+.contacto-nombre{font-size:28px;font-weight:700;color:#fff;margin-bottom:4px}
+.contacto-titulo{font-size:13px;color:#6b9fff;margin-bottom:12px;letter-spacing:.5px}
+.contacto-bio{font-size:12px;color:#9ca3af;line-height:1.7;max-width:560px}
+.contacto-redes{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
+.red-btn{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:500;padding:7px 14px;border-radius:20px;border:1px solid #2a3a50;color:#9ca3af;text-decoration:none}
+.contacto-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px}
+.contacto-card{background:#0f2440;border:1px solid #2a3a50;border-radius:10px;padding:20px 22px}
+.contacto-card-ico{font-size:20px;margin-bottom:10px}
+.contacto-card-titulo{font-size:13px;font-weight:600;color:#f0f1f3;margin-bottom:6px}
+.contacto-card-desc{font-size:11px;color:#6b7280;line-height:1.6;margin-bottom:12px}
+.contacto-links{display:flex;flex-direction:column;gap:6px}
+.contacto-link{display:inline-flex;align-items:center;gap:8px;font-size:11px;font-weight:500;color:#6b9fff;text-decoration:none;padding:6px 12px;background:#1a7aff11;border:1px solid #1a7aff22;border-radius:6px}
+.contacto-link-arrow{font-size:10px;margin-left:auto}
+.contacto-contacto{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:32px}
+.contacto-dato{background:#0f2440;border:1px solid #2a3a50;border-radius:8px;padding:14px 16px}
+.contacto-dato-label{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#4b5a6e;margin-bottom:5px}
+.contacto-dato-val{font-size:12px;font-weight:500;color:#c9a84c}
+.ref-zona{margin-top:22px;background:#fff;border:1px solid #e1e0d9;border-radius:10px;padding:16px 18px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:18px;max-width:860px}
+.ref-zona .rz-label{font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin-bottom:6px}
+.ref-zona .rz-tit{font-size:14px;font-weight:700;color:#0b0b0b}
+.ref-zona .rz-sub{font-size:11.5px;color:#52514e;margin-top:3px;line-height:1.55}
+.ref-zona .rz-precio{font-size:12px;color:#52514e;margin-top:8px}
+.ref-zona .rz-precio strong{color:#0b0b0b;font-size:15px}
+.ref-zona ul{list-style:none;display:grid;gap:6px;font-size:12px;color:#2b2b28}
+.ref-zona li{display:flex;gap:8px;align-items:baseline}
+.ref-zona li b{color:#1a7a4a;font-size:12px}
+@media(max-width:720px){.ref-zona{grid-template-columns:1fr}}
+
+@media(max-width:720px){
+  .header,.seccion,.links-pie,.contacto-page{padding-left:16px;padding-right:16px}
+  .header{flex-direction:column;align-items:flex-start;gap:14px}.header-right{text-align:left}
+  .header h1{font-size:26px}
+  .presentacion-wrap,.g4,.g5,.vender-grid,.contacto-grid,.contacto-contacto,.estado-grid{grid-template-columns:1fr}
+  .g5{grid-template-columns:1fr 1fr}
+  .fotos-grid{grid-template-columns:1fr;grid-template-rows:240px 120px}
+  .fotos-grid .col-side{grid-template-columns:1fr 1fr;grid-template-rows:120px}
+  .contacto-hero{grid-template-columns:1fr}
+  .embudo-bar{padding:12px 14px}
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div>
+    <div class="eyebrow">Pretasación orientativa · 2 ambientes · Coronel Díaz 2045, Palermo</div>
+    <h1>Depto <strong>6°C</strong><br>Coronel Díaz 2045, Palermo</h1>
+    <div class="header-sub">Basada en la venta real del 3°B de tu edificio · Noviembre 2026</div>
+  </div>
+  <div class="header-right">
+    <a href="https://matiasleiblich.com" target="_blank" style="text-decoration:none;color:inherit"><strong>Matías Leiblich</strong></a>
+    Ingenieros Inmobiliarios<br>
+    deinmobiliarios.com<br>
+    <a href="https://wa.me/5491161737552" target="_blank" class="handle" style="color:#c9a84c;text-decoration:none">11-6173-7552</a>
+  </div>
+</header>
+
+<!-- 01: PRESENTACIÓN -->
+<section class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">01</span>
+    <div>
+      <div class="sec-titulo">Hola, soy <strong>Matías Leiblich</strong></div>
+      <div class="sec-desc">Ingeniero Civil · Real Estate</div>
+    </div>
+  </div>
+  <div class="presentacion-wrap">
+    <div class="presentacion-texto">
+      <p>Hace poco vendí el departamento <strong>3°B</strong> de tu edificio, Coronel Díaz 2045, en <strong>USD 103.000</strong>. A partir de esa venta real, me tomé el atrevimiento de armarte una pretasación orientativa de tu unidad, el <strong>6°C</strong>.</p>
+      <p>Como no conozco el estado real de tu departamento, más abajo te dejo dos escenarios de precio según el estado en el que podría encontrarse. Al ser estimaciones, este informe no reemplaza una tasación presencial, pero a lo largo del informe vas a poder ver el porqué de cada número.</p>
+    </div>
+    <div class="presentacion-foto">
+      <img src="https://static.kiteprop.com/kp/properties/480134/3fb0eb/lg/3fb0eb05fcc8ef3d39de35c9ceab5fd4.jpg" alt="Balcón del 3°B, Coronel Díaz 2045">
+      <span class="foto-cap">3°B · balcón</span>
+    </div>
+  </div>
+</section>
+
+<!-- 02: CÓMO VENDIMOS EL 3°B -->
+<section class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">02</span>
+    <div>
+      <div class="sec-titulo">Cómo vendimos el <strong>3°B</strong></div>
+      <div class="sec-desc">El punto de partida real de esta pretasación</div>
+    </div>
+  </div>
+
+  <span class="badge-vendido">✓ Vendido · Febrero 2026</span>
+
+  <div class="fotos-grid">
+    <img src="https://static.kiteprop.com/kp/properties/480134/b5727e/lg/b5727e613fcb41c23ea017f803e30915.jpg" alt="Living 3°B">
+    <div class="col-side">
+      <div><img src="https://static.kiteprop.com/kp/properties/480134/40358e/lg/40358e10ac8e6253e2e9ad292f822e92.jpg" alt="Cocina 3°B"><span class="foto-cap">Cocina</span></div>
+      <div><img src="https://static.kiteprop.com/kp/properties/480134/557ae0/lg/557ae042c2eaff76315a3e83b60192dc.jpg" alt="Baño 3°B"><span class="foto-cap">Baño</span></div>
+    </div>
+  </div>
+
+  <div class="comp-precio">USD 103.000 <span class="m2">vendido al precio de publicación · con financiación</span></div>
+
+  <div class="comp-specs">
+    <span class="spec-pill">Monoambiente</span>
+    <span class="spec-pill">3° piso</span>
+    <span class="spec-pill">Frente</span>
+    <span class="spec-pill">Balcón</span>
+    <span class="spec-pill">Buen estado</span>
+    <span class="spec-pill">31,1 m² ponderados</span>
+    <span class="spec-pill">Apto crédito</span>
+  </div>
+
+  <p style="font-size:12.5px;color:#52514e;max-width:640px;margin-bottom:10px">Monoambiente al frente con balcón sobre Coronel Díaz. Salimos con la mejor comercialización y un precio de prueba, algo exigente, para medir la respuesta del mercado. En menos de dos semanas el depto apareció más de 5.700 veces en Zonaprop. Hubo pocas consultas, como es esperable con un precio exigente, pero calificadas: a los 13 días cerramos la operación al precio de publicación, con una parte financiada.</p>
+  <p style="font-size:12.5px;color:#52514e;max-width:640px">Es el estado <strong>"Buen estado"</strong> que tomamos como referencia. Una operación de contado suele cerrar algo por debajo de lista, por eso los valores de esta pretasación están calculados para un comprador de contado.</p>
+
+  <div style="display:flex;gap:10px;flex-wrap:wrap">
+    <a class="link-aviso" href="https://www.kiteprop.com/landing/properties/t5132p480134t41a846m/venta-depto-monoambiente-balcon-apto-cred-recoleta?u=540042996051" target="_blank">Ver aviso original ↗</a>
+    <a class="link-video-destacado" href="#" target="_blank"><span class="play-ico">▶</span> Ver cómo vendimos el 3°B</a>
+  </div>
+  <div class="ref-zona">
+    <div>
+      <div class="rz-label">Referencia en la zona · 2 ambientes</div>
+      <div class="rz-tit">Beruti 2800, Recoleta</div>
+      <div class="rz-sub">40 m² cub. + balcón chico · al frente · 49 años · se vende con inquilino</div>
+      <div class="rz-precio">Reservado, publicado en <strong>USD 110.000</strong></div>
+    </div>
+    <ul>
+      <li><b>✓</b><span>Tu edificio tiene unos 30 años menos</span></li>
+      <li><b>✓</b><span>Tu balcón es más amplio (7,2 m² contra 2 m²)</span></li>
+      <li><b>✓</b><span>Pileta y parrilla en la terraza del edificio</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- 03: DATOS DE LA UNIDAD -->
+<section class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">03</span>
+    <div>
+      <div class="sec-titulo"><strong>Tu unidad</strong></div>
+      <div class="sec-desc">Datos objetivos, según el reglamento de copropiedad, los planos y la liquidación de expensas del edificio</div>
+    </div>
+  </div>
+  <div class="kpi-grid g5">
+    <div class="kpi"><div class="kpi-label">Unidad</div><div class="kpi-val">6°C</div></div>
+    <div class="kpi"><div class="kpi-label">Ambientes</div><div class="kpi-val">2</div></div>
+    <div class="kpi"><div class="kpi-label">Orientación</div><div class="kpi-val">Contrafrente</div></div>
+    <div class="kpi"><div class="kpi-label">Sup. ponderada</div><div class="kpi-val">41,40 m²</div></div>
+    <div class="kpi"><div class="kpi-label">Baulera</div><div class="kpi-val">Sí*</div></div>
+  </div>
+  <p class="nota-ast">* Se entiende que tu unidad tiene una baulera en el subsuelo: el porcentual de expensas de tu unidad incluye el de una de las unidades complementarias del edificio. Lo confirmamos con tu escritura. Su valor está sumado en los rangos de abajo.</p>
+</section>
+
+<!-- 04: VALOR ESTIMADO POR ESTADO -->
+<section class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">04</span>
+    <div>
+      <div class="sec-titulo"><strong>Tu pretasación</strong> según el estado</div>
+      <div class="sec-desc">Como no conocemos el estado real de tu unidad, te dejamos los 2 escenarios posibles. Hacé clic en cada uno para ver fotos de referencia</div>
+    </div>
+  </div>
+  <div class="estado-grid">
+    <div class="estado-card" onclick="verEstado('bueno')">
+      <div class="estado-foto-grid">
+        <img class="estado-foto-mini" src="https://static.kiteprop.com/kp/properties/480134/a0843a/lg/a0843a8a81978926e3787916b37847c6.jpg" alt="Buen estado">
+        <img class="estado-foto-mini" src="https://static.kiteprop.com/kp/properties/480134/40358e/lg/40358e10ac8e6253e2e9ad292f822e92.jpg" alt="Buen estado">
+        <img class="estado-foto-mini" src="https://static.kiteprop.com/kp/properties/480134/557ae0/lg/557ae042c2eaff76315a3e83b60192dc.jpg" alt="Buen estado">
+        <img class="estado-foto-mini" src="https://static.kiteprop.com/kp/properties/480134/3fb0eb/lg/3fb0eb05fcc8ef3d39de35c9ceab5fd4.jpg" alt="Buen estado">
+      </div>
+      <div class="estado-card-body">
+        <div class="estado-nombre">Buen estado</div>
+        <div class="estado-desc">Terminaciones originales bien conservadas, listo para habitar. Es el estado del 3°B.</div>
+        <span class="estado-ver">Ver fotos →</span>
+        <div class="estado-card-price">
+          <div class="estado-price-label">Rango estimado</div>
+          <div class="estado-price-val"><span class="usd">USD</span>120.000 – 133.000</div>
+        </div>
+      </div>
+    </div>
+    <div class="estado-card" onclick="verEstado('mejoras')">
+      <div class="estado-foto-grid">
+        <img class="estado-foto-mini" src="../IMG/mejoras-1.jpg" alt="Mejoras necesarias">
+        <img class="estado-foto-mini" src="../IMG/mejoras-2.jpg" alt="Mejoras necesarias">
+        <img class="estado-foto-mini" src="../IMG/mejoras-3.jpg" alt="Mejoras necesarias">
+        <img class="estado-foto-mini" src="../IMG/mejoras-4.jpg" alt="Mejoras necesarias">
+      </div>
+      <div class="estado-card-body">
+        <div class="estado-nombre">Mejoras necesarias</div>
+        <div class="estado-desc">Desgaste de uso que pide una intervención mínima: pintura, detalles de terminación, algún artefacto.</div>
+        <span class="estado-ver">Ver fotos →</span>
+        <div class="estado-card-price">
+          <div class="estado-price-label">Valor aproximado</div>
+          <div class="estado-price-val"><span class="usd">USD</span>~117.000</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="alert a-amarillo" style="margin-top:20px">
+    <span class="alert-ico">🔧</span>
+    <div>
+      <div class="alert-titulo">Un edificio joven no necesita "modernizarse"</div>
+      <div class="alert-body">Al ser un edificio relativamente nuevo, una eventual refacción no responde al paso del tiempo: no hace falta modernizar el departamento. Por eso, en el escenario <strong>"Mejoras necesarias"</strong> estimamos una intervención mínima y no una obra. Mirá las fotos de referencia de cada caso.</div>
+    </div>
+  </div>
+  <div class="alert a-gris">
+    <span class="alert-ico">ⓘ</span>
+    <div>
+      <div class="alert-titulo">Esta es una pretasación orientativa</div>
+      <div class="alert-body">Está construida a partir de una venta real en tu edificio y de variables objetivas (superficie, orientación, piso). Para conocer el valor exacto de tu unidad hace falta una visita profesional: recién ahí se puede tasar con precisión, viendo el estado real y la distribución.</div>
+    </div>
+  </div>
+</section>
+
+<!-- 05: EMBUDO -->
+<section class="seccion">
+  <div class="sec-header">
+    <span class="sec-num">05</span>
+    <div>
+      <div class="sec-titulo">Cómo <strong>vendimos</strong> el 3°B, en números</div>
+      <div class="sec-desc">Rendimiento real de la publicación · Zonaprop y consultas directas · Enero–Febrero 2026</div>
+    </div>
+  </div>
+  <div class="kpi-grid g4">
+    <div class="kpi"><div class="kpi-label">Exposiciones</div><div class="kpi-val">5.720</div><div class="kpi-note">veces que apareció en resultados</div></div>
+    <div class="kpi"><div class="kpi-label">Visualizaciones</div><div class="kpi-val azul">180</div><div class="kpi-note">entraron a ver el aviso</div></div>
+    <div class="kpi"><div class="kpi-label">Consultas</div><div class="kpi-val">6</div><div class="kpi-note">portal + contactos directos</div></div>
+    <div class="kpi"><div class="kpi-label">Visitas coordinadas</div><div class="kpi-val verde">2</div><div class="kpi-note">interesados que avanzaron</div></div>
+  </div>
+
+  <div style="font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:#898781;margin:8px 0 14px;text-align:center">Embudo de conversión: de la exposición a la reserva</div>
+  <div class="embudo-wrap">
+    <div class="embudo-bar embudo-1"><span class="embudo-txt">Exposiciones</span><span class="embudo-val">5.720</span></div>
+    <div class="embudo-bar embudo-2"><span class="embudo-txt">Visualizaciones</span><span class="embudo-val">180</span></div>
+    <div class="embudo-bar embudo-3"><span class="embudo-txt">Consultas</span><span class="embudo-val">6</span></div>
+    <div class="embudo-bar embudo-4"><span class="embudo-txt">Visitas coordinadas</span><span class="embudo-val">2</span></div>
+    <div class="embudo-bar embudo-5"><span class="embudo-txt">Reserva</span><span class="embudo-val">1</span></div>
+  </div>
+  <div class="embudo-caption">Apareció 5.720 veces en Zonaprop · 180 personas entraron al aviso · 6 consultas entre el portal y contactos directos</div>
+
+  <div class="alert a-verde" style="margin-top:24px">
+    <span class="alert-ico">✓</span>
+    <div>
+      <div class="alert-titulo">Lo reservamos en 13 días, al precio de publicación</div>
+      <div class="alert-body">Publicado el 28/01/2026 y reservado el 09/02/2026: <strong>13 días</strong> en el mercado. Con un precio de prueba exigente hubo pocas consultas, pero calificadas, y la operación cerró al <strong>100% del precio de publicación</strong>, con una parte financiada.</div>
+    </div>
+  </div>
+
+  <a class="link-video-destacado" href="#" target="_blank" style="margin-top:12px"><span class="play-ico">▶</span> Ver cómo vendimos el 3°B</a>
+</section>
+
+<!-- 06: VENDER EN MENOS DE 4 MESES -->
+<section class="seccion seccion-blanca">
+  <div class="sec-header">
+    <span class="sec-num">06</span>
+    <div>
+      <div class="sec-titulo">Qué hacemos para <strong>vender en menos de 4 meses</strong></div>
+      <div class="sec-desc">El mismo proceso que usamos para vender el 3°B de tu edificio</div>
+    </div>
+  </div>
+  <div class="vender-grid">
+    <div class="vender-item"><div class="ico">📸</div><div class="tit">Fotos y publicación profesional</div><div class="desc">Igual que en el 3°B: fotos, video y descripción pensados para maximizar exposiciones y visualizaciones desde el día uno, con publicidad destacada en todos los portales.</div></div>
+    <div class="vender-item"><div class="ico">📊</div><div class="tit">Seguimiento con datos, no con intuición</div><div class="desc">Medimos exposiciones, visualizaciones y consultas semana a semana. Si el ritmo cae por debajo de lo esperado, ajustamos precio o estrategia a tiempo.</div></div>
+    <div class="vender-item"><div class="ico">🗓️</div><div class="tit">Visitas calificadas</div><div class="desc">Filtramos consultas antes de coordinar cada visita, para no perder tu tiempo ni el de compradores que no están en condiciones reales de comprar.</div></div>
+    <div class="vender-item"><div class="ico">🤝</div><div class="tit">Acompañamiento hasta la escritura</div><div class="desc">Desde la reserva hasta la firma: boleto, escribanía y coordinación con el comprador, todo incluido en el proceso.</div></div>
+  </div>
+  <a href="#" target="_blank" style="margin-top:18px;display:flex;align-items:center;gap:16px;background:#0d1b2e;border-radius:10px;padding:18px 22px;text-decoration:none;color:#fff">
+    <div style="width:44px;height:44px;border-radius:50%;background:#1a7aff;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:16px">▶</div>
+    <div>
+      <div style="font-size:14px;font-weight:700">Video: "Coronel Díaz 2045 · 3°B · ¿Qué hicimos para vender?"</div>
+      <div style="font-size:12px;color:#c9d3e0;margin-top:2px">Te contamos en pocos minutos el proceso real que usamos para vender el 3°B de tu edificio</div>
+    </div>
+  </a>
+</section>
+
+<div class="links-pie">
+  <div class="links-pie-label">Más información</div>
+  <div class="links-pie-row">
+    <a class="primary" href="https://matiasleiblich.com/guias/vendedor/" target="_blank">Conocé el proceso de venta: Guía del Vendedor</a>
+    <a class="secondary" href="https://matiasleiblich.com/calculadora-inmobiliaria" target="_blank">Calculá los gastos: Calculadora Inmobiliaria</a>
+  </div>
+</div>
+
+<div class="contacto-page">
+  <div class="contacto-hero">
+    <div style="width:100px;height:100px;border-radius:50%;overflow:hidden;border:2px solid #1a7aff55;flex-shrink:0">
+      <img src="https://raw.githubusercontent.com/matiasleiblich/informes/main/IMG/Fotoportada-avatar.jpg" style="width:100%;height:100%;object-fit:cover;display:block" alt="Matías Leiblich">
+    </div>
+    <div>
+      <div class="contacto-nombre">Matías Leiblich</div>
+      <div class="contacto-titulo">Ingeniero Civil · Real Estate</div>
+      <div class="contacto-bio">Soy Ingeniero Civil (UBA) y asesor en Real Estate. Mi enfoque combina el análisis técnico de cada inmueble con el estudio de las condiciones actuales del mercado, lo que permite elaborar valuaciones objetivas y fundamentadas. Cada tasación se realiza considerando las características particulares de la propiedad, los antecedentes de operaciones comparables y la dinámica vigente de la oferta y la demanda.</div>
+      <div class="contacto-redes">
+        <a class="red-btn" href="https://wa.me/5491161737552" target="_blank">📱 WhatsApp</a>
+        <a class="red-btn" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank">✉️ Mail</a>
+        <a class="red-btn" href="https://linkedin.com/in/matias-leiblich" target="_blank">💼 LinkedIn</a>
+        <a class="red-btn" href="https://www.instagram.com/tutemudas" target="_blank">📷 @tutemudas</a>
+        <a class="red-btn" href="https://whatsapp.com/channel/0029VbBiYGGLCoWvqOOv4y1O" target="_blank">📢 Canal WhatsApp</a>
+      </div>
+    </div>
+  </div>
+
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">Datos de contacto</div>
+  <div class="contacto-contacto">
+    <div class="contacto-dato"><div class="contacto-dato-label">Teléfono / WhatsApp</div><a class="contacto-dato-val" href="https://wa.me/5491161737552" target="_blank" style="text-decoration:none">11-6173-7552</a></div>
+    <div class="contacto-dato"><div class="contacto-dato-label">Email</div><a class="contacto-dato-val" href="mailto:matiasleiblich@deinmobiliarios.com" target="_blank" style="text-decoration:none;font-size:11px">matiasleiblich@deinmobiliarios.com</a></div>
+    <div class="contacto-dato"><div class="contacto-dato-label">Web</div><a class="contacto-dato-val" href="https://matiasleiblich.com" target="_blank" style="text-decoration:none">matiasleiblich.com</a></div>
+  </div>
+
+  <div style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#4b5a6e;margin-bottom:16px;font-weight:600">¿Cómo puedo ayudarte?</div>
+  <div class="contacto-grid">
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🏗️</div>
+      <div class="contacto-card-titulo">¿Estás por construir o remodelar?</div>
+      <div class="contacto-card-desc">Te ayudo a hacer el número actualizado antes de avanzar con la obra, y a comparar contra alternativas de compra.</div>
+      <div class="contacto-links"><a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Estoy%20evaluando%20construir%20o%20remodelar%20y%20quisiera%20asesoramiento." target="_blank">🏗️ Quiero asesoramiento <span class="contacto-link-arrow">→</span></a></div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">🏠</div>
+      <div class="contacto-card-titulo">¿Necesitás ayuda con tu operación?</div>
+      <div class="contacto-card-desc">Asesoramiento personalizado para compradores y vendedores en CABA y GBA.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20recibir%20asesoramiento%20para%20analizar%20una%20operacion%20de%20compra." target="_blank">🏠 Quiero comprar <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20recibir%20asesoramiento%20para%20analizar%20la%20venta%20de%20una%20propiedad." target="_blank">💰 Quiero vender <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📚</div>
+      <div class="contacto-card-titulo">Herramientas y recursos</div>
+      <div class="contacto-card-desc">Calculadora de gastos, simulador de tasaciones, informes de valor y biblioteca de guías para compradores, vendedores e inversores.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://matiasleiblich.com/calculadora-inmobiliaria" target="_blank">🧮 Calculadora inmobiliaria <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://matiasleiblich.com/simulador-tasaciones" target="_blank">📊 Simulador de Tasaciones <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://matiasleiblich.com/informes" target="_blank">📈 Informes de Valor <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://drive.google.com/drive/folders/1el9JGp-ROZrFCmeo2ruf0rJneN-WWf4z?usp=sharing" target="_blank">📖 Biblioteca de guías <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+    <div class="contacto-card">
+      <div class="contacto-card-ico">📐</div>
+      <div class="contacto-card-titulo">¿Qué hacer con mi lote?</div>
+      <div class="contacto-card-desc">Análisis de indicadores urbanísticos y potencial constructivo para proyectos de inversión, con el costo de obra actualizado.</div>
+      <div class="contacto-links">
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20consultar%20por%20un%20analisis%20de%20prefactibilidad%20para%20un%20lote." target="_blank">📐 Solicitar análisis <span class="contacto-link-arrow">→</span></a>
+        <a class="contacto-link" href="https://wa.me/5491161737552?text=Hola%20Matias.%20Quisiera%20que%20coordinemos%20una%20reunion." target="_blank">📅 Agendar reunión <span class="contacto-link-arrow">→</span></a>
+      </div>
+    </div>
+  </div>
+
+  <div style="border-top:1px solid #2a3a50;padding-top:24px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px">
+    <div>
+      <a href="https://matiasleiblich.com" target="_blank" style="font-size:13px;font-weight:700;color:#f0f1f3;text-decoration:none">Matías Leiblich</a>
+      <div style="font-size:10px;color:#4b5a6e;margin-top:2px">Noviembre 2026</div>
+    </div>
+    <div style="font-size:10px;color:#4b5a6e;text-align:right">Fuente: venta real depto 3°B, Coronel Díaz 2045 · Reglamento de copropiedad, planos y liquidación de expensas del edificio</div>
+  </div>
+</div>
+
+<div class="modal-overlay" id="modal-estado" onclick="if(event.target===this)cerrarEstado()">
+  <div class="modal-box">
+    <button class="modal-close" onclick="cerrarEstado()">✕</button>
+    <div id="modal-img-wrap"></div>
+    <div class="modal-body">
+      <div class="modal-titulo" id="modal-titulo"></div>
+      <div class="modal-desc" id="modal-desc"></div>
+    </div>
+  </div>
+</div>
+<div class="lightbox-overlay" id="lightbox" onclick="if(event.target===this)cerrarLightbox()">
+  <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="">
+</div>
+
+<script>
+const ESTADOS = {
+  bueno: {
+    titulo: 'Buen estado',
+    imgs: ['https://static.kiteprop.com/kp/properties/480134/a0843a/lg/a0843a8a81978926e3787916b37847c6.jpg','https://static.kiteprop.com/kp/properties/480134/40358e/lg/40358e10ac8e6253e2e9ad292f822e92.jpg','https://static.kiteprop.com/kp/properties/480134/557ae0/lg/557ae042c2eaff76315a3e83b60192dc.jpg','https://static.kiteprop.com/kp/properties/480134/3fb0eb/lg/3fb0eb05fcc8ef3d39de35c9ceab5fd4.jpg'],
+    desc: 'Terminaciones originales bien conservadas: pisos, pintura, cocina y baño sin desgaste visible, listo para habitar. Es el estado del 3°B que vendimos en tu edificio.'
+  },
+  mejoras: {
+    titulo: 'Mejoras necesarias',
+    imgs: ['../IMG/mejoras-1.jpg','../IMG/mejoras-2.jpg','../IMG/mejoras-3.jpg','../IMG/mejoras-4.jpg'],
+    desc: 'Al ser un edificio joven, una eventual refacción no responde al paso del tiempo: no hace falta modernizar el departamento. Hablamos de una intervención mínima, como pintura, detalles de terminación o algún artefacto, y no de una obra.'
+  }
+};
+function verEstado(key){
+  const e = ESTADOS[key];
+  document.getElementById('modal-titulo').textContent = e.titulo;
+  document.getElementById('modal-desc').textContent = e.desc;
+  document.getElementById('modal-img-wrap').innerHTML = `<div class="modal-gallery">${e.imgs.map(src => `<img src="${src}" alt="${e.titulo}" onclick="event.stopPropagation();verFoto('${src}','${e.titulo}')">`).join('')}</div>`;
+  document.getElementById('modal-estado').classList.add('on');
+}
+function cerrarEstado(){ document.getElementById('modal-estado').classList.remove('on'); }
+function verFoto(src, alt){
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox-img').alt = alt;
+  document.getElementById('lightbox').classList.add('on');
+}
+function cerrarLightbox(){ document.getElementById('lightbox').classList.remove('on'); }
+</script>
+</body>
+</html>
